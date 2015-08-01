@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="product_normal_form_view_ext" model="ir.ui.view">
+            <field name="name">product.normal.form.view.ext</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="priority">26</field>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[@string='Procurements']/group/group[@name='procurement_uom']/field[@name='uom_po_id']" position="after">
+                	<field name="job_cost_type"/>
+                	<field name="main_material"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

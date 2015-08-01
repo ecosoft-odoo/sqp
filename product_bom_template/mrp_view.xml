@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    	<record id="mrp_bom_form_view_ext" model="ir.ui.view">
+            <field name="name">mrp.bom.form.view.ext</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/group" position="inside">
+	                <group>
+	                    <field name="is_bom_template"/>
+					</group>
+					<group></group>
+					<group>
+	                    <field name="bom_template_type" attrs="{'invisible':[('is_bom_template','=',False)],'required':[('is_bom_template','=',True)]}"/>
+	                    <field name="bom_product_type" attrs="{'invisible':[('is_bom_template','=',False)],'required':[('is_bom_template','=',True)]}"/>
+	                    <field name="new_name_format" attrs="{'invisible':[('is_bom_template','=',False)],'required':[('is_bom_template','=',True)]}"/>	                
+					</group>
+					<group col="8" colspan="4" string="Requried Parameters" attrs="{'invisible':[('is_bom_template','=',False)]}" >
+		                <group>
+							<group>
+			                    <field name="W"/> 
+			                    <field name="L"/>
+			                    <field name="T" widget="many2many_tags"/>			                
+							</group>
+				            <group>
+					           	<div name="model_choices">
+									<label for="mat_model_choices"/>
+			                        <field name="mat_model_choices" widget="many2many_tags"/>
+			                    </div>					           	
+								<div name="joint_choices">
+									<label for="mat_joint_choices"/>
+			                        <field name="mat_joint_choices" widget="many2many_tags"/>
+			                    </div>
+								<div name="insulation_choices">
+									<label for="mat_insulation_choices"/>
+			                        <field name="mat_insulation_choices" widget="many2many_tags"/>
+			                    </div>
+								<div name="skin_choices">
+									<label for="mat_inside_skin_choices"/>
+			                        <field name="mat_inside_skin_choices" widget="many2many_tags"/>
+			                    </div>			                    
+								<div name="skin_choices">
+									<label for="mat_outside_skin_choices"/>
+			                        <field name="mat_outside_skin_choices" widget="many2many_tags"/>
+			                    </div>			
+								<div name="camlock_choices">
+									<label for="mat_camlock_choices"/>
+			                        <field name="mat_camlock_choices" widget="many2many_tags"/>
+			                    </div>
+								<div name="window_choices">
+									<label for="mat_window_choices"/>
+			                        <field name="mat_window_choices" widget="many2many_tags"/>
+			                    </div>
+			            	</group>
+			            </group>
+					</group>
+                </xpath>
+                <xpath expr="/form/notebook/page/field[@name='bom_lines']" position="attributes">
+					<attribute name="attrs">{'invisible': [('is_bom_template','=',True),('bom_template_type','=','formula')]}</attribute>
+                </xpath>
+                <xpath expr="/form/notebook/page/field[@name='bom_lines']" position="after">
+                    <field name="bom_lines_formula" widget="one2many_list" attrs="{'invisible': ['|',('is_bom_template','=',False),('bom_template_type','&lt;&gt;','formula')]}">
+                        <tree string="Components" editable="bottom">
+                            <field name="product_id" on_change="onchange_product_id(product_id, name)" options="{'limit': 10, 'create': false, 'create_edit': false}" context="{'default_supply_method':'produce'}" />
+                            <field name="product_qty_formula" options="{'limit': 10, 'create': false, 'create_edit': false}" required="True"/>
+                            <field name="product_uom" on_change="onchange_uom(product_id, product_uom)" options="{'limit': 10, 'create': false, 'create_edit': false}" groups="product.group_uom"/>
+                            <field name="name" options="{'limit': 10, 'create': false, 'create_edit': false}" invisible="1"/>
+                        </tree>
+                    </field>                
+				</xpath>
+            </field>
+        </record>
+        
+    	<record id="mrp_bom_tree_view_ext" model="ir.ui.view">
+            <field name="name">mrp.bom.tree.view.ext</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="/tree/field[@name='product_id']" position="after">
+                	<field name="is_bom_template" />
+				</xpath>
+            </field>
+        </record>        
+
+		<!-- BOM Template Choice -->
+		<menuitem id="menu_bom_template_choice" name="BOM Template Choices" parent="mrp.menu_mrp_configuration" groups="mrp.group_mrp_manager"/>
+
+
+    	<!-- Thickness Choice -->
+        <record id="bom_choice_thick_tree_view" model="ir.ui.view">
+            <field name="name">bom.choice.thick.tree.view</field>
+            <field name="model">bom.choice.thick</field>
+            <field name="arch" type="xml">
+                <tree string="Thickness Choice" version="7.0">
+                    <field name="name"/>
+                    <field name="value"/>
+                </tree>
+            </field>
+        </record>        
+		<record id="bom_choice_thick_form_view" model="ir.ui.view">
+            <field name="name">bom.choice.thick.form.view</field>
+            <field name="model">bom.choice.thick</field>
+            <field name="arch" type="xml">
+                <form string="Thickness Choice" version="7.0">
+                    <group>
+                        <field name="name"/>
+                        <field name="value"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="bom_choice_thick_form_action" model="ir.actions.act_window">
+            <field name="name">Thickness Choice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bom.choice.thick</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new Thickness Choice.
+              </p>
+            </field>
+        </record>
+        
+        <menuitem action="bom_choice_thick_form_action" id="menu_bom_choice_thick_form_action" parent="menu_bom_template_choice" sequence="21" groups="mrp.group_mrp_manager"/>
+		
+
+    	<!-- Choice Model -->
+        <record id="bom_choice_model_tree_view" model="ir.ui.view">
+            <field name="name">bom.choice.model.tree.view</field>
+            <field name="model">bom.choice.model</field>
+            <field name="arch" type="xml">
+                <tree string="Model Choice" version="7.0">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>        
+		<record id="bom_choice_model_form_view" model="ir.ui.view">
+            <field name="name">bom.choice.model.form.view</field>
+            <field name="model">bom.choice.model</field>
+            <field name="arch" type="xml">
+                <form string="Model Choice" version="7.0">
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="bom_choice_model_form_action" model="ir.actions.act_window">
+            <field name="name">Model Choice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bom.choice.model</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new Model Choice.
+              </p>
+            </field>
+        </record>
+        
+        <menuitem action="bom_choice_model_form_action" id="menu_bom_choice_model_form_action" parent="menu_bom_template_choice" sequence="23" groups="mrp.group_mrp_manager"/>
+
+
+    	<!-- Choice Joint -->
+        <record id="bom_choice_joint_tree_view" model="ir.ui.view">
+            <field name="name">bom.choice.joint.tree.view</field>
+            <field name="model">bom.choice.joint</field>
+            <field name="arch" type="xml">
+                <tree string="Joint Choice" version="7.0">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>        
+		<record id="bom_choice_joint_form_view" model="ir.ui.view">
+            <field name="name">bom.choice.joint.form.view</field>
+            <field name="model">bom.choice.joint</field>
+            <field name="arch" type="xml">
+                <form string="Joint Choice" version="7.0">
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="bom_choice_joint_form_action" model="ir.actions.act_window">
+            <field name="name">Joint Choice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bom.choice.joint</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new Joint Choice.
+              </p>
+            </field>
+        </record>
+        
+        <menuitem action="bom_choice_joint_form_action" id="menu_bom_choice_joint_form_action" parent="menu_bom_template_choice" sequence="25" groups="mrp.group_mrp_manager"/>
+
+    	<!-- Choice Skin -->
+        <record id="bom_choice_skin_tree_view" model="ir.ui.view">
+            <field name="name">bom.choice.skin.tree.view</field>
+            <field name="model">bom.choice.skin</field>
+            <field name="arch" type="xml">
+                <tree string="Skin Choice" version="7.0">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>        
+		<record id="bom_choice_joint_skin_view" model="ir.ui.view">
+            <field name="name">bom.choice.skin.form.view</field>
+            <field name="model">bom.choice.skin</field>
+            <field name="arch" type="xml">
+                <form string="Skin Choice" version="7.0">
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="bom_choice_skin_form_action" model="ir.actions.act_window">
+            <field name="name">Skin Choice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bom.choice.skin</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new Skin Choice.
+              </p>
+            </field>
+        </record>
+        
+        <menuitem action="bom_choice_skin_form_action" id="menu_bom_skin_joint_form_action" parent="menu_bom_template_choice" sequence="25" groups="mrp.group_mrp_manager"/>
+
+    	<!-- Chice Joint -->
+        <record id="bom_choice_insulation_tree_view" model="ir.ui.view">
+            <field name="name">bom.choice.insulation.tree.view</field>
+            <field name="model">bom.choice.insulation</field>
+            <field name="arch" type="xml">
+                <tree string="Insulation Choice" version="7.0">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>        
+		<record id="bom_choice_insulation_form_view" model="ir.ui.view">
+            <field name="name">bom.choice.insulation.form.view</field>
+            <field name="model">bom.choice.insulation</field>
+            <field name="arch" type="xml">
+                <form string="Insulation Choice" version="7.0">
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="bom_choice_insulation_form_action" model="ir.actions.act_window">
+            <field name="name">Insulation Choice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bom.choice.insulation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new Insulation Choice.
+              </p>
+            </field>
+        </record>
+        
+        <menuitem action="bom_choice_insulation_form_action" id="menu_bom_choice_insulation_form_action" parent="menu_bom_template_choice" sequence="25" groups="mrp.group_mrp_manager"/>
+
+    	<!-- Choice Camlock -->
+        <record id="bom_choice_camlock_tree_view" model="ir.ui.view">
+            <field name="name">bom.choice.camlock.tree.view</field>
+            <field name="model">bom.choice.camlock</field>
+            <field name="arch" type="xml">
+                <tree string="Camlock Choice" version="7.0">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>        
+		<record id="bom_choice_camlock_form_view" model="ir.ui.view">
+            <field name="name">bom.choice.camlock.form.view</field>
+            <field name="model">bom.choice.camlock</field>
+            <field name="arch" type="xml">
+                <form string="Camlock Choice" version="7.0">
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="bom_choice_camlock_form_action" model="ir.actions.act_window">
+            <field name="name">Camlock Choice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bom.choice.camlock</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new Camlock Choice.
+              </p>
+            </field>
+        </record>
+        
+        <menuitem action="bom_choice_camlock_form_action" id="menu_bom_choice_camlock_form_action" parent="menu_bom_template_choice" sequence="25" groups="mrp.group_mrp_manager"/>
+
+    	<!-- Choice Window -->
+        <record id="bom_choice_window_tree_view" model="ir.ui.view">
+            <field name="name">bom.choice.window.tree.view</field>
+            <field name="model">bom.choice.window</field>
+            <field name="arch" type="xml">
+                <tree string="Window Choice" version="7.0">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>        
+		<record id="bom_choice_window_form_view" model="ir.ui.view">
+            <field name="name">bom.choice.window.form.view</field>
+            <field name="model">bom.choice.window</field>
+            <field name="arch" type="xml">
+                <form string="Window Choice" version="7.0">
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="bom_choice_window_form_action" model="ir.actions.act_window">
+            <field name="name">Window Choice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bom.choice.window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new Window Choice.
+              </p>
+            </field>
+        </record>
+        
+        <menuitem action="bom_choice_window_form_action" id="menu_bom_choice_window_form_action" parent="menu_bom_template_choice" sequence="30" groups="mrp.group_mrp_manager"/>
+
+
+		<!--
+		Machine Setup Formula
+		-->
+		<record id="view_machine_setup_master_search" model="ir.ui.view">
+            <field name="name">view.machine.setup.master.search</field>
+            <field name="model">mrp.machine.setup.master</field>
+            <field name="arch" type="xml">
+                <search string="Search Machine Setup Master">
+                   <field name="name" string="Machine"/>
+               </search>
+            </field>
+        </record>
+		
+        <record id="machine_setup_master_form" model="ir.ui.view">
+            <field name="name">machine.setup.master.form</field>
+            <field name="model">mrp.machine.setup.master</field>
+            <field name="arch" type="xml">
+                <form string="Machine Setup Master" version="7.0">
+                    <sheet>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                    <field name="line_ids">
+		                <tree string="Machine Setup Detail" editable="top">
+		                    <field name="thickness"/>
+		                    <field name="flowrate"/>
+		                    <field name="density"/>
+		                    <field name="correction_factor"/>
+		                    <field name="overpack_1"/>
+		                    <field name="overpack_2"/>
+		                    <field name="settime"/>
+		                </tree>        
+		            </field>           
+                	</sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_machine_setup_master" model="ir.actions.act_window">
+            <field name="name">Machine Setup Master</field>
+            <field name="res_model">mrp.machine.setup.master</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="view_machine_setup_master_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Machine Setup Master Data
+              </p>
+            </field>
+        </record>       
+
+        <record id="view_machine_setup_master_tree" model="ir.ui.view">
+            <field name="name">view.machine.setup.master.tree</field>
+            <field name="model">mrp.machine.setup.master</field>
+            <field name="arch" type="xml">
+                <tree string="Machine Setup Master">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>		
+        
+        <menuitem name="Machine Setup Master" action="action_machine_setup_master" id="machine_setup_master" parent="mrp.menu_mrp_configuration" groups="mrp.group_mrp_manager" />
+
+		<!-- 
+		inherited view, Adding Dimension and Machine Setup Parameters
+		-->
+
+    	<record id="mrp_production_form_view_ext" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.ext</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[@string='Scheduled Products']/field[@name='product_lines']" position="replace">
+                	<field name="product_lines" context="{'parent_mo': parent_id}"/>
+				</xpath>
+            </field>
+        </record>       		
+
+
+    	<record id="mrp_production_product_form_view_ext" model="ir.ui.view">
+            <field name="name">mrp.production.product.form.view</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="inherit_id" ref="mrp.mrp_production_product_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+	                <field name="product_uos" position="after">
+	                	<field name="W" invisible="context.get('parent_mo', False)"/>
+	                	<field name="L" invisible="context.get('parent_mo', False)"/>
+	                	<field name="T" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line1_inject1" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line1_inject2" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line2_inject1" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line2_inject2" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line3_inject1" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line3_inject2" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line4_inject1" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line4_inject2" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line5_inject1" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line5_inject2" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line1_settime" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line2_settime" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line3_settime" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line4_settime" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line5_settime" invisible="context.get('parent_mo', False)"/>
+	                	<field name="cut_area" invisible="context.get('parent_mo', False)"/>
+	                	<field name="remark" invisible="context.get('parent_mo', False)"/>
+	                </field>
+                </data>
+            </field>
+        </record>
+    	<record id="mrp_production_product_tree_view_ext" model="ir.ui.view">
+            <field name="name">mrp.production.product.tree.view.ext</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="inherit_id" ref="mrp.mrp_production_product_tree_view"/>
+            <field name="arch" type="xml">
+                <data>
+	                <field name="product_uos" position="after">
+	                	<field name="W" invisible="context.get('parent_mo', False)"/>
+	                	<field name="L" invisible="context.get('parent_mo', False)"/>
+	                	<field name="T" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line1_inject1" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line1_inject2" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line2_inject1" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line2_inject2" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line3_inject1" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line3_inject2" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line4_inject1" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line4_inject2" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line5_inject1" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line5_inject2" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line1_settime" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line2_settime" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line3_settime" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line4_settime" invisible="context.get('parent_mo', False)"/>
+	                	<field name="line5_settime" invisible="context.get('parent_mo', False)"/>
+	                	<field name="cut_area" invisible="context.get('parent_mo', False)"/>
+	                	<field name="remark" invisible="context.get('parent_mo', False)"/>
+	                </field>
+                </data>
+            </field>
+        </record>		
+
+    </data>
+</openerp>

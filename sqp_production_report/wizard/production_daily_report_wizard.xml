@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="sqp_report_production_daily_wizard" model="ir.ui.view">
+            <field name="name">Production Daily Report</field>
+            <field name="model">sqp.report.production.daily</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Selection Criteria" version="7.0">
+                    <group>
+	                    <group>
+                    		<field name="date"/>
+                    		<field name="dept"/>
+	                    </group>
+                        <group>
+                        	<field name="format" />
+                        </group>
+                    </group>
+                	<footer>
+                        <button string="Execute Report" name="start_report" type="object" default_focus="1" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sqp_report_production_daily_wizard" model="ir.actions.act_window">
+            <field name="name">Production Daily Report</field>
+            <field name="res_model">sqp.report.production.daily</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="sqp_report_production_daily_wizard"/>
+            <field name="target">new</field>
+            <field name="help">Print Production Daily Report</field>
+        </record>
+
+        <menuitem action="action_sqp_report_production_daily_wizard"
+            id="menu_sqp_report_production_daily"
+        	groups=""
+            parent="mrp.menu_mrp_manufacturing" sequence="110" />
+
+    </data>
+</openerp>

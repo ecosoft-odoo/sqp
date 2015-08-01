@@ -1,0 +1,2 @@
+id,company_id/id,currency_id/id,name,type
+pricelist_export_usd,,base.USD,Price Export,sale

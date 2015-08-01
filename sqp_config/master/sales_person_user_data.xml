@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        
+        <!-- Chairat S.	0-2744-6300-2	081-497-3284	chairat@squarepanel.com -->
+        <record id="base.partner_chairat" model="res.partner">
+            <field name="name">Chairat S.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="phone">0-2744-6300-2</field>
+            <field name="mobile">081-497-3284</field>
+            <field name="email">chairat@squarepanel.com</field>
+        </record>
+        <record id="base.user_chairat" model="res.users">
+            <field name="partner_id" ref="base.partner_chairat"/>
+            <field name="login">chairat</field>
+            <field name="password">chairat</field>
+            <field name="signature">--
+Mr Chairat S.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('base.group_partner_manager'), ref('base.group_sale_salesman')])]"/>
+            <field name="image"></field>
+        </record>
+        
+		<!-- Chatchai T.	0-2744-6300-2	081-554-4097	chatchai@squarepanel.com -->
+        <record id="base.partner_chatchai" model="res.partner">
+            <field name="name">Chatchai T.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="phone">0-2744-6300-2</field>
+            <field name="mobile">081-554-4097</field>
+            <field name="email">chatchai@squarepanel.com</field>
+        </record>
+        <record id="base.user_chatchai" model="res.users">
+            <field name="partner_id" ref="base.partner_chatchai"/>
+            <field name="login">chatchai</field>
+            <field name="password">chatchai</field>
+            <field name="signature">--
+Mr Chatchai T.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('base.group_partner_manager'), ref('base.group_sale_salesman')])]"/>
+            <field name="image"></field>
+        </record>	
+
+		<!-- Dusit T.	0-2744-6300-2	081-424-1488	dusit@squarepanel.com -->
+        <record id="base.partner_dusit" model="res.partner">
+            <field name="name">Dusit T.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="phone">0-2744-6300-2</field>
+            <field name="mobile">081-424-1488</field>
+            <field name="email">dusit@squarepanel.com</field>
+        </record>
+        <record id="base.user_dusit" model="res.users">
+            <field name="partner_id" ref="base.partner_dusit"/>
+            <field name="login">dusit</field>
+            <field name="password">dusit</field>
+            <field name="signature">--
+Mr Dusit T.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('base.group_partner_manager'), ref('base.group_sale_salesman')])]"/>
+            <field name="image"></field>
+        </record>			
+
+
+		<!-- Somboon T.	0-2744-6300-2	081-840-1389	somboon@squarepanel.com -->
+        <record id="base.partner_somboon" model="res.partner">
+            <field name="name">Somboon T.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="phone">0-2744-6300-2</field>
+            <field name="mobile">081-840-1389</field>
+            <field name="email">somboon@squarepanel.com</field>
+        </record>
+        <record id="base.user_somboon" model="res.users">
+            <field name="partner_id" ref="base.partner_somboon"/>
+            <field name="login">somboon</field>
+            <field name="password">somboon</field>
+            <field name="signature">--
+Mr Somboon T.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('base.group_partner_manager'), ref('base.group_sale_salesman')])]"/>
+            <field name="image"></field>
+        </record>
+
+		<!-- Surasak S.	0-2744-6300-2	089-773-8744	surasak@squarepanel.com -->
+        <record id="base.partner_surasak" model="res.partner">
+            <field name="name">Surasak S.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="phone">0-2744-6300-2</field>
+            <field name="mobile">089-773-8744</field>
+            <field name="email">surasak@squarepanel.com</field>
+        </record>
+        <record id="base.user_surasak" model="res.users">
+            <field name="partner_id" ref="base.partner_surasak"/>
+            <field name="login">surasak</field>
+            <field name="password">surasak</field>
+            <field name="signature">--
+Mr Surasak S.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('base.group_partner_manager'), ref('base.group_sale_salesman')])]"/>
+            <field name="image"></field>
+        </record>
+
+		<!-- Visak T.	0-2744-6300-2	081-8486793	visak@squarepanel.com -->
+        <record id="base.partner_visak" model="res.partner">
+            <field name="name">Visak T.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="phone">0-2744-6300-2</field>
+            <field name="mobile">081-8486793</field>
+            <field name="email">visak@squarepanel.com</field>
+        </record>
+        <record id="base.user_visak" model="res.users">
+            <field name="partner_id" ref="base.partner_visak"/>
+            <field name="login">visak</field>
+            <field name="password">visak</field>
+            <field name="signature">--
+Mr Visak T.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('base.group_partner_manager'), ref('base.group_sale_salesman')])]"/>
+            <field name="image"></field>
+        </record>
+
+		<!-- Weeranuwat S.	0-2744-6300-2	089-780-7891	weeranuwat@squarepanel.com -->
+        <record id="base.partner_weeranuwat" model="res.partner">
+            <field name="name">Weeranuwat S.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="customer" eval="False"/>
+            <field name="phone">0-2744-6300-</field>
+            <field name="mobile">089-780-7891</field>
+            <field name="email">weeranuwat@squarepanel.com</field>
+        </record>
+        <record id="base.user_weeranuwat" model="res.users">
+            <field name="partner_id" ref="base.partner_weeranuwat"/>
+            <field name="login">weeranuwat</field>
+            <field name="password">weeranuwat</field>
+            <field name="signature">--
+Mr Weeranuwat S.</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('base.group_partner_manager'), ref('base.group_sale_salesman')])]"/>
+            <field name="image"></field>
+        </record>			
+
+    </data>
+</openerp>

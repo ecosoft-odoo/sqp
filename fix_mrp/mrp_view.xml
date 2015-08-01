@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>        
+		<record model="ir.actions.act_window" id="mrp.product_open_bom">
+            <field name="context">{'group_by': False, 'default_product_id': active_id, 'search_default_product_id': active_id}</field>
+        </record>
+    </data>
+</openerp>

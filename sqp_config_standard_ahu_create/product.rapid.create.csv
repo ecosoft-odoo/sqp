@@ -1,0 +1,11 @@
+id,tag_ids,is_one_time_use,sale_ok,description,product_categ_id
+Amair_AD,Standard AHU,FALSE,TRUE,Amair AD (Std AHU),Standard AHU
+Amair_AF,Standard AHU,FALSE,TRUE,Amair AF (Std AHU),Standard AHU
+Amair_AG,Standard AHU,FALSE,TRUE,Amair AG (Std AHU),Standard AHU
+Amair_AH,Standard AHU,FALSE,TRUE,Amair AH (Std AHU),Standard AHU
+Amair_AI,Standard AHU,FALSE,TRUE,Amair AI (Std AHU),Standard AHU
+Amair_AJ,Standard AHU,FALSE,TRUE,Amair AJ (Std AHU),Standard AHU
+Amair_AL,Standard AHU,FALSE,TRUE,Amair AL (Std AHU),Standard AHU
+Amair_AS,Standard AHU,FALSE,TRUE,Amair AS (Std AHU),Standard AHU
+B_Grimm_Access,Standard AHU,FALSE,TRUE,B.Grimm Access (Std AHU),Standard AHU
+B_Grimm_Panel,Standard AHU,FALSE,TRUE,B.Grimm Panel (Std AHU),Standard AHU

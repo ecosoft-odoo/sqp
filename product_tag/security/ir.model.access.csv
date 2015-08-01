@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_tag_sale_own_lead,product.tag sales see own lead,model_product_tag,base.group_sale_salesman,1,1,1,1
+access_product_tag_sale_manager,product.tag sales manager,model_product_tag,base.group_sale_manager,1,1,1,1
+access_product_tag_sale_all_lead,product.tag sales see all lead,model_product_tag,base.group_sale_salesman_all_leads,1,1,1,1

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="purchase_order_form_ext" model="ir.ui.view">
+            <field name="name">purchase.order.form.ext</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <data>
+	                <field name="partner_id" position="attributes" version="7.0">					
+						<attribute name="domain" >[('supplier','=',True),('is_company','=',True)]</attribute> 
+					</field>
+					<field name="pricelist_id" position="after" version="7.0">					
+						<field name="ref_attention_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/> 
+					</field>
+	                <field name="warehouse_id" position="after" version="7.0">
+						<field name="ref_purchase_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/> 
+						<field name="ref_order_id" on_change="onchange_ref_order_id(ref_order_id)" options="{'limit': 10, 'create': false, 'create_edit': false}"/> 
+						<field name="ref_project_name" /> 
+					</field>				
+				</data>
+			</field>
+        </record>
+        
+
+        <record id="purchase_order_tree_ext" model="ir.ui.view">
+            <field name="name">purchase.order.tree.ext</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="name" position="after">
+                    	<field name="ref_project_name"/>
+                    </field>
+				</data>
+			</field>
+        </record>     
+        
+		<record id="view_purchase_order_filter_ext" model="ir.ui.view">
+            <field name="name">view.purchase.order.filter.ext</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/search/field[@name='name']" position="after">
+                    	<field name="ref_project_name" string="Project"/>
+                    </xpath>
+                	<xpath expr="/search/group" position="inside">
+                        <filter string="Project" domain="[]" context="{'group_by':'ref_project_name'}"/>
+         			</xpath> 
+				</data>
+            </field>
+        </record>        
+	</data>
+</openerp>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+		<!-- kittiu -->
+        <record id="act_progress" model="workflow.activity">
+            <field name="wkf_id" ref="stock.wkf_picking"/>
+            <field name="name">progress</field>
+            <field name="kind">function</field>
+            <field name="action">action_progress()</field>
+        </record>
+
+        <record id="trans_draft_progress" model="workflow.transition">
+            <field name="act_from" ref="stock.act_draft"/>
+            <field name="act_to" ref="act_progress"/>
+            <field name="signal">button_progress</field>
+        </record>
+        
+        <record id="trans_progress_confirmed" model="workflow.transition">
+            <field name="act_from" ref="act_progress"/>
+            <field name="act_to" ref="stock.act_confirmed"/>
+            <field name="signal">button_confirm</field>
+        </record>
+        
+        <record id="trans_progress_cancel" model="workflow.transition">
+            <field name="act_from" ref="act_progress"/>
+            <field name="act_to" ref="stock.act_cancel"/>
+            <field name="condition">allow_cancel()</field>
+            <field name="signal">button_cancel</field>
+        </record>
+
+    </data>
+</openerp>

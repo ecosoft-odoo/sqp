@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <!--
+        Precision
+        -->
+        <record forcecreate="True" id="product.decimal_price" model="decimal.precision">
+            <field name="name">Product Price</field>
+            <field name="digits">6</field>
+        </record>
+		<!--
+		Product Category for SQP
+		-->        
+        <record id="product_category_finished_goods" model="product.category">
+            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="name">Finished Goods</field>
+        </record>
+        <record id="product_category_for_sales" model="product.category">
+            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="name">For Sales</field>
+        </record>        
+        <record id="product_category_standard_ahu" model="product.category">
+            <field name="parent_id" ref="sqp_config.product_category_for_sales"/>
+            <field name="name">Standard AHU</field>
+        </record>       
+        <record id="product_category_nonstandard" model="product.category">
+            <field name="parent_id" ref="sqp_config.product_category_for_sales"/>
+            <field name="name">Non-Standard</field>
+        </record>       
+        <record id="product_category_part" model="product.category">
+            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="name">Part</field>
+        </record>       
+        <record id="product_category_aluminum" model="product.category">
+            <field name="parent_id" ref="sqp_config.product_category_part"/>
+            <field name="name">Aluminium</field>
+        </record>     
+        <record id="product_category_installation" model="product.category">
+            <field name="parent_id" ref="sqp_config.product_category_part"/>
+            <field name="name">Installation</field>
+        </record>    
+        <record id="product_category_supplies" model="product.category">
+            <field name="parent_id" ref="sqp_config.product_category_part"/>
+            <field name="name">Supplies</field>
+        </record>    
+        <record id="product_category_pvc" model="product.category">
+            <field name="parent_id" ref="sqp_config.product_category_part"/>
+            <field name="name">PVC</field>
+        </record>    
+        <record id="product_category_materials" model="product.category">
+            <field name="parent_id" ref="sqp_config.product_category_part"/>
+            <field name="name">Materials</field>
+        </record>      
+		<!--
+		Product Tag for SQP
+		-->        
+        <record id="product_tag_standard_ahu" model="product.tag">
+            <field name="name">Standard AHU</field>
+        </record>     
+        <record id="product_tag_ahu" model="product.tag">
+            <field name="name">AHU</field>
+        </record>     
+        <record id="product_tag_cold_room" model="product.tag">
+            <field name="name">Cold Room</field>
+        </record>     
+        <record id="product_tag_clean_room" model="product.tag">
+            <field name="name">Clean Room</field>
+        </record>
+        
+
+		<!-- 
+		UOM Category 
+		-->
+        <record id="product.product_uom_categ_area" model="product.uom.categ">
+            <field name="name">Area</field>
+        </record>
+        <record id="product.product_uom_categ_unit" model="product.uom.categ">
+            <field name="name">Unit</field>
+        </record>
+        <record id="product.product_uom_categ_kgm" model="product.uom.categ">
+            <field name="name">Weight</field>
+        </record>
+        <record id="product.uom_categ_wtime" model="product.uom.categ">
+            <field name="name">Working Time</field>
+        </record>
+        <record id="product.uom_categ_length" model="product.uom.categ">
+            <field name="name">Length / Distance</field>
+        </record>
+        <record id="product.product_uom_categ_vol" model="product.uom.categ">
+            <field name="name">Volume</field>
+        </record>
+	</data>
+</openerp>

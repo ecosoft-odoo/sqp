@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Delivery Order, domain: is_supply_list = False -->
+    	<record id="stock.action_picking_tree" model="ir.actions.act_window">
+            <field name="context">{'default_type': 'out', 'contact_display': 'partner_address', 'is_delivery_order': True, 'fg_location_id': 16}</field>
+            <field name="domain">[('type','=','out'),('is_supply_list','=',False)]</field>
+        </record>
+        
+        <!-- Supply List -->
+        <record id="action_supply_list_tree" model="ir.actions.act_window">
+            <field name="name">Supply List</field>
+            <field name="res_model">stock.picking.out</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('type','=','out'),('is_supply_list','=',True)]</field>
+            <field name="context">{'default_type': 'out', 'contact_display': 'partner_address', 'is_supply_list': True, 'supply_location_id': 15}</field>
+            <field name="search_view_id" ref="stock.view_picking_out_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a supply list. 
+              </p><p>
+                This is the list of all supply list that have to be
+                prepared manually.
+              </p>
+            </field>
+        </record>
+        
+        <menuitem action="action_supply_list_tree" id="menu_action_supply_list_tree" parent="stock.menu_stock_warehouse_mgmt" sequence="4"/>
+
+		<!-- Picking Form -->
+		<record id="view_picking_form_ext" model="ir.ui.view">
+            <field name="name">view.picking.form.ext</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="model">stock.picking.out</field>
+            <field name="arch" type="xml">
+                <button name="draft_force_assign" position="attributes">
+                    <attribute name="states">draft,progress</attribute>
+                    <attribute name="groups">mrp.group_mrp_manager,stock.group_stock_manager</attribute>
+            	</button>   	
+                <button name="draft_force_assign" position="before">
+                	<button name="draft_progress" string="In Progress" attrs="{'invisible':['|',('is_supply_list','=',False),('state','not in',('draft'))]}" type="object" class="oe_highlight" groups="base.group_user"/>
+				</button>
+				<field name="stock_journal_id" position="after">
+                	<field name="is_supply_list" attrs="{'invisible':[('is_supply_list','=',False)]}"/>             
+					<field name="contact_name"/>
+				</field>
+				<field name="min_date" position="attributes">
+					<attribute name="readonly">False</attribute>
+				</field>
+			</field>
+        </record>
+        
+        <record id="view_picking_out_form_ext" model="ir.ui.view">
+            <field name="name">stock.picking.out.form</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock.view_picking_out_form"/>
+            <field name="arch" type="xml">
+                <button name="draft_validate" position="attributes">
+                    <attribute name="states">draft,progress</attribute>
+                    <attribute name="invisible">context.get('is_supply_list', False)</attribute>
+                    <attribute name="groups">mrp.group_mrp_manager,stock.group_stock_manager</attribute>
+            	</button>
+            	<xpath expr="//field[@name='move_lines']" position="replace">
+                    <field name="move_lines" context="{'address_out_id': partner_id, 'picking_type': 'out', 'form_view_ref':'view_move_picking_form', 'tree_view_ref':'view_move_picking_tree', 'is_supply_list': context.get('is_supply_list', False), 'supply_location_id': context.get('supply_location_id', False), 'is_delivery_order': context.get('is_delivery_order', False), 'fg_location_id': context.get('fg_location_id', False)}"/>
+                </xpath>
+				 <xpath expr="//field[@name='origin']" position="attributes">
+				 	<attribute name="attrs">{'invisible':[('is_supply_list','=',True)]}</attribute>                      
+                </xpath>
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="ref_order_id"  on_change="onchange_ref_order_id(ref_order_id)" domain="[('partner_id','=',partner_id)]"
+                        options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+					<field name="ref_project_name" />	
+					<field name="is_printed" />
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="view_picking_out_tree_ext" model="ir.ui.view">
+            <field name="name">view.picking.out.tree.ext</field>
+            <field name="inherit_id" ref="stock.view_picking_out_tree" />
+            <field name="model">stock.picking.out</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/tree/field[@name='invoice_state']" position="after">
+                    	<field name="is_printed"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        
+		<record id="view_move_picking_tree_ext" model="ir.ui.view">
+            <field name="name">view.move.picking.tree.ext</field>
+            <field name="inherit_id" ref="stock.view_move_picking_tree" />
+            <field name="model">stock.move</field>
+            <field name="arch" type="xml">
+				<field name="product_id" position="after">
+				    <field name="name"/>
+				</field>
+				<field name="product_qty" position="after">
+				    <field name="order_qty" invisible="not context.get('is_supply_list', False)"/>
+				</field>
+			</field>
+        </record>        
+		<record id="view_move_picking_form" model="ir.ui.view">
+            <field name="name">stock.move.form.ext</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form" />
+            <field name="arch" type="xml">
+            	<xpath expr="//form/sheet/group/group/field[@name='product_id']" position="after">
+				    <field name="order_qty" on_change="onchange_order_qty(order_qty)" string="Order Quantity" invisible="not context.get('is_supply_list', False)"/>
+				</xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

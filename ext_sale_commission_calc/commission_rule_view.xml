@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+		<record id="view_commission_rule_form_ext" model="ir.ui.view">
+            <field name="name">view.commission.rule.form.ext</field>
+            <field name="model">commission.rule</field>
+            <field name="inherit_id" ref="sale_commission_calc.view_commission_rule_form" />
+            <field name="arch" type="xml">
+                <data>
+                	<xpath expr="/form/sheet/group//field[@name='type']" position="attributes">
+                		<attribute name="readonly">True</attribute>		
+                    </xpath> 
+				</data>
+            </field>
+        </record>
+	</data>
+</openerp>

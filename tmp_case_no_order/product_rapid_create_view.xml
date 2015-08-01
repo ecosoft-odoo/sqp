@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+	    <record id="view_product_rapid_create_form_ext" model="ir.ui.view">
+	        <field name="name">view.product.rapid.create.form.ext</field>
+	        <field name="model">product.rapid.create</field>
+	        <field name="inherit_id" ref="product_bom_template.view_product_rapid_create_form"/>
+	        <field name="arch" type="xml">
+	        	<field name="order_id" position="replace">
+           			<field name="order_id" attrs="{'required': [('temp_no_order_ref','!=',True),('is_one_time_use','=',True)]}"/>
+           			<field name="temp_no_order_ref"/>	        	    
+	        	</field>       
+	    	</field>
+	    </record>
+    </data>
+</openerp>

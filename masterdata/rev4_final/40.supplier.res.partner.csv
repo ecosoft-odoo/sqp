@@ -1,0 +1,963 @@
+id,name,ref,is_company,customer,supplier,parent_id_NOT_USE,parent_id/id,type,use_parent_address,street,street2,zip,city,country_id,phone,mobile,fax,email,category_id,website,comment,property_supplier_payment_term,LEAD_TIME
+res_partner_aluminum_1,บริษัท เค.ซี.(กระทุ่มแบน) อุตสาหกรรม จำกัด,SP01S001,TRUE,FALSE,TRUE,,,Default,FALSE,107 หมู่ 10,ต.คลองมะเดือ อ.กระทุ่มแบน,,สมุทรสาคร,Thailand,0-2878-0432-6,,0-2468-3728,,ALUMINIUM,,Aluminium,Cash,21
+res_partner_aluminum_2,บริษัท ซิมเมอร์ เมตัล สแตนดาร์ด จำกัด,SP01S002,TRUE,FALSE,TRUE,,,Default,FALSE,1/4 ม.7,ต.บ้านแถว อ.เสนา,13110,พระนครศรีอยุธยา,Thailand,02-6176025-6 /081-6856926,,"02-2721546, 2720877",,ALUMINIUM,,Aluminium,45 Days,21
+res_partner_aluminum_3,ปราวีณา / จิน,,FALSE,FALSE,TRUE,บริษัท ซิมเมอร์ เมตัล สแตนดาร์ด จำกัด,res_partner_aluminum_2,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_aluminum_4,บริษัท ไทยเม็ททอล จำกัด,SP01S003,TRUE,FALSE,TRUE,,,Default,FALSE,205 ม.2 ถ.บางปิ้ง-แพรกษา (พุทธรักษา),ต.ท้ายบ้าน อ.เมือง,10280,สมุทรปราการ,Thailand,02-7029787-91,,02-7028559,,ALUMINIUM,,Aluminium,60 Days,21
+res_partner_aluminum_5,คุณกชพร,,FALSE,FALSE,TRUE,บริษัท ไทยเม็ททอล จำกัด,res_partner_aluminum_4,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_aluminum_6,บริษัท พรนครินทร์ อลูมินั่ม จำกัด,SP01S004,TRUE,FALSE,TRUE,,,Default,FALSE,407/25-27 ม.5 ถนนศรีนครินทร์,ตำบลสำโรงเหนือ อำเภอเมือง,10270,สมุทรปราการ,Thailand,"02-3857871, 02-7587372",,"02-3857871, 02-7587372",,ALUMINIUM,,"Aluminium  ( สำเร็จรูป , PART ขายตามท้องตลาด)",15 Days,7
+res_partner_aluminum_7,คุณอัมพร,,FALSE,FALSE,TRUE,บริษัท พรนครินทร์ อลูมินั่ม จำกัด,res_partner_aluminum_6,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_aluminum_8,บริษัท รัตนดำรงค์ จำกัด,SP01S005,TRUE,FALSE,TRUE,,,Default,FALSE,258 หมู่ 4 ซอย ว.ป.อ. 11 ( พิเศษ) ถ.เศรษฐกิจ 1,ต.ท่าไม้ อ.กระทุ่มแบน,,สมุทรสาคร,Thailand,"02 - 810 0179-80  ,02-429 1929",,02 - 4291929 ,,ALUMINIUM,,Aluminium,45 Days,21
+res_partner_aluminum_9,คุณสะรากรณ์,,FALSE,FALSE,TRUE,บริษัท รัตนดำรงค์ จำกัด,res_partner_aluminum_8,Contact,TRUE,,,,,Thailand,,0-81 331 1687 ,,,,,,,
+res_partner_aluminum_10,บริษัท แอลเมทไทย จำกัด,SP01S006,TRUE,FALSE,TRUE,,,Default,FALSE,235 ม.7 ถ.สุขุมวิท กม35,ต.บางปูใหม่ อ.เมือง,,สมุทรปราการ,Thailand,"02 - 323 2635 - 40 , 02 - 709 5608 -11",,02-709 5607,,ALUMINIUM,,Aluminium,30 Days,21
+res_partner_aluminum_11,คุณพิสิต,,FALSE,FALSE,TRUE,บริษัท แอลเมทไทย จำกัด,res_partner_aluminum_10,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_aluminum_12,ร้านสมานมิตร,SP01S007,TRUE,FALSE,TRUE,,,Default,FALSE,802 หมู่ 1,ต.พนมสารคาม อ.พนมสารคาม,,ฉะเชิงเทรา,Thailand, (038)883 9191,, (038)883 9191,,ALUMINIUM,,"Aluminium  ( สำเร็จรูป , PART ขายตามท้องตลาด)",Cash,3
+res_partner_aluminum_13,คุณไพรวัลย์,,FALSE,FALSE,TRUE,ร้านสมานมิตร,res_partner_aluminum_12,Contact,TRUE,,,,,Thailand,,089-964 0222,,,,,,,
+res_partner_pvc_1,"KRUNGTEP UNION MFG. CO.,LTD.",SP04S001,TRUE,FALSE,TRUE,,,Default,FALSE,47 หมู่ 2 ถ.สุวินทวงศ์,ลำผักชี หนองจอก,10530,กรุงเทพฯ,Thailand,02-989 7791-4,,02-989 7878,,PVC ,,"PVC , ยาง ",,
+res_partner_pvc_2,คุณสุนีย์รัตน์,,FALSE,FALSE,TRUE,"KRUNGTEP UNION MFG. CO.,LTD.",res_partner_pvc_1,Contact,TRUE,,,,,Thailand,,081 - 1701490,,,,,,,
+res_partner_pvc_3,บริษัท เอส. จี สยาม จำกัด,SP04S002,TRUE,FALSE,TRUE,,,Default,FALSE,11/272-272 ม.10 ถ.เอกชัย,แขวงบางบอน เขตบางบอน,10150,กรุงเทพฯ,Thailand,02 - 895 0545 -6 ,,02 - 895 3029 ,,PVC ,,"PVC , ยาง ",Cash,
+res_partner_pvc_4,คุณหน่อย,,FALSE,FALSE,TRUE,บริษัท เอส. จี สยาม จำกัด,res_partner_pvc_3,Contact,TRUE,,,,,Thailand,,089-4949485,,,,,,,
+res_partner_pvc_5,บริษัท อินเตอร์ไพรส์ บุษราคัม โปรพลาส จำกัด,SP04S003,TRUE,FALSE,TRUE,,,Default,FALSE,4/7 ม.9,ต.นาดี อ.เมืองสมุทรสาคร,74000,สมุทรสาคร,Thailand,034-466011-6,,034-466017-8,,PVC ,,"PVC , ยาง  ",30 Days,
+res_partner_pvc_6,คุณทักษิณ,,FALSE,FALSE,TRUE,บริษัท อินเตอร์ไพรส์ บุษราคัม โปรพลาส จำกัด,res_partner_pvc_5,Contact,TRUE,,,,,Thailand,,01-9099456,,,,,,,
+res_partner_pvc_7,คุณเสริมศักดิ์,,FALSE,FALSE,TRUE,บริษัท อินเตอร์ไพรส์ บุษราคัม โปรพลาส จำกัด,res_partner_pvc_5,Contact,TRUE,,,,,Thailand,,081-6301569,,,,,,,
+res_partner_pvc_8,คุณบี,,FALSE,FALSE,TRUE,บริษัท อินเตอร์ไพรส์ บุษราคัม โปรพลาส จำกัด,res_partner_pvc_5,Contact,TRUE,,,,,Thailand,,06-3247323,,,,,,,
+res_partner_pvc_9,คุณศิริรัตน์-CN,,FALSE,FALSE,TRUE,บริษัท อินเตอร์ไพรส์ บุษราคัม โปรพลาส จำกัด,res_partner_pvc_5,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_pvc_10,บริษัท ซิลเวอร์โกลด์ พลาสติก จำกัด,SP04S004,TRUE,FALSE,TRUE,,,Default,FALSE,81/70-72 ม.20 (ไทรอัมพ์ เซ็นเตอร์) ถ.เทพารักษ์ กม.12,ต.บางพลีใหญ่ อ.บางพลี,10540,สมุทรปราการ,Thailand,01-3183339 / 02-3129720-22,,02-3129723,,PVC ,,"PVC , ยาง ",30 Days,
+res_partner_pvc_11,คุณคฑาวุธ,,FALSE,FALSE,TRUE,บริษัท ซิลเวอร์โกลด์ พลาสติก จำกัด,res_partner_pvc_10,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_1,บริษัท เซ้าท์ ซิตี้ ปิโตรเคม จำกัด,SP04S001,TRUE,FALSE,TRUE,,,Default,FALSE,99/1 ม.8 ถ.ทางหลวงหมายเลข 3191,ต.มาบข่า กิ่ง อ.นิคมพัฒนา,21180,ระยอง,Thailand,0-2717-1730-48 : 324,01-8899240,0-2717-1750,,วัตถุดิบ,,น้ำยา / สารเคมี / WAX (DOP น้ำยาล้างเครื่องฉีดโฟม),,-
+res_partner_rawmat_2,กาญจนา เลิศอัมพรวิทย์,,FALSE,FALSE,TRUE,บริษัท เซ้าท์ ซิตี้ ปิโตรเคม จำกัด,res_partner_rawmat_1,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_3,บริษัท พรีซีสชั่น เอนยีเนียริ่ง จำกัด,SP04S002,TRUE,FALSE,TRUE,,,Default,FALSE,153/13 ซ.รองเมือง 3 ถ.รองเมือง,แขวงรองเมือง เขตปทุมวัน,10330,กรุงเทพฯ,Thailand,"04-1457049, 02-2164762, 2165858",,02-2170214,,วัตถุดิบ,,น้ำยา / สารเคมี / WAX,,-
+res_partner_rawmat_4,คุณเอกรัฐ,,FALSE,FALSE,TRUE,บริษัท พรีซีสชั่น เอนยีเนียริ่ง จำกัด,res_partner_rawmat_3,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_5,คุณนวลทิพย์,,FALSE,FALSE,TRUE,บริษัท พรีซีสชั่น เอนยีเนียริ่ง จำกัด,res_partner_rawmat_3,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_6,บริษัท เชลล์แห่งประเทศไทย จำกัด ( Flintkote No.5 ),SP04S003,TRUE,FALSE,TRUE,,,Default,FALSE,10 ถนนสุนทรโกษา,แขวงคลองเตย เขตคลองเตย,10110,กรุงเทพฯ,Thailand,"0-2249-0491, 0-2262-6341",06-977 5614,0-2249-8334,,วัตถุดิบ,,น้ำยา / สารเคมี / WAX,Cash,7
+res_partner_rawmat_7,กิ่งแก้ว สุภูตะโยธิน,,FALSE,FALSE,TRUE,บริษัท เชลล์แห่งประเทศไทย จำกัด ( Flintkote No.5 ),res_partner_rawmat_6,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_8,บริษัท พรีเทรนเคมี จำกัด ( Methylene Chloride น้ำยาล้างโฟม),SP04S004,TRUE,FALSE,TRUE,,,Default,FALSE,127/217 หมู่บ้านสวนทองวิลล่า ถ.รามอินทรา,แขวงคลองกุ่ม เขตบึงกุ่ม,10230,กรุงเทพฯ,Thailand,"09-4990990, 02-9445450-2",,02-9445454,,วัตถุดิบ,,น้ำยา / สารเคมี / WAX,,-
+res_partner_rawmat_9,คุณจารุวัฒน์,,FALSE,FALSE,TRUE,บริษัท พรีเทรนเคมี จำกัด ( Methylene Chloride น้ำยาล้างโฟม),res_partner_rawmat_8,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_10,ห้างหุ้นส่วนจำกัด ฟิแลนโทรป,SP04S005,TRUE,FALSE,TRUE,,,Default,FALSE,256 ถ.สีลม แขวงสุริยวงศ์ เขตบางรัก กรุงเทพ ฯ 10500,256 ถ.สีลม แขวงสุริยวงศ์ เขตบางรัก,10500,กรุงเทพฯ,Thailand," 0-2234-1288, 233-0306 ",,0-2233-7496,,วัตถุดิบ,,น้ำยา / สารเคมี / WAX,30 Days,5
+res_partner_rawmat_11,คุณสุรพงษ์,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ฟิแลนโทรป,res_partner_rawmat_10,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_12,บริษัท เคมเอ็กซ์ จำกัด,SP04S006,TRUE,FALSE,TRUE,,,Default,FALSE,77/249 อาคารราชเทวีทาวเวอร์ ชั้น 19 ถนนพยาไทย กรุงเทพ ฯ / 1296/4 ถ.ประชาราษฏร์ แขวงบางซื่อ กรุงเทพฯ 10800,77/249 อาคารราชเทวีทาวเวอร์ ชั้น 19 ถนนพยาไทย กรุงเทพ ฯ / 1296/4 ถ.ประชาราษฏร์ แขวงบางซื่อ กรุงเทพฯ 10800,,,Thailand,"0-225 7599,252 9897 ",,0-2254 4182,,วัตถุดิบ,,น้ำยา / สารเคมี / WAX,30 Days,3
+res_partner_rawmat_13,คุณพงษ์เทพ,,FALSE,FALSE,TRUE,บริษัท เคมเอ็กซ์ จำกัด,res_partner_rawmat_12,Contact,TRUE,,,,,Thailand, ,086- 688 5775,,,,,,,
+res_partner_rawmat_14,บริษัท แม็คฮิลล์ กรุ๊ป จำกัด,SP04S007,TRUE,FALSE,TRUE,,,Default,FALSE,"69/108 หมู่ที่ 5 ซอยอำนวยโชค ถนนเลียบคลองทวีวัฒนา 
+บรรทัด :บริษัท แม็คฮิลล์ กรุ๊ป จำกัด","แขวงทวีวัฒนา เขตทวีวัฒนา 
+บรรทัด :บริษัท แม็คฮิลล์ กรุ๊ป จำกัด",10170,กรุงเทพฯ,Thailand,0-2814-0291-4 (01-6943256),,0-2814-0290,,วัตถุดิบ,,น้ำยา / สารเคมี / WAX   (  น้ำยา Wax ),,-
+res_partner_rawmat_15,คุณวิชาย แซ่ลี้,,FALSE,FALSE,TRUE,บริษัท แม็คฮิลล์ กรุ๊ป จำกัด,res_partner_rawmat_14,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_16,บริษัท อัลติม่า โพลีเมอร์ จำกัด,SP04S008,TRUE,FALSE,TRUE,,,Default,FALSE,44/5 ม.4 ถ.พหลโยธิน-ลำลูกกา,ต.ลำลูกกา อ.ลำลูกกา,12150,ปทุมธานี,Thailand,"0-2987-1157-9, 01-9259236",,0-2968-3713,,วัตถุดิบ,,น้ำยา / สารเคมี / WAX   (  น้ำยา Wax ),,-
+res_partner_rawmat_17,ณัฐกฤตย์,,FALSE,FALSE,TRUE,บริษัท อัลติม่า โพลีเมอร์ จำกัด,res_partner_rawmat_16,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_18,ตุ๊กตา,,FALSE,FALSE,TRUE,บริษัท อัลติม่า โพลีเมอร์ จำกัด,res_partner_rawmat_16,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_19,เตย,,FALSE,FALSE,TRUE,บริษัท อัลติม่า โพลีเมอร์ จำกัด,res_partner_rawmat_16,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_20,CB MARKETING,SP04S009,TRUE,FALSE,TRUE,,,Default,FALSE,90 Soi Sangngoen Sukhumvit 55 Rd.,Wattana Bangkok,10110,กรุงเทพฯ,Thailand," 02 - 185 0747 ,02 - 185 0749   ",,02-712 6438,,วัตถุดิบ,,น้ำยา / สารเคมี / WAX   ( MC  ) ,30 Days,5
+res_partner_rawmat_21,คุณปอ,,FALSE,FALSE,TRUE,CB MARKETING,res_partner_rawmat_20,Contact,TRUE,,,,,Thailand,,089-816 3100,,,,,,,
+res_partner_rawmat_22,บริษัท โมเดอนเคมีเคิล จำกัด,SP04S010,TRUE,FALSE,TRUE,,,Default,FALSE,59/5-6 ซ.สุขุมวิท 42 ถ.สุขุมวิท,แขวงพระโขนง เขตคลองเตย กรุงเทพฯ 10110,10110,กรุงเทพฯ,Thailand,02-7120405-9 /0-1920-9800,,02-3911571,,วัตถุดิบ,,น้ำยา / สารเคมี / WAX   ( MC  ) ,60 Days,5
+res_partner_rawmat_23,พรทวี,,FALSE,FALSE,TRUE,บริษัท โมเดอนเคมีเคิล จำกัด,res_partner_rawmat_22,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_24,ห้างหุ้นส่วนจำกัด ดีมาร์ค อาร์ซี.,SP04S011,TRUE,FALSE,TRUE,,,Default,FALSE,"59/742, 744 ม.4 ถ.นิมิตรใหม่",แขวงสามวาตะวันออก เขตคลองสามวา,10510,กรุงเทพฯ,Thailand,"02-9156727, 9157016",,02-9156970,,วัตถุดิบ,,น้ำยา / สารเคมี / WAX   ( กาวขาว  กาวดำ ) ,30 Days,3
+res_partner_rawmat_25,พงษ์เทพ,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ดีมาร์ค อาร์ซี.,res_partner_rawmat_24,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_26,กรองทิพย์,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ดีมาร์ค อาร์ซี.,res_partner_rawmat_24,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_27,"BAYER THAI CO.,LTD.",SP04S012,TRUE,FALSE,TRUE,,,Default,FALSE,130/1 North Sathon Rd. Silom,Bangrak,10500,กรุงเทพฯ,Thailand,,,,,วัตถุดิบ,,"น้ำยา / สารเคมี / WAX  ( ISO , POLY )",60 Days,ตามข้อตกลง
+res_partner_rawmat_28,K.Thanitnun,,FALSE,FALSE,TRUE,"BAYER THAI CO.,LTD.",res_partner_rawmat_27,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_29,บริษัท บัลมอรัล จำกัด,SP04S013,TRUE,FALSE,TRUE,,,Default,FALSE,46 ซอยรามคำแหง 192,แขวงมีนบุรี เขตมีนบุรี,10510,กรุงเทพฯ,Thailand,"0-2919-4162-3, 9194077",,0-2919-4163,,วัตถุดิบ,,"น้ำยา / สารเคมี / WAX  ( ISO , POLY )",,-
+res_partner_rawmat_30,คุณจันคำ กูนวงศ์,,FALSE,FALSE,TRUE,บริษัท บัลมอรัล จำกัด,res_partner_rawmat_29,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_31,บริษัท บางกอก อินทิเกรเท็ด เทรดดิ้ง จำกัด,SP04S014,TRUE,FALSE,TRUE,,,Default,FALSE,255 หมู่บ้านทาวน์อินทาวน์ ซ.94 ถ.ลาดพร้าว,แขวง/เขตวังทองหลาง,10310,กรุงเทพฯ,Thailand,02-5303811-2,,02-5303846,,วัตถุดิบ,,"น้ำยา / สารเคมี / WAX  ( ISO , POLY )",90 Days,-
+res_partner_rawmat_32,รัตน์,,FALSE,FALSE,TRUE,บริษัท บางกอก อินทิเกรเท็ด เทรดดิ้ง จำกัด,res_partner_rawmat_31,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_33,สมชาย,,FALSE,FALSE,TRUE,บริษัท บางกอก อินทิเกรเท็ด เทรดดิ้ง จำกัด,res_partner_rawmat_31,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_34,บริษัท พี. เมทัลเคม เทรดดิ้ง จำกัด,SP04S015,TRUE,FALSE,TRUE,,,Default,FALSE,129/ 157 หมู่ 2 ถนนบางบอน 3,แขวงหลักสอง เขตบางแค,10160,กรุงเทพฯ,Thailand,"0-2806 5083-4 , 02- 476 6582",,0-2460 0112,,วัตถุดิบ,,น้ำยา / สารเคมี / WAX  (น้ำยาล้างไข Aluminium ),30 Days,5
+res_partner_rawmat_35,คุณธวัชชัย มงคลอุดมรัตน์,,FALSE,FALSE,TRUE,บริษัท พี. เมทัลเคม เทรดดิ้ง จำกัด,res_partner_rawmat_34,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_36,บริษัท ซีเอสอาร์ อินซูเลชั่น (ประเทศไทย) จำกัด,SP04S016,TRUE,FALSE,TRUE,,,Default,FALSE,"52/160 ซอยประชาร่วมใจ กรุงเทพ-กรีฑา 
+
+","แขวงหัวหมาก เขตบางกะปิ 
+
+",10250,กรุงเทพฯ,Thailand,"Tel :02 - 7360924,02 - 7360564,02 - 7360845 ",,02 - 736 0934,,วัตถุดิบ,,ROCK WOOLS,30 Days,15
+res_partner_rawmat_37,บริษัท เอเซีย วี.เอส.ซี. คอร์ปอเรชั่น จำกัด,SP04S017,TRUE,FALSE,TRUE,,,Default,FALSE,8/2 ซ.สามแยกบายพาส ถ.สุขุมวิท,อ.เมืองระยอง,21150,ระยอง,Thailand,038-688589-92,,038-688591,,วัตถุดิบ,,ROCK WOOLS,30 Days,15
+res_partner_rawmat_38,คุณตุ่น (ขาย),,FALSE,FALSE,TRUE,บริษัท เอเซีย วี.เอส.ซี. คอร์ปอเรชั่น จำกัด,res_partner_rawmat_37,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_39,คุณya (บัญชี)),,FALSE,FALSE,TRUE,บริษัท เอเซีย วี.เอส.ซี. คอร์ปอเรชั่น จำกัด,res_partner_rawmat_37,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_40,บริษัท ร็อควูล (ประเทศไทย) จำกัด,SP04S018,TRUE,FALSE,TRUE,,,Default,FALSE,52/160 ม.13 ซ.ประชาร่วมใจ ถ.กรุงเทพ-กรีฑา,แขวงสะพานสูง เขตสะพานสูง,10250,กรุงเทพฯ,Thailand,02- 0 2736 0924    , ,0 2736 0934,,วัตถุดิบ,,ROCKWOOL ,30 Days,15
+res_partner_rawmat_41,K. ศิรินทิพย์,,FALSE,FALSE,TRUE,บริษัท ร็อควูล (ประเทศไทย) จำกัด,res_partner_rawmat_40,Contact,TRUE,,,,,Thailand,,089 - 893 6007,,,,,,,
+res_partner_rawmat_42,National Starch And Chemical (Thailand) Limited,SP04S019,TRUE,FALSE,TRUE,,,Default,FALSE,"216/5 L.P.N.Tower 7th Floor, Nanglinchee Road","Chongnonsee, Yannawa,",10120,Bangkok,Thailand,0-2517-0045-9 ,,0-2906-0680,,วัตถุดิบ,,กาว ROCKWOOL ,60 Days,-
+res_partner_rawmat_43,คุณสุวรี,,FALSE,FALSE,TRUE,National Starch And Chemical (Thailand) Limited,res_partner_rawmat_42,Contact,TRUE,,,,,Thailand,,081 - 647 3273 ,,,,,,,
+res_partner_rawmat_44,Henkel (Thailand) Ltd.,SP04S020,TRUE,FALSE,TRUE,,,Default,FALSE,"At Centralworld , 35th floor , 999/9 Rama 1 Rd.","Kwang Patumwan , Ket Patumwan,",10330,Bangkok,Thailand,02-209-8000,,"02-209-8108 , 02-209-8109",,วัตถุดิบ,,กาว ROCKWOOL ,30 Days,3
+res_partner_rawmat_45,K.Suvalee Peugsupa,,FALSE,FALSE,TRUE,Henkel (Thailand) Ltd.,res_partner_rawmat_44,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_46,คุณทิพมนต์,,FALSE,FALSE,TRUE,Henkel (Thailand) Ltd.,res_partner_rawmat_44,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_47,บริษัท ฮันทส์แมน (ประเทศไทย) จำกัด,SP04S021,TRUE,FALSE,TRUE,,,Default,FALSE,899 หมู่ 4 นิคมอุตสาหกรรมบางปู ซอย 6 ถ.สุขุมวิท,แพรกษา เมือง,10540,สมุทรปราการ,Thailand, 0-2709-4466 /,, 0-2709-4360,,วัตถุดิบ,,กาว ROCKWOOL ,60 Days,5
+res_partner_rawmat_48,คุณอ้อ # 404,,FALSE,FALSE,TRUE,บริษัท ฮันทส์แมน (ประเทศไทย) จำกัด,res_partner_rawmat_47,Contact,TRUE,,,,,Thailand,,404,,,,,,,
+res_partner_rawmat_49,บริษัท นิปปอน พาเนล (ไทยแลนด์) จำกัด,SP04S022,TRUE,FALSE,TRUE,,,Default,FALSE,99/11 ม.3 ซ.วัดบัวโรย ถ.บางนา-ตราด,ต.บางเสาธง กิ่งอ.บางเสาธง,10540,สมุทรปราการ,Thailand,02-3979153-6,,02-3979157,,วัตถุดิบ,,ห้อง Clean Room . Cold Room,,-
+res_partner_rawmat_50,อารียา,,FALSE,FALSE,TRUE,บริษัท นิปปอน พาเนล (ไทยแลนด์) จำกัด,res_partner_rawmat_49,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_51,บริษัท ซี.เอส. สตีลเทค จำกัด,SP04S023,TRUE,FALSE,TRUE,,,Default,FALSE,29/376 ม.11 ถ.บางบอน 5,แขวงบางบอน เขตบางบอน,10150,กรุงเทพฯ,Thailand,02-8068604 / 01-4001033,,02-8068616,,วัตถุดิบ,,"เหล็ก , สังกะสี ",30 Days,ตามข้อตกลง
+res_partner_rawmat_52,ชวลิต,,FALSE,FALSE,TRUE,บริษัท ซี.เอส. สตีลเทค จำกัด,res_partner_rawmat_51,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_53,บริษัท เอส.เอ. สตีล เซ็นเตอร์ จำกัด,SP04S024,TRUE,FALSE,TRUE,,,Default,FALSE,2842-2844 ถ.พระราม 4,แขวงคลองเตย เขตคลองเตย,10110,กรุงเทพฯ,Thailand,"0-2240-1669-70, 240-1847  ",,0-2240-1849,,วัตถุดิบ,,"เหล็ก , สังกะสี ",30 Days,ตามข้อตกลง
+res_partner_rawmat_54,สมศรี,,FALSE,FALSE,TRUE,บริษัท เอส.เอ. สตีล เซ็นเตอร์ จำกัด,res_partner_rawmat_53,Contact,TRUE,,,,,Thailand,,01-9845070,,,,,,,
+res_partner_rawmat_55,บริษัท บลูสโคป สตีล (ประเทศไทย ) จำกัด,SP04S025,TRUE,FALSE,TRUE,,,Default,FALSE,108 อาคารบางกอกไทย ชั้น 7 ถนนรางน้ำ,แขวงพญาไท เขตราชเทวี,10400,กรุงเทพฯ,Thailand,0-2642-7155,,0-2642-7156,,วัตถุดิบ,,"เหล็ก , สังกะสี ",30 Days,ตามข้อตกลง
+res_partner_rawmat_56,คุณกุสุมา ( โอ๋ ),,FALSE,FALSE,TRUE,บริษัท บลูสโคป สตีล (ประเทศไทย ) จำกัด,res_partner_rawmat_55,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_57,บริษัท ไทยเอ็นวาเทค จำกัด,SP04S026,TRUE,FALSE,TRUE,,,Default,FALSE,"195 หมู่ 4 ซอยเอนกถาวร 
+
+","ตำบลพยอม อำเภอวังน้อย 
+
+",13170,พระนครศรีอยุธยา,Thailand,035 - 744501-3,,35744504035744500,,วัตถุดิบ,,"เหล็ก , สังกะสี ",30 Days,ตามข้อตกลง
+res_partner_rawmat_58,บริษัท เพิ่มสินสตีลเวิร์ค จำกัด (มหาชน),SP04S027,TRUE,FALSE,TRUE,,,Default,FALSE,"เลขที่ 4, 95-96 หมู่ที่ 6 ถนนพระราม 2",ตำบลโคกขาม อำเภอเมืองสมุทรสาคร,74000,สมุทรสาคร,Thailand,034-825 090-100,,"034-825 081, 034-825 078-9",,วัตถุดิบ,,"เหล็ก , สังกะสี ",30 Days,ตามข้อตกลง
+res_partner_rawmat_59,คุณสมพงษ์,,FALSE,FALSE,TRUE,บริษัท เพิ่มสินสตีลเวิร์ค จำกัด (มหาชน),res_partner_rawmat_58,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_60,"SK NETWORKS CO.,LTD.",SP04S028,TRUE,FALSE,TRUE,,,Default,FALSE,"SK BLDG.119-15 EULIIRO-ZGA ,",JUNG-GU SEOUL 110-192,,,Thailand,,,,,วัตถุดิบ,,"เหล็ก , สังกะสี ",,45
+res_partner_rawmat_61,"ALUTHAI METALS CO.,LTD.",SP04S029,TRUE,FALSE,TRUE,,,Default,FALSE,104/3 Moo 12 Bangpla Dist,Tumbol Bang Pla Amphoe Bang Phli,10540,Samut Prakan,Thailand,02- 1746015-6,,02 - 1746014 ,,วัตถุดิบ,,"เหล็ก , สังกะสี ",Cash,ตามข้อตกลง
+res_partner_rawmat_62,คุณนิตยา,,FALSE,FALSE,TRUE,"ALUTHAI METALS CO.,LTD.",res_partner_rawmat_61,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_63,บริษัท วิบูลย์ชัยเกียรติพงษ์ จำกัด ( อลูมิเนียมรวมลาย ),SP04S030,TRUE,FALSE,TRUE,,,Default,FALSE,765,แขวงสี่พระยา เขตบางรัก,10500,กรุงเทพฯ,Thailand,"02-2351922-3, 2374822-3",,02-2363407,,วัตถุดิบ,,"เหล็ก , สังกะสี ",,-
+res_partner_rawmat_64,ภคนันท์,,FALSE,FALSE,TRUE,บริษัท วิบูลย์ชัยเกียรติพงษ์ จำกัด ( อลูมิเนียมรวมลาย ),res_partner_rawmat_63,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_65,บริษัท วี.อาร์. เม็ททอล จำกัด,SP04S031,TRUE,FALSE,TRUE,,,Default,FALSE,30/17 ม.12,ท่าอิฐ อ.ปากเกร็ด,11120,นนทบุรี,Thailand,"02- 924 6136 -7  , 02 - 926 1756 - 7",,02 - 594 3943,,วัตถุดิบ,,"เหล็ก , สังกะสี ,สแตนเลส",,-
+res_partner_rawmat_66,คุณวีระนันท์,,FALSE,FALSE,TRUE,บริษัท วี.อาร์. เม็ททอล จำกัด,res_partner_rawmat_65,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_67,บริษัท ศรีราชพฤกษ์ จำกัด,SP04S032,TRUE,FALSE,TRUE,,,Default,FALSE,"745,747 พระราม 3",แขวงบางโพงพาง เขตยานนาวา,10120,กรุงเทพฯ,Thailand,02-2948974-7,,02-2945069,,วัตถุดิบ,,"เหล็ก , สังกะสี ,สแตนเลส",30 Days,ตามข้อตกลง
+res_partner_rawmat_68,สุวณี,,FALSE,FALSE,TRUE,บริษัท ศรีราชพฤกษ์ จำกัด,res_partner_rawmat_67,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_69,บริษัท ชลบุรีศรีเจริญโลหะ จำกัด,SP04S033,TRUE,FALSE,TRUE,,,Default,FALSE,"39/39,39/40 ม.4 ถนนบายพลาส",ต.หนองไม้แดงอ.เมืองชลบุรี,20000,ชลบุรี,Thailand,038-458737-41,,038-458742,,วัตถุดิบ,,"เหล็ก , สังกะสี ,สแตนเลส",Cash,ตามข้อตกลง
+res_partner_rawmat_70,จิตรา,,FALSE,FALSE,TRUE,บริษัท ชลบุรีศรีเจริญโลหะ จำกัด,res_partner_rawmat_69,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_71,บริษัท ไทยยูนีคอยล์เซ็นเตอร์ จำกัด (มหาชน ),SP04S034,TRUE,FALSE,TRUE,,,Default,FALSE,809 ซอย 14 ถ.พัฒนา 1,ต.แพรกษา อ.เมืองสมุทรปราการ จ.สมุทรปราการ 10280,10280,สมุทรปราการ,Thailand,"0-2709 3034-6 ,02-709 3984-9  / 085- 810 1639 ",,"0-2709 3037-8,02 - 709 3988",,วัตถุดิบ,,"สแตนเลส, สังกะสี , เหล็กแผ่นลาย  ",45 Days,ตามข้อตกลง
+res_partner_rawmat_72,คุณทิวา,,FALSE,FALSE,TRUE,บริษัท ไทยยูนีคอยล์เซ็นเตอร์ จำกัด (มหาชน ),res_partner_rawmat_71,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_73,บริษัท สินสยามเม็ททอลเซ็นเตอร์ (1984) จำกัด,SP04S035,TRUE,FALSE,TRUE,,,Default,FALSE,136 ถนนกรุงธนบุรี,แขวงบางลำภูล่าง เขตคลองสาน กรุงเทพมหานคร 10600,10600,กรุงเทพฯ,Thailand,"0-2860-9119, 0-2860-9191",,0-2860-9500-1,,วัตถุดิบ,,"สแตนเลส, สังกะสี , เหล็กแผ่นลาย  ",45 Days,ตามข้อตกลง
+res_partner_rawmat_74,คุณวีรพงษ์,,FALSE,FALSE,TRUE,บริษัท สินสยามเม็ททอลเซ็นเตอร์ (1984) จำกัด,res_partner_rawmat_73,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_rawmat_75,บริษัท โตชิน อินเตอร์เนชั่นแนล คอร์ปอเรชั่น จำกัด,SP04S036,TRUE,FALSE,TRUE,,,Default,FALSE,246 นิคมอุตสาหรรม ลาดกระบัง ( Phase 3) ถ. ฉลองกรุง,แหลมประทิว เขตลาดกระบัง กรุงเทพ ฯ 10520,10520,กรุงเทพฯ,Thailand,01-7346556 / 02-7384800,,"02-7384801, 4808",,วัตถุดิบ,,"สแตนเลส, สังกะสี , เหล็กแผ่นลาย  ",30 Days,ตามข้อตกลง
+res_partner_rawmat_76,วิชัย,,FALSE,FALSE,TRUE,บริษัท โตชิน อินเตอร์เนชั่นแนล คอร์ปอเรชั่น จำกัด,res_partner_rawmat_75,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_1,บริษัท โอปนายิกุล จำกัด,SP02S001,TRUE,FALSE,TRUE,,,Default,FALSE,410/24-30 ถนน รัชดาภิเษก แขวงสามเสนนอก เขตห้วยขวาง กรุงเทพฯ 10310,แขวงสามเสนนอก เขตห้วยขวาง,10310,กรุงเทพฯ,Thailand,02-5415320-7,,02-5415329,,INSTALLATION ,,"PVC , ยาง ",30 Days,14
+res_partner_installation_2,คุณกิตติ,,FALSE,FALSE,TRUE,บริษัท โอปนายิกุล จำกัด,res_partner_installation_1,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_3,"ASIAN MODULAR SYSTEMS (THAILAND) CO.,LTD.",SP02S002,TRUE,FALSE,TRUE,,,Default,FALSE,410 ซอยพระยาสุเรนทร์ 30 ถนนรามอินทรา (109),แขวงบางชัน เขตคลองสามวา,10510,กรุงเทพฯ,Thailand,0-2540 6871,,0-2918 6954,,INSTALLATION ,,อุปกรณ์ประตู,30 Days,7
+res_partner_installation_4,คุณวิไล,,FALSE,FALSE,TRUE,"ASIAN MODULAR SYSTEMS (THAILAND) CO.,LTD.",res_partner_installation_3,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_5,คุณไกรกฤษ,,FALSE,FALSE,TRUE,"ASIAN MODULAR SYSTEMS (THAILAND) CO.,LTD.",res_partner_installation_3,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_6,CAC PACIFIC LIMITED,SP02S003,TRUE,FALSE,TRUE,,,Default,FALSE,89 Chalermprakiat Soi 34,Nongbon Pravet,10250,Bangkok,Thailand,02-328-1984( 10 Lines),,02 - 328 1985 ,,INSTALLATION ,,อุปกรณ์ประตู /  ตัวแทน DORMA ,60 Days,7
+res_partner_installation_7,คุณพลสิทธิ์,,FALSE,FALSE,TRUE,CAC PACIFIC LIMITED,res_partner_installation_6,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_8,คุณพิมกมล,,FALSE,FALSE,TRUE,CAC PACIFIC LIMITED,res_partner_installation_6,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_9,CAMFIL FARR ( THAILAND ) LIMITED,SP02S004,TRUE,FALSE,TRUE,,,Default,FALSE,"202 Le Concorde Tower Room A305, Ratchadapisek Rd.,","Hual Khwang, Hual Khwang ,",10310,Bangkok,Thailand,02 - 694 1480-4,,02-964 1464,,INSTALLATION ,,FILTER ,30 Days,7
+res_partner_installation_10,คุณพิมพิชา,,FALSE,FALSE,TRUE,CAMFIL FARR ( THAILAND ) LIMITED,res_partner_installation_9,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_11,"Daiowa (Thailand) Co.,Ltd.",SP02S005,TRUE,FALSE,TRUE,,,Default,FALSE,865 /7 ซ.อุดมสุข 42 ถนนสุขุมวิท 103,เขตบางนา,10260,กรุงเทพฯ,Thailand,02-979 4941-2,,02-979 4943,,INSTALLATION ,,FILTER ,30 Days,7
+res_partner_installation_12,คุณก้อง,,FALSE,FALSE,TRUE,"Daiowa (Thailand) Co.,Ltd.",res_partner_installation_11,Contact,TRUE,,,,,Thailand,,087 - 070 3758,,,,,,,
+res_partner_installation_13,Delier Int'L (H.K.) Company Limited ID174 Panel Joints for Cold Room (Camlock),SP02S006,TRUE,FALSE,TRUE,,,Default,FALSE,"No.12 Floor, Tower B,","Yuquan S Jinan, Shandong, 250063",,,China,[86] (531) 86012834,,[86] (531) 86012734 ,,INSTALLATION ,,อุปกรณ์ประตู,,Within 45 Days
+res_partner_installation_14,Door Seals of Australia,SP02S007,TRUE,FALSE,TRUE,,,Default,FALSE,"Unit 13/81 Bishop Street,","KELVIN GROVE QLD 4059,",,,Australia,61 7 3856 6660,,61 7 3352 7488,,INSTALLATION ,,อุปกรณ์ประตู,,Within 45 Days
+res_partner_installation_15,Mr. Joe Buttafuoco,,FALSE,FALSE,TRUE,Door Seals of Australia,res_partner_installation_14,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_16,"GUANGDONG KIN LONG HARDWARE PRODUCT CO.,LTD.",SP02S008,TRUE,FALSE,TRUE,,,Default,FALSE,"No.1 Xizibian Rd,Daping Industrial Zone,","Tangxia Town,DongGuan City,GuangDong Province, 
+",,,China,0086-769-87943133,,0086-769-87942388   0086-769-87943188,,INSTALLATION ,,อุปกรณ์ประตู,,45
+res_partner_installation_17,HAFALE ( THAILAND ) LIMITED,SP02S009,TRUE,FALSE,TRUE,,,Default,FALSE,57 ซอย สุขุมวิท 64 ถนนสุขุมวิท,บางจาก,,กรุงเทพฯ,Thailand,0-2741-7171,,0-2741-7272,,INSTALLATION ,,อุปกรณ์ประตู,45 Days,7
+res_partner_installation_18,คุณประจวบ,,FALSE,FALSE,TRUE,HAFALE ( THAILAND ) LIMITED,res_partner_installation_17,Contact,TRUE,,,,,Thailand,,081-8340984,,,,,,,
+res_partner_installation_19,"HEBEI JUSHANG COMMERCIAL TRADE CO.,LTD.",SP02S010,TRUE,FALSE,TRUE,,,Default,FALSE,"No. 94 Xida Street ,","Shijiazhuang 050081 , Hebei ,",,,China,Tel. : +86-311 + 86668681 ,,Fax :   86 - 311 - 86668681 ,,INSTALLATION ,,อุปกรณ์ประตู,,Within 45 Days
+res_partner_installation_20,"ICELANDIC CO.,LTD.",SP02S011,TRUE,FALSE,TRUE,,,Default,FALSE,"99 Moo 2 , Bangna-Trad KM.15 Rd.,","Bangchalong , Bangplee ,",10540,Samutprakan,Thailand,02-750-9444  ,,02-752-6139,,INSTALLATION ,,แม่เหล็ก ,30 Days,15
+res_partner_installation_21,คุณดาม,,FALSE,FALSE,TRUE,"ICELANDIC CO.,LTD.",res_partner_installation_20,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_22,คุณแนน,,FALSE,FALSE,TRUE,"ICELANDIC CO.,LTD.",res_partner_installation_20,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_23,JINAN LIXIA SOFTWARE DEVELOPMENT CENTER,SP02S012,TRUE,FALSE,TRUE,,,Default,FALSE,"Dongguan Street 3, Lixia,","Jinan 250013 Shandong,",,,China,86-531-8601-2834,,86-531-8601-2734,,INSTALLATION ,,อุปกรณ์ประตู,,Within 45 Days
+res_partner_installation_24,Micron Clean Limited.,SP02S013,TRUE,FALSE,TRUE,,,Default,FALSE,"1246 Moo 13, Phahol Yothin Rd.,","T. Klong Nung , A. Klong Luang ,",12120,Pathumthanee,Thailand,02-908-8200  ,,02-908-8211,,INSTALLATION ,,Pass Box ,30 Days,ตามตกลง
+res_partner_installation_25,คุณปรีชา,,FALSE,FALSE,TRUE,Micron Clean Limited.,res_partner_installation_24,Contact,TRUE,,,,,Thailand,,081-205-9330,,,,,,,
+res_partner_installation_26,คุณเกวลิน,,FALSE,FALSE,TRUE,Micron Clean Limited.,res_partner_installation_24,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_27,OMERIN ASIA Pte. Ltd.,SP02S014,TRUE,FALSE,TRUE,,,Default,FALSE,"10, Rue des Frères Lumière Z.A. du Bois rond 69720",AINT BONNET DE MURE,,,France,"Tél. +33 (0)4 72 48 30 90 
+",,"
+Fax +33 (0)4 78 40 82 81 
+",,INSTALLATION ,,อุปกรณ์ประตู,,45
+res_partner_installation_28,"SUPER VAC CO.,LTD.",SP02S015,TRUE,FALSE,TRUE,,,Default,FALSE,22/33-40 SOI.16 PHACHA-UTHID RD.,RATBURANA,10140,BANGKOK,Thailand,(662) 870-9595   ,," (662) 427-8045,870-9595 # 314",,INSTALLATION ,,แว๊กซ์ ,Cash,-
+res_partner_installation_29,คุณพรชัย,,FALSE,FALSE,TRUE,"SUPER VAC CO.,LTD.",res_partner_installation_28,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_30,คุณวิ,,FALSE,FALSE,TRUE,"SUPER VAC CO.,LTD.",res_partner_installation_28,Contact,TRUE,,,,,Thailand,, ,,,,,,,
+res_partner_installation_31,"YONG DA REFRIGERATION PRODUCTS CO.,LTD.",SP02S016,TRUE,FALSE,TRUE,,,Default,FALSE,"Xinhe County, Wanjiang District,","Dongguan City,Guangdong Province , P.R.C.",,,Thailand,  +86-769-2701625,, +86-769-2701629,,INSTALLATION ,,อุปกรณ์ประตู,,45
+res_partner_installation_32,คุงเจริญโลหะกิจ,SP02S017,TRUE,FALSE,TRUE,,,Default,FALSE,154/10-11 ม.4 ต.เมืองเก่า,อ.พนมสารคาม,24120,ฉะเชิงเทรา,Thailand,038-836749,,,,INSTALLATION ,,เหล็กรูปพรรณ,Cash,3
+res_partner_installation_33,บริษัท 555 ซีพีเอส มาร์เก็ตติ้ง จำกัด,SP02S018,TRUE,FALSE,TRUE,,,Default,FALSE,"74/5-6 สุขสวัสดิ์ 
+
+","แขวงราษฎร์บูรณะ เขตราษฎร์บูรณะ 
+
+",10140,กรุงเทพฯ,Thailand,0-2877-0510 ,,0- 2477-3022,,INSTALLATION ,,อุปกรณ์ประตู ,Cash,7
+res_partner_installation_34,คุณเกตุ,,FALSE,FALSE,TRUE,บริษัท 555 ซีพีเอส มาร์เก็ตติ้ง จำกัด,res_partner_installation_33,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_35,บริษัท กิ้มหยูเส็งค้ากระจก จำกัด,SP02S019,TRUE,FALSE,TRUE,,,Default,FALSE,41/8 ซ.59 ถ.พระราม 3,แขวงช่องนนทรี เขตยานนาวา,10120,กรุงเทพฯ,Thailand,02-2946291-8,,02-2941780,,INSTALLATION ,,กระจก ,30 Days,7
+res_partner_installation_36,หยก,,FALSE,FALSE,TRUE,บริษัท กิ้มหยูเส็งค้ากระจก จำกัด,res_partner_installation_35,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_37,อรุโณทัย,,FALSE,FALSE,TRUE,บริษัท กิ้มหยูเส็งค้ากระจก จำกัด,res_partner_installation_35,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_38,บริษัท แกรนด์ โฟร์ซี จำกัด,SP02S020,TRUE,FALSE,TRUE,,,Default,FALSE,19/224 หมู่ 10 พระราม 2,แขวงบางมด เขตจอมทอง,10150,กรุงเทพฯ,Thailand,02-898-3104-5,,02-898-4852,,INSTALLATION ,,ซิลิกา-เจล,Cash,Within 15 Days
+res_partner_installation_39,คุณจุฬาภรณ์,,FALSE,FALSE,TRUE,บริษัท แกรนด์ โฟร์ซี จำกัด,res_partner_installation_38,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_40,บริษัท โกลด์เวสท์ เทรดดิ้ง (ประเทศไทย) จำกัด,SP02S021,TRUE,FALSE,TRUE,,,Default,FALSE,"69/60 หมู่ 6 ซอยกิ่งแก้ว 54 
+
+","ตำบลราชาเทวะ อำเภอบางพลี 
+
+",10540,สมุทรปราการ,Thailand,02-7384930-39,,02-7384928-9,,INSTALLATION ,,อุปกรณ์ประตู,,-
+res_partner_installation_41,ประภัสสร,,FALSE,FALSE,TRUE,บริษัท โกลด์เวสท์ เทรดดิ้ง (ประเทศไทย) จำกัด,res_partner_installation_40,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_42,บริษัท คอมพลีท ไลน์ จำกัด,SP02S022,TRUE,FALSE,TRUE,,,Default,FALSE,220 ซ.อ่อนนุช 35 ถ.สุขุมวิท 77,แขวง/เขตสวนหลวง,10250,กรุงเทพฯ,Thailand,02-3201427-8 / 01-4444573,,02-7215290,,INSTALLATION ,,ชุดประตูอัตโนมัติ,30 Days,7
+res_partner_installation_43,อนันต์,,FALSE,FALSE,TRUE,บริษัท คอมพลีท ไลน์ จำกัด,res_partner_installation_42,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_44,บริษัท คอมฟอร์ตโฟลว์ เอส.อี. จำกัด,SP02S023,TRUE,FALSE,TRUE,,,Default,FALSE,367 ถนนอ่อนนุช,"แขวงประเวศ,กรุงเทพฯ",10250,กรุงเทพฯ,Thailand,"02-321-2511 ,321-4124,321-4154 ",, 02-321-5204,,INSTALLATION ,,GRILL ,30 Days,Within 15 Days
+res_partner_installation_45,คุณสรนันท์ เตชอัครกุล,,FALSE,FALSE,TRUE,บริษัท คอมฟอร์ตโฟลว์ เอส.อี. จำกัด,res_partner_installation_44,Contact,TRUE,,,,,Thailand,,084-639 9990,,,,,,,
+res_partner_installation_46,บริษัท คิดเซลล์ (เอเชีย ) จำกัด,SP02S024,TRUE,FALSE,TRUE,,,Default,FALSE,2893ม 2895 ถนนพัฒนาการ,แขวงสวนหลวง เขต สวนหลวง,10250,กรุงเทพฯ,Thailand,"02-321 3078, 02-722 0245 , ",,02-320 2520 ,,INSTALLATION ,,เครื่องลดความชื้น ,60 Days,3
+res_partner_installation_47,คุณกมลวรรณ,,FALSE,FALSE,TRUE,บริษัท คิดเซลล์ (เอเชีย ) จำกัด,res_partner_installation_46,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_48,บริษัท จิรันธนิน จำกัด,SP02S025,TRUE,FALSE,TRUE,,,Default,FALSE,"1350/130-131 ชั้น 10 อาคารไทยรงค์ ถ.พัฒนาการ 36 
+
+
+","แขวงสวนหลวง เขตสวนหลวง 
+
+
+",10250,กรุงเทพฯ,Thailand,0-2713-7707-8,,0-2713-7706,,INSTALLATION ,,"งานสั่งทำ ,งานเจาะรูตะแกรง",Cash,7
+res_partner_installation_49,คุณพัทธนันท์,,FALSE,FALSE,TRUE,บริษัท จิรันธนิน จำกัด,res_partner_installation_48,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_50,บริษัท จีคอนส์ (ประเทศไทย) จำกัด,SP02S026,TRUE,FALSE,TRUE,,,Default,FALSE,1093/33 อาคารเซ็นทรัลซิตี้ ทาวเวอร์ 1. ถนนบางนา - ตราด กม.3 หมู่ 12,แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,02-7457181-7,,02-7457188,,INSTALLATION ,,ซิลิโคน,30 Days,7
+res_partner_installation_51,วิโรจน์,,FALSE,FALSE,TRUE,บริษัท จีคอนส์ (ประเทศไทย) จำกัด,res_partner_installation_50,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_52,บริษัท เจริญวิทย์ ซัพพลาย จำกัด,SP02S027,TRUE,FALSE,TRUE,,,Default,FALSE,"268 ซอยทินกร ดินแดง
+
+","แขวงดินแดง เขตดินแดง 
+
+",10400,กรุงเทพฯ,Thailand,"02 - 6433502,026433153-4,02 - 6434412",,02 - 2453327,,INSTALLATION ,,อุปกรณ์ประตู ,Cash,7
+res_partner_installation_53,บริษัท ชาญอินทร์ อินสทรูเม้นท์ จำกัด,SP02S028,TRUE,FALSE,TRUE,,,Default,FALSE,81 ถ.เยาวราช 00,แขวงสัมพันธวงศ์ เขตสัมพันธวงศ์,10100,กรุงเทพฯ,Thailand,"02-2221582, 2227563, 2251969",,02-2251970,,INSTALLATION ,,อุปกรณ์ประตู,Cash,7
+res_partner_installation_54,ใหญ่,,FALSE,FALSE,TRUE,บริษัท ชาญอินทร์ อินสทรูเม้นท์ จำกัด,res_partner_installation_53,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_55,บริษัท ซันซูเลท (ไทยแลนด์) จำกัด,SP02S029,TRUE,FALSE,TRUE,,,Default,FALSE,"2/3 ซอย 109 รามอินทรา
+
+","แขวงมีนบุรี เขตมีนบุรี 
+
+",10510,กรุงเทพฯ,Thailand,"02- 5174560,025173579,02 - 5403244-6,02 - 5174085",,02 - 5178527,,INSTALLATION ,,FILTER ,Cash,ตามตกลง
+res_partner_installation_56,บริษัท ซิก้า (ประเทศไทย) จำกัด,SP02S030,TRUE,FALSE,TRUE,,,Default,FALSE,"700/37 หมู่ที่ 5 นิคมอุตสาหกรรมบางปะกง เฟส 2 กม. 57 ถ. บางนา-ตราด
+กม. 57 ถ. บางนา-ตราด","ต. คลองตำหรุ อ. เมือง 
+
+อ. เมือง จ. ชลบุรี 20000
+",20000,ชลบุรี,Thailand,038 21 4270-85,,038 21 4286,,INSTALLATION ,,ซิลิ โคน,30 Days,5
+res_partner_installation_57,บริษัท ซิตี้พาร์คสตีล อิมพอร์ต (2002) จำกัด,SP02S031,TRUE,FALSE,TRUE,,,Default,FALSE,830 หมู่ที่1 ถ. เทพารักษ์,ต.บางเสาธง อ.บางเสาธง,10540,สมุทรปราการ,Thailand, 02 - 313 1313       ,,02 - 313 1555 ( ฝ่ายขาย ) 02 - 706 1177 (บัญชี),,INSTALLATION ,,เหล็กรูปพรรณ,30 Days,7
+res_partner_installation_58,คุณดวงชีวัน ( คุณดวง),,FALSE,FALSE,TRUE,บริษัท ซิตี้พาร์คสตีล อิมพอร์ต (2002) จำกัด,res_partner_installation_57,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_59,บริษัท ซิลเวอร์ดรากอน (ไทย) จำกัด,SP02S032,TRUE,FALSE,TRUE,,,Default,FALSE,263 ถนนพระราม 4,แขวงรองเมือง เขตประทุมวัน,10330,กรุงเทพฯ,Thailand,"0-2214-0241 , 0-2215-2116",,"0-2214-0241 , 0-2215-2116",,INSTALLATION ,,อุปกรณ์ประตู,30 Days,7
+res_partner_installation_60,"คุณสมเกียรติ , คุณผึ้ง",,FALSE,FALSE,TRUE,บริษัท ซิลเวอร์ดรากอน (ไทย) จำกัด,res_partner_installation_59,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_61,คุณผึ้ง,,FALSE,FALSE,TRUE,บริษัท ซิลเวอร์ดรากอน (ไทย) จำกัด,res_partner_installation_59,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_62,บริษัท ดิคเซลล์ (เอเชีย) จำกัด,SP02S033,TRUE,FALSE,TRUE,,,Default,FALSE,"2893 , 2895 ถ.พัฒนาการ",แขวงสวนหลวง เขตสวนหลวง,10250,กรุงเทพฯ,Thailand,"02 - 321 - 3078 , 02 - 722 - 0245 ",,"02 - 722 - 0250 , 02 - 320 - 2520",,INSTALLATION ,,อุปกรณ์ประตู,30 Days,7
+res_partner_installation_63,คุณกมลวรรณ ( ป่าน ),,FALSE,FALSE,TRUE,บริษัท ดิคเซลล์ (เอเชีย) จำกัด,res_partner_installation_62,Contact,TRUE,,,,,Thailand,,081-6291708 ,,,,,,,
+res_partner_installation_64,บริษัท ติยะไพบูลย์ จำกัด,SP02S034,TRUE,FALSE,TRUE,,,Default,FALSE,57 ซอยศูนย์วิจัย 14,ห้วยขวาง,10320,กรุงเทพฯ,Thailand,02-3185320,,,,INSTALLATION ,,อุปกรณ์ไฟฟ้า ,Cash,7
+res_partner_installation_65,คุณอาทิตย์,,FALSE,FALSE,TRUE,บริษัท ติยะไพบูลย์ จำกัด,res_partner_installation_64,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_66,คุณแอ๊ว,,FALSE,FALSE,TRUE,บริษัท ติยะไพบูลย์ จำกัด,res_partner_installation_64,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_67,บริษัท ไตตันโค อินเตอร์เนชั่นแนล จำกัด,SP02S035,TRUE,FALSE,TRUE,,,Default,FALSE,2 ซอยเจริญใจ ถนนสุขุมวิท 63,แขวงคลองตันเหนือ เขตวัฒนา,10110,กรุงเทพฯ,Thailand,"02-3902081-7 , 02-392 9197",,02-381 1734,,INSTALLATION ,,อุปกรณ์ประตู,30 Days,7
+res_partner_installation_68,คุณโสมาภา,,FALSE,FALSE,TRUE,บริษัท ไตตันโค อินเตอร์เนชั่นแนล จำกัด,res_partner_installation_67,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_69,บริษัท ทรู เซิร์ฟ จำกัด,SP02S036,TRUE,FALSE,TRUE,,,Default,FALSE,129/63 ม. 7 ถ.บางกรวย - จงถนอม,ต.มหาสวัสดิ์ อ.บางกรวย,11130,นนทบุรี,Thailand,02 - 489 4022 ,,02 - 489 4022 ,,INSTALLATION ,,ซิลิโคน,60 Days,7
+res_partner_installation_70,คุณธงชัย,,FALSE,FALSE,TRUE,บริษัท ทรู เซิร์ฟ จำกัด,res_partner_installation_69,Contact,TRUE,,,,,Thailand,,085 - 1124291 ,,,,,,,
+res_partner_installation_71,บริษัท ทูเดย์ สไตล์ 2100 จำกัด,SP02S037,TRUE,FALSE,TRUE,,,Default,FALSE,10/2 ซ.สุขุมวิท 40 แขวงพระโขนง,เขตคลองเตย,10110,กรุงเทพฯ,Thailand,02-7121872-4,,02-7121876-7,,INSTALLATION ,,อุปกรณ์ประตู,30 Days,7
+res_partner_installation_72,คุณสามารถ,,FALSE,FALSE,TRUE,บริษัท ทูเดย์ สไตล์ 2100 จำกัด,res_partner_installation_71,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_73,บริษัท ไทยพอลลูเทค แมชชีนเนอรี่ จำกัด,SP02S038,TRUE,FALSE,TRUE,,,Default,FALSE,865/7 ซอยอุมสุข 42 ถนนบางนา-ตราด,เขตบางนา,10260,กรุงเทพฯ,Thailand, 02 - 979 - 5175 - 8 ,, 02 -979 4172,,INSTALLATION ,,FILTER ,30 Days,Within 15 Days
+res_partner_installation_74,คุณก้อง,,FALSE,FALSE,TRUE,บริษัท ไทยพอลลูเทค แมชชีนเนอรี่ จำกัด,res_partner_installation_73,Contact,TRUE,,,,,Thailand,,087-070 3758,,,,,,,
+res_partner_installation_75,คุณธงชัย,,FALSE,FALSE,TRUE,บริษัท ไทยพอลลูเทค แมชชีนเนอรี่ จำกัด,res_partner_installation_73,Contact,TRUE,,,,,Thailand,,087-0703758,,,,,,,
+res_partner_installation_76,บริษัท ไทยไพศาล สลักภัณฑ์ จำกัด,SP02S039,TRUE,FALSE,TRUE,,,Default,FALSE,43-45-47 จึ่งเจริญพานิชย์,แขวงป้อมปราบ เขตป้อมปราบศัตรูพ่าย,10100,กรุงเทพฯ,Thailand,02-622 5194-9 ,,"02 - 225 7817 , 02-2261965",,INSTALLATION ,,วัสดุสิ้นเปลือง  NUT / SCREW ,30 Days,7
+res_partner_installation_77,คุณอุทัย,,FALSE,FALSE,TRUE,บริษัท ไทยไพศาล สลักภัณฑ์ จำกัด,res_partner_installation_76,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_78,บริษัท ไทยแมคมอร์ จำกัด,SP02S040,TRUE,FALSE,TRUE,,,Default,FALSE,1529/540 อาคารศุภาลัย ริเวอร์ เพลส ถ.เจริญนคร,แขวงบางลำภู เขตคลองสาน,10600,กรุงเทพฯ,Thailand,02 - 861 7295,, 02 - 861 7297 ,,INSTALLATION ,,FIRE ALARM ,PDC. 30 Days,7
+res_partner_installation_79,คุณสุภกาญจน์,,FALSE,FALSE,TRUE,บริษัท ไทยแมคมอร์ จำกัด,res_partner_installation_78,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_80,คุณวรเทพ,,FALSE,FALSE,TRUE,บริษัท ไทยแมคมอร์ จำกัด,res_partner_installation_78,Contact,TRUE,,,,,Thailand,,081-633 3872,,,,,,,
+res_partner_installation_81,บริษัท ไทย-เยอรมัน สเปเชียลตี้ กลาส จำกัด,SP02S041,TRUE,FALSE,TRUE,,,Default,FALSE,41/8 ถ.พระราม 3 แขวงข่องนนทรี,เขตยานนาวา,10120,กรุงเทพฯ,Thailand,09-1092744 / 0-2294-6287 : 552,,0-2294-6286,,INSTALLATION ,,กระจก ,30 Days,Within 10 Days
+res_partner_installation_82,คุณปราโมทย์,,FALSE,FALSE,TRUE,บริษัท ไทย-เยอรมัน สเปเชียลตี้ กลาส จำกัด,res_partner_installation_81,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_83,จิตรา,,FALSE,FALSE,TRUE,บริษัท ไทย-เยอรมัน สเปเชียลตี้ กลาส จำกัด,res_partner_installation_81,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_84,บริษัท ไทยรุ่งโรจน์ไพศาล จำกัด,SP02S042,TRUE,FALSE,TRUE,,,Default,FALSE,21/587 -589 หมู่ 12 ถนนบางนา-ตราด,แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,02-3980159,,02-3981864,,INSTALLATION ,,อุปกรณ์ไฟฟ้า,30 Days,3
+res_partner_installation_85,เอ,,FALSE,FALSE,TRUE,บริษัท ไทยรุ่งโรจน์ไพศาล จำกัด,res_partner_installation_84,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_86,บริษัท ธนาสตีล เวิร์ค จำกัด,SP02S043,TRUE,FALSE,TRUE,,,Default,FALSE,69 หมู่ 7 ตำบลคลองสี่,อำเภอคลองหลวง,12120,ปทุมธานี,Thailand,02 - 524 - 0857 - 60 ,,02 - 524 - 0861 ,,INSTALLATION ,,งาน Punch  รู  ( งานสั่งทำตามแบบ ) ,30 Days,Within 10 Days
+res_partner_installation_87,คุณเกสรา,,FALSE,FALSE,TRUE,บริษัท ธนาสตีล เวิร์ค จำกัด,res_partner_installation_86,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_88,คุณวิสิต,,FALSE,FALSE,TRUE,บริษัท ธนาสตีล เวิร์ค จำกัด,res_partner_installation_86,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_89,บริษัท น่ำเซ่งฮวด โลหะกิจ จำกัด,SP02S044,TRUE,FALSE,TRUE,,,Default,FALSE,21/575-577 ม.12 ถ.บางนา-ตราด กม.2,แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,"02-3930773, 3980823",,02-3980860,,INSTALLATION ,,เหล็กรูปพรรณ,60 Days,7
+res_partner_installation_90,สุภรณ์,,FALSE,FALSE,TRUE,บริษัท น่ำเซ่งฮวด โลหะกิจ จำกัด,res_partner_installation_89,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_91,ไพสิฐ,,FALSE,FALSE,TRUE,บริษัท น่ำเซ่งฮวด โลหะกิจ จำกัด,res_partner_installation_89,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_92,บริษัท พี.เค. เทคโนโลยี จำกัด,SP02S045,TRUE,FALSE,TRUE,,,Default,FALSE,781 ม.4 ซ.อภิชาต ถ.สุขุมวิท 115,ต.เทพารักษ์ อ.เมือง,10270,สมุทรปราการ,Thailand,"0-2380-4851, 380-4845-7",,0-2380-4852,,INSTALLATION ,,"PVC , ยาง ",30 Days,14
+res_partner_installation_93,แป๊ด,,FALSE,FALSE,TRUE,บริษัท พี.เค. เทคโนโลยี จำกัด,res_partner_installation_92,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_94,ปิยะ,,FALSE,FALSE,TRUE,บริษัท พี.เค. เทคโนโลยี จำกัด,res_partner_installation_92,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_95,บริษัท พี.โอ. ฟาสเทนเนอร์ จำกัด,SP02S046,TRUE,FALSE,TRUE,,,Default,FALSE,1995 ซอยกาญจนาภิเษก 008,แขวงบางแค เขตบางแค,10160,กรุงเทพฯ,Thailand,"083-611 6567, 034 -458 137      ",,034-458 139,,INSTALLATION ,,คุณโอ,60 Days,7
+res_partner_installation_96,คุณโอ,,FALSE,FALSE,TRUE,บริษัท พี.โอ. ฟาสเทนเนอร์ จำกัด,res_partner_installation_95,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_97,บริษัท แฟคทอรี่ คอนโทรลเลอร์ จำกัด,SP02S047,TRUE,FALSE,TRUE,,,Default,FALSE,67/1473 หมู่ที่ 16 ซอย15 ถ. ตลิ่งชัน-สุพรรณบุรี,แขวง บางแม่นาง เขคบางใหญ่,,นนทบุรี,Thailand,,,,,INSTALLATION ,,อุปกรณ์ประตู   ระบบ Inter Lock,30 Days,15
+res_partner_installation_98,คุณนุ,,FALSE,FALSE,TRUE,บริษัท แฟคทอรี่ คอนโทรลเลอร์ จำกัด,res_partner_installation_97,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_99,บริษัท แม็กนั่ม สตีล จำกัด,SP02S048,TRUE,FALSE,TRUE,,,Default,FALSE,29/12 หมู่ 5 ตำบลพันท้ายนรสิงห์,อำเภอเมืองสมุทรสาคร,74000,สมุทรสาคร,Thailand,"034865330-2,034865347-8,034865345",,,,INSTALLATION ,,เหล็กรูปพรรณ,30 Days,7
+res_partner_installation_100,คุณโอ๋,,FALSE,FALSE,TRUE,บริษัท แม็กนั่ม สตีล จำกัด,res_partner_installation_99,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_101,บริษัท ยางไทย อุตสาหกรรม จำกัด,SP02S049,TRUE,FALSE,TRUE,,,Default,FALSE,75 ม.1 ถนนสุคนธวิท,ต.ท่าเสา อ.กระทุ่มแบน,74110,สมุทรสาคร,Thailand,"034-844360 , 034-470529-30",,034-470531,,INSTALLATION ,,"PVC , ยาง  , EPDM ",30 Days,14
+res_partner_installation_102,คุณสุจิดา,,FALSE,FALSE,TRUE,บริษัท ยางไทย อุตสาหกรรม จำกัด,res_partner_installation_101,Contact,TRUE,,,,,Thailand,,081-625-4425,,,,,,,
+res_partner_installation_103,บริษัท โรงงานไทยสถาวร จำกัด,SP02S050,TRUE,FALSE,TRUE,,,Default,FALSE,27 ม.9 ซ.วัดมหาวงษ์,ต.สำโรงกลาง อ.พระประแดง,10130,สมุทรปราการ,Thailand,"02-394 4535,02-183 2131,02-183 2133,02-183 2135",,02-3943735,,INSTALLATION ,,งานสั่งทำเฉพาะ ,30 Days,3
+res_partner_installation_104,ทศพร,,FALSE,FALSE,TRUE,บริษัท โรงงานไทยสถาวร จำกัด,res_partner_installation_103,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_105,บริษัท วิบูลย์วัฒนอุตสาหกรรม จำกัด,SP02S051,TRUE,FALSE,TRUE,,,Default,FALSE,3/1 ม.15,ต.เกาะขนุน อ.พนมสารคาม,24120,ฉะเชิงเทรา,Thailand,038-816264,,038-512419,,INSTALLATION ,,วีว่าบอร์ด,7 Days,3
+res_partner_installation_106,ไก่,,FALSE,FALSE,TRUE,บริษัท วิบูลย์วัฒนอุตสาหกรรม จำกัด,res_partner_installation_105,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_107,บริษัท วี.วี.พี. มาร์เก็ตติ้ง จำกัด,SP02S052,TRUE,FALSE,TRUE,,,Default,FALSE,"ฝ่ายขาย 84/49 พระราม 2 แขวงแสมดำ 
+
+","เขตบางขุนเทียน 
+
+",10150,กรุงเทพฯ,Thailand,0-2894-0020-6,,"0-2894-1008, 415-4743",,INSTALLATION ,,อุปกรณ์ประตู,,7
+res_partner_installation_108,วิไล ภู่ชาญสิน,,FALSE,FALSE,TRUE,บริษัท วี.วี.พี. มาร์เก็ตติ้ง จำกัด,res_partner_installation_107,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_109,บริษัท วีทีซี เอ็นเตอร์ไพรส จำกัด,SP02S053,TRUE,FALSE,TRUE,,,Default,FALSE,65/126-8 อาคารชำนาญเพ็ญชาติ ชั้น 15 ถนน พระราม 9,เขตห้วยขวาง,10320,กรุงเทพฯ,Thailand,02-245-4834/02-248-4550-1                 ,,02-248-3839,,INSTALLATION ,,อุปกรณ์ประตู,30 Days,ตามตกลง
+res_partner_installation_110,คุณศุภกร,,FALSE,FALSE,TRUE,บริษัท วีทีซี เอ็นเตอร์ไพรส จำกัด,res_partner_installation_109,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_111,บริษัท วีเทค อีเล็คตริค เซ็นเตอร์ จำกัด,SP02S054,TRUE,FALSE,TRUE,,,Default,FALSE,1063 ถ.พระราม 4,แขวงวังใหม่ เขตปทุมวัน,10330,กรุงเทพฯ,Thailand,02-6117719,,02-6117721,,INSTALLATION ,,อุปกรณ์ไฟฟ้า ,60 Days,5
+res_partner_installation_112,สมชาย,,FALSE,FALSE,TRUE,บริษัท วีเทค อีเล็คตริค เซ็นเตอร์ จำกัด,res_partner_installation_111,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_113,บริษัท เวคเตอร์ไทยเทคโนโลยี จำกัด,SP02S055,TRUE,FALSE,TRUE,,,Default,FALSE,1157/3 ซ.ลาดพร้าว 101 ถ.ลาดพร้าว,แขวงคลองจั่น เขตบางกะปิ,10240,กรุงเทพฯ,Thailand,02-5093883-5,,02-5093878,,INSTALLATION ,,ซิลิโคน,30 Days,7
+res_partner_installation_114,ธีรุตม์,,FALSE,FALSE,TRUE,บริษัท เวคเตอร์ไทยเทคโนโลยี จำกัด,res_partner_installation_113,Contact,TRUE,,,,,Thailand,,089-968 2868,,,,,,,
+res_partner_installation_115,บริษัท สแตนดาร์ด ฟอร์มูล่า จำกัด,SP02S056,TRUE,FALSE,TRUE,,,Default,FALSE,11/5 ซอยสามเสน 3 ถนนสามพระยา,แขวงวัดสามพระยา เขตพระนคร,,กรุงเทพฯ,Thailand,02-281-2672   ,,"02-281-2674 ,02-281 3052",,INSTALLATION ,,น้ำยา / สารเคมี / WAX   (  เซฟโปร ),30 Days,3
+res_partner_installation_116,คุณจรรยา,,FALSE,FALSE,TRUE,บริษัท สแตนดาร์ด ฟอร์มูล่า จำกัด,res_partner_installation_115,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_117,บริษัท สเปเชี่ยล สตีล เซ็นเตอร์ จำกัด,SP02S057,TRUE,FALSE,TRUE,,,Default,FALSE,"495/69 Sathupradit Rd.,","Chongnonsi, Yannawa,",10120,Bangkok,Thailand,"0-2674-2829-30, 0-2674-2992/ 02-8159395",,02-815 9396,,INSTALLATION ,,เหล็กรูปพรรณ,Cash,3
+res_partner_installation_118,คุณพีรพล,,FALSE,FALSE,TRUE,บริษัท สเปเชี่ยล สตีล เซ็นเตอร์ จำกัด,res_partner_installation_117,Contact,TRUE,,,,,Thailand,,081-5831818,,,,,,,
+res_partner_installation_119,บริษัท สมบูรณ์ แอนด์ เอส.พี. รับเบอร์ จำกัด,SP02S058,TRUE,FALSE,TRUE,,,Default,FALSE,9/16 ม.2 ถ.รถไฟเก่า,ต.สำโรงใต้ อ.พระประแดง,10130,สมุทรปราการ,Thailand," 02 - 183 - 3322 , 02 - 754 - 3994    ",,02 - 183 - 3323,,INSTALLATION ,,"PVC , ยาง  , EPDM ",30 Days,Within 15 Days
+res_partner_installation_120,คุณจิตรา,,FALSE,FALSE,TRUE,บริษัท สมบูรณ์ แอนด์ เอส.พี. รับเบอร์ จำกัด,res_partner_installation_119,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_121,บริษัท สยามอาร์มสตรองค์ จำกัด,SP02S059,TRUE,FALSE,TRUE,,,Default,FALSE,103/53 หมู่ 1 สุขาภิบาล 1,แขวงบางแค เขตบางแค,10160,กรุงเทพฯ,Thailand,"0-2454-1137, 802-3511-2, 802-3848-9", ,0-2454-1623,,INSTALLATION ,,PACKING  /Double Sides Adhesive Foam,30 Days,ตามตกลง
+res_partner_installation_122,สุมิตรา,,FALSE,FALSE,TRUE,บริษัท สยามอาร์มสตรองค์ จำกัด,res_partner_installation_121,Contact,TRUE,,,,,Thailand,,081-8102508,,,,,,,
+res_partner_installation_123,บริษัท สหภัณฑ์ พลาสติกโปรดักส์ จำกัด,SP02S060,TRUE,FALSE,TRUE,,,Default,FALSE,"เลขที่ 2131 - 2133 หมู่ 4 ถนนเทพารักษ์ 
+","ต.เทพารักษ์, เมืองสมุทรปราการ
+",10270,สมุทรปราการ,Thailand,"02-3840546, 3842363",,02-7454967,,INSTALLATION ,,แผ่นอะคริลิค,,-
+res_partner_installation_124,บุษ,,FALSE,FALSE,TRUE,บริษัท สหภัณฑ์ พลาสติกโปรดักส์ จำกัด,res_partner_installation_123,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_125,บริษัท สินประเสริฐ เอ็นจิเนียริ่ง จำกัด,SP02S061,TRUE,FALSE,TRUE,,,Default,FALSE,"1596/273-4 ซอยอภิชาติ สุขุมวิท 115 
+
+","ตำบลเทพารักษ์ อำเภอเมืองสมุทรปราการ 
+
+",10270,สมุทรปราการ,Thailand,"02-7577358, 7578684, 7579724",,02-7576431,,INSTALLATION ,,"อุปกรณ์ทั่วไป - สกรูเกลียว, น็อต",30 Days,7
+res_partner_installation_126,แหวว,,FALSE,FALSE,TRUE,บริษัท สินประเสริฐ เอ็นจิเนียริ่ง จำกัด,res_partner_installation_125,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_127,บริษัท สีมาโลหะภัณฑ์ จำกัด,SP02S062,TRUE,FALSE,TRUE,,,Default,FALSE,"169/1,169/2 หมู่ที่ 3 ถ.เทพารักษ์",ต.บางเพรียง อ.บางบ่อ,10560,สมุทรปราการ,Thailand,"02-754 8527 - 8 ,02-7089001-3",,02- 7 54852902 - 7089499,,INSTALLATION ,,งานเจาะรู มตะแกรง,Cash,7
+res_partner_installation_128,บริษัท ห้างกระจกตังน้ำ จำกัด,SP02S063,TRUE,FALSE,TRUE,,,Default,FALSE,"226 ถนนพระรามที่ 2 
+
+ 
+","แขวงแสมดำ เขตบางขุนเทียน 
+
+ 
+",10150,กรุงเทพฯ,Thailand,(น้อย/พร 7280900-3 F.3731165) 02-4165678,,0-2894-0433,,INSTALLATION ,,กระจก ,30 Days,Within 10 Days
+res_partner_installation_129,อรุณี,,FALSE,FALSE,TRUE,บริษัท ห้างกระจกตังน้ำ จำกัด,res_partner_installation_128,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_130,รุ่งฟ้า,,FALSE,FALSE,TRUE,บริษัท ห้างกระจกตังน้ำ จำกัด,res_partner_installation_128,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_131,บริษัท ออนวัลล่า จำกัด,SP02S064,TRUE,FALSE,TRUE,,,Default,FALSE,50 ม. 20 ต. ลำลูกกา,อ. ลำลูกกา,12150,ปทุมธานี,Thailand, 02 - 193 5380- 5 ,,02-193 5386-7,,INSTALLATION ,,อุปกรณ์ประตู  / ม่าน PVC ,30 Days,7
+res_partner_installation_132,คุณพิมพิยู,,FALSE,FALSE,TRUE,บริษัท ออนวัลล่า จำกัด,res_partner_installation_131,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_133,บริษัท ออลล่า จำกัด,SP02S065,TRUE,FALSE,TRUE,,,Default,FALSE,"935, 937, 939 ซ.อ่อนนุช 46 ถ.อ่อนนุช",แขวง/เขตสวนหลวง,10250,กรุงเทพฯ,Thailand,"02-3220777, 7215699",,02-3221892,,INSTALLATION ,,อุปกรณ์ประตู  / ม่าน PVC ,30 Days,7
+res_partner_installation_134,จุฑามาศ,,FALSE,FALSE,TRUE,บริษัท ออลล่า จำกัด,res_partner_installation_133,Contact,TRUE,,,,,Thailand,,085-0420668,,,,,,,
+res_partner_installation_135,บริษัท อินซูลคูลลิ่ง เซ็นเตอร์ จำกัด จำกัด,SP02S066,TRUE,FALSE,TRUE,,,Default,FALSE,130/6 หมู่ที่ 3,ต. รังสิต อ. ธัญบุรี,12110,ปทุมธานี,Thailand,02-904 4395 - 6  ,,  0-2904 4397 ,,INSTALLATION ,,จำหน่ายส่งเครื่องทำความเย็น,30 Days,7
+res_partner_installation_136,คุณนัด,,FALSE,FALSE,TRUE,บริษัท อินซูลคูลลิ่ง เซ็นเตอร์ จำกัด จำกัด,res_partner_installation_135,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_137,คุณเจมส์,,FALSE,FALSE,TRUE,บริษัท อินซูลคูลลิ่ง เซ็นเตอร์ จำกัด จำกัด,res_partner_installation_135,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_138,บริษัท อินเตอร์ไลท์ ไลท์ติ้ง จำกัด,SP02S067,TRUE,FALSE,TRUE,,,Default,FALSE,"131,133 ซ.ลาซาล 79",แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,02-745-8859-62 ,, 02-745-8388,,INSTALLATION ,,อุปกรณ์ไฟฟ้า,30 Days,7
+res_partner_installation_139,คุณพรรณทิพย์,,FALSE,FALSE,TRUE,บริษัท อินเตอร์ไลท์ ไลท์ติ้ง จำกัด,res_partner_installation_138,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_140,คุณวราวุธ,,FALSE,FALSE,TRUE,บริษัท อินเตอร์ไลท์ ไลท์ติ้ง จำกัด,res_partner_installation_138,Contact,TRUE,,,,,Thailand,,081-5522508,,,,,,,
+res_partner_installation_141,บริษัท เอ็กซ์เซนจ์ อินเตอร์ จำกัด,SP02S068,TRUE,FALSE,TRUE,,,Default,FALSE,3/365 ซ.รามคำแหง 184 ถ.รามคำแหง,แขวงมีนบุรี เขตมีนบุรี,10510,กรุงเทพฯ,Thailand,"02 - 916 7640 ,080-294 1100",, 02-976 9119,,INSTALLATION ,,วัสดุสิ้นเปลือง  NUT / SCREW ,60 Days,7
+res_partner_installation_142,คุณโอ,,FALSE,FALSE,TRUE,บริษัท เอ็กซ์เซนจ์ อินเตอร์ จำกัด,res_partner_installation_141,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_143,บริษัท เอเชี่ยน โมดูลาร์ ชิสเต็มส์ (ไทยแลนด์) จำกัด,SP02S069,TRUE,FALSE,TRUE,,,Default,FALSE,410 ซ.พระยาสุเรนทร์ 30 ถ.รามอินทรา (109),บางชัน คลองสามวา,10510,กรุงเทพฯ,Thailand,02 - 540 6871 - 5  ,, 02- 918 6954,,INSTALLATION ,,จำหน่ายอุปกรณ์แอร์ อุปกรณ์ตู้เย็น เครื่องทำความเย็นทุกชนิด ,30 Days,7
+res_partner_installation_144,คุณป้อม,,FALSE,FALSE,TRUE,บริษัท เอเชี่ยน โมดูลาร์ ชิสเต็มส์ (ไทยแลนด์) จำกัด,res_partner_installation_143,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_145,บริษัท เอ็น.ซี.อาร์. รับเบอร์อินดัสตรี้ จำกัด,SP02S070,TRUE,FALSE,TRUE,,,Default,FALSE,"6971-73 ถนนบำรุงรัฐ 
+","แขวงสัมพันธวงศ์ เขตสัมพันธวงศ์ 
+",10100,กรุงเทพฯ,Thailand,"(662) 225 7656-7, 662 6992-6
+",,"(662) 224 0707, 224 0791
+",,INSTALLATION ,,"PVC , ยาง  , EPDM ",30 Days,30
+res_partner_installation_146,บริษัท เอ็ม อาร์ ซันรับเบอร์ จำกัด,SP02S071,TRUE,FALSE,TRUE,,,Default,FALSE,24/75 ม.6 ซอยวัดยายร่ม,แขวงบางมด เขตจอมทอง,10150,กรุงเทพฯ,Thailand,"02-427 1828 , 02-428 4577",,02-4284577,,INSTALLATION ,,"PVC , ยาง ",30 Days,Within 15 Days
+res_partner_installation_147,คุณกาหลง,,FALSE,FALSE,TRUE,บริษัท เอ็ม อาร์ ซันรับเบอร์ จำกัด,res_partner_installation_146,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_148,บริษัท เอ็ม เอ็ม พี ดิสทริบิวเตอร์ จำกัด,SP02S072,TRUE,FALSE,TRUE,,,Default,FALSE,41 ซอย สุขุมวิท 62,แขวงบางจาก เขตพระโขนง,10260,กรุงเทพฯ,Thailand,"0-2741 4790 , 02-741 4792",,02 - 741 4791,,INSTALLATION ,,วัสดุสิ้นเปลือง  NUT / SCREW ,30 Days,7
+res_partner_installation_149,คุณวรรณา (แอน),,FALSE,FALSE,TRUE,บริษัท เอ็ม เอ็ม พี ดิสทริบิวเตอร์ จำกัด,res_partner_installation_148,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_150,บริษัท เอ็มอาร์จีเอ (ประเทศไทย) จำกัด ซิลิโคน DOW GM กลาส แอนด์ เมทัล (สีขาว),SP02S073,TRUE,FALSE,TRUE,,,Default,FALSE,"55 หมู่ 2 เฉลิมพระเกียรติ ร9 
+
+","แขวงดอกไม้ เขตประเวศ 
+
+",10260,กรุงเทพฯ,Thailand,"0-2726-3214, (09-7714473)",,0-2956-6705 ต่อ 15,,INSTALLATION ,,ซิลิโคน,,-
+res_partner_installation_151,นิมิตร (อัฑฒ์) พรัดภู่,,FALSE,FALSE,TRUE,บริษัท เอ็มอาร์จีเอ (ประเทศไทย) จำกัด ซิลิโคน DOW GM กลาส แอนด์ เมทัล (สีขาว),res_partner_installation_150,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_152,บริษัท เอส.เจ สกรูไทย จำกัด,SP02S074,TRUE,FALSE,TRUE,,,Default,FALSE,1347 ซ.จรัญสนิทวงศ์ 75 ถ.จรัญสนิทวงศ์,แขวง/เขตบางพลัด,10700,กรุงเทพฯ,Thailand,02-8803636-8,,02-4248110,,INSTALLATION ,,วัสดุสิ้นเปลือง  NUT / SCREW ,60 Days,7
+res_partner_installation_153,อรพงศ์,,FALSE,FALSE,TRUE,บริษัท เอส.เจ สกรูไทย จำกัด,res_partner_installation_152,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_154,โอ,,FALSE,FALSE,TRUE,บริษัท เอส.เจ สกรูไทย จำกัด,res_partner_installation_152,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_155,บริษัท แอดฮีซีล จำกัด,SP02S075,TRUE,FALSE,TRUE,,,Default,FALSE,44 ซ.สมเด็จพระเจ้าตากสิน 27 ถ.สมเด็จพระเจ้าตากสิน,แขวงบุคคโล เขตธนบุรี,10600,กรุงเทพฯ,Thailand,02-8779935-7/01-6363130,,02-8779009,,INSTALLATION ,,ซิลิโคน,60 Days,7
+res_partner_installation_156,ดวงกมล,,FALSE,FALSE,TRUE,บริษัท แอดฮีซีล จำกัด,res_partner_installation_155,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_157,บริษัท แอบบอน จำกัด,SP02S076,TRUE,FALSE,TRUE,,,Default,FALSE,"403,405,407,409 ถนนสี่พระยา",แขวงสี่พระยา เขตบางรัก,10500,กรุงเทพฯ,Thailand,02 - 631 4400,," 02 - 631 4264 - 5 , 02 - 268 1692,02 - 6314260",,INSTALLATION ,,วัสดุสิ้นเปลือง  NUT / SCREW ,30 Days,5
+res_partner_installation_158,คุณปริศนา,,FALSE,FALSE,TRUE,บริษัท แอบบอน จำกัด,res_partner_installation_157,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_159,บริษัท ฮั่วหยงโลหะการ จำกัด,SP02S077,TRUE,FALSE,TRUE,,,Default,FALSE,848 ม.3 ถ.เทพารักษ์,ต.เทพารักษ์ อ.เมืองสมุทราปราการ,10270,สมุทรปราการ,Thailand,"0-2312-1910-11, 0-23825-216-7",,0-2312-1959,,INSTALLATION ,,"งานสั่งทำ ,งานเจาะรูตะแกรง",30 Days,7
+res_partner_installation_160,คุณอาทิตย์,,FALSE,FALSE,TRUE,บริษัท ฮั่วหยงโลหะการ จำกัด,res_partner_installation_159,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_161,คุณเปิ้ล,,FALSE,FALSE,TRUE,บริษัท ฮั่วหยงโลหะการ จำกัด,res_partner_installation_159,Contact,TRUE,,,,,Thailand,,089-6699232,,,,,,,
+res_partner_installation_162,สำเร็จการช่าง,SP02S078,TRUE,FALSE,TRUE,,,Default,FALSE,13/10 หมที่ 6 ซอยลาซาน 42 สุขุมวิท 105,แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,02-7486480-2 ,,02-7486480-2 ,,INSTALLATION ,,งานทำตะแกรง,Cash,7
+res_partner_installation_163,คุณรัศมี,,FALSE,FALSE,TRUE,สำเร็จการช่าง,res_partner_installation_162,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_164,ห้างหุ้นส่วนจำกัด กรเทพกระจก อลูมิเนียม,SP02S079,TRUE,FALSE,TRUE,,,Default,FALSE,"418, 418/1-2 ม.5 ถ.ศรีนครินทร์",ต.สำโรงเหนือ อ.เมือง,10270,สมุทรปราการ,Thailand,"02-7486881, 7486884",,02-7486869,,INSTALLATION ,,กระจก,Cash,Within 15 Days
+res_partner_installation_165,ห้างหุ้นส่วนจำกัด ซ้งเฮงลิ้ม,SP02S080,TRUE,FALSE,TRUE,,,Default,FALSE,2/6 ซ.บำเพ็ญกุศล ถ.จันทร์,แขวงทุ่งวัดดอน เขตสาทร,10120,กรุงเทพฯ,Thailand,"0-2867-2488, 896-5162",,0-2896-5162,,INSTALLATION ,,อุปกรณ์ประตู,30 Days,7
+res_partner_installation_166,คุณออย,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ซ้งเฮงลิ้ม,res_partner_installation_165,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_167,ห้างหุ้นส่วนจำกัด ธนาชล,SP02S081,TRUE,FALSE,TRUE,,,Default,FALSE,6/92-93 ม.5 ซ.วัดด่าน ถ.ศรีนครินทร์,ต.สำโรงเหนือ อ.เมือง,10270,สมุทรปราการ,Thailand,01-8262246 / 02-7571495-6,,02-7570992,,INSTALLATION ,,อุปกรณ์ประตู,30 Days,7
+res_partner_installation_168,ธนะ,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ธนาชล,res_partner_installation_167,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_169,ศศิ,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ธนาชล,res_partner_installation_167,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_170,ห้างหุ้นส่วนจำกัด น่ำเซ่งฮวด จารุเมือง,SP02S082,TRUE,FALSE,TRUE,,,Default,FALSE,528-532 ถ.บางนา-ตราด,แขวงบางนา เขตบางนา,10250,กรุงเทพฯ,Thailand,0-2398-0823 ,,0-2398-0860,,INSTALLATION ,,เหล็กรูปพรรณ,60 Days,7
+res_partner_installation_171,คุณสุภรณ์,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด น่ำเซ่งฮวด จารุเมือง,res_partner_installation_170,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_172,คุณไพศิต,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด น่ำเซ่งฮวด จารุเมือง,res_partner_installation_170,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_173,สุนีย์,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด น่ำเซ่งฮวด จารุเมือง,res_partner_installation_170,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_174,ห้างหุ้นส่วนจำกัด วิชัยพันธ์พาณิชย์,SP02S083,TRUE,FALSE,TRUE,,,Default,FALSE,81 ถ.เยาวราช,แขวงสัมพันธวงศ์ เขตสัมพันธวงศ์,10100,กรุงเทพฯ,Thailand,"02-2251969 , 02-222 7563",,02-2251970,,INSTALLATION ,,อุปกรณ์ประตู,30 Days,7
+res_partner_installation_175,ใหญ่,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด วิชัยพันธ์พาณิชย์,res_partner_installation_174,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_176,ห้างหุ้นส่วนจำกัด อินเตอร์แสตนเลส โปรดักท์,SP02S084,TRUE,FALSE,TRUE,,,Default,FALSE,2222/12-13 ม.4 ถ.สุขุมวิท,ต.เทพารักษ์ อ.เมืองสมุทราปราการ,10270,สมุทรปราการ,Thailand,"0-2384-7418, 384-3579, 394-6565",,0-2757-8056,,INSTALLATION ,,อุปกรณ์ประตู / มือจับห้องเย็น COLD ROOM HINGE + LATCH ,Cash,7
+res_partner_installation_177,อนิวัฒน์,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด อินเตอร์แสตนเลส โปรดักท์,res_partner_installation_176,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_178,สุรัสวดี,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด อินเตอร์แสตนเลส โปรดักท์,res_partner_installation_176,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_179,"PVN ENGINEERING CO,.LTD.",SP02S085,TRUE,FALSE,TRUE,,,Default,FALSE,"1532/22-25 Soi Tanuthai, Bangkok-Nonthaburi Road,","Bangsue,",10800,Bangkok,Thailand,0-2911-4761(auto 10 Lines),,"0-2911-4760, 0-2587-3655",,INSTALLATION ,,Differential Pressure  Transmitter,,
+res_partner_installation_180,คุณวิไลพร,,FALSE,FALSE,TRUE,"PVN ENGINEERING CO,.LTD.",res_partner_installation_179,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_installation_181,วีระเผ่า # 109,,FALSE,FALSE,TRUE,"PVN ENGINEERING CO,.LTD.",res_partner_installation_179,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_1,บริษัท โกริตา แพคเกจจิ้ง จำกัด,SP03S001,TRUE,FALSE,TRUE,,,Default,FALSE,2/3 หมู่ 21,แขวงมีนบุรี เขตมีนบุรี,10510,กรุงเทพฯ,Thailand,0-3745-7067-8,,0-3745-7073,,วัสดุสิ้นเปลือง ,,"PACKING / PE  FOAM , AIR BUBBLE",30 Days,7
+res_partner_expendables_2,คุณตุ๊ก,,FALSE,FALSE,TRUE,บริษัท โกริตา แพคเกจจิ้ง จำกัด,res_partner_expendables_1,Contact,TRUE,,,,,Thailand,,01-7811537,,,,,,,
+res_partner_expendables_3,BANGKOK TOOLS CENTER,SP03S002,TRUE,FALSE,TRUE,,,Default,FALSE,31 ซ.ประชาอุทิศ 79 หมู่ 1 ถ.ประชาอุทิศ,แขวงทุ่งครุ เขตทุ่งครุ,10140,กรุงเทพฯ,Thailand,"02-426 0471 , 02 - 871 7566 ,02 - 426 0933    ",,02 - 426 0933,,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,30 Days,3
+res_partner_expendables_4,คุณแสงอรุณ,,FALSE,FALSE,TRUE,BANGKOK TOOLS CENTER,res_partner_expendables_3,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_5,"Cleanstat ( Thailand ) Co.,Ltd",SP03S003,TRUE,FALSE,TRUE,,,Default,FALSE,"207 M.1 Hi-Tech Industrial Estate,","T.Banine , Abangpra-In ,",13160,Ayutthaya,Thailand,035-350 555,,035-959 269 - 70,,วัสดุสิ้นเปลือง ,,น้ำยา / สารเคมี / WAX   (  น้ำยาทำความสะอาด  ),30 Days,3
+res_partner_expendables_6,คุณนาตยา (คุณเอ๋),,FALSE,FALSE,TRUE,"Cleanstat ( Thailand ) Co.,Ltd",res_partner_expendables_5,Contact,TRUE,,,,,Thailand,,086-316-3172,,,,,,,
+res_partner_expendables_7,"GENERAL VACUUM & FLOW CO.,LTD.",SP03S004,TRUE,FALSE,TRUE,,,Default,FALSE,7/8 หมู่ 2,ตำบลท่าอิฐ อ.ปากเกร็ด,11120,นนทบุรี,Thailand,02 - 924 5770,, 02 - 924 5796 ,,วัสดุสิ้นเปลือง ,,"วาวล์ แวคคัมปั๊ม นิวเมติก  
+",Cash,ตามข้อตกลง
+res_partner_expendables_8,คุณนิติกร,,FALSE,FALSE,TRUE,"GENERAL VACUUM & FLOW CO.,LTD.",res_partner_expendables_7,Contact,TRUE,,,,,Thailand,,081-8230023,,,,,,,
+res_partner_expendables_9,"NITTO DENKO MATERIAL (THAILAND) CO.,LTD.",SP03S005,TRUE,FALSE,TRUE,,,Default,FALSE,"Rojana Industrial Park, 1/75 Moo5, Rojana Rd.,","T.Kanham, A.U-Thai,",13210,Pranakornsriayuthaya,Thailand," 035- 226750 ,02-6790990 ",,"035 - 226 745 ,02-6790997",,วัสดุสิ้นเปลือง ,,วัสดุสิ้นเปลือง  เทปกาว,30 Days,21
+res_partner_expendables_10,คุณแนนปนัสญา (แนน),,FALSE,FALSE,TRUE,"NITTO DENKO MATERIAL (THAILAND) CO.,LTD.",res_partner_expendables_9,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_11,SAIYAKAYA (M) Sdn. Bhd.,SP03S006,TRUE,FALSE,TRUE,,,Default,FALSE,"7, JALAN 11,","TAMAN KEPONG, KEPONG,",52100,KUALA LUMPUR,Malaysia,603-6272-1668/3227/9778,,603-6272-1696,,วัสดุสิ้นเปลือง ,,Protection Film,,45
+res_partner_expendables_12,"SIMAC ART & DECOR PAINT CO.,LTD.",SP03S007,TRUE,FALSE,TRUE,,,Default,FALSE,"313 Sirinthorn Road,","Bangbumru,Bangplad,",10700,Bangkok,Thailand,0-2434-9979,,0-2434-9979,,วัสดุสิ้นเปลือง ,,สีอุตสากรรม / สีเพื่องานตกแต่ง / สีสกรีนกระจก ,Cash,7
+res_partner_expendables_13,คุณสินี,,FALSE,FALSE,TRUE,"SIMAC ART & DECOR PAINT CO.,LTD.",res_partner_expendables_12,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_14,บริษัท ก.บุญชัยก่อสร้างและจักรกล จำกัด,SP03S008,TRUE,FALSE,TRUE,,,Default,FALSE,1193/5 ม.1,ต.พนมสารคาม อ.พนมสารคาม,,ฉะเชิงเทรา,Thailand,"(038) 551 - 104,551 726",,"(038) 553 - 139 , (038) 552-915",,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,30 Days,3
+res_partner_expendables_15,คุณมด,,FALSE,FALSE,TRUE,บริษัท ก.บุญชัยก่อสร้างและจักรกล จำกัด,res_partner_expendables_14,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_16,บริษัท เกรียงกมล 2009 จำกัด,SP03S009,TRUE,FALSE,TRUE,,,Default,FALSE,"44,50 เยาวราช 
+
+","แขวงจักรวรรดิ์ เขตสัมพันธวงศ์ 
+
+",10100,กรุงเทพฯ,Thailand,"02 - 2250138,022 - 255297-8",,02 - 2256027,,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,Cash,3
+res_partner_expendables_17,คุณปู,,FALSE,FALSE,TRUE,บริษัท เกรียงกมล 2009 จำกัด,res_partner_expendables_16,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_18,บริษัท โกเวล พาวเวอร์ (2002) จำกัด,SP03S010,TRUE,FALSE,TRUE,,,Default,FALSE,1815 ถ.ลาซาล,แขวงบางนา เขตบางนา (เริ่ม 9 มิ.ย.2549),10260,กรุงเทพฯ,Thailand,02-3494587-8,,02-3839483,,วัสดุสิ้นเปลือง ,,"สายพาน, Bearing",,-
+res_partner_expendables_19,ติ๊ก,,FALSE,FALSE,TRUE,บริษัท โกเวล พาวเวอร์ (2002) จำกัด,res_partner_expendables_18,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_20,พูนสิน,,FALSE,FALSE,TRUE,บริษัท โกเวล พาวเวอร์ (2002) จำกัด,res_partner_expendables_18,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_21,บริษัท คลีนแอร์ โปรดักท์ จำกัด,SP03S011,TRUE,FALSE,TRUE,,,Default,FALSE,14/2 ซ. รามคำแหง 21( นวศรี 1 ) ถนน รามคำแหง,แขวงวังทองหลาง เขตวังทองหลาง,10310,กรุงเทพฯ,Thailand,"0-2319 7035-6,02-3193780",,0-2718 5859,,วัสดุสิ้นเปลือง ,,"PACKING / PE  FOAM , AIR BUBBLE",Cash,-
+res_partner_expendables_22,คุณต้อม,,FALSE,FALSE,TRUE,บริษัท คลีนแอร์ โปรดักท์ จำกัด,res_partner_expendables_21,Contact,TRUE,,,,,Thailand,,086-5355567,,,,,,,
+res_partner_expendables_23,บริษัท คาร์ โคทติ้งส์ ซิสเต็ม (ประเทศไทย) จำกัด ( สีมิป้า),SP03S012,TRUE,FALSE,TRUE,,,Default,FALSE,109/85 ถ.เทพารักษ์ (กม.26),ต.บางเสาธง อ.บางเสาธง,10540,สมุทรปราการ,Thailand,"02 708 0733, 088 022 0045 ",,02 -  7087034 ,,วัสดุสิ้นเปลือง ,,สีอุตสากรรม / สีเพื่องานตกแต่ง / สีสกรีนกระจก ,Cash,7
+res_partner_expendables_24,บริษัท โจตัน พาวเดอร์ โค้ทติ้งส์ ( ประเทศไทย ) จำกัด,SP03S013,TRUE,FALSE,TRUE,,,Default,FALSE,700/355 ม.6,ต. ดอนหัวพ่อ อ.เมืองชลบุรี,20000,ชลบุรี,Thailand, 038 - 468 744 - 5,,  038 - 468 757,,วัสดุสิ้นเปลือง ,,สีอุตสากรรม / สีเพื่องานตกแต่ง / สีสกรีนกระจก ,30 Days,15
+res_partner_expendables_25,คุณเล็ก,,FALSE,FALSE,TRUE,บริษัท โจตัน พาวเดอร์ โค้ทติ้งส์ ( ประเทศไทย ) จำกัด,res_partner_expendables_24,Contact,TRUE,,,,,Thailand,,, ,,,,,,
+res_partner_expendables_26,คุณโกมุต,,FALSE,FALSE,TRUE,บริษัท โจตัน พาวเดอร์ โค้ทติ้งส์ ( ประเทศไทย ) จำกัด,res_partner_expendables_24,Contact,TRUE,,,,,Thailand,,081 - 9117427,,,,,,,
+res_partner_expendables_27,บริษัท ชินเตอร์โปรดักส์ จำกัด,SP03S014,TRUE,FALSE,TRUE,,,Default,FALSE,39/80 ม.11,แขวงคลองกุ่ม เขตบึงกุ่ม,10230,กรุงเทพฯ,Thailand,"02-916 1211, 543 9664 , 916 1949   ",, 02-543 9497,,วัสดุสิ้นเปลือง ,,"PACKING  , PE FOAM",Cash,7
+res_partner_expendables_28,คุณเมธาพร,,FALSE,FALSE,TRUE,บริษัท ชินเตอร์โปรดักส์ จำกัด,res_partner_expendables_27,Contact,TRUE,,,,,Thailand,, ,,,,,,,
+res_partner_expendables_29,เม,,FALSE,FALSE,TRUE,บริษัท ชินเตอร์โปรดักส์ จำกัด,res_partner_expendables_27,Contact,TRUE,,,,,Thailand,,081 - 636 7332 ,,,,,,,
+res_partner_expendables_30,บริษัท ซัฟฟิเชียนท์ จำกัด (ฟองน้ำ PU FOAM ),SP03S015,TRUE,FALSE,TRUE,,,Default,FALSE,606/43 ม.2 ถ.พัฒนา,ต.บางปูใหม่ อ.เมืองสมุทรปราการ,10280,สมุทรปราการ,Thailand,0-2709 9183 - 4,,02-709 9185,,วัสดุสิ้นเปลือง ,,PACKING ,30 Days,-
+res_partner_expendables_31,คุณประภัทร,,FALSE,FALSE,TRUE,บริษัท ซัฟฟิเชียนท์ จำกัด (ฟองน้ำ PU FOAM ),res_partner_expendables_30,Contact,TRUE,,,,,Thailand,,081 - 839 3431 ,,,,,,,
+res_partner_expendables_32,คุณวิชัย,,FALSE,FALSE,TRUE,บริษัท ซัฟฟิเชียนท์ จำกัด (ฟองน้ำ PU FOAM ),res_partner_expendables_30,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_33,บริษัท ไซคลอพ แพคเกจจิ้ง (ประเทศไทย) จำกัด,SP03S016,TRUE,FALSE,TRUE,,,Default,FALSE,114 ซ.อ่อนนุช 13,แขวงสวนหลวง เขตสวนหลวง,10250,กรุงเทพฯ,Thailand,(06-6631313) 0-2730-0213-6,,0-2730-0217,,วัสดุสิ้นเปลือง ,,"PACKING / PE  FOAM , AIR BUBBLE",,-
+res_partner_expendables_34,บุษกร,,FALSE,FALSE,TRUE,บริษัท ไซคลอพ แพคเกจจิ้ง (ประเทศไทย) จำกัด,res_partner_expendables_33,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_35,บริษัท ตะวันออกโพลิเมอร์ จำกัด,SP03S017,TRUE,FALSE,TRUE,,,Default,FALSE,770 หมู่ 6,ต.เทพารักษ์ อ.เมือง,10270,สมุทรปราการ,Thailand,02-2493976 # 135 or 75 # 135    ,,  FAX :  02 - 249 498,,วัสดุสิ้นเปลือง ,,"PACKING / PE  FOAM , AIR BUBBLE",Cash,-
+res_partner_expendables_36,คุณนีรนุช (นุช),,FALSE,FALSE,TRUE,บริษัท ตะวันออกโพลิเมอร์ จำกัด,res_partner_expendables_35,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_37,บริษัท ไต้หวัน ฮัอยซท แอนด์ เครน (ประเทศไทย) จำกัด,SP03S018,TRUE,FALSE,TRUE,,,Default,FALSE,28/2 ซ.45 ถ.พระราม 9,แขวงสวนหลวง เขตสวนหลวง,10250,กรุงเทพฯ,Thailand,(081-9) / 0-2720-1035-6,,0-2718-9709,,วัสดุสิ้นเปลือง ,,"สายเครน, รอก",30 Days,7
+res_partner_expendables_38,คุณทวีศักดิ์,,FALSE,FALSE,TRUE,บริษัท ไต้หวัน ฮัอยซท แอนด์ เครน (ประเทศไทย) จำกัด,res_partner_expendables_37,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_39,บริษัท ท เทียนชัย จำกัด,SP03S019,TRUE,FALSE,TRUE,,,Default,FALSE,"184/2 สายลวด 
+
+","ตำบลปากน้ำ อำเภอเมืองสมุทรปราการ
+
+",10280,สมุทรปราการ,Thailand,"02-7018014-5, 7016295",,02-3953552,,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,30 Days,3
+res_partner_expendables_40,ปรียา,,FALSE,FALSE,TRUE,บริษัท ท เทียนชัย จำกัด,res_partner_expendables_39,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_41,บริษัท ทวีทรัพย์ไทยเทรดดิ้ง จำกัด,SP03S020,TRUE,FALSE,TRUE,,,Default,FALSE,516 - 518 ถนนบางนา - ตราด,แขวงบางนา เจตบางนา,10260,กรุงเทพฯ,Thailand,0-2744 6377-8  ,, FAX :  0-27446379,,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,30 Days,3
+res_partner_expendables_42,คุณธัญ,,FALSE,FALSE,TRUE,บริษัท ทวีทรัพย์ไทยเทรดดิ้ง จำกัด,res_partner_expendables_41,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_43,บริษัท ทานากะ เคมีคอล (ประเทศไทย) จำกัด,SP03S021,TRUE,FALSE,TRUE,,,Default,FALSE,2344 หมู่บ้านโฮมเพลส ถนนพัฒนาการ,แขวงสวนหลวง เขตสวนหลวง,102500,กรุงเทพฯ,Thailand,02 - 722 7900 - 2 ,, 02 - 722 7887,,วัสดุสิ้นเปลือง ,,สีอุตสากรรม / สีเพื่องานตกแต่ง / สีสกรีนกระจก ,30 Days,7
+res_partner_expendables_44,คุณผนิดา,,FALSE,FALSE,TRUE,บริษัท ทานากะ เคมีคอล (ประเทศไทย) จำกัด,res_partner_expendables_43,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_45,คุณสืบพงษ์,,FALSE,FALSE,TRUE,บริษัท ทานากะ เคมีคอล (ประเทศไทย) จำกัด,res_partner_expendables_43,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_46,บริษัท ที.พี.ซี. (2000) อินเตอร์เนชั่นแนล กรุ๊ป จำกัด,SP03S022,TRUE,FALSE,TRUE,,,Default,FALSE,34-34/1 ม.7 ถนนศรีนครินทร์,ต.เทพารักษ์ อ.เมืองสมุทรปราการ,10270,สมุทรปราการ,Thailand,"0-2883-0440,883-0330-1",,02-8830493,,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,30 Days,3
+res_partner_expendables_47,คุณธนพล,,FALSE,FALSE,TRUE,บริษัท ที.พี.ซี. (2000) อินเตอร์เนชั่นแนล กรุ๊ป จำกัด,res_partner_expendables_46,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_48,คุณปู,,FALSE,FALSE,TRUE,บริษัท ที.พี.ซี. (2000) อินเตอร์เนชั่นแนล กรุ๊ป จำกัด,res_partner_expendables_46,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_49,บริษัท เทพเทวา มั่นคง จำกัด,SP03S023,TRUE,FALSE,TRUE,,,Default,FALSE,"64,66,68,70,72,76 ถ.ท่าดินแดง ซ.18",แขวงคลองสาน เขตคลองสาน,10600,กรุงเทพฯ,Thailand,"02 - 439 - 5937  ,02-437 0387     ",,02-438 9581,,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,30 Days,3
+res_partner_expendables_50,คุณแอม,,FALSE,FALSE,TRUE,บริษัท เทพเทวา มั่นคง จำกัด,res_partner_expendables_49,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_51,กระแต,,FALSE,FALSE,TRUE,บริษัท เทพเทวา มั่นคง จำกัด,res_partner_expendables_49,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_52,บริษัท โทเทิล พลาส แพ็ค จำกัด,SP03S024,TRUE,FALSE,TRUE,,,Default,FALSE,95/356-358 ซ.พระราม 3 (ซ.52) ถ.พระราม 3,แขวงช่องนนทรี เขตยานนาวา,10120,กรุงเทพฯ,Thailand,01-6155181 / 0-2681-4920,,0-2681-4921,,วัสดุสิ้นเปลือง ,,ฟิล์มยืด STRETCH FILM,,-
+res_partner_expendables_53,นพงษ์ วิวัฒน์ธนสาร,,FALSE,FALSE,TRUE,บริษัท โทเทิล พลาส แพ็ค จำกัด,res_partner_expendables_52,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_54,บริษัท ไทย โกลบอล ซัพพลาย จำกัด,SP03S025,TRUE,FALSE,TRUE,,,Default,FALSE,"1098 ศรีนครินทร์ 
+
+","แขวงสวนหลวง เขตสวนหลวง 
+
+",10250,กรุงเทพฯ,Thailand,"023224145-7,027213092,023228970-2",,02362-4948,,วัสดุสิ้นเปลือง ,,อุปกรณ์เซฟตี้,,-
+res_partner_expendables_55,บริษัท ไทยเทคโนเพลท จำกัด,SP03S026,TRUE,FALSE,TRUE,,,Default,FALSE,12/1 หมู่ 9 ถนนบางคูวัด,อ.เมือง,12000,ปทุมธานี,Thailand,0-2976-5281-4 (นุช - บัญชี),,0-2598-6490,,วัสดุสิ้นเปลือง ,,Sticker  ,30 Days,15
+res_partner_expendables_56,คุณรุ่งทิพย์,,FALSE,FALSE,TRUE,บริษัท ไทยเทคโนเพลท จำกัด,res_partner_expendables_55,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_57,บริษัท ไทยนครพัฒนา ( 1982 ) จำกัด,SP03S027,TRUE,FALSE,TRUE,,,Default,FALSE,2242-4 รามคำแหง,แขวงหัวหมาก เขตบางกะปิ,10240,กรุงเทพฯ,Thailand,"0-2377 0737, 02 - 3779488 ",,0-2377 2812,,วัสดุสิ้นเปลือง ,,"ร้านขายปลีกสี น้ำมันชักเงา และแลกเกอร์ 
+",Cash,7
+res_partner_expendables_58,คุณเปรี้ยว,,FALSE,FALSE,TRUE,บริษัท ไทยนครพัฒนา ( 1982 ) จำกัด,res_partner_expendables_57,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_59,บริษัท ไทยพัฒนสิน ( จิ้นเส็ง 2000 ) จำกัด,SP03S028,TRUE,FALSE,TRUE,,,Default,FALSE,286-288 ถ.สุขุมวิท,ต.มาบตาพุด อ.เมือง,,ระยอง,Thailand,"038-691994-9 ,( Office) 02-886 9506",,"038-692000,0-288 30612",,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,30 Days,3
+res_partner_expendables_60,คุณรพีพร,,FALSE,FALSE,TRUE,บริษัท ไทยพัฒนสิน ( จิ้นเส็ง 2000 ) จำกัด,res_partner_expendables_59,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_61,บริษัท ไทยรุ่งเรือง ฟิตติ้ง แอนด์ วาวล์ จำกัด,SP03S029,TRUE,FALSE,TRUE,,,Default,FALSE,15 ถนนมหานคร,แขวงมหาพฤฒาราม เขตบางรัก,10500,กรุงเทพฯ,Thailand,0-2233-4320,,0-2236-2404,,วัสดุสิ้นเปลือง ,,วาล์ว ,30 Days,3
+res_partner_expendables_62,คุณเอ๋,,FALSE,FALSE,TRUE,บริษัท ไทยรุ่งเรือง ฟิตติ้ง แอนด์ วาวล์ จำกัด,res_partner_expendables_61,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_63,บริษัท ไทยวัฒนาพลาสติก จำกัด,SP03S030,TRUE,FALSE,TRUE,,,Default,FALSE,267 หมู่ 4 ถนนเศรษฐกิจ 1,ต.ท่าไม้ อ.กระทุ่มแบน,,สมุทรสาคร,Thailand,02-8621080-7,,02-8623204,,วัสดุสิ้นเปลือง ,,พลาสติกใส,30 Days,7
+res_partner_expendables_64,สุดาณี (บี),,FALSE,FALSE,TRUE,บริษัท ไทยวัฒนาพลาสติก จำกัด,res_partner_expendables_63,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_65,บริษัท พรพรหมเพิ่มพัฒนา (2002) จำกัด,SP03S031,TRUE,FALSE,TRUE,,,Default,FALSE,72 ซอยท่าดินแดง 18 ถนนท่าดินแดงคลองสาน,กรุงเทพมหานคร,10600,กรุงเทพฯ,Thailand,"02-4370387, 4392874",,02-4372960,,วัสดุสิ้นเปลือง ,,ถุงขยะ,30 Days,7
+res_partner_expendables_66,วิไล,,FALSE,FALSE,TRUE,บริษัท พรพรหมเพิ่มพัฒนา (2002) จำกัด,res_partner_expendables_65,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_67,บริษัท เฟอร์โกอุตสาหกรรม จำกัด,SP03S032,TRUE,FALSE,TRUE,,,Default,FALSE,388 ม.7,ต.บางเสาธง อ.บางเสาธง,10540,สมุทรปราการ,Thailand,02-708 3745-50,, 02-708 -3722 ,,วัสดุสิ้นเปลือง ,,PACKING /  โฟมแผ่น,Cash,
+res_partner_expendables_68,คุณสมศักดิ์,,FALSE,FALSE,TRUE,บริษัท เฟอร์โกอุตสาหกรรม จำกัด,res_partner_expendables_67,Contact,TRUE,,,,,Thailand,,089-665 5382,,,,,,,
+res_partner_expendables_69,บริษัท โฟร์เคม จำกัด ( สีเคลือบกระจก (สีทึบ),SP03S033,TRUE,FALSE,TRUE,,,Default,FALSE,116/67 หมู่ 9 ถ.เทพารักษ์,ต.บางปลา อ.บางพลี,10540,สมุทรปราการ,Thailand, 02 - 706-3337,,  02 - 706-3337,,วัสดุสิ้นเปลือง ,,สีอุตสากรรม / สีเพื่องานตกแต่ง / สีสกรีนกระจก ,Cash,7
+res_partner_expendables_70,คุณวรพงศ์,,FALSE,FALSE,TRUE,บริษัท โฟร์เคม จำกัด ( สีเคลือบกระจก (สีทึบ),res_partner_expendables_69,Contact,TRUE,,,,,Thailand,,089-499 1644,,,,,,,
+res_partner_expendables_71,บริษัท มหพงษ์ค้ากระดาษ จำกัด,SP03S034,TRUE,FALSE,TRUE,,,Default,FALSE,461-3 ถ.ไมตรีจิตต์,ป้อมปราบ ป้อมปราบศัตรูพ่าย,10100,กรุงเทพฯ,Thailand,"0-2222-7307, 0-2225-2212",,02-2252213,,วัสดุสิ้นเปลือง ,,กระดาษสีน้ำตาล,30 Days,15
+res_partner_expendables_72,หมี,,FALSE,FALSE,TRUE,บริษัท มหพงษ์ค้ากระดาษ จำกัด,res_partner_expendables_71,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_73,บริษัท มาสเตอร์ แมค อินดัสทรี จำกัด,SP03S035,TRUE,FALSE,TRUE,,,Default,FALSE,49/57 ม.12 ถ.กิ่งแก้ว,ต.ราชาเทวะ อ.บางพลี,10540,สมุทรปราการ,Thailand,0-2750-2901-3/01-5662182,,0-2750-2909,,วัสดุสิ้นเปลือง ,,อุปกรณ์เซฟตี้,,-
+res_partner_expendables_74,คุณกาญจนา,,FALSE,FALSE,TRUE,บริษัท มาสเตอร์ แมค อินดัสทรี จำกัด,res_partner_expendables_73,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_75,บริษัท ยู.เอส.ซีเนี่ยน จำกัด,SP03S036,TRUE,FALSE,TRUE,,,Default,FALSE,326-328 ถ.ลาดพร้าว 132,บางกะปิ,10240,กรุงเทพฯ,Thailand,"02-2377 4854,02-3751171",,"02-3752667,5142489",,วัสดุสิ้นเปลือง ,,น้ำมัน  / น้ำมันอุตสาหรรม ,30 Days,3
+res_partner_expendables_76,คุณพรพรรณ,,FALSE,FALSE,TRUE,บริษัท ยู.เอส.ซีเนี่ยน จำกัด,res_partner_expendables_75,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_77,บริษัท ยูไนเต็ด ดีสทริบิวชั่น จำกัด,SP03S037,TRUE,FALSE,TRUE,,,Default,FALSE,1367-1369 ถ.สุทธิสารวินิจฉัย,แขวงดินแดง เขตดินแดง,10400,กรุงเทพฯ,Thailand,02-6938585-90,,02-6938833,,วัสดุสิ้นเปลือง ,,วัสดุสิ้นเปลือง  เทปกาว,30 Days,3
+res_partner_expendables_78,อาม,,FALSE,FALSE,TRUE,บริษัท ยูไนเต็ด ดีสทริบิวชั่น จำกัด,res_partner_expendables_77,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_79,บริษัท รุ่งพัฒนา อิมปอร์ต เอ็กปอร์ต จำกัด,SP03S038,TRUE,FALSE,TRUE,,,Default,FALSE,743 ซอย 42,แขวงบางมด เขตจอมทอง,10150,กรุงเทพฯ,Thailand,028983104-5,,02-8984852,,วัสดุสิ้นเปลือง ,,สารกันชื้น ,Cash,7
+res_partner_expendables_80,บริษัท รุ่งศิริ ซัพพลาย จำกัด,SP03S039,TRUE,FALSE,TRUE,,,Default,FALSE,188/4 ถ.สายลวด,ต.ปากน้ำ อ.เมือง,10280,สมุทรปราการ,Thailand,"0-2701-6500, 701-6400",,0-2701-7331,,วัสดุสิ้นเปลือง ,,"น้ำยา / สารเคมี / WAX   (กาวพ่นสแตนเลส, กาวยาง, กาพ่นสี )",30 Days,3
+res_partner_expendables_81,คุณสุมาลี,,FALSE,FALSE,TRUE,บริษัท รุ่งศิริ ซัพพลาย จำกัด,res_partner_expendables_80,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_82,บริษัท วานิชย์เจริญ ฮาร์ดแวร์ จำกัด,SP03S040,TRUE,FALSE,TRUE,,,Default,FALSE,2025/27 ถ.เจริญกรุง,แขวงวัดพระยาไกร เขตบางคอแหลม,10120,กรุงเทพฯ,Thailand,"02 - 727 0664-5,02-7270667-9   ",,02 - 7270890,,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,60 Days,3
+res_partner_expendables_83,คุณปนัดดา,,FALSE,FALSE,TRUE,บริษัท วานิชย์เจริญ ฮาร์ดแวร์ จำกัด,res_partner_expendables_82,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_84,เบียร์,,FALSE,FALSE,TRUE,บริษัท วานิชย์เจริญ ฮาร์ดแวร์ จำกัด,res_partner_expendables_82,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_85,บริษัท วี-ไนน แพคเกจจิ้ง จำกัด,SP03S041,TRUE,FALSE,TRUE,,,Default,FALSE,140/39 ถ.นนทรี,แขวงช่องนนทรี เขตยานนาวา,10120,กรุงเทพฯ,Thailand,0-2681-5840-2 (01-8494160),,02-681 5839,,วัสดุสิ้นเปลือง ,,ฟิล์มยืด STRETCH FILM,30 Days,3
+res_partner_expendables_86,บริษัท สแควร์ คอมเมอร์เชียล จำกัด,SP03S042,TRUE,FALSE,TRUE,,,Default,FALSE,69-110/4 หมู่ 8,ต.บางกระสอ อ.เมืองนนทบุรี,11000,นนทบุรี,Thailand,0-2591-9864-6,,0-2950-3369,,วัสดุสิ้นเปลือง ,,น้ำมัน  / น้ำมันอุตสาหรรม ,30 Days,3
+res_partner_expendables_87,คุณนี,,FALSE,FALSE,TRUE,บริษัท สแควร์ คอมเมอร์เชียล จำกัด,res_partner_expendables_86,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_88,บริษัท สลิงอ่อน (ประเทศไทย) จำกัด,SP03S043,TRUE,FALSE,TRUE,,,Default,FALSE,40/32-35 ถ.รามคำแหง,แขวงหัวหมาก เขตบางกะปิ,10240,กรุงเทพฯ,Thailand,"02-3793840, 7316000-2",,02-3793889,,วัสดุสิ้นเปลือง ,,สายสลิง,30 Days,7
+res_partner_expendables_89,ทัศนีย์ รอดเกษี,,FALSE,FALSE,TRUE,บริษัท สลิงอ่อน (ประเทศไทย) จำกัด,res_partner_expendables_88,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_90,บริษัท สีอีซามุไทย จำกัด,SP03S044,TRUE,FALSE,TRUE,,,Default,FALSE,81ถนน ประดิพัทธ์ ซอย9,สามเสนใน พญาไท,10400,กรุงเทพฯ,Thailand,"02 - 279 9060 ,02 - 618 6938",,02- 6187188,,วัสดุสิ้นเปลือง ,,สีอุตสากรรม / สีเพื่องานตกแต่ง / สีสกรีนกระจก ,Cash,7
+res_partner_expendables_91,คุณทิพย์ญาดา,,FALSE,FALSE,TRUE,บริษัท สีอีซามุไทย จำกัด,res_partner_expendables_90,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_92,บริษัท แสงเจริญวานิช จำกัด,SP03S045,TRUE,FALSE,TRUE,,,Default,FALSE,1565 ม.6 ถ.สุขุมวิท,ต.สำโรงเหนือ อ.เมือง,10270,สมทุรปราการ,Thailand,"02-398 2598,02-393 8390",,02-3987749,,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,30 Days,3
+res_partner_expendables_93,มงคล,,FALSE,FALSE,TRUE,บริษัท แสงเจริญวานิช จำกัด,res_partner_expendables_92,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_94,สมแก้ว,,FALSE,FALSE,TRUE,บริษัท แสงเจริญวานิช จำกัด,res_partner_expendables_92,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_95,บริษัท อ.ชัยวัฒน์ แพคเกจจิ้ง ซิสเท็ม จำกัด,SP03S046,TRUE,FALSE,TRUE,,,Default,FALSE,"52/40 หมู่ 9 ซอยเอกชัย 72 
+
+","เอกชัย แขวงบางบอน เขตบางบอน 
+
+",10150,กรุงเทพฯ,Thailand,"02-8944036, 4161311",,02-8944107,,วัสดุสิ้นเปลือง ,,"PACKING / PE  FOAM , AIR BUBBLE",,-
+res_partner_expendables_96,ญาณวัฒน์,,FALSE,FALSE,TRUE,บริษัท อ.ชัยวัฒน์ แพคเกจจิ้ง ซิสเท็ม จำกัด,res_partner_expendables_95,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_97,บริษัท อำนวยการดับเพลิง จำกัด,SP03S047,TRUE,FALSE,TRUE,,,Default,FALSE,52/1-2 ถนนรามคำแหง 60/4,แขวงหัวหมาก เขตบางกะปิ,10240,กรุงเทพฯ,Thailand,"0-2374 5593, 02-374 8738  ",,0-2374 5593 ,,วัสดุสิ้นเปลือง ,,อุปกรณ์เซฟตี้,30 Days,3
+res_partner_expendables_98,คุณบี,,FALSE,FALSE,TRUE,บริษัท อำนวยการดับเพลิง จำกัด,res_partner_expendables_97,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_99,บริษัท อุตสาหกรรมยูเนี่ยนเปเปอร์ทิ้ว จำกัด,SP03S048,TRUE,FALSE,TRUE,,,Default,FALSE,522 ม.1 ซ.ปลั่งเปล่ง ถ.พุทธรักษา,ต.ท้ายบ้าน อ.เมือง,10280,สมทุรปราการ,Thailand,"02-3951217, 3952068",,02-3870679,,วัสดุสิ้นเปลือง ,,กระดาษสีน้ำตาล,Cash,7
+res_partner_expendables_100,ประกายรัตน์,,FALSE,FALSE,TRUE,บริษัท อุตสาหกรรมยูเนี่ยนเปเปอร์ทิ้ว จำกัด,res_partner_expendables_99,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_101,คุณน้อย,,FALSE,FALSE,TRUE,บริษัท อุตสาหกรรมยูเนี่ยนเปเปอร์ทิ้ว จำกัด,res_partner_expendables_99,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_102,บริษัท เอเซียโพลีพลาสติค อินดัสทรี จำกัด,SP03S049,TRUE,FALSE,TRUE,,,Default,FALSE,230 หมู่ที่ 6 ถนนสุขสวัสดิ์ 78,ตำบลในคลองบางปลากด พระสมุทรเจดีย์,10290,สมทุรปราการ,Thailand,"02-2942166, 2940772, 2942215",,02-2942216,,วัสดุสิ้นเปลือง ,,"PACKING / PE  FOAM , AIR BUBBLE",30 Days,-
+res_partner_expendables_103,ยุกต์ จิระกิจจา,,FALSE,FALSE,TRUE,บริษัท เอเซียโพลีพลาสติค อินดัสทรี จำกัด,res_partner_expendables_102,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_104,บริษัท เอ็ม พี แอล มาร์เก็ตติ้ง จำกัด,SP03S050,TRUE,FALSE,TRUE,,,Default,FALSE,112/285-288 ซ.วัจนะ ม.8 ถ.จอมทอง,แขวง/เขตจอมทอง,10150,กรุงเทพฯ,Thailand,02-4770430-7,,02-4770439,,วัสดุสิ้นเปลือง ,,วัสดุสิ้นเปลือง  เทปกาว,60 Days,5
+res_partner_expendables_105,วันชัย,,FALSE,FALSE,TRUE,บริษัท เอ็ม พี แอล มาร์เก็ตติ้ง จำกัด,res_partner_expendables_104,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_106,บริษัท เอ็ม เอ็ม พี แพ็คเกจจิ้ง กรุ๊พ จำกัด,SP03S051,TRUE,FALSE,TRUE,,,Default,FALSE,3075/1-2 ถ.สุขุมวิท,แขวงบางจาก เขตพระโขนง,10260,กรุงเทพฯ,Thailand,02-7418444,,"02-3320514, 7418425",,วัสดุสิ้นเปลือง ,,ฟิล์มยืด M-STRETCH,Cash,3
+res_partner_expendables_107,K. สมถวิน,,FALSE,FALSE,TRUE,บริษัท เอ็ม เอ็ม พี แพ็คเกจจิ้ง กรุ๊พ จำกัด,res_partner_expendables_106,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_108,ร้านจงวิศาล,SP03S052,TRUE,FALSE,TRUE,,,Default,FALSE,100 ม.8,ต.โคกปีบอ.ศรีมโหสถ,25190,ปราจีนบุรี,Thailand,037 - 276 - 328  ,,"037 - 276 - 460 , 037 - 276 - 328",,วัสดุสิ้นเปลือง ,,ร้านวัสดุก่อสร้าง ,30 Days,7
+res_partner_expendables_109,คุณอุไรวรรณ,,FALSE,FALSE,TRUE,ร้านจงวิศาล,res_partner_expendables_108,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_110,สถานีบริการน้ำมันสหกรณ์การเกษตรโคกปีบ จำกัด,SP03S053,TRUE,FALSE,TRUE,,,Default,FALSE,224 หมู่ที่ 7,ต.โคกปีบอ.ศรีมโหสถ,25190,ปราจีนบุรี,Thailand,"037 - 276 - 742 , 037 - 276 - 049",, 037 - 276 - 049,,วัสดุสิ้นเปลือง ,,น้ำมัน,Cash,3
+res_partner_expendables_111,คุณนงเยาว์,,FALSE,FALSE,TRUE,สถานีบริการน้ำมันสหกรณ์การเกษตรโคกปีบ จำกัด,res_partner_expendables_110,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_112,แสงเจริญรับเบอร์ส (1996),SP03S054,TRUE,FALSE,TRUE,,,Default,FALSE,228/8-9 ม.11,ต.บางพลีใหญ่ อ.บางพลี,10540,สมทุรปราการ,Thailand,02-3121737 (01-3728022),,02-7524944,,วัสดุสิ้นเปลือง ,,"ปะเก็นยาง, ท่อสายใยลวด (สายยางฉีดโฟม)",30 Days,7
+res_partner_expendables_113,วี,,FALSE,FALSE,TRUE,แสงเจริญรับเบอร์ส (1996),res_partner_expendables_112,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_114,ห้างหุ้นส่วนจำกัด กิจเจริญวัฒนาโลหะภัณฑ์,SP03S055,TRUE,FALSE,TRUE,,,Default,FALSE,21/230-232 ม.12 ถ.บางนา-ตราด,แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,02-7490722-6,,"02-3938046, 7444584",,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,30 Days,3
+res_partner_expendables_115,พัฒน์,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด กิจเจริญวัฒนาโลหะภัณฑ์,res_partner_expendables_114,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_116,ห้างหุ้นส่วนจำกัด ทูลลิ่ง ซัพพลาย,SP03S056,TRUE,FALSE,TRUE,,,Default,FALSE,46/90 ซอยนวลจันทร์ 31,แขวงนวลจันท์ เขตบึงกุ่ม,10230,กรุงเทพฯ,Thailand,02 - 363-7748-51,, 02 - 509-9227,,วัสดุสิ้นเปลือง ,,เครื่องต๊าปเกลียว,30 Days,7
+res_partner_expendables_117,คุณธีรพล,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ทูลลิ่ง ซัพพลาย,res_partner_expendables_116,Contact,TRUE,,,,,Thailand,,081-988 8718,,,,,,,
+res_partner_expendables_118,ห้างหุ้นส่วนจำกัด พิพัฒนกิจเทรดดิ้ง,SP03S057,TRUE,FALSE,TRUE,,,Default,FALSE,113 ถนนเสือป่า,แขวงป้อมปราบ,10100,กรุงเทพฯ,Thailand,02-623  2434,,"02-623 2433, 02 - 252 455-6 ",,วัสดุสิ้นเปลือง ,,พลาสติกใส,Cash,3
+res_partner_expendables_119,คุณนิตยา,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด พิพัฒนกิจเทรดดิ้ง,res_partner_expendables_118,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_120,ห้างหุ้นส่วนจำกัด รุ่งพิทักษ์ ปิโตรเลียม,SP03S058,TRUE,FALSE,TRUE,,,Default,FALSE,123 ม.4,ต.เมืองเก่า อ.พนมสารคาม,,ฉะเชิงเทรา,Thailand," 038 - 551 - 219 , 038 - 551 - 650  ",,"038 - 552 - 812 ,038 - 551 - 219",,วัสดุสิ้นเปลือง ,,แก๊ส,30 Days,5 - 7
+res_partner_expendables_121,คุณปราณี,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด รุ่งพิทักษ์ ปิโตรเลียม,res_partner_expendables_120,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_122,ห้างหุ้นส่วนจำกัด วงศ์วิวัฒน์ฮาร์ดแวร์,SP03S059,TRUE,FALSE,TRUE,,,Default,FALSE,4509/7-8 ถ.สุขุมวิท,แขวงบางนา เขตบางนา (เริ่ม 9 มิ.ย.2549),10260,กรุงเทพฯ,Thailand,"0-2398-0916-7, 744-4540-4",,02-3988963,,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,Cash,3
+res_partner_expendables_123,คุณแอนนา,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด วงศ์วิวัฒน์ฮาร์ดแวร์,res_partner_expendables_122,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_124,ห้างหุ้นส่วนจำกัด วี.เอ็น.คอมเมอร์เชียล,SP03S060,TRUE,FALSE,TRUE,,,Default,FALSE,118/134 ซอยบัวทอง 10/4,ตำบลบางรักพัฒนา อำเภอบางบัวทอง,11110,นทบุรี,Thailand,02 - 5946105,,02 - 5946106,,วัสดุสิ้นเปลือง ,,ถุงขยะ,,-
+res_partner_expendables_125,ห้างหุ้นส่วนจำกัด ศรีวิกรณ์เพ้นท์ ( สีซ่อมผนัง ),SP03S061,TRUE,FALSE,TRUE,,,Default,FALSE,487/13 หมู่ 6 แพรกษา,อำเภอเมืองสมุทรปราการ,10280,สมุทรปราการ,Thailand,02- 7037449,, 02 - 7011301,,วัสดุสิ้นเปลือง ,,สีอุตสากรรม / สีเพื่องานตกแต่ง / สีสกรีนกระจก ,Cash,7
+res_partner_expendables_126,ห้างหุ้นส่วนจำกัด สแตนดาร์ด เทป,SP03S062,TRUE,FALSE,TRUE,,,Default,FALSE,479/19 วอยวัดปรก 2 ถนนจันทน์,แขวงทุ่งวัดดอน เขตสาทร,10120,กรุงเทพฯ,Thailand,02 - 675 6969,,02-6756202,,วัสดุสิ้นเปลือง ,,วัสดุสิ้นเปลือง  เทปกาว,30 Days,3
+res_partner_expendables_127,คุณเอกฤทธิ์,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด สแตนดาร์ด เทป,res_partner_expendables_126,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_128,ห้างหุ้นส่วนจำกัด สมชาติฮาร์ดแวร์,SP03S063,TRUE,FALSE,TRUE,,,Default,FALSE,176 แขวงบุคคโล,เขตธนบุรี,10600,กรุงเทพฯ,Thailand,02-8760308-9,,02-4764452,,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,30 Days,3
+res_partner_expendables_129,สมหญิง,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด สมชาติฮาร์ดแวร์,res_partner_expendables_128,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_130,ห้างหุ้นส่วนจำกัด สีไดโน (สี RUST-OLEUM),SP03S064,TRUE,FALSE,TRUE,,,Default,FALSE,69 หมู่ 14 ถนนกิ่งแก้ว,ต.ราชาเทวะ อ.บางพลี,10540,สมุทรปราการ,Thailand," 02-175 2577 ,02-738 4111",,02 - 738 4341,,วัสดุสิ้นเปลือง ,,สีอุตสากรรม / สีเพื่องานตกแต่ง / สีสกรีนกระจก ,Cash,7
+res_partner_expendables_131,คุณเอ๋,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด สีไดโน (สี RUST-OLEUM),res_partner_expendables_130,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_132,ห้างหุ้นส่วนจำกัด อนุสรณ์ โปรดักส์,SP03S065,TRUE,FALSE,TRUE,,,Default,FALSE,92/7 ม.5 ถ.อ่อนนุช,แขวงประเวศ เขตประเวศ,10250,กรุงเทพฯ,Thailand,"02-3219448, 3223360",,"02-3215206, 3214402",,วัสดุสิ้นเปลือง ,,อุปกรณ์เซฟตี้,30 Days,3
+res_partner_expendables_133,คุณหนิง,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด อนุสรณ์ โปรดักส์,res_partner_expendables_132,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_expendables_134,คุณอั้ม,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด อนุสรณ์ โปรดักส์,res_partner_expendables_132,Contact,TRUE,,,,,Thailand,,085-1242709,,,,,,,
+res_partner_expendables_135,ห้างหุ้นส่วนจำกัด สำโรงรวมกิจ,SP03S066,TRUE,FALSE,TRUE,,,Default,FALSE,"229,299/1-2 หมู่ 9 ถ.สุขุมวิท",ต.เทพารักษ์ อ.เมืองสมุทรปราการ,10270,สมุทรปราการ,Thailand, 02- 756-9980-85,,02-756-9978-79,,วัสดุสิ้นเปลือง ,,วัสดุสิ้จเปลือง / เครื่องมือช่าง  / ทั่วไป,Cash,3
+res_partner_expendables_136,คุณประชา,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด สำโรงรวมกิจ,res_partner_expendables_135,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_1,บริษัท ควอซาร์ ซิสเท็ม จำกัด,SP06S0001,TRUE,FALSE,TRUE,,,Default,FALSE,264/7 ซ.ปรีดีพนมยงค์ ถฬสุขุมวิท 71,แขวงพระโขนงเหนือ เขตวัฒนา,10110,กรุงเทพฯ,Thailand,02-751 2929 ,,02-751 2988,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,-
+res_partner_office_2,บริษัท มัลติเทค คอมพิวเตอร์ โซลูชั่น จำกัด,SP06S0002,TRUE,FALSE,TRUE,,,Default,FALSE,38 ม.3,ต.ท้ายบ้าน อ.เมือง,10280,สมุทรปราการ,Thailand,"04-0710364 / 02-7028098, 3892695",,02-3956129,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,Cash,7
+res_partner_office_3,แก้ว / โยธิน,,FALSE,FALSE,TRUE,บริษัท มัลติเทค คอมพิวเตอร์ โซลูชั่น จำกัด,res_partner_office_2,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_4,บริษัท ออฟฟิต เบส ดอท คอม จำกัด,SP06S0003,TRUE,FALSE,TRUE,,,Default,FALSE,"2371 Petchaburi Rd., 7/F Petchburi Bldg.",Bangkapi Huay - Kwang,10320,Bangkok,Thailand,0-2718-0818,, 0-2716-5663,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,7
+res_partner_office_5,คุณสุนทร,,FALSE,FALSE,TRUE,บริษัท ออฟฟิต เบส ดอท คอม จำกัด,res_partner_office_4,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_6,"NetSys & Computer Co.,Ltd.",SP06S0004,TRUE,FALSE,TRUE,,,Default,FALSE,842 ถนนประชาอุทิศ,แขวงสามเสนนอก เขตห้วยขวาง,10320,กรุงเทพฯ,Thailand,"66 (0) 2274 2924-6, 66 (0) 2274 4479",,66 (0) 2274 4614,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,-
+res_partner_office_7,บริษัท แอมโปไมโครซิส จำกัด,SP06S0005,TRUE,FALSE,TRUE,,,Default,FALSE,99/349 อาคาร ณ นคร หมู่ที่ 2 ถนนแจ้งวัฒนะ,แขวงทุ่งสองห้อง เขตหลักสี่,,กรุงเทพฯ,Thailand,02-235-3999 ,,02-235-9939,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,7
+res_partner_office_8,คุณวรรณา,,FALSE,FALSE,TRUE,บริษัท แอมโปไมโครซิส จำกัด,res_partner_office_7,Contact,TRUE,,,,,Thailand,,"081-3745821, 086-340-9310",,,,,,,
+res_partner_office_9,"LEO ELECTRONIC CO.,LTD.",SP06S0006,TRUE,FALSE,TRUE,,,Default,FALSE,"27 ,29 Bangna - Trad 34 ,","Bangna , Bangna Bangkok",10260,Bangkok,Thailand,"02-746 9500  ,02-746 8708",,02 - 746 8712,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,Cash,7
+res_partner_office_10,คุณหทัยชนก,,FALSE,FALSE,TRUE,"LEO ELECTRONIC CO.,LTD.",res_partner_office_9,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_11,บริษัท แคนนอน มาร์เก็ตติ้ง (ไทยแลนด์) จำกัด,SP06S0007,TRUE,FALSE,TRUE,,,Default,FALSE,179/34-35 อาคารบางกอกซิตี้ทาวเวอร์ ชั้น 9-10 ถนนสาทรใต้,แขวงทุ่งมหาเมฆ เขตสาทร,10120,กรุงเทพฯ,Thailand,0-2344-9999 ext 720-721/ 09-1404997,,0-2344-9960,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,3
+res_partner_office_12,คุณคมกฤษ,,FALSE,FALSE,TRUE,บริษัท แคนนอน มาร์เก็ตติ้ง (ไทยแลนด์) จำกัด,res_partner_office_11,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_13,ANGEL WATER SYSTEM,SP06S0008,TRUE,FALSE,TRUE,,,Default,FALSE,999/339 หมู่ที่ 6,แขวงหลักสอง เชตบางแค,10160,กรุงเทพฯ,Thailand,02 - 404 4001,,02 - 404 4003,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,60 Days,3
+res_partner_office_14,บริษัท ออฟฟิศเมท จำกัด (มหาชน),SP06S0009,TRUE,FALSE,TRUE,,,Default,FALSE,24 ซอยอ่อนนุช 66/1,แขวงสวนหลวง เขตสวนหลวง,10250,กรุงเทพฯ,Thailand,02- 739 5555 #155,,02-721 1717,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,3
+res_partner_office_15,คุณสมฤดี 155,,FALSE,FALSE,TRUE,บริษัท ออฟฟิศเมท จำกัด (มหาชน),res_partner_office_14,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_16,บริษัท เอ็ม-พลัส เทค จำกัด,SP06S0010,TRUE,FALSE,TRUE,,,Default,FALSE,4/6 ซ. รามคำแหง 30,แขวงหัวหมาก เขตบางกะปิ,10240,กรุงเทพฯ,Thailand,02-7322090,,02-7329435,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,3
+res_partner_office_17,มนต์ชัย,,FALSE,FALSE,TRUE,บริษัท เอ็ม-พลัส เทค จำกัด,res_partner_office_16,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_18,จิ๊บ,,FALSE,FALSE,TRUE,บริษัท เอ็ม-พลัส เทค จำกัด,res_partner_office_16,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_19,บริษัท ลีเรคโก ( ประเทศไทย ) จำกัด,SP06S0011,TRUE,FALSE,TRUE,,,Default,FALSE,41/10-11 หมู่ 6 ถนนบางนาตราด ก.ม.16.5,ตำบลบางโฉลง อำเภอบางพลี,10540,สมุทรปราการ,Thailand,02 338 0200,,02 349 6552,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,7 Days,3
+res_partner_office_20,บริษัท ไทยฟูจิซีร็อกซ์ จำกัด,SP06S0012,TRUE,FALSE,TRUE,,,Default,FALSE,123 อาคารซันทาวเวอร์ส เอ ชั้นที่ 23-26 ถนน วิภาวดีรังสิต,แขวงจอมพล เขตจตุจักร,10900,กรุงเทพฯ,Thailand,02-6796050-68,,02-6796048-9,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,3
+res_partner_office_21,บริษัท เอ็ม-พลัส เทค จำกัด,SP06S0013,TRUE,FALSE,TRUE,,,Default,FALSE,33/38 ม.10 ถ.เทพารักษ์,ต.บางปลา อ.บางพลี,10540,สมุทรปราการ,Thailand,0-2750-4852-8,09-1681699,0-2750-7299,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,15
+res_partner_office_22,คุณชูศักดิ์ ปู่หล่อ,,FALSE,FALSE,TRUE,บริษัท เอ็ม-พลัส เทค จำกัด,res_partner_office_21,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_23,บริษัท โปรเจคเตอร์ เวิลค์จำกัด,SP06S0014,TRUE,FALSE,TRUE,,,Default,FALSE,202 อาคารเลอ คองคอร์ด ชั้น 10 ถนนรัชดาภิเษก,แขวงสามเสนนอก เขตห้วยขวาง,10310,กรุงเทพฯ,Thailand,02-6942355 ต่อ 1,08-36666546,02-6942369,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,Cash,7
+res_partner_office_24,บริษัท ดำรงค์ชัย เซฟแอนด์สตีล เฟอร์นิเจอร์ จำกัด,SP06S0015,TRUE,FALSE,TRUE,,,Default,FALSE,1945/6-9 ม.1 ถ.สุขุมวิท,ต.สำโรงเหนือ อ.เมืองสมุทรปราการ,,สมุทรปราการ,Thailand,01-4037315 / 02-755 0955-65,, 0-2755 -0953-4,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,7
+res_partner_office_25,พิชชาพร (ออย),,FALSE,FALSE,TRUE,บริษัท ดำรงค์ชัย เซฟแอนด์สตีล เฟอร์นิเจอร์ จำกัด,res_partner_office_24,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_26,บริษัท เน็ตซีส แอนด์ คอมพิวเตอร์ จำกัด,SP06S0016,TRUE,FALSE,TRUE,,,Default,FALSE,842 ถนนประชาอุทิศ,แขวงสามเสนนอก เขตห้วยขวาง,10310,กรุงเทพฯ,Thailand,,,,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,7
+res_partner_office_27,บริษัท ไมร่า คอมพิวเตอร์ อินเตอร์ เนชั่นแนล จำกัด,SP06S0017,TRUE,FALSE,TRUE,,,Default,FALSE,"509, 511 ถนนรามอินทรา",แขวงคันนายาว เขต/อำเภอ คันนายาว,10230,กรุงเทพฯ,Thailand, 0-2943 0180-9 ,,0-2519 2825,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,7
+res_partner_office_28,การะเกษ# 1329,,FALSE,FALSE,TRUE,บริษัท ไมร่า คอมพิวเตอร์ อินเตอร์ เนชั่นแนล จำกัด,res_partner_office_27,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_29,คุณกรพิกุล,,FALSE,FALSE,TRUE,บริษัท ไมร่า คอมพิวเตอร์ อินเตอร์ เนชั่นแนล จำกัด,,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_30,บริษัท พีแอนด์เจ ฟรีเวย์ เทรดดิ้ง จำกัด (หมึก ),SP06S0018,TRUE,FALSE,TRUE,,,Default,FALSE,88 ซอยพร้อมพงษ์ ถนนสุขุมวิท 39,แขวงคลองตันเหนือ เขตวัฒนา,10110,กรุงเทพฯ,Thailand,02-7184110 /02-720 3496-7,,02-720 3495,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,3
+res_partner_office_31,คุณกวาง,,FALSE,FALSE,TRUE,บริษัท พีแอนด์เจ ฟรีเวย์ เทรดดิ้ง จำกัด (หมึก ),res_partner_office_30,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_32,บริษัท ที เอ็น . แม็คเน็ท เซ็นเตอร์ จำกัด (หมึก ),SP06S0019,TRUE,FALSE,TRUE,,,Default,FALSE,99/11 ม.6 ซ.พัฒนาชุมชน 1 ถ.ศรีนครินทร์,บางแก้ว อ.บางพลี,,สมุทรปราการ,Thailand," 02 - 348 - 2411 , 02 - 348 - 2422 ",,02 - 348 - 2424 - 5 ,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,60 Days,3
+res_partner_office_33,คุณหญิง,,FALSE,FALSE,TRUE,บริษัท ที เอ็น . แม็คเน็ท เซ็นเตอร์ จำกัด (หมึก ),res_partner_office_32,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_34,บริษัท ไอ.ที.โซลูชั่น คอมพิวเตอร์ (ไทยแลนด์) จำกัด,SP06S0020,TRUE,FALSE,TRUE,,,Default,FALSE,937 ถนนศรีนครินทร์,แขวงสวนหลวง เขตสวนหลวง,10250,กรุงเทพฯ,Thailand, 0-2725-6499   ,,0-2725-6499,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,3
+res_partner_office_35,คุณพัชมณ,,FALSE,FALSE,TRUE,บริษัท ไอ.ที.โซลูชั่น คอมพิวเตอร์ (ไทยแลนด์) จำกัด,res_partner_office_34,Contact,TRUE,,,,,Thailand,,085-143-3067,,,,,,,
+res_partner_office_36,ห้างหุ้นส่วนจำกัด วุฒิชัยซัพพลายส์,SP06S0021,TRUE,FALSE,TRUE,,,Default,FALSE,736 ซ.เทอดไท 33 ถ.เทอดไท,แขวงบุคคโล เขตธนบุรี,10600,กรุงเทพฯ,Thailand,"05-1485133,0-2878-8021, 878-8033",,0-2878-8022,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,3
+res_partner_office_37,วิสูตรวุฒิ,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด วุฒิชัยซัพพลายส์,res_partner_office_36,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_38,คุณโป่ง,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด วุฒิชัยซัพพลายส์,res_partner_office_36,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_39,"Point IT Consulting Co., Ltd.",SP06S0022,TRUE,FALSE,TRUE,,,Default,FALSE,"17 Soi On Nut 35,","Kweng Suan Luang, Khet Suan Luang",10250,Bangkok,Thailand,666-322-8010, ,662-322-8011,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,,-
+res_partner_office_40,Mr.Kreangkrai Sangseeda,,FALSE,FALSE,TRUE,"Point IT Consulting Co., Ltd.",res_partner_office_39,Contact,TRUE,,,,,Thailand,,087-083-7026,,,,,,,
+res_partner_office_41,"ThaiBiz Provider Co.,Ltd.",SP06S0023,TRUE,FALSE,TRUE,,,Default,FALSE,99/23 เขตอุตสาหกรรมซอฟต์แวร์ชั้น 12 ถ.แจ้งวัฒนะ,คลองเกลือ ปากเกร็ด,11120,นนทบุรี,Thailand,02 - 962 2112               ,,02 - 962 7320 ,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,7
+res_partner_office_42,คุณนันทนา,,FALSE,FALSE,TRUE,"ThaiBiz Provider Co.,Ltd.",res_partner_office_41,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_43,บริษัท เอ เอ เปเปอร์ แอนด์ สเตชั่นเนอรี่ จำกัด,SP06S0024,TRUE,FALSE,TRUE,,,Default,FALSE,เลขที่ 109/2 หมู่ที่ 3,ต.บางสมัคร อ.บางประกง,24180,ฉะเชิงเทรา,Thailand," 02-659-1234 # 4 , 1759 # 4",, 02-659-1399,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,3
+res_partner_office_44,คุณบอย,,FALSE,FALSE,TRUE,บริษัท เอ เอ เปเปอร์ แอนด์ สเตชั่นเนอรี่ จำกัด,res_partner_office_43,Contact,TRUE,,,,,Thailand,,085-835 3281,,,,,,,
+res_partner_office_45,ห้างหุ้นส่วนจำกัด เปเปอร์เทรดดิ้ง,SP06S0025,TRUE,FALSE,TRUE,,,Default,FALSE,11/37 ซ.พหลโยธิน 32 ถ.พหลโยธิน,แขวงเสนานิคม เขตจตุจักร,10900,กรุงเทพฯ,Thailand,02-5612099,,02-5612120,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,3
+res_partner_office_46,อ้วน,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด เปเปอร์เทรดดิ้ง,res_partner_office_45,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_47,บริษัท เค.พี.ไอ. เทรดดิ้ง จำกัด,SP06S0026,TRUE,FALSE,TRUE,,,Default,FALSE,47/2 หมู่ 1,แขวงพระโขนง เขตคลองเตย,10260,กรุงเทพฯ,Thailand,02-311 0413-5,,02-3110413-5 : 128-130,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,3
+res_partner_office_48,บอย,,FALSE,FALSE,TRUE,บริษัท เค.พี.ไอ. เทรดดิ้ง จำกัด,res_partner_office_47,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_49,บริษัท เอ็น พี เค มาสเตอร์แพลน จำกัด,SP06S0027,TRUE,FALSE,TRUE,,,Default,FALSE,11 - 13 ซอยบางนา-ตราด 12 ถ.บางนา-ตราด,แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,"0-2749-1282, 749-2183",,0-2749-2185,,อุปกรณ์/เครื่องใช้สำนักงาน,,เครื่องใช้สำนักงาน ,30 Days,3
+res_partner_office_50,คุณสุกัญญา,,FALSE,FALSE,TRUE,บริษัท เอ็น พี เค มาสเตอร์แพลน จำกัด,res_partner_office_49,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_51,บริษัท ไทยแอมโน อินเตอร์เนชั่นแนล จำกัด,SP06S0028,TRUE,FALSE,TRUE,,,Default,FALSE,267/15 ซ.สุขุมวิท 63 ถ.สุขุมวิท,แขวงคลองตันเหนือ เขตวัฒนา,10110,กรุงเทพฯ,Thailand,02-3821523-5,,02-3819895,,อุปกรณ์/เครื่องใช้สำนักงาน,,"เครื่องใช้สำนักงาน   ( บัตรตอก, ผ้าหมึก ) ",45 Days,3
+res_partner_office_52,เริงศักดิ์,,FALSE,FALSE,TRUE,บริษัท ไทยแอมโน อินเตอร์เนชั่นแนล จำกัด,res_partner_office_51,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_53,นุช,,FALSE,FALSE,TRUE,บริษัท ไทยแอมโน อินเตอร์เนชั่นแนล จำกัด,res_partner_office_51,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_54,ตั้ว,,FALSE,FALSE,TRUE,บริษัท ไทยแอมโน อินเตอร์เนชั่นแนล จำกัด,res_partner_office_51,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_55,บริษัท เทคโนวเลจ คอนซัลติง จำกัด,SP06S0029,TRUE,FALSE,TRUE,,,Default,FALSE,72 อาคาร PAV ชั้น 2 ซ.ลาดพร้าว 42 ถนนลาดพร้าว,แขวงสามเสนนอก เขตห้วยขวาง,10310,กรุงเทพฯ,Thailand,0-2513-9416 ,,0- 2513-9413,,อุปกรณ์/เครื่องใช้สำนักงาน,,"งานระบบ Hardware , software",30 Days,3
+res_partner_office_56,K. Wichet,,FALSE,FALSE,TRUE,บริษัท เทคโนวเลจ คอนซัลติง จำกัด,res_partner_office_55,Contact,TRUE,,,,,Thailand,,,089-031 2540,,,,,,
+res_partner_office_57,คุณจักรพงษ์,,FALSE,FALSE,TRUE,บริษัท เทคโนวเลจ คอนซัลติง จำกัด,res_partner_office_55,Contact,TRUE,,,,,Thailand,,,"086-5719603,081-3187777",,,,,,
+res_partner_office_58,บริษัท มายเซลส์ แอนด์ เซอร์วิส จำกัด,SP06S0030,TRUE,FALSE,TRUE,,,Default,FALSE,61/251 หมู่ 6 ถ.ลำลูกกา,ต.บึงคำพล้อย อ.ลำลูกกา,12150,ปทุมธานี,Thailand, 0-2987-9947   ,, 0-2987-9948,,อุปกรณ์/เครื่องใช้สำนักงาน,,ระบบ Telecom ,30 Days,3
+res_partner_office_59,คุณศรุต,,FALSE,FALSE,TRUE,บริษัท มายเซลส์ แอนด์ เซอร์วิส จำกัด,res_partner_office_58,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_60,บริษัท จัสมิน อินเตอร์เนต จำกัด,SP06S0031,TRUE,FALSE,TRUE,,,Default,FALSE,200 ม.4 อาคาร จัสมิน อินเตอร์เนชั่นแนล,ปากเกร็ด,11120,นนทบุรี,Thailand,02-502 - 3700-4,,02-502 3793 ,,อุปกรณ์/เครื่องใช้สำนักงาน,,ระบบโทรศัพท์,30 Days,3
+res_partner_office_61,คุณนัฐกร,,FALSE,FALSE,TRUE,บริษัท จัสมิน อินเตอร์เนต จำกัด,res_partner_office_60,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_62,บริษัท ซันไทย กรุ๊ป จำกัด,SP06S0032,TRUE,FALSE,TRUE,,,Default,FALSE,61/162 ทวีมิตร ซ.5 ถ.พระราม 9,แขวง/เขตห้วยขวาง,10320,กรุงเทพฯ,Thailand,"02-2479991-5, 7468994-5",,"02-2455122, 7468993",,อุปกรณ์/เครื่องใช้สำนักงาน,,ระบบโทรศัพท์,30 Days,3
+res_partner_office_63,คุณวนิดา,,FALSE,FALSE,TRUE,บริษัท ซันไทย กรุ๊ป จำกัด,res_partner_office_62,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_64,คุณอดุลย์,,FALSE,FALSE,TRUE,บริษัท ซันไทย กรุ๊ป จำกัด,res_partner_office_62,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_65,ห้างหุ้นส่วนจำกัด ซี. เอส. คอมมูนิเคชั่น เซอร์วิส,SP06S0033,TRUE,FALSE,TRUE,,,Default,FALSE,61/235 หมู่ที่ 6 ถ. ลำลูกกา,ต. บึงคำพร้อย อ.ลำลูกกา,12150,ปทุมธานี,Thailand,02 - 987 9947  ,,02 - 987 9948,,อุปกรณ์/เครื่องใช้สำนักงาน,,ระบบโทรศัพท์,30 Days,3
+res_partner_office_66,คุณวิชัย,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ซี. เอส. คอมมูนิเคชั่น เซอร์วิส,res_partner_office_65,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_67,บริษัท โสภณแพคกิ้ง จำกัด,SP07S001,TRUE,FALSE,TRUE,,,Default,FALSE,96 หมู่ 12,ต.บางพลีใหญ่ อ.บางพลี,10540,สมุทรปราการ,Thailand,02 - 316 - 9278 - 80  ,,02- 3169279    02 - 730 7300- 1,,อื่น ๆ ,,"PACKING / พาเลท ,ลังไม้",30 Days,7
+res_partner_office_68,คุณทวี,,FALSE,FALSE,TRUE,บริษัท โสภณแพคกิ้ง จำกัด,res_partner_office_67,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_69,คุณธนทัตต์,,FALSE,FALSE,TRUE,บริษัท โสภณแพคกิ้ง จำกัด,res_partner_office_67,Contact,TRUE,,,,,Thailand,,089-7714599,,,,,,,
+res_partner_office_70,"SIAM WOOD INTERTRADE CO.,LTD.",SP07S002,TRUE,FALSE,TRUE,,,Default,FALSE,"38/1 Moo 1 Kingkaew Road,","T. Rachateva , A. Bangplee",10540,Samuthprakarn,Thailand,0-2750 0647 - 8,,0-2750 0649 ,,อื่น ๆ ,,"PACKING / พาเลท ,ลังไม้",30 Days,7
+res_partner_office_71,คุณวุฒิชัย,,FALSE,FALSE,TRUE,"SIAM WOOD INTERTRADE CO.,LTD.",res_partner_office_70,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_72,"DEUTSCHE FREIGHT LOGISTICE ( THAI) CO.,LTD.",SP07S003,TRUE,FALSE,TRUE,,,Default,FALSE,"138/23 Soi Ladprao 80 (Chantima),",Kwng/Khet Wangthonglang,10310,Bangkok,Thailand,(66) 2-995-3092-5 ,,"(66) 2-995-3389 , 3391",,อื่น ๆ ,,provide services on a worldwide basis,,45
+res_partner_office_73,"TOZEN (THAILAND ) CO.,LTD.",SP07S004,TRUE,FALSE,TRUE,,,Default,FALSE,3388/62 อาคารสิริริรรัตน์ พระราม 4,แขวงคลองจัน เขตคลองเตย,10110,กรุงเทพฯ,Thailand,0-2367-5721-8        ,,0-2367-5729,,อื่น ๆ ,,"TCI Texfilm 404/2 "" Fabric  Expansion Joint ",30 Days,-
+res_partner_office_74,คุณปานจิต,,FALSE,FALSE,TRUE,"TOZEN (THAILAND ) CO.,LTD.",res_partner_office_73,Contact,TRUE,,,,,Thailand,,, 081-859 2725  ,,,,,,
+res_partner_office_75,ณสุบรร,,FALSE,FALSE,TRUE,"TOZEN (THAILAND ) CO.,LTD.",res_partner_office_73,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_76,บริษัท วาลิเทค จำกัด,SP07S005,TRUE,FALSE,TRUE,,,Default,FALSE,274 อาคารเอ2 ชั้นที่ 1 ซอยศูนย์วิจัย 4 (โรงเรียนญี่ปุ่น) ถนนพระราม 9,แขวงบางกะปิ เขตห้วยขวาง,10320,กรุงเทพฯ,Thailand,02 - 319 9769,,02 - 319 9770,,อื่น ๆ ,,Test Helpa ,30 Days,7
+res_partner_office_77,คุณพนิสรา,,FALSE,FALSE,TRUE,บริษัท วาลิเทค จำกัด,res_partner_office_76,Contact,TRUE,,,,,Thailand,,081-913 8832,,,,,,,
+res_partner_office_78,"ACT ADVANCE COOL TECHNOLOGY CO.,LTD.",SP07S006,TRUE,FALSE,TRUE,,,Default,FALSE,"55/39 M.9 SOI CHOLLATEB 6.TEPARAK ROAD,","BANGPLEEYAI,BANGPLEE",10540,SAMUTPLAKARN,Thailand, 02-3123990-1   ,, 02-3123992,,อื่น ๆ ,,WATER CHILLER,Cash,15
+res_partner_office_79,คุณมงคล,,FALSE,FALSE,TRUE,"ACT ADVANCE COOL TECHNOLOGY CO.,LTD.",res_partner_office_78,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_80,บริษัท ไพธากอรัส เอส อี เอ จำกัด,SP07S007,TRUE,FALSE,TRUE,,,Default,FALSE,337,แขวงประเวศ เขตประเวศ,10250,กรุงเทพฯ,Thailand,02-7216969,,23202808027217500,,อื่น ๆ ,,"กล้องเลเซอร์   , คาริเบต",Cash,7
+res_partner_office_81,ชลดา,,FALSE,FALSE,TRUE,บริษัท ไพธากอรัส เอส อี เอ จำกัด,res_partner_office_80,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_82,ติ๊ก,,FALSE,FALSE,TRUE,บริษัท ไพธากอรัส เอส อี เอ จำกัด,res_partner_office_80,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_83,บริษัท สายทิพย์เอ็นจิเนียริ่ง จำกัด,SP07S008,TRUE,FALSE,TRUE,,,Default,FALSE,337,แขวงประเวศ เขตประเวศ,10250,กรุงเทพฯ,Thailand,02-7216969,,23202808027217500,,อื่น ๆ ,,"กล้องเลเซอร์   , คาริเบต",Cash,7
+res_partner_office_84,ชลดา,,FALSE,FALSE,TRUE,บริษัท สายทิพย์เอ็นจิเนียริ่ง จำกัด,res_partner_office_83,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_85,ติ๊ก,,FALSE,FALSE,TRUE,บริษัท สายทิพย์เอ็นจิเนียริ่ง จำกัด,res_partner_office_83,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_86,บริษัท เอส เอส อินเตอร์โปรดักส์ จำกัด,SP07S009,TRUE,FALSE,TRUE,,,Default,FALSE,21 ซ.ลาซาล 29,แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,"0-2399-0331, 399-1382-3 (09-8951790)",,0-2398-5771,,อื่น ๆ ,,กาพ่นสี ,30 Days,3
+res_partner_office_87,คุณพัฒน์,,FALSE,FALSE,TRUE,บริษัท เอส เอส อินเตอร์โปรดักส์ จำกัด,res_partner_office_86,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_88,บริษัท เมมเบอร์ คอนโทรล & เซอร์วิส จำกัด,SP07S010,TRUE,FALSE,TRUE,,,Default,FALSE,"233/143-144 ถนนสรรพาวุธ คร
+
+","แขวงบางนา เขตบางนา 
+
+",10260,กรุงเทพฯ,Thailand,"027453421, 027457874-5 ",,27455322,,อื่น ๆ ,,"กำจัดปลวก ,  ปลวก ",Cash,3
+res_partner_office_89,บริษัท เทวกิจ จำกัด,SP07S011,TRUE,FALSE,TRUE,,,Default,FALSE,282/23 การ์เด้นเพลส 1 ถ.รัชดาภิเษก ซ.รุ่งเรือง,แขวงสามเสนนอก เขตห้วยขวาง,10310,กรุงเทพฯ,Thailand,0-2693-4326-7 / 09-1255336,,0-2693-4336,,อื่น ๆ ,,ควบคุมงานสนามบินสุวรรณภูมิ,30 Days,7
+res_partner_office_90,คุณสุรศักดิ์,,FALSE,FALSE,TRUE,บริษัท เทวกิจ จำกัด,res_partner_office_89,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_91,คุณน้อง,,FALSE,FALSE,TRUE,บริษัท เทวกิจ จำกัด,res_partner_office_89,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_92,ห้างหุ้นส่วนจำกัด เจ. เอ็ม. คอนกรีตผสมสร็จ ( 1995 ),SP07S012,TRUE,FALSE,TRUE,,,Default,FALSE,121 หมู่ที่ 2 พนมสารคาม-สนามชัยเขต,เกาะขนุน พนมสารคาม,24120,ฉะเชิงเทรา,Thailand,038- 551 119 ,,038-836 536,,อื่น ๆ ,,คอนกรีต,30 Days,7
+res_partner_office_93,บริษัท แมคกราฟฟิค จำกัด,SP07S013,TRUE,FALSE,TRUE,,,Default,FALSE,158/9 หมู่ 9,ตำบลบางปลา อำเภอบางพลี,10540,สมุทรปราการ,Thailand,"0-2315-4722, 706-3096-7 (01-5639033)",,0-2315-4725,,อื่น ๆ ,,ค่าแรงไสเหล็ก,Cash,3
+res_partner_office_94,คุณอนุชา การสมชิต,,FALSE,FALSE,TRUE,บริษัท แมคกราฟฟิค จำกัด,res_partner_office_93,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_95,บริษัท ยีไทยอินเตอร์เนชั่นแนล จำกัด,SP07S014,TRUE,FALSE,TRUE,,,Default,FALSE,45 ถนนเฉลิมพระเกียรติ ร.๙ ซ. 48,แขวงดอกไม้ เขตประเวศ,10250,กรุงเทพฯ,Thailand,0-2726  7036    ,,0-2726 3734 ,,อื่น ๆ ,,เครื่องกรองน้ำ ,Cash,3
+res_partner_office_96,คุณเป้,,FALSE,FALSE,TRUE,บริษัท ยีไทยอินเตอร์เนชั่นแนล จำกัด,res_partner_office_95,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_97,บริษัท อัทโค จำกัด,SP07S015,TRUE,FALSE,TRUE,,,Default,FALSE,"35/489 หมู่ 3 หมู่บ้านภัสสร 3 ถนนเลียบคลองสาม 
+","ตำบลคลองสาม อำเภอคลองหลวง จังหวัดปทุมธานี
+",,ปทุมธานี,Thailand,0-2661-4130,,0-2661-4133,,อื่น ๆ ,,เครื่องขัดพื้น,30 Days,-
+res_partner_office_98,ขวัญฤทัย เอี่ยมต่อม,,FALSE,FALSE,TRUE,บริษัท อัทโค จำกัด,res_partner_office_97,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_99,บริษัท ตังไถ่แอคเซสซอรี จำกัด,SP07S016,TRUE,FALSE,TRUE,,,Default,FALSE,52/72 ซ.พระราม 2 - 59 ม.6 ถ.พระราม 2,แขวงแสมดำ เขตบางขุนเทียน,10150,กรุงเทพฯ,Thailand,0-2840-1229 / (01-4833963),,0-2894-1318,,อื่น ๆ ,,เครื่องจักรโรงงาน,30 Days,30
+res_partner_office_100,คุณศิริพาพร พิลาชัย,,FALSE,FALSE,TRUE,บริษัท ตังไถ่แอคเซสซอรี จำกัด,res_partner_office_99,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_101,บริษัท ตงชางเครื่องชั่ง (ประเทศไทย) จำกัด,SP07S017,TRUE,FALSE,TRUE,,,Default,FALSE,53/14 ม.5 ถ.เทพารักษ์ กม.11,ต.บางพลีใหญ่ อ.บางพลี,10540,สมุทรปราการ,Thailand,0-2730-4861-3 / 09-7995434,,0-2730-4864,,อื่น ๆ ,,เครื่องชั่ง ,60 Days,3
+res_partner_office_102,คุณไพศาล,,FALSE,FALSE,TRUE,บริษัท ตงชางเครื่องชั่ง (ประเทศไทย) จำกัด,res_partner_office_101,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_103,"FLOOR PRO SUMMIT CO.,LTD.",SP07S018,TRUE,FALSE,TRUE,,,Default,FALSE,42/1 MOO.2,"Mabpong , Panthong ,",20160,Chonburi,Thailand,038-209516,,038-451894,,อื่น ๆ ,,เครื่องชั่ง ,30 Days,-
+res_partner_office_104,คุณประสงค์,,FALSE,FALSE,TRUE,"FLOOR PRO SUMMIT CO.,LTD.",res_partner_office_103,Contact,TRUE,,,,,Thailand,,086-1110033,,,,,,,
+res_partner_office_105,บริษัท ลาฟา เทค จำกัด,SP07S019,TRUE,FALSE,TRUE,,,Default,FALSE,35 ซอยแสนสุข ประดิพัทธ์,แขวงสามเสนใน เขตพญาไท,10400,กรุงเทพฯ,Thailand,"02 -  6167500-9,022713823   ",,02 - 2710674 */ 02 - 6167509,,อื่น ๆ ,,เครื่องดูดฝุ่น,Cash,7
+res_partner_office_106,คุณอุทัยวรรณ,,FALSE,FALSE,TRUE,บริษัท ลาฟา เทค จำกัด,res_partner_office_105,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_107,บริษัท เอ็มบิส เอเชีย จำกัด,SP07S020,TRUE,FALSE,TRUE,,,Default,FALSE,"65/170 20th Fl., Chamnan Phenjati Bldg.,Rama 9 Rd.,","Huaykwang, Huaykwang,",10310,Bangkok,Thailand,02-2453334,,02-6431045,,อื่น ๆ ,,เครื่องตะไบเพชร Diamond,Cash,7
+res_partner_office_108,บัณฑิต,,FALSE,FALSE,TRUE,บริษัท เอ็มบิส เอเชีย จำกัด,res_partner_office_107,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_109,บริษัท เวิลด์แมชชีน เซ็นเตอร์ จำกัด,SP07S021,TRUE,FALSE,TRUE,,,Default,FALSE,99/5 ม.8 ถ.บางนา-ตราด,แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,0-2746-9851-5,,0-2746-9850,,อื่น ๆ ,,เครื่องตัดมุม,30 Days,3
+res_partner_office_110,ศุภมิตร,,FALSE,FALSE,TRUE,บริษัท เวิลด์แมชชีน เซ็นเตอร์ จำกัด,res_partner_office_109,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_111,บริษัท วี.เอส.พี. กรุ๊ป จำกัด,SP07S022,TRUE,FALSE,TRUE,,,Default,FALSE,210 ถ.รัชดาภิเษก,แขวงบุคคโล เขตธนบุรี,10600,กรุงเทพฯ,Thailand,"0-2476-0522, 476-3572",,0-2476-9723,,อื่น ๆ ,,เครื่องทำความเย็น ,30 Days,3
+res_partner_office_112,สุรเชษฐ์,,FALSE,FALSE,TRUE,บริษัท วี.เอส.พี. กรุ๊ป จำกัด,res_partner_office_111,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_113,ห้างหุ้นส่วนจำกัด เทอร์โมวิศวกรรม (โฟมหุ้มท่อ),SP07S023,TRUE,FALSE,TRUE,,,Default,FALSE,24/69-71 ม.6 ซ.วัดยายร่ม ถ.พระราม 2,แขวงบางมด เขตจอมทอง,10150,กรุงเทพฯ,Thailand,"02-4279991-2, 8740463-4",,02-8740844,,อื่น ๆ ,,เครื่องทำความเย็น /  (โฟมหุ้มท่อ ),Cash,3
+res_partner_office_114,บริษัท ไทยนิปปอนแอร์ จำกัด,SP07S024,TRUE,FALSE,TRUE,,,Default,FALSE,"44/141-2 ซอยถนอมมิตร รามอินทรา 65 
+
+","แขวงท่าแร้ง เขตบางเขน 
+
+",10230,กรุงเทพฯ,Thailand,02-9459005-7,,02-9458587,,อื่น ๆ ,,เครื่องปรับอากาศ,Cash,3
+res_partner_office_115,ส้ม,,FALSE,FALSE,TRUE,บริษัท ไทยนิปปอนแอร์ จำกัด,res_partner_office_114,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_116,"HILTI ( THAILAND ) CO.,LTD",SP07S025,TRUE,FALSE,TRUE,,,Default,FALSE,"1858/31-32 อาคารเนชั่นทาวเวอร์ ชั้น 8 ถนนบางนา-ตราด กม. 4.5 
+
+","แขวงบางนา เขตบางนา 
+
+",10260,กรุงเทพฯ,Thailand,+662 714 5300,,+662 714 5399,,อื่น ๆ ,,เครื่องมือช่าง ,60 Days,7
+res_partner_office_117,คุณวิชัย,,FALSE,FALSE,TRUE,"HILTI ( THAILAND ) CO.,LTD",res_partner_office_116,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_118,"TONAN ASIA AUTOTECH CO.,LTD.",SP07S026,TRUE,FALSE,TRUE,,,Default,FALSE,160/356 หมู่ 1 ถ.ช่างอากาศอุทิศ,แขวงสีกัน เขตดอนเมือง กรุงเทพฯ,,กรุงเทพฯ,Thailand,"0-2983-5227-8, 0-2983-5231-2 
+
+",,"0-2983-5229
+",,อื่น ๆ ,,เครื่องมือวัด ,Cash,7
+res_partner_office_119,คุณพัชรี,,FALSE,FALSE,TRUE,"TONAN ASIA AUTOTECH CO.,LTD.",res_partner_office_118,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_120,บริษัท แสงไทยอินเตอร์เทรด จำกัด,SP07S027,TRUE,FALSE,TRUE,,,Default,FALSE,"330-4 เจริญกรุง 
+
+",แขวงจักรวรรดิ์ เขตสัมพันธวงศ์,10100,กรุงเทพฯ,Thailand,"02-2261232, 2243602, 2226252",,02-2241888,,อื่น ๆ ,,เครื่องเลื่อยสายพาน,,-
+res_partner_office_121,อุดม ตรงมณีธรรม,,FALSE,FALSE,TRUE,บริษัท แสงไทยอินเตอร์เทรด จำกัด,res_partner_office_120,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_122,บริษัท ดิคเซลล์ ( เอเชีย ) จำกัด,SP07S028,TRUE,FALSE,TRUE,,,Default,FALSE,"2893 , 2895 ถ.พัฒนาการ",แขวงสวนหลวง เขตสวนหลวง,10250,กรุงเทพฯ,Thailand,"0-2321 3078, 722 - 0245 ",,0-2320 2520,,อื่น ๆ ,,เครื่องวัด,30 Days,-
+res_partner_office_123,คุณกมลวรรณ ( ป่าน ),,FALSE,FALSE,TRUE,บริษัท ดิคเซลล์ ( เอเชีย ) จำกัด,res_partner_office_122,Contact,TRUE,,,,,Thailand,,081-6291708,,,,,,,
+res_partner_office_124,"SHENZHEN ZHENXUN SCREEN PRINTING MACHINERY CO.,LTD.",SP07S029,TRUE,FALSE,TRUE,,,Default,FALSE,"No.7 Fengye Road 1, Fenhuang First Industrial Area, Fuyong Town,","Baooan District, Shenzhen",,,Thailand," +86 755 27378805
+",," +86 755 27378809
+",,อื่น ๆ ,,เครื่องสกรีนกระจก ,Cash,3
+res_partner_office_125,บริษัท ไทย พินนะเคิ้ล เอ็นจิเนียริ่ง จำกัด,SP07S030,TRUE,FALSE,TRUE,,,Default,FALSE,"8/1 ซอยเพชรเกษม 77 แยก 3-10 
+
+","แขวงหนองค้างพลู เขตหนองแขม 
+
+",10160,กรุงเทพฯ,Thailand,02 - 8098915-8,,02 - 8098933,,อื่น ๆ ,,เครื่องสูบน้ำในบ้านและโรงงานอุตสาหกรรม ,,-
+res_partner_office_126,บริษัท แมชชีนิโอโทรนิค จำกัด,SP07S031,TRUE,FALSE,TRUE,,,Default,FALSE,"17/100 ซอยเพชรเกษม 81 มาเจริญ 
+
+","แขวงหนองค้างพลู เขตหนองแขม 
+
+",10160,กรุงเทพฯ,Thailand,"0-2812-4988 ,0-2812-3381 , 0-2812-1576- 8, 0-2814-6238",,02-812-4989,,อื่น ๆ ,,เครื่องอัดกระดาษ,,-
+res_partner_office_127,คุณนำพล,,FALSE,FALSE,TRUE,บริษัท แมชชีนิโอโทรนิค จำกัด,res_partner_office_126,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_128,บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน),SP07S032,TRUE,FALSE,TRUE,,,Default,FALSE,539/2 ชั้น 16-17 อาคารมหานครยิบซั่ม,ถ.ศรีอยุธยา,10400,กรุงเทพฯ,Thailand,"02-2488133, 02-6425092",,"02-6425091, 2488144",,อื่น ๆ ,,โคมคลีนรูม,30 Days,3
+res_partner_office_129,จุฑา,,FALSE,FALSE,TRUE,บริษัท ไลท์ติ้ง แอนด์ อีควิปเมนท์ จำกัด (มหาชน),res_partner_office_128,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_130,"Fight Engi - Trade Co.,Ltd.",SP07S033,TRUE,FALSE,TRUE,,,Default,FALSE,"47/7 Moo 6 Phathumthani-Ladlumkaew,","Khu Bangluang, Latlumkaew",12140,Pathum Thani,Thailand,(66) 2979 4771 to 3,,(66) 2979 4775 ,,อื่น ๆ ,,โครงกระตูบ้าน ,Cash,5
+res_partner_office_131,บริษัท ร้อคกรีต ( ประเทศไทย) จำกัด,SP07S034,TRUE,FALSE,TRUE,,,Default,FALSE,37/4 ซ.จามจุรี ถ.รามอินทรา 39,"แขวงท่าแร้ง เขตบางเขน 
+
+",10220,กรุงเทพฯ,Thailand,02- 973 1796 ,,02-973 1798,,อื่น ๆ ,,งานคอนกรีต,60 Days,3
+res_partner_office_132,บริษัท ร๊อค เอเชีย,SP07S035,TRUE,FALSE,TRUE,,,Default,FALSE,107 หมู่ 2,ตำบลบางสมัคร อำเภอบางปะกง,24180,ฉะเชิงเทรา,Thailand,038-540241,,038-538 397,,อื่น ๆ ,,งานเจาะรู มตะแกรง,,-
+res_partner_office_133,คุณนุจรี ขันธรูป,,FALSE,FALSE,TRUE,บริษัท ร๊อค เอเชีย,res_partner_office_132,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_134,บริษัท เค. ซี. ไอ. เอ็นจิเนียริ่ง จำกัด,SP07S036,TRUE,FALSE,TRUE,,,Default,FALSE,81/9 ม.2,ต.สามโคก อ.สามโคก,12160,ปทุมธานี,Thailand,0-2979 1400-8 / ,,"02 - 979 13999 , 02-9791678",,อื่น ๆ ,,"งานซ่อมสลิง /  สลิง , รอก",30 Days,-
+res_partner_office_135,คุณแอน,,FALSE,FALSE,TRUE,บริษัท เค. ซี. ไอ. เอ็นจิเนียริ่ง จำกัด,res_partner_office_134,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_136,คุณวัฒนา,,FALSE,FALSE,TRUE,บริษัท เค. ซี. ไอ. เอ็นจิเนียริ่ง จำกัด,res_partner_office_134,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_137,บริษัท อี.เอ็ม.ทีม จำกัด,SP07S037,TRUE,FALSE,TRUE,,,Default,FALSE,679/92 ซ.ประชาอุทิศ 45 ม.1 ถ.ประชาอุทิศ,แขวงบางมด เขตทุ่งครุ,10140,กรุงเทพฯ,Thailand,"0-2427-9047, 427-0885, 872-6495",,0-2872-6496,,อื่น ๆ ,,งานต่อเติมโรงงาน,,-
+res_partner_office_138,นัททโชติ,,FALSE,FALSE,TRUE,บริษัท อี.เอ็ม.ทีม จำกัด,res_partner_office_137,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_139,บริษัท พี.พี.เค. อินดัสตรี้ส์ จำกัด,SP07S038,TRUE,FALSE,TRUE,,,Default,FALSE,32 ซอยอมรพันธ์ 4 ถ.วิภาวดีรังสิต,แขวงลาดยาว เขต จตุจักร,10900,กรุงเทพฯ,Thailand,"02-561 1309 ,02-5796026,02-941 2653",,02-941 0239,,อื่น ๆ ,,งานตะแกรงห้องเย็น,30 Days,-
+res_partner_office_140,บริษัท เอส พลัส ซิสเทมส์ จำกัด,SP07S039,TRUE,FALSE,TRUE,,,Default,FALSE,4/10 ซ.เทศบาล43 ( เกษม) ถ.สุขุมวิท,ต.ปากน้ำ อ.เมือง,10270,สมุทรปราการ,Thailand," 0-2744 1027 - 8 , 0 - 2744 1681",,0-2744 1680 ,,อื่น ๆ ,,งานพ่นสี,Cash,-
+res_partner_office_141,คุณชัชวาลย์,,FALSE,FALSE,TRUE,บริษัท เอส พลัส ซิสเทมส์ จำกัด,res_partner_office_140,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_142,คุณวิรัช,,FALSE,FALSE,TRUE,บริษัท เอส พลัส ซิสเทมส์ จำกัด,res_partner_office_140,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_143,หจก. ปัญชะยา ครีเอชั่น,SP07S040,TRUE,FALSE,TRUE,,,Default,FALSE,72 ซอยลาดปลาเค้า 14,แขวงจรเข้บัว เขตลาดพร้าว,10230,กรุงเทพฯ,Thailand," 02 - 940 3981, 02- 9403813",,"02 - 940 3981, 02- 9403813     # 6",,อื่น ๆ ,,งานพิมพ์,Cash,15
+res_partner_office_144,คุณชญาน์,,FALSE,FALSE,TRUE,หจก. ปัญชะยา ครีเอชั่น,res_partner_office_143,Contact,TRUE,,,,,Thailand,,089 - 846 4486,,,,,,,
+res_partner_office_145,บริษัท เน็กซ์สเต็ป วิชั่น จำกัด,SP07S041,TRUE,FALSE,TRUE,,,Default,FALSE,17/93 หมู่ที่ 10 ซอยลาดพร้าว 41 ถนนสุขาภิบาล 1,แขวงลาดพร้าว เขตลาดพร้าว,10230,กรุงเทพฯ,Thailand,"02-5424269, 9328334",,02-9328334,,อื่น ๆ ,,งานพิมพ์,Cash,15
+res_partner_office_146,ฐิติกา,,FALSE,FALSE,TRUE,บริษัท เน็กซ์สเต็ป วิชั่น จำกัด,res_partner_office_145,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_147,"MEGAWEB CO.,LTD.",SP07S042,TRUE,FALSE,TRUE,,,Default,FALSE,748/63 ซ.ริมคลองบางกอกใหญ่ ถ.เพชรเกษม,แขวงวัดท่าพระ เขตบางกอกใหญ่,10600,กรุงเทพฯ,Thailand,0-2891-7400-1     ,,  0-2891-7019,,อื่น ๆ ,,งานระบบ IT ,Cash,15
+res_partner_office_148,คุณประทักษ์,,FALSE,FALSE,TRUE,"MEGAWEB CO.,LTD.",res_partner_office_147,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_149,"Three Mar Co.,Ltd.",SP07S043,TRUE,FALSE,TRUE,,,Default,FALSE,"99/293 Soi Ladprao 41 ,","Chankasem ,Jatujak ,",10900,Bangkok,Thailand,02-939 9664-5  ,,02- 5418296,,อื่น ๆ ,,งานพิมพ์ ,15 Days,15
+res_partner_office_150,สงวนศักดิ์ การพิมพ์,SP07S044,TRUE,FALSE,TRUE,,,Default,FALSE,43/35 ม.11 ซ.อ่อนนุช 66 ถ.สุขุมวิท 77,แขวงประเวศ เขตประเวศ,10250,กรุงเทพฯ,Thailand,"02-7211331, 3229234",,02-7211331,,อื่น ๆ ,,งานพิมพ์ ,30 Days,15
+res_partner_office_151,คุณสงวนศักดิ์,,FALSE,FALSE,TRUE,สงวนศักดิ์ การพิมพ์,res_partner_office_150,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_152,บริษัท เอ โมลด์ ( ประเทศไทย ) จำกัด,SP07S045,TRUE,FALSE,TRUE,,,Default,FALSE,"244/2-3 หมู่ที่ 1 
+","ตำบลบางเสาธง อำเภอกิ่งอำเภอบางเสาธง 
+",,สมุทรปราการ,Thailand,0- 2706 - 2323  ,,0-2313 1340,,อื่น ๆ ,,งานโมลด์ ในโรงงาน ,30 Days,-
+res_partner_office_153,คุณไสวิจิตร,,FALSE,FALSE,TRUE,บริษัท เอ โมลด์ ( ประเทศไทย ) จำกัด,res_partner_office_152,Contact,TRUE,,,,,Thailand,,087-9308673,,,,,,,
+res_partner_office_154,บริษัท เวอร์ทัส จำกัด,SP07S046,TRUE,FALSE,TRUE,,,Default,FALSE,120 ซอย สมถวิล ตากสิน 44 ถ.ตากสิน,แขวงบุคคโล เขตธนบุรี,10600,กรุงเทพฯ,Thailand,"02- 876 2727 ,02 - 876 2828         ",,0 2 - 476 1711,,อื่น ๆ ,,จัดจำหน่ายประกับเพลาและอุปกรณ์ส่งกำลัง ,30 Days,-
+res_partner_office_155,คุณเสริมศักดิ์,,FALSE,FALSE,TRUE,บริษัท เวอร์ทัส จำกัด,res_partner_office_154,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_156,บริษัท เซนเทค สเกล แอนด์ อินสตรูเมนท์ จำกัด,SP07S047,TRUE,FALSE,TRUE,,,Default,FALSE,167/20-2 เทอดไท,"แขวงปากคลองภาษีเจริญ เขตภาษีเจริญ 
+
+",10160,กรุงเทพฯ,Thailand," 0-2457-3693, 0-2457-4526, 0-2457-1521 ",,0-2869-2305,,อื่น ๆ ,,จำหน่ายเครื่องชั่ง และเครื่องวัดทุกประเภท ,30 Days,3
+res_partner_office_157,คุณน้อง,,FALSE,FALSE,TRUE,บริษัท เซนเทค สเกล แอนด์ อินสตรูเมนท์ จำกัด,res_partner_office_156,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_158,ห้างหุ้นส่วนจำกัด ก. เศรษฐกิจ,SP07S048,TRUE,FALSE,TRUE,,,Default,FALSE,"31 จรัญสนิทวงศ์ 
+
+","แขวงบางบำหรุ เขตบางพลัด 
+
+",10700,กรุงเทพฯ,Thailand,"02 - 8818180-2,02 - 4347754",,02 - 8818183,,อื่น ๆ ,,จำหน่ายปั๊มลม เครื่องพ่น ตู้พ่น วัสดุพ่น สี ทราย ,Cash,3
+res_partner_office_159,บริษัท เมโทรซิสเต็มส์คอร์ปอเรชั่น จำกัด (มหาชน),SP07S049,TRUE,FALSE,TRUE,,,Default,FALSE,23/3 ม.9 ถ.สุขุมวิท 103,แขวงหนองบอน เขตประเวศ,10250,กรุงเทพฯ,Thailand,"02-7262555, 2828, 7274000",,"02-7262630-1, 5",,อื่น ๆ ,,จำหน่ายและติดตั้งอุปกรณ์ฮาร์ดแวร์ คอมพิวเตอร์ ,Cash,3
+res_partner_office_160,บริษัท 2 พี. ที. จำกัด,SP07S050,TRUE,FALSE,TRUE,,,Default,FALSE,26/3 ม.12 สุขุมวิท 103,แวงดอกไม้ เขตประเวศ,10260,กรุงเทพฯ,Thailand,02 -726 2675-7    ,,02-726 2674,,อื่น ๆ ,,จำหน่ายส่งเครื่องทำความเย็น,30 Days,3
+res_partner_office_161,"SANGCHAI REFRIGERATION CO.,LTD.",SP07S051,TRUE,FALSE,TRUE,,,Default,FALSE,283 ถนนหลานหลวง,แขวงโสมนัส เขตป้อมปราบ ฯ,10110,กรุงเทพฯ,Thailand,02-628 2600 ม 02- 280 3444 ,,"02-628 0484 - 5 , 02- 2280-0352",,อื่น ๆ ,,จำหน่ายส่งเครื่องทำความเย็น,60 Days,7
+res_partner_office_162,คุณนพดล,,FALSE,FALSE,TRUE,"SANGCHAI REFRIGERATION CO.,LTD.",res_partner_office_161,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_163,คุณศุภชัย,,FALSE,FALSE,TRUE,"SANGCHAI REFRIGERATION CO.,LTD.",res_partner_office_161,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_164,บริษัท ชิลแมทช์ จำกัด,SP07S052,TRUE,FALSE,TRUE,,,Default,FALSE,19/20-22 ซ.ศูนย์วิจัย ถ.พระราม 9,บางกะปิ ห้วยขวาง,10310,กรุงเทพฯ,Thailand,"0-2203-0357 ต่อ 219, 01-6441437",,0-2203-0798,,อื่น ๆ ,,จำหน่ายส่งเครื่องทำความเย็น,Cash,3
+res_partner_office_165,คุณศิริกานต์,,FALSE,FALSE,TRUE,บริษัท ชิลแมทช์ จำกัด,res_partner_office_164,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_166,บริษัท ดีเอชแอล เอ๊กซ์เพรส (ประเทศไทย) จำกัด,SP07S053,TRUE,FALSE,TRUE,,,Default,FALSE,175 อาคารสาธรซิตี้ทาวเวอร์ ชั้น 7/1 และ 8/1 ถ.สาทรใต้,แขวงทุ่งมหาเมฆ เขตสาทร,10120,กรุงเทพฯ,Thailand,02-3455163 / 02-3455111,,"02-2855642, 2855549",,อื่น ๆ ,,ชิปปิ้ง,Cash,3
+res_partner_office_167,ปนิธิ,,FALSE,FALSE,TRUE,บริษัท ดีเอชแอล เอ๊กซ์เพรส (ประเทศไทย) จำกัด,res_partner_office_166,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_168,บริษัท นิมเบิล ชิปปิ้ง เซอร์วิส จำกัด,SP07S054,TRUE,FALSE,TRUE,,,Default,FALSE,79 ซ. เจริญนคร,แขวงบางลำภูล่าง เขตคลองสาน,10600,กรุงเทพฯ,Thailand,"02-8602582, 8601003-4",,02-4396345 : 18,,อื่น ๆ ,,ชิปปิ้ง,30 Days,3
+res_partner_office_169,ทิพย์,,FALSE,FALSE,TRUE,บริษัท นิมเบิล ชิปปิ้ง เซอร์วิส จำกัด,res_partner_office_168,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_170,น้ำ,,FALSE,FALSE,TRUE,บริษัท นิมเบิล ชิปปิ้ง เซอร์วิส จำกัด,res_partner_office_168,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_171,หมวย(บ/ช),,FALSE,FALSE,TRUE,บริษัท นิมเบิล ชิปปิ้ง เซอร์วิส จำกัด,res_partner_office_168,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_172,บริษัท โปรเฟรท อินเตอร์เนชั่นแนล จำกัด,SP07S055,TRUE,FALSE,TRUE,,,Default,FALSE,87/90-91 อาคารโมเดอร์นทาวน์ (เอกมัย 3) ถ.สุขุมวิท 63,แขวงคลองตันเหนือ เขตวัฒนา,10110,กรุงเทพฯ,Thailand,02-7116111,,02-7116112,,อื่น ๆ ,,ชิปปิ้ง,30 Days,3
+res_partner_office_173,บริษัท ไวส์เฟรทเซอร์วิสเซส (ประเทศไทย) จำกัด,SP07S056,TRUE,FALSE,TRUE,,,Default,FALSE,1/66 ซ.บุบผาบุรี ถ.นนทรี,แขวงช่องนนทรี เขตยานนาวา,10120,กรุงเทพฯ,Thailand,0-2681-6181,,0-2681-6173-5,,อื่น ๆ ,,ชิปปิ้ง,60 Days,3
+res_partner_office_174,อ้วน,,FALSE,FALSE,TRUE,บริษัท ไวส์เฟรทเซอร์วิสเซส (ประเทศไทย) จำกัด,res_partner_office_173,Contact,TRUE,,,,,Thailand,,081-4504840,,,,,,,
+res_partner_office_175,บริษัท อีสต์เอเชีย ชิปปิ้ง (ประเทศไทย) จำกัด,SP07S057,TRUE,FALSE,TRUE,,,Default,FALSE,109 อาคาร ซี.ซี.ที. ชั้น 10 ถ.สุรวงศ์,แขวงสุริยวงศ์ เขตบางรัก,10500,กรุงเทพฯ,Thailand,"02-2362866,2896,2903,0115,2930",,"02-2380918, 6340373",,อื่น ๆ ,,ชิปปิ้ง,Cash,
+res_partner_office_176,ศิริชัย,,FALSE,FALSE,TRUE,บริษัท อีสต์เอเชีย ชิปปิ้ง (ประเทศไทย) จำกัด,res_partner_office_175,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_177,ตุ๊ก,,FALSE,FALSE,TRUE,บริษัท อีสต์เอเชีย ชิปปิ้ง (ประเทศไทย) จำกัด,res_partner_office_175,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_178,บริษัท พีเอ็ม ออโตเมชั่น (ประเทศไทย) จำกัด,SP07S058,TRUE,FALSE,TRUE,,,Default,FALSE,96 ลาดพร้าว 115 ถ.ลาดพร้าว,แขวงคลองจั่น เขตบางกะปิ,10240,กรุงเทพฯ,Thailand,0-704 9104-5,,0-2377 5036,,อื่น ๆ ,,ซ่อมเครื่อง  Printer ,60 Days,3
+res_partner_office_179,คุณรุ้งลาวัลย์,,FALSE,FALSE,TRUE,บริษัท พีเอ็ม ออโตเมชั่น (ประเทศไทย) จำกัด,res_partner_office_178,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_180,บริษัท เจ.ซี.เค. สตีล แอนด์ ออโตพาร์ท จำกัด,SP07S059,TRUE,FALSE,TRUE,,,Default,FALSE,306/254-255 ม.11,ต.บางพลีใหญ่ อ.บางพลี,10540,สมุทรปราการ,Thailand,"(01-8591813) 0-2752-0223, 752-0786",,0-2752-0622,,อื่น ๆ ,,"โซ่, สายรัด",,-
+res_partner_office_181,จรรยา พันสาย,,FALSE,FALSE,TRUE,บริษัท เจ.ซี.เค. สตีล แอนด์ ออโตพาร์ท จำกัด,res_partner_office_180,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_182,บริษัท สยามอินสเป็คชั่น แอนด์ เอ็นจิเนียริ่ง จำกัด,SP07S060,TRUE,FALSE,TRUE,,,Default,FALSE,201/203 หมู่ 7 บางนา-ตราด กม 24,ตำบลบางเสาธง อำเภอบางเสาธง,10540,สมุทรปราการ,Thailand,"02- 7401726-7,027404661-3",,27401706,,อื่น ๆ ,,ตรวจสอบเครน,30 Days,-
+res_partner_office_183,บริษัท เอส. เอ็ม. เซ็นเตอร์ แลบ จำกัด,SP07S061,TRUE,FALSE,TRUE,,,Default,FALSE,251/24 หมู่ 12 ถ. สุขุมวิท,ต. บางพระ อ. ศรีราชา,20110,ชลบุรี,Thailand,"087- 868 3042 ,038-342 024",, 038-342 024        ,,อื่น ๆ ,,ตรวจสุขภาพ ,,-
+res_partner_office_184,คุณแหม่ม,,FALSE,FALSE,TRUE,บริษัท เอส. เอ็ม. เซ็นเตอร์ แลบ จำกัด,res_partner_office_183,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_185,คุณจินดา,,FALSE,FALSE,TRUE,บริษัท เอส. เอ็ม. เซ็นเตอร์ แลบ จำกัด,res_partner_office_183,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_186,บริษัท พรชัยทัวร์และการท่องเที่ยว จำกัด,SP07S062,TRUE,FALSE,TRUE,,,Default,FALSE,223/14-15 ม.5 ถ.ศรีนครินทร์,ต.สำโรงเหนือ อ.เมือง,10270,สมุทรปราการ,Thailand,0-2758-6495/385-7328/385-7383,,0-2758-6496,,อื่น ๆ ,,ตั๋วเครื่องบิน,7 Days,3
+res_partner_office_187,คุณปู,,FALSE,FALSE,TRUE,บริษัท พรชัยทัวร์และการท่องเที่ยว จำกัด,res_partner_office_186,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_188,คุณเป็ด,,FALSE,FALSE,TRUE,บริษัท พรชัยทัวร์และการท่องเที่ยว จำกัด,res_partner_office_186,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_189,"AUTOMATION SERVICE CO.,LTD.",SP07S063,TRUE,FALSE,TRUE,,,Default,FALSE,4 ซอยชุ่มชื่น ถนนอโศก-ดินแดง,แขวงดินแดง เขตดินแดง กรุงเทพฯ,,กรุงเทพฯ,Thailand," 0-2246-0330 , 0-2246-0200    ",,"0-2248-4961,0-2246-0235  ",,อื่น ๆ ,,ตัวแทนจำหน่าย ติดตั้ง chino controller recorders ระบบวัด ...,30 Days,-
+res_partner_office_190,บริษัท สปริงคูล จำกัด,SP07S064,TRUE,FALSE,TRUE,,,Default,FALSE,265/395 ซอยทวีวัฒนา สาธุประดิษฐ์ 5,แขวงช่องนนทรี เขตยานนาวา,10120,กรุงเทพฯ,Thailand,"022128360-1,026740565-6,026740563-4",,02 - 2127126,,อื่น ๆ ,,ติดตั้งระบบไฟฟ้า ประปา แอร์ ,30 Days,-
+res_partner_office_191,บริษัท เค ทู วิน จำกัด,SP07S065,TRUE,FALSE,TRUE,,,Default,FALSE,102/3 หมู่ 3 ถ. ปทุมธานี - สามโคก,อ.สามโคก,12160,ปทุมธานี,Thailand,02- 581 - 7220 -1,,02 - 581 7220 - 1  # 10,,อื่น ๆ ,,ติดตั้งหลังคาดมทัลชีท,30 Days,-
+res_partner_office_192,คุณโกญจนาท,,FALSE,FALSE,TRUE,บริษัท เค ทู วิน จำกัด,res_partner_office_191,Contact,TRUE,,,,,Thailand,,081 - 420 7343 ,,,,,,,
+res_partner_office_193,บริษัท จีซีเอส กรุ๊ปคอร์ปอเรชั่น จำกัด,SP07S066,TRUE,FALSE,TRUE,,,Default,FALSE,88/8 หมู่ 1,ต.คลองด่าน อ.บางบ่อ,10550,สมุทรปราการ,Thailand,02 - 183-8812 – 5     ,,02 - 183 8817     ,,อื่น ๆ ,,ตู้ USED CONTAINER,Cash,-
+res_partner_office_194,คุณสุจิตร,,FALSE,FALSE,TRUE,บริษัท จีซีเอส กรุ๊ปคอร์ปอเรชั่น จำกัด,res_partner_office_193,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_195,คุณอรวรรณ,,FALSE,FALSE,TRUE,บริษัท จีซีเอส กรุ๊ปคอร์ปอเรชั่น จำกัด,res_partner_office_193,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_196,"BANGPLEE CAR HOUSE LITD.,PART",SP07S067,TRUE,FALSE,TRUE,,,Default,FALSE,"79/3 Moo. 3 Theparak Rd.,",Bangpleeyai Bangplee,10540,Samuthprakarn,Thailand,02- 755 3260 - 1  # 23 ,,02-312 3064,,อื่น ๆ ,,ตู้คอนเทนเนอร์ ,Cash,-
+res_partner_office_197,คุณโอ๋,,FALSE,FALSE,TRUE,"BANGPLEE CAR HOUSE LITD.,PART",res_partner_office_196,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_198,บริษัท กิตติ คอนเทนเนอร์ จำกัด,SP07S068,TRUE,FALSE,TRUE,,,Default,FALSE,4/6 หมู่ 12,ต.บึงคำพร้อย อ.ลำลูกกา,12150,ปทุมธานี,Thailand,"02-9974600-1, 02-9974844-5 ",,"02-9974899, ",,อื่น ๆ ,,ตู้คอนเทนเนอร์ ,30 Days,-
+res_partner_office_199,คุณอุ๊,,FALSE,FALSE,TRUE,บริษัท กิตติ คอนเทนเนอร์ จำกัด,res_partner_office_198,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_200,ห้างหุ้นส่วนจำกัด บางพลีคอนเทนเนอร์,SP07S069,TRUE,FALSE,TRUE,,,Default,FALSE,21/367 หมู่ที่ 18,ต.บางพลีใหญ่ อ.บางพลี,10540,สมุทรปราการ,Thailand, 02-3164881-2 / 081-3510203,,02-752-0438,,อื่น ๆ ,,ตู้คอนเทนเนอร์ ,Cash,-
+res_partner_office_201,คุณวาสนา คำสวัสดิ์ (โอ๋),,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด บางพลีคอนเทนเนอร์,res_partner_office_200,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_202,บริษัท สยามคูลเลอร์ อินดัสทรี้ จำกัด / บริษัท สยามคูลเลอร์ มาร์ท จำกัด,SP07S070,TRUE,FALSE,TRUE,,,Default,FALSE,33/1490 หมู่ 10 ซ.โชคชัย 4 แยก 54 ถ.โชคชัย 4,แขวงลาดพร้าว เขตลาดพร้าว,10230,กรุงเทพฯ,Thailand,"0-2539-2630,0-2931-1381 ",,0-2539-2607,,อื่น ๆ ,,ตู้ทำน้ำเย็น,30 Days,3
+res_partner_office_203,คุณวัชรพงศ์,,FALSE,FALSE,TRUE,บริษัท สยามคูลเลอร์ อินดัสทรี้ จำกัด / บริษัท สยามคูลเลอร์ มาร์ท จำกัด,res_partner_office_202,Contact,TRUE,,,,,Thailand,,086 - 311 3572,,,,,,,
+res_partner_office_204,คุณมนตรี,,FALSE,FALSE,TRUE,บริษัท สยามคูลเลอร์ อินดัสทรี้ จำกัด / บริษัท สยามคูลเลอร์ มาร์ท จำกัด,res_partner_office_202,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_205,บริษัท มิชชั่น เคมิคอล จำกัด,SP07S071,TRUE,FALSE,TRUE,,,Default,FALSE,93/48 ม.1,แขวงสายไหม เขตสายไหม,10220,กรุงเทพฯ,Thailand,(04-7295733) 0-2994-3256,,0-2994-3256,,อื่น ๆ ,,ถังดับเพลิง,,3
+res_partner_office_206,วรโชติ,,FALSE,FALSE,TRUE,บริษัท มิชชั่น เคมิคอล จำกัด,res_partner_office_205,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_207,ห้างหุ้นส่วนจำกัด ไทยแสงฮวด,SP07S072,TRUE,FALSE,TRUE,,,Default,FALSE,21/207-208 ถ.บางนา-ตราด กม.2,แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,"02-3930780-1, 749-1364-6",,02-7491367,,อื่น ๆ ,,"ถังเหล็ก, ถังสแตนเลส",30 Days,3
+res_partner_office_208,คุณลาวัลย์,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ไทยแสงฮวด,res_partner_office_207,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_209,บริษัท สเปซ มีเดีย จำกัด,SP07S073,TRUE,FALSE,TRUE,,,Default,FALSE,48 หมู่ 2 ถนนสุขุมวิท 103,แขวงดอกไม้ เขตประเวศ,10250,กรุงเทพฯ,Thailand, 02-3280888 ,,02-3280324,,อื่น ๆ ,,ทำป้ายโฆษณา,30 Days,3
+res_partner_office_210,คุณชนกชนน์,,FALSE,FALSE,TRUE,บริษัท สเปซ มีเดีย จำกัด,res_partner_office_209,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_211,สยามวิศวกรรมและการพานิช,SP07S074,TRUE,FALSE,TRUE,,,Default,FALSE,10/2 ซ.สุขสวัสดิ์ 70,ต.บางครุ พระประแดง,10130,สมุทรปราการ,Thailand,"02 -4633274, 02-4641439,024637121",,02 -4633274,,อื่น ๆ ,,ทำผ้าใบ,Cash,3
+res_partner_office_212,คุณชาติ,,FALSE,FALSE,TRUE,สยามวิศวกรรมและการพานิช,res_partner_office_211,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_213,คุณสงวน,,FALSE,FALSE,TRUE,สยามวิศวกรรมและการพานิช,res_partner_office_211,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_214,บริษัท วี. พี. ซี. กรุ๊ป จำกัด,SP07S075,TRUE,FALSE,TRUE,,,Default,FALSE,"59 ซอยอ่อนนุช 65 
+
+","แขวงประเวศ เขตประเวศ 
+
+",10250,กรุงเทพฯ,Thailand,02 - 3220057-9,,"02 - 3220060,02 - 3229191",,อื่น ๆ ,,นั่งร้านเหล็ก,Cash,3
+res_partner_office_215,บริษัท เอสโก้ - ไทย จำกัด,SP07S076,TRUE,FALSE,TRUE,,,Default,FALSE,"1018,1020,1022 ถ.ศรีนครินทร์",แขวงสวนหลวง เขตสวนหลวง,10250,กรุงเทพฯ,Thailand,0-2322 9022-4,,"0-2322 5651 , 02-322 4412",,อื่น ๆ ,,นำเข้าเครื่องฟอกอากาศ เครื่องกำจัดไฟฟ้าสถิตย์ ชุด ,Cash,7
+res_partner_office_216,คุณโสสรส,,FALSE,FALSE,TRUE,บริษัท เอสโก้ - ไทย จำกัด,res_partner_office_215,Contact,TRUE,,,,,Thailand,,081-303 6663, ,,,,,,
+res_partner_office_217,บริษัท เร้นท์ (ประเทศไทย ) จำกัด,SP07S077,TRUE,FALSE,TRUE,,,Default,FALSE,700/679 หมู่ 1,ตำบลพานทอง อำเภอพานทอง,20160,ชลบุรี,Thailand,038 - 447391-4,,038 - 447395-6,,อื่น ๆ ,,บริการเช่ารถ    ( รถเครน ),30 Days,7
+res_partner_office_218,คุณตรียภรณ์,,FALSE,FALSE,TRUE,บริษัท เร้นท์ (ประเทศไทย ) จำกัด,res_partner_office_217,Contact,TRUE,,,,,Thailand,,087-344 4139,,,,,,,
+res_partner_office_219,บริษัท เปี๊ยกเครนกลการ จำกัด,SP07S078,TRUE,FALSE,TRUE,,,Default,FALSE,11/5 หมู่ที่ 18,ตำบลคูคต อำเภอลำลูกกา,,ปทุมธานี,Thailand,02-9958546    ,,"02-9958546 ,",,อื่น ๆ ,,บริการเช่ารถ    ( รถเครน ),Cash,7
+res_partner_office_220,คุณเปี๊ยก,,FALSE,FALSE,TRUE,บริษัท เปี๊ยกเครนกลการ จำกัด,res_partner_office_219,Contact,TRUE,,,,,Thailand,,081 - 832 7250,,,,,,,
+res_partner_office_221,บริษัท ออล สตาร์ ทรานสปอร์ต จำกัด,SP07S079,TRUE,FALSE,TRUE,,,Default,FALSE,880/2 ถนนหลวงแพ่ง,แขวงทับยาว เขตลาดกระบัง,10520,กรุงเทพฯ,Thailand," 02-715-1800-5 , 084-451-5588 ",, 02-715-1818-9,,อื่น ๆ ,,บริการเช่ารถ    ( รถตู้ ),Cash,7
+res_partner_office_222,คุณพัชรี,,FALSE,FALSE,TRUE,บริษัท ออล สตาร์ ทรานสปอร์ต จำกัด,res_partner_office_221,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_223,ห้างหุ้นส่วนจำกัด สมจิตร นิลสุวรรรณ ทรานสปอร์ต,SP07S080,TRUE,FALSE,TRUE,,,Default,FALSE,16 ม.6 ถ.บางนา-ตราด กม.15,ต.บางโฉลง อ.บางพลี,,สมุทรปราการ,Thailand,"0-2312-5124 ,0-2312-5858  , 0-2312-5859 ",,0-2312-5538 ,,อื่น ๆ ,,บริการเช่ารถ  ( รถตู้ ) ,Cash,7
+res_partner_office_224,คุณนารีรัตน์,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด สมจิตร นิลสุวรรรณ ทรานสปอร์ต,res_partner_office_223,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_225,คุณสุ,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด สมจิตร นิลสุวรรรณ ทรานสปอร์ต,res_partner_office_223,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_226,บริษัท บางบอนฟอร์คลิฟท์ จำกัด,SP07S081,TRUE,FALSE,TRUE,,,Default,FALSE,เลขที่ 781 ถนนเอกชัย,แขวงบางบอน เขตบางบอน,10150,กรุงเทพฯ,Thailand,"02-894-3322, 02-894-5115",,02-8943746 ,,อื่น ๆ ,,"บริการเช่ารถ  , จำหน่าย  รถโฟร์คลิฟท์ ",30 Days,7
+res_partner_office_227,บริษัท อิมมอร์เทล จำกัด,SP07S082,TRUE,FALSE,TRUE,,,Default,FALSE,"445/369 หมู่ที่ 4 
+","ตำบลแพรกษา อำเภอเมืองสมุทรปราการ 
+", ,สมุทรปราการ,Thailand,"TEL : 0-2324 3817 , 02 - 324 3833",,0-2324 3818,,อื่น ๆ ,,บริการตรวจสอบเครน,30 Days,-
+res_partner_office_228,คุณปพิชญานันท์,,FALSE,FALSE,TRUE,บริษัท อิมมอร์เทล จำกัด,res_partner_office_227,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_229,คณะบุคคล เจ อาร์ เอส,SP07S083,TRUE,FALSE,TRUE,,,Default,FALSE,120/82,แขวงหลักสอง เขตบางแค,10160,กรุงเทพฯ,Thailand,"02 - 802 7887   ,081-710 3733     ",,02-804 9303   ,,อื่น ๆ ,,บริการตรวจสอบเครน ,30 Days,-
+res_partner_office_230,คุณจำเริญ,,FALSE,FALSE,TRUE,คณะบุคคล เจ อาร์ เอส,res_partner_office_229,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_231,บริษัท แบงค็อคเอ็กซ์ซิบิชั่นเซอร์วิสเซส จำกัด,SP07S084,TRUE,FALSE,TRUE,,,Default,FALSE,62 ซ.พระราม 6 ซ.30 ถ.พระราม 6,แขวงสามเสนใน เขตพญาไท,10400,กรุงเทพฯ,Thailand,02-6171475-82,,02-6171407,,อื่น ๆ ,,บริการให้เช่าพื้นที่สำหรับจัดนิทรรศการ ,Cash,-
+res_partner_office_232,บริษัท สยามทิมเบอร์ แอนด์ แมชชีนเนอร์นร่ จำกัด,SP07S085,TRUE,FALSE,TRUE,,,Default,FALSE,4-6 ถ.บรรทัดทอง,แขวงเพชรบุรี แขตราชเทวี,,กรุงเทพฯ,Thailand,"081-4421786 ,02-2160295-7 ",,"02-2159526,02-2159595",,อื่น ๆ ,,ใบเลื่อยสายพาน,Cash,-
+res_partner_office_233,คุณฐิตาพร(บี),,FALSE,FALSE,TRUE,บริษัท สยามทิมเบอร์ แอนด์ แมชชีนเนอร์นร่ จำกัด,res_partner_office_232,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_234,ห้างหุ้นส่วนจำกัด ทวีอนันต์,SP07S086,TRUE,FALSE,TRUE,,,Default,FALSE,27/10 ม.13,แขวงคันนายาว เขตคันนายาว,,กรุงเทพฯ,Thailand,"02-5107857, 01-8015256",,02-5107857,,อื่น ๆ ,,ประกอบกิจการรับเหมาก่อสร้าง,,-
+res_partner_office_235,บริษัท วิริยะประกันภัย จำกัด,SP07S087,TRUE,FALSE,TRUE,,,Default,FALSE,1242 ถนนกรุงเกษม,แขวงคลองมหานาค เขตป้อมปราบศัตรูพ่าย,10100,กรุงเทพฯ,Thailand,"02-224 0059, 02-2223 0851",,02 - 7599296,,อื่น ๆ ,,ประกันภัย,30 Days,-
+res_partner_office_236,บริษัท กรุงเทพประกันภัย จำกัด (มหาชน),SP07S088,TRUE,FALSE,TRUE,,,Default,FALSE,อาคารกรุงเทพประกันภัย 25,ถนนสาทรใต้,10120,กรุงเทพฯ,Thailand,"02-085 8888 , 02-677 3777",,02-677 3737-8,,อื่น ๆ ,,ประกันภัย ,30 Days,-
+res_partner_office_237,คุณวีนา,,FALSE,FALSE,TRUE,บริษัท กรุงเทพประกันภัย จำกัด (มหาชน),res_partner_office_236,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_238,บริษัท ศรีทอง เอ็นจิเนียริ่ง จำกัด,SP07S089,TRUE,FALSE,TRUE,,,Default,FALSE,"483,485,487,489 พระราม 2 
+
+","แขวงบางมด เขตจอมทอง 
+
+",10150,กรุงเทพฯ,Thailand,02-4284171-8,,02-4284180,,อื่น ๆ ,,"ปลอกยอย, สาย HY, ข้อต่อตรง, ไฮโดรลิก",,-
+res_partner_office_239,อภิสิทธิ์ มีอาษา,,FALSE,FALSE,TRUE,บริษัท ศรีทอง เอ็นจิเนียริ่ง จำกัด,res_partner_office_238,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_240,บริษัท ไวทยะโชติ จำกัด,SP07S090,TRUE,FALSE,TRUE,,,Default,FALSE,120 ซอยบางนาตราด 31,แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,"02-3987294, 7441307",,02-3994840,,อื่น ๆ ,,"ปั๊มน้ำ ปั๊มลม มอเตอร์ไฟฟ้า 
+",,-
+res_partner_office_241,ร้านปากน้ำผ้าใบ,SP07S091,TRUE,FALSE,TRUE,,,Default,FALSE,"50/34-5 คลองตะเค็ดฝั่งตะวันตก 
+
+","ตำบลปากน้ำ อำเภอเมืองสมุทรปราการ 
+
+",10280,สมุทรปราการ,Thailand,"0-2395-2434, 701-7998",,0-2701-8540,,อื่น ๆ ,,ผ้าใบคลุมรถ,Cash,7
+res_partner_office_242,คุณสิริมา,,FALSE,FALSE,TRUE,ร้านปากน้ำผ้าใบ,res_partner_office_241,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_243,ห้างหุ้นส่วนจำกัด ประกิตผ้าใบ,SP07S092,TRUE,FALSE,TRUE,,,Default,FALSE,"35, 37 ถ.สายลวด",ต.ปากน้ำ อ.เมือง,10280,สมุทรปราการ,Thailand,02-7018820-1,,02-3872473,,อื่น ๆ ,,ผ้าใบคลุมรถ,Cash,7
+res_partner_office_244,หนุ่ม,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ประกิตผ้าใบ,res_partner_office_243,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_245,ห้างหุ้นส่วนจำกัด ยี้ เฮง หลง,SP07S093,TRUE,FALSE,TRUE,,,Default,FALSE,196-8,แขวงจักรวรรดิ์ เขตสัมพันธวงศ์,10100,กรุงเทพฯ,Thailand,"02-2222808, 2114564",,02-2253271,,อื่น ๆ ,,ผ้ายางมะตอย,Cash,7
+res_partner_office_246,แก้ว,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ยี้ เฮง หลง,res_partner_office_245,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_247,บริษัท ไอ เอ๊กซ์ แอล จำกัด,SP07S094,TRUE,FALSE,TRUE,,,Default,FALSE,4 ซอยสุขาภิบาล 2 ซอย 11 แยก 2-3 อ่อนนุช,แขวงประเวศ เขตประเวศ,10250,กรุงเทพฯ,Thailand,02 - 7264574-6,,02 - 7264577,,อื่น ๆ ,,"แผ่นฉนวนกันความร้อน, ",Cash,7
+res_partner_office_248,บริษัท ซานโต ไฟร์ เทรนนิ่ง จำกัด,SP07S095,TRUE,FALSE,TRUE,,,Default,FALSE,6/53-55 ซอยแสงอุทัยทิพย์ ถนนดินแดง,แขวงดินแดง เขตดินแดง,,กรุงเทพฯ,Thailand,02-248-3071       ,,02-246-6859  ,,อื่น ๆ ,,ฝึกอบรมดับเพลิงขั้นต้นและฝึกซ้อมหนีไฟประจำปี  ,30 Days,7
+res_partner_office_249,คุณอธิกาญ,,FALSE,FALSE,TRUE,บริษัท ซานโต ไฟร์ เทรนนิ่ง จำกัด,res_partner_office_248,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_250,บริษัท เค.ที แอนด์ แอล เมทัล จำกัด,SP07S096,TRUE,FALSE,TRUE,,,Default,FALSE,227 ม.4 ถ.รัตนโกสินทร์ 200 ปี,ต.บางบ่อ อ.บางบ่อ,10560,สมุทรปราการ,Thailand,02-707 0573-4 / 081- 5837828,,02-7070575,,อื่น ๆ ,,พ่นสีอลูมิเนียม,30 Days,7
+res_partner_office_251,คุณทวีพัฒน์,,FALSE,FALSE,TRUE,บริษัท เค.ที แอนด์ แอล เมทัล จำกัด,res_partner_office_250,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_252,คุณสุรินทร์,,FALSE,FALSE,TRUE,บริษัท เค.ที แอนด์ แอล เมทัล จำกัด,res_partner_office_250,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_253,บริษัท แคปิตอล คาร์เปท จำกัด,SP07S097,TRUE,FALSE,TRUE,,,Default,FALSE,"32 Soi Udomsuk 31, Sukhumvit 103 Rd.,","Bangjak , Prakhanong ,",10260,Bangkok,Thailand,0-2383 - 8850-3,,  0 - 2383 - 8860 ,,อื่น ๆ ,,"พรม , กาวปูพรม",Cash,7
+res_partner_office_254,คุณอุดม,,FALSE,FALSE,TRUE,บริษัท แคปิตอล คาร์เปท จำกัด,res_partner_office_253,Contact,TRUE,,,,,Thailand,,081-565 7059,,,,,,,
+res_partner_office_255,ห้างหุ้นส่วนจำกัด มงคลถาวรกิจ,SP07S098,TRUE,FALSE,TRUE,,,Default,FALSE,"2/14-15 หมู่ 10 ซอยเอกชัย 7 ถนนเอกชัย 
+","แขวงบางขุนเทียน เขตจอมทอง 
+",10150,กรุงเทพฯ,Thailand,"02 - 415 3138, 2415 2322, 2416 9594
+",,"02 - 893 8563
+",,อื่น ๆ ,,พัดลมอุตสาหกรรม,Cash,7
+res_partner_office_256,"VKS TINT CO.,LTD",SP07S099,TRUE,FALSE,TRUE,,,Default,FALSE,27 ซ.ลาซาล 365,แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,02-745-8112-3,,02-478-7643,,อื่น ๆ ,,ฟิล์มกรองแสง,30 Days,7
+res_partner_office_257,คุณวิทยา,,FALSE,FALSE,TRUE,"VKS TINT CO.,LTD",res_partner_office_256,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_258,บริษัท พลวัตร จำกัด,SP07S100,TRUE,FALSE,TRUE,,,Default,FALSE,76 ม.11 ถ.พุทธมณฑลสาย 5,ต.ไร่ขิง อ.สามพราน,73210,นครปฐม,Thailand,0-2811-9022,,0-2811-9519,,อื่น ๆ ,,มอเตอร์เกียร์,Cash,7
+res_partner_office_259,คุณสุรินทร์,,FALSE,FALSE,TRUE,บริษัท พลวัตร จำกัด,res_partner_office_258,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_260,บริษัท ไมโครไฟเบอร์ อุตสาหกรรม จำกัด,SP07S101,TRUE,FALSE,TRUE,,,Default,FALSE,อาคารไทยสมุทร ชั้น 3 175 ถนนสุขุมวิท 21,วัฒนา,10110,กรุงเทพฯ,Thailand,"02-2583774-6, 2593767-9",,02-2583767,,อื่น ๆ ,,ไมโครไฟเบอร์  แบบกันเสียง,Cash,-
+res_partner_office_261,เดโช,,FALSE,FALSE,TRUE,บริษัท ไมโครไฟเบอร์ อุตสาหกรรม จำกัด,res_partner_office_260,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_262,บริษัท วี. พี. วู๊ด จำกัด,SP07S102,TRUE,FALSE,TRUE,,,Default,FALSE,"25/5 หมู่ 4 ซ.สุขสวัสดิ์ 66 ถ.สุขสวัสดิ์
+
+",แขวงบางมด เขตทุ่งครุ,10140,กรุงเทพฯ,Thailand,"02-463-0335 - 9 , 086-340-8271",,02-463-4477,,อื่น ๆ ,,ไม้แปรรูป  / ไม้รูปพรรณ /ไม้อัด,Cash,-
+res_partner_office_263,คุณวุฒิ,,FALSE,FALSE,TRUE,บริษัท วี. พี. วู๊ด จำกัด,res_partner_office_262,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_264,บริษัท ธนาดุลค้าไม้ จำกัด,SP07S103,TRUE,FALSE,TRUE,,,Default,FALSE,136/7-9 ซอยไสวสุวรรณ ประชาราษฎร์สาย 1,แขวงบางซื่อ เขตบางซื่อ,10800,กรุงเทพฯ,Thailand,02-912 7937-9,,02- 912 7936 ,,อื่น ๆ ,,ไม้แปรรูป  / ไม้รูปพรรณ /ไม้อัด,Cash,-
+res_partner_office_265,คุณเต๋า,,FALSE,FALSE,TRUE,บริษัท ธนาดุลค้าไม้ จำกัด,res_partner_office_264,Contact,TRUE,,,,,Thailand,,081-514 3352,,,,,,,
+res_partner_office_266,บริษัท เอกวิวัฒน์ไม้อัด จำกัด,SP07S104,TRUE,FALSE,TRUE,,,Default,FALSE,"29/41 หมู่ 6 ซอยจิตภักดี สุขาภิบาล 1 
+
+",แขวงคลองกุ่ม เขตบึงกุ่ม,10240,กรุงเทพฯ,Thailand,"02-3792845, 3792956",,"02-3792845, 3792956",,อื่น ๆ ,,ไม้แปรรูป  / ไม้รูปพรรณ /ไม้อัด,Cash,-
+res_partner_office_267,ทัศนีย์,,FALSE,FALSE,TRUE,บริษัท เอกวิวัฒน์ไม้อัด จำกัด,res_partner_office_266,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_268,บริษัท พีพีพี ทิมเบอร์ส จำกัด,SP07S105,TRUE,FALSE,TRUE,,,Default,FALSE,797 ถ.ศรีนครินทร์,แขวงสวนหลวง เขตสวนหลวง,,กรุงเทพฯ,Thailand,"081 - 886 - 5288 , 02 - 320 -1915  ",,02 - 320 -  1916,,อื่น ๆ ,,ไม้แปรรูป  / ไม้รูปพรรณ /ไม้อัด,15 Days,-
+res_partner_office_269,คุณเล็ก,,FALSE,FALSE,TRUE,บริษัท พีพีพี ทิมเบอร์ส จำกัด,res_partner_office_268,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_270,ศรีนครินทร์ปาเก้,SP07S106,TRUE,FALSE,TRUE,,,Default,FALSE,"407/8-9 หมู่ 5 ถ.ศรีนครินทร์ 
+
+","ต.สำโรงเหนือ อ.เมืองสมุทรปราการ 
+
+",,สมุทรปราการ,Thailand,"02-3857731, 3857785",,02-3867223,,อื่น ๆ ,,ไม้แปรรูป  / ไม้รูปพรรณ /ไม้อัด,30 Days,-
+res_partner_office_271,เก๋,,FALSE,FALSE,TRUE,ศรีนครินทร์ปาเก้,res_partner_office_270,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_272,จ.รวมยาง,SP07S107,TRUE,FALSE,TRUE,,,Default,FALSE,735/9,ต. พนมสารคาม อ.พนมสารคาม,,ฉะเชิงเทรา,Thailand,"038- 551 230 ,038 - 837 311",,"038- 551 230 ,038 - 837 311",,อื่น ๆ ,,ยางรถยนต์ ,Cash,-
+res_partner_office_273,คุณสมบูรณ์,,FALSE,FALSE,TRUE,จ.รวมยาง,res_partner_office_272,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_274,บริษัท สต๊อป - เบิร์ด โปรเฟสชั่นแนล จำกัด,SP07S108,TRUE,FALSE,TRUE,,,Default,FALSE,87/291 ถ.กาญจนาภิเษก,แขวงบางบอน เขตบางบอน,10150,กรุงเทพฯ,Thailand,02 - 899 9928   ,,"02 - 899 9939, 49, 59",,อื่น ๆ ,,ยาดักจับนก,Cash,-
+res_partner_office_275,คุณวัชรินทร์,,FALSE,FALSE,TRUE,บริษัท สต๊อป - เบิร์ด โปรเฟสชั่นแนล จำกัด,res_partner_office_274,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_276,บริษัท ฮ.เจริญทรัพย์กลการ จำกัด,SP07S109,TRUE,FALSE,TRUE,,,Default,FALSE,"109/438-41 บางนา-ตราด 
+
+","ตำบลบางพลีใหญ่ อำเภอบางพลี 
+
+",10540,สมุทรปราการ,Thailand,0-2749 2162-3,,0-2749 2169,,อื่น ๆ ,,ร้านซ่อมรถ,30 Days,-
+res_partner_office_277,คุณประนอม,,FALSE,FALSE,TRUE,บริษัท ฮ.เจริญทรัพย์กลการ จำกัด,res_partner_office_276,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_278,ร้านสมานมิตร,SP07S110,TRUE,FALSE,TRUE,,,Default,FALSE,802 หมู่ 1,ต.พนมสารคาม อ.พนมสารคาม,24120,ฉะเชิงเทรา,Thailand,(038)883 9191,, (038)  839 292,,อื่น ๆ ,,ร้านอุปกรณ์ก่อสร้าง ,Cash,-
+res_partner_office_279,คุณไพรวัลย์,,FALSE,FALSE,TRUE,ร้านสมานมิตร,res_partner_office_278,Contact,TRUE,,,,,Thailand,,089-964 0222,,,,,,,
+res_partner_office_280,บริษัท ภูวดลไพศาล เอ็นจิเนียริ่ง จำกัด,SP07S111,TRUE,FALSE,TRUE,,,Default,FALSE,8 ม.5,ต.บางพูน อ.เมือง,12000,ปทุมธานี,Thailand,0-2567-3651-2,,0-2567-3185,,อื่น ๆ ,,รีโมท,Cash,-
+res_partner_office_281,ประดิษฐ์,,FALSE,FALSE,TRUE,บริษัท ภูวดลไพศาล เอ็นจิเนียริ่ง จำกัด,res_partner_office_280,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_282,บริษัท อาร์. เจ. โค้ทติ้ง จำกัด,SP07S112,TRUE,FALSE,TRUE,,,Default,FALSE,38/1 ม.6 ต.เกาะขนุน,อ.พนมสารคาม,24120,ฉะเชิงเทรา,Thailand, 038-59-7738-9    ,,  0-3859-7025,,อื่น ๆ ,,โรงพ่นสี ,Cash,-
+res_partner_office_283,คุณจินตนา,,FALSE,FALSE,TRUE,บริษัท อาร์. เจ. โค้ทติ้ง จำกัด,res_partner_office_282,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_284,จรัสบริการ ( ลับคมใบมีด ),SP07S113,TRUE,FALSE,TRUE,,,Default,FALSE,1568 หมู่ที่ 6 ถ.สุขุมวิท,ต. สำโรงเหนือ อ.เมือง,10270,สมุทรปราการ,Thailand,02- 749 3472-3       ,,02 -393 9754,,อื่น ๆ ,,ลับคมใบมีด,Cash,-
+res_partner_office_285,คุณเมย์,,FALSE,FALSE,TRUE,จรัสบริการ ( ลับคมใบมีด ),res_partner_office_284,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_286,บริษัท ศรีบุญชัย ( สุขุมวิท105) จำกัด,SP07S114,TRUE,FALSE,TRUE,,,Default,FALSE,756 ซ. สุขุมวิท 105 ถ.ลาซาล,แขวงบางนา เขตบางนนา,10260,กรุงเทพฯ,Thailand,02 748 6089 - 90      ,,02 - 398 4953-4,,อื่น ๆ ,,วัสดุก่อสร้าง,30 Days,7
+res_partner_office_287,คุณประภา (นก),,FALSE,FALSE,TRUE,บริษัท ศรีบุญชัย ( สุขุมวิท105) จำกัด,res_partner_office_286,Contact,TRUE,,,,,Thailand,,086-3741581,,,,,,,
+res_partner_office_288,บริษัท ฮาร์ดแวร์ เซ็นเตอร์ จำกัด,SP07S115,TRUE,FALSE,TRUE,,,Default,FALSE,766 ซอยสุขุมวิท 105ถนนลาซาล,แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand, 02 - 748 6089-90,,02 - 748 6090 ,,อื่น ๆ ,,วัสดุก่อสร้าง,Cash,7
+res_partner_office_289,คุณขวัญ,,FALSE,FALSE,TRUE,บริษัท ฮาร์ดแวร์ เซ็นเตอร์ จำกัด,res_partner_office_288,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_290,บริษัท บี วาย พี เทรดดิ้ง จำกัด,SP07S116,TRUE,FALSE,TRUE,,,Default,FALSE,23/25 อาคารอี โครงการรอยัลซิตี้อเวนิว ซอยศูนย์วิจัย ถนนพระราม 9,แขวงบางกะปิ เขตห้วยขวาง,,กรุงเทพฯ,Thailand,-,,-,,อื่น ๆ ,,เสื้อโปโล,Cash,30
+res_partner_office_291,คุณอราม,,FALSE,FALSE,TRUE,บริษัท บี วาย พี เทรดดิ้ง จำกัด,res_partner_office_290,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_292,บริษัท แอมเชอร์ พลัส จรูญรัศมี จำกัด,SP07S117,TRUE,FALSE,TRUE,,,Default,FALSE,1015 หมู่ที่ 3 ซอยรามคำแหง 164 รามคำแหง,คลองสองต้นนุ่น ลาดกระบัง,,กรุงเทพฯ,Thailand, 02 - 372 9586    ,,02 - 372 7116,,อื่น ๆ ,,เสื้อโปโล,Cash,30
+res_partner_office_293,คณะบุคคล โฟร์ เฟรน ซอร์สซิ่ง,SP07S118,TRUE,FALSE,TRUE,,,Default,FALSE,56/81 ม.7 ถ.บางกรวย-ไทรน้อย,ต.บางกรวย อ.บางกรวย,11130,นนทบุรี,Thailand,05-1124291/0-2673-1593/01-4383750/06-9890006,,0-2673-1593,,อื่น ๆ ,,เสื้อโปโล,Cash,30
+res_partner_office_294,คุณธงชัย,,FALSE,FALSE,TRUE,คณะบุคคล โฟร์ เฟรน ซอร์สซิ่ง,res_partner_office_293,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_295,พุทธชาด,,FALSE,FALSE,TRUE,คณะบุคคล โฟร์ เฟรน ซอร์สซิ่ง,res_partner_office_293,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_296,นิวแสงทองแฟ็คทอรี่,SP07S119,TRUE,FALSE,TRUE,,,Default,FALSE,24/630 ถ.สุขุมวิท 105 ซ.ลาซาล 75,แขวงบางนา เขตบางนนา,10260,กรุงเทพฯ,Thailand,02-7487774-8,,02-7487770,,อื่น ๆ ,,เสื้อโปโล,Cash,30
+res_partner_office_297,คุณวรวุฒิ,,FALSE,FALSE,TRUE,นิวแสงทองแฟ็คทอรี่,res_partner_office_296,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_298,ห้างหุ้นส่วนจำกัด อาจิวการไฟฟ้า,SP07S120,TRUE,FALSE,TRUE,,,Default,FALSE,66 ซ.บุรีรมย์ ถนนเจริญกรุง,แขวงบ้านบาตร์ เขตป้อมปรบศัตรูพ่าย,10100,กรุงเทพฯ,Thailand,"02-222 6421, 02-222 6427 ",,02-621 0008-9,,อื่น ๆ ,,หม้อแปลงเครื่องอาร์กสปอร์ตเวลติ้,Cash,7
+res_partner_office_299,คุณนิรุฒ,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด อาจิวการไฟฟ้า,res_partner_office_298,Contact,TRUE,,,,,Thailand,,089-131 0681,,,,,,,
+res_partner_office_300,บริษัท แลมป์ตัน ไลท์ติ้ง(2001 ) จำกัด,SP07S121,TRUE,FALSE,TRUE,,,Default,FALSE,3 ซอยเทียนทะเล 19 ถ.บางขุนเทียน -ชายทะเล,แขวงท่าด่า แขตบางขุนเทียน,10150,กรุงเทพฯ,Thailand,02 - 451 2968-9,,02-8972938    ,,อื่น ๆ ,,หลอดไฟ ,Cash,15
+res_partner_office_301,คุณหญิง,,FALSE,FALSE,TRUE,บริษัท แลมป์ตัน ไลท์ติ้ง(2001 ) จำกัด,res_partner_office_300,Contact,TRUE,,,,,Thailand,,"085-770-7077 , 080 -729 9904",,,,,,,
+res_partner_office_302,"THAI SYNCON & SUPPLIES CO.,LTD.",SP07S122,TRUE,FALSE,TRUE,,,Default,FALSE,889 อาคารไทย ซีซี ทาวเวอร์ ชั้นที่ 22 ห้อง 224 ถ.สาทรใต้แขวงยายนาวา,เขตสาทร,10120,กรุงเทพฯ,Thailand,"02-675 6260-2 ,038-570572",,"02-675 6259,",,อื่น ๆ ,,"หลังคา , งานเมทัลชีท",Cash,15
+res_partner_office_303,K. ชนากานต์,,FALSE,FALSE,TRUE,"THAI SYNCON & SUPPLIES CO.,LTD.",res_partner_office_302,Contact,TRUE,,,,,Thailand,,08-1357 1389,,,,,,,
+res_partner_office_304,บริษัท ซี.เอส.ซี. อินเตอร์เนชั่นแนล จำกัด,SP07S123,TRUE,FALSE,TRUE,,,Default,FALSE,"10/22 หมู่ 8 ถนนพุทธรักษา 
+","ตำบลท้ายบ้านใหม่ อำเภอเมือง 
+",,สมุทรปราการ,Thailand,02-388-1081-2,,02-388-1080,,อื่น ๆ ,,"หลังคา , งานเมทัลชีท",Cash,15
+res_partner_office_305,บริษัท ไทย อาจีย่า จำกัด,SP07S124,TRUE,FALSE,TRUE,,,Default,FALSE,"19/40 หมู่ 10 พหลโยธิน 
+
+","ตำบลคลองหนึ่ง อำเภอคลองหลวง 
+
+",12122,ปทุมธานี,Thailand,02 - 5204047-8,,02 - 5204050,,อื่น ๆ ,,"หลังคา , งานเมทัลชีท",30 Days,15
+res_partner_office_306,คุณอมรเทพ,,FALSE,FALSE,TRUE,บริษัท ไทย อาจีย่า จำกัด,res_partner_office_305,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_307,ห้างหุ้นส่วนจำกัด ลี - เมดิค,SP07S125,TRUE,FALSE,TRUE,,,Default,FALSE,"90/68 หมู่ 8 ซอย 26 สุขสวัสดิ์ 
+
+","แขวงบางปะกอก เขตราษฎร์บูรณะ 
+
+",10140,กรุงเทพฯ,Thailand,02 - 8744801-2,,02 - 8744801-2,,อื่น ๆ ,,อุปกรณ์การแพทย์,Cash,15
+res_partner_office_308,บริษัท ฟอร์ท แทร็คกิ้ง ซีสเต็ม จำกัด,SP07S126,TRUE,FALSE,TRUE,,,Default,FALSE,"226/3,4,5 ถนนพหลโยธิน 
+",แขวงสามเสนใน เขตพญาไท,10400,กรุงเทพฯ,Thailand,02 - 615-0808,,02 - 615-0809,,อื่น ๆ ,,อุปกรณ์ติดตามรถ,30 Days,7
+res_partner_office_309,คุณไกรกฤษ์ ทิมอ่อน,,FALSE,FALSE,TRUE,บริษัท ฟอร์ท แทร็คกิ้ง ซีสเต็ม จำกัด,res_partner_office_308,Contact,TRUE,,,,,Thailand,,084-1067 825,,,,,,,
+res_partner_office_310,บริษัท รีฟริโก อีควิปเม้นท์ จำกัด,SP07S127,TRUE,FALSE,TRUE,,,Default,FALSE,99/24-27 ม.9 ถ.ลาดพร้าว,แขวงลาดพร้าว เขตลาดพร้าว,10230,กรุงเทพฯ,Thailand,02-7627910-20,,0-2931-7280,,อื่น ๆ ,,อุปกรณ์ทองแดง,30 Days,7
+res_partner_office_311,คุณไชย,,FALSE,FALSE,TRUE,บริษัท รีฟริโก อีควิปเม้นท์ จำกัด,res_partner_office_310,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_312,บริษัท แสงชัยรีฟริเจอเรชั่น จำกัด,SP07S128,TRUE,FALSE,TRUE,,,Default,FALSE,283 ถ.หลานหลวง,แขวงวัดโสมนัส เขตป้อมปราบฯ,10100,กรุงเทพฯ,Thailand,"05-1239166, 02-6282600, 2803444",,02-6280484-5,,อื่น ๆ ,,อุปกรณ์ทองแดง,60 Days,7
+res_partner_office_313,คุณนราวุธ,,FALSE,FALSE,TRUE,บริษัท แสงชัยรีฟริเจอเรชั่น จำกัด,res_partner_office_312,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_314,บริษัท เซนิท ซิสเท็ม จำกัด,SP07S129,TRUE,FALSE,TRUE,,,Default,FALSE,32/9 ซอยเจริญรัก 18 ถนนเจริญรัก,แขวงคลองต้นไทร เขตคลองสาน,10600,กรุงเทพฯ,Thailand,"0-2862 0906 , 02 -439 4723 ",,02- 437 8921,,อื่น ๆ ,,อุปกรณ์ลำเรียง,30 Days,7
+res_partner_office_315,คุณดลพร,,FALSE,FALSE,TRUE,บริษัท เซนิท ซิสเท็ม จำกัด,res_partner_office_314,Contact,TRUE,,,,,Thailand,,081-5183374,,,,,,,
+res_partner_office_316,บริษัท ยู.บี.จี.(2008) จำกัด,SP07S130,TRUE,FALSE,TRUE,,,Default,FALSE,"155, ซอยเอกชัย 110, ถนนเอกชัย","แขวงบางบอน, เขตบางบอน,",10150,กรุงเทพฯ,Thailand,02 - 895 0751-4,, 02 -895 0755    ,,อื่น ๆ ,,อุปกรณ์ลำเรียง,Cash,7
+res_partner_office_317,คุณทวี,,FALSE,FALSE,TRUE,บริษัท ยู.บี.จี.(2008) จำกัด,res_partner_office_316,Contact,TRUE,,,,,Thailand,,081-6123951,,,,,,,
+res_partner_office_318,"บริษัท ลาฟแลนด์ 2535 ซัพพลาย จำกัด ( ล้อยูริเทน, PVC SH4, แผ่นซุปเปอร์เลน )",SP07S131,TRUE,FALSE,TRUE,,,Default,FALSE,1999/8-9 หมู่ที่ 4 ถนนสุขุมวิท,ตำบลเทพารักษ์ อำเภอเมืองสมุทรปราการ,,สมุทรปราการ,Thailand,"02-3847890, 7577039",,02-7577045,,อื่น ๆ ,,อุปกรณ์ลำเรียง,Cash,3
+res_partner_office_319,นงนุช,,FALSE,FALSE,TRUE,"บริษัท ลาฟแลนด์ 2535 ซัพพลาย จำกัด ( ล้อยูริเทน, PVC SH4, แผ่นซุปเปอร์เลน )",res_partner_office_318,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_320,บริษัท สปีดเวย์ โรลเลอร์แอนด์คอนเวเยอร์ จำกัด,SP07S132,TRUE,FALSE,TRUE,,,Default,FALSE,"26/203 หมู่ 1 ซอยจุลพงษ์ บางขุนเทียน-ชายทะเล 
+
+",แขวงแสมดำ เขตบางขุนเทียน,10150,กรุงเทพฯ,Thailand,02 - 8921846-50,,"02 - 4156327,028921233",,อื่น ๆ ,,อุปกรณ์ลำเรียง,30 Days,3
+res_partner_office_321,บริษัท ไมครอนคลีน จำกัด,SP07S133,TRUE,FALSE,TRUE,,,Default,FALSE,1246 ม.13 ถ.พหลโยธิน,ต.คลองหนึ่ง อ.คลองหลวง,12120,ปทุมธานี,Thailand,"01-3430443, 02-9088200",,02-9088211,,อื่น ๆ ,,อุปกรณ์และวัสดุที่ใช้ในห้องสะอาด,30 Days,3
+res_partner_office_322,วีระชัย,,FALSE,FALSE,TRUE,บริษัท ไมครอนคลีน จำกัด,res_partner_office_321,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_323,ร้าน เอส เค แอร์ แอนด์ เซอร์วิส,SP07S134,TRUE,FALSE,TRUE,,,Default,FALSE,8/5 หมู่ 12 พระประแดง,ต.บางกอบัว อ.พระประแดง,10130,สมุทรปราการ,Thailand,02-816-5711,,02-816-5711,,อื่น ๆ ,,แอร์  บ้าน,30 Days,3
+res_partner_office_324,คุณอุมา,,FALSE,FALSE,TRUE,ร้าน เอส เค แอร์ แอนด์ เซอร์วิส,res_partner_office_323,Contact,TRUE,,,,,Thailand,,086-906-9134,,,,,,,
+res_partner_office_325,คุณฑาณุมาศ,,FALSE,FALSE,TRUE,ร้าน เอส เค แอร์ แอนด์ เซอร์วิส,res_partner_office_323,Contact,TRUE,,,,,Thailand,,089-674-7606,,,,,,,
+res_partner_office_326,ห้างหุ้นส่วนจำกัด ซี.ที.พี.แอร์ เซอร์วิส,SP07S135,TRUE,FALSE,TRUE,,,Default,FALSE,94/29 หมู่ที่ 4 ถ.สุขุมวิท 105,แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,"0-2 393  7143,  02-393 7153",,0-2749 7357,,อื่น ๆ ,,แอร์  บ้าน,30 Days,-
+res_partner_office_327,คุณศิริศักดิ์,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ซี.ที.พี.แอร์ เซอร์วิส,res_partner_office_326,Contact,TRUE,,,,,Thailand,,081 - 812 9951,,,,,,,
+res_partner_office_328,คุณนี,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ซี.ที.พี.แอร์ เซอร์วิส,res_partner_office_326,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_329,บริษัท แคนนอน ฟาร์อีสต์ (ไทยแลนด์) จำกัด,SP07S136,TRUE,FALSE,TRUE,,,Default,FALSE,48 ซ.รามคำแหง 14,แขวงหัวหมาก แขตบางกะปิ,10240,กรุงเทพฯ,Thailand,02-3192595-7,,02-3192598,,อื่น ๆ ,,Machinne  / เครื่องฉีดโฟม  /  SPARE PART ,30 Days,ตามตกลง
+res_partner_office_330,ทัศนีย์,,FALSE,FALSE,TRUE,บริษัท แคนนอน ฟาร์อีสต์ (ไทยแลนด์) จำกัด,res_partner_office_329,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_331,Hennecke GmbH,SP07S137,TRUE,FALSE,TRUE,,,Default,FALSE,Polyurethane Technology Birlinghovener,StraBe 30 D-53757 Sankt Augustin,,,Thailand,(+49) 22 41/3 39-0,, (+49) 22 41/3 39-20 4,,อื่น ๆ ,,Machinne  / เครื่องฉีดโฟม  /  SPARE PART ,,ตามตกลง
+res_partner_office_332,"ALL ARM CO.,LTD.",SP07S138,TRUE,FALSE,TRUE,,,Default,FALSE,93 ซอยเสนานิคม1(พหลโยธิน32) ถ.พหลโยธิน,แขวงเสนานิคม เขตจตุจักร,10900,กรุงเทพฯ,Thailand,"02 - 9415657, 9415577 ",,941 8707 ,,อื่น ๆ ,,Machinne  / เครื่องฉีดโฟม  /  SPARE PART ,30 Days,ตามตกลง
+res_partner_office_333,คุรแซม / คุรฉฮฯ,,FALSE,FALSE,TRUE,"ALL ARM CO.,LTD.",res_partner_office_332,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_334,CBM MACHINE (NZ) LIMITED,SP07S139,TRUE,FALSE,TRUE,,,Default,FALSE,"NO. 1825, HUALONG ROAD, JIAHENG TOWER A 2201,","Jinan - 250100, Shandong, China",,,Thailand,86-531-88020036,,86-531-88020455,,อื่น ๆ ,,Machinne  / เครื่องฉีดโฟม  /  SPARE PART ,30 Days,ตามตกลง
+res_partner_office_335,Mr. Farley Feng (Sales Manager),,FALSE,FALSE,TRUE,CBM MACHINE (NZ) LIMITED,res_partner_office_334,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_336,"7408 ENGINEERING CO.,LTD.",SP07S140,TRUE,FALSE,TRUE,,,Default,FALSE,244/3 Moo 1 Thepharak,Tumbol Bang Sao Thong Amphoe Bang Sao Thong,10540,Samut Prakan,Thailand,23131340,,23131340,,อื่น ๆ ,,Machinne /  SPARE PART ,30 Days,ตามตกลง
+res_partner_office_337,บริษัท ไทย เมทัล ชีท โปรดัก จำกัด,SP07S141,TRUE,FALSE,TRUE,,,Default,FALSE,25/257 หมู่ที่ 6,ตำบลบางตลาด อำเภอปากเกร็ด,11120,นนทบุรี,Thailand,"02 -582 0588-90 , 081- 823 5182  ",,"02-582 0591, 02-962 1486",,อื่น ๆ ,,Machinne /  SPARE PART ,30 Days,ตามตกลง
+res_partner_office_338,ศุภกร,,FALSE,FALSE,TRUE,บริษัท ไทย เมทัล ชีท โปรดัก จำกัด,res_partner_office_337,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_339,ทัศนีย์,,FALSE,FALSE,TRUE,บริษัท ไทย เมทัล ชีท โปรดัก จำกัด,res_partner_office_337,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_340,คุณปู,,FALSE,FALSE,TRUE,บริษัท ไทย เมทัล ชีท โปรดัก จำกัด,res_partner_office_337,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_341,บริษัท สยามโปรเทค ซัพพลาย จำกัด,SP07S142,TRUE,FALSE,TRUE,,,Default,FALSE,81/51ม.9 ถนนฉลองกรุง,แขวงลำผักชี เขตหนองจอก,10530,กรุงเทพฯ,Thailand, 0-2908-3596-9,, 0-2908-3595,,อื่น ๆ ,,Machinne /  SPARE PART ,30 Days,ตามตกลง
+res_partner_office_342,คุณประภัสสร,,FALSE,FALSE,TRUE,บริษัท สยามโปรเทค ซัพพลาย จำกัด,res_partner_office_341,Contact,TRUE,,,,,Thailand,,089 - 797 6629,,,,,,,
+res_partner_office_343,บริษัท เอส วาย เทค คอปอร์เรชั่น จำกัด,SP07S143,TRUE,FALSE,TRUE,,,Default,FALSE,"HEAD OFFICE 335/21 Srinakarin Road,","Nongbon, Pravet,",10250,Bangkok,Thailand,"02-366-0395-7 , 02-366-0731 ",, 02-366-0394-5,,อื่น ๆ ,,Machinne /  SPARE PART ,30 Days,ตามตกลง
+res_partner_office_344,คุณสำเร็จ,,FALSE,FALSE,TRUE,บริษัท เอส วาย เทค คอปอร์เรชั่น จำกัด,res_partner_office_343,Contact,TRUE,,,,,Thailand,,081-341 1267,,,,,,,
+res_partner_office_345,บริษัท วีเอ็น - เทค ออโตเมชั่น จำกัด,SP07S144,TRUE,FALSE,TRUE,,,Default,FALSE,89/183 หมู่ที่ 5 ถนนเทพารักษ์,ต. บางพลีใหญ่ อ. บางพลี,10540,สมุทรปราการ,Thailand,"02 - 186 8290 , 089 - 7610330 ,086-3205257     ",,02 - 186 8291  ,,อื่น ๆ ,,Machinne /  SPARE PART ,30 Days,ตามตกลง
+res_partner_office_346,คุณชาญยุทธ,,FALSE,FALSE,TRUE,บริษัท วีเอ็น - เทค ออโตเมชั่น จำกัด,res_partner_office_345,Contact,TRUE,,,,,Thailand,,089 - 7610330,,,,,,,
+res_partner_office_347,คุณจุไรพร,,FALSE,FALSE,TRUE,บริษัท วีเอ็น - เทค ออโตเมชั่น จำกัด,res_partner_office_345,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_348,บริษัท ยู.บี.จี.(2008) จำกัด,SP07S145,TRUE,FALSE,TRUE,,,Default,FALSE,"155, ซอยเอกชัย 110, ถนนเอกชัย,","แขวงบางบอน, เขตบางบอน,",10150,กรุงเทพฯ,Thailand,02-895 0751-4            ,,02-8950755,,อื่น ๆ ,,Machinne /  SPARE PART ,30 Days,ตามตกลง
+res_partner_office_349,คุณทวี,,FALSE,FALSE,TRUE,บริษัท ยู.บี.จี.(2008) จำกัด,res_partner_office_348,Contact,TRUE,,,,,Thailand,,081-6123951 ,,,,,,,
+res_partner_office_350,บริษัท 3114 เอ็นจิเนียริ่ง จำกัด,SP07S146,TRUE,FALSE,TRUE,,,Default,FALSE,87 ซอยบางนา - ตราด 21,บางนา บางนา,10260,กรุงเทพฯ,Thailand,02 - 748 8455-8  ,,"02 - 399 2815,393 6680  ",,อื่น ๆ ,,Machinne /  SPARE PART ,30 Days,ตามตกลง
+res_partner_office_351,คุณทิพวรรณ,,FALSE,FALSE,TRUE,บริษัท 3114 เอ็นจิเนียริ่ง จำกัด,res_partner_office_350,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_352,ห้างหุ้นส่วนจำกัด ศิริวัฒน์ แมชชินเนอรี่,SP07S147,TRUE,FALSE,TRUE,,,Default,FALSE,23-27 และ 282-284 ในเวิ้งนครเกษม ถนนเจริญกรุง,แขวงสัมพันธวงศ์ เขตสัมพันธวงศ์,10100,กรุงเทพฯ,Thailand,"0-2222-9880, 222-2284",,0-2225-3724,,อื่น ๆ ,,Machinne  ( จำหน่ายเครื่องปั๊มลม FUSHENG),Cash,ตามตกลง
+res_partner_office_353,คุณสุทธิชัย,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ศิริวัฒน์ แมชชินเนอรี่,res_partner_office_352,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_354,คุณสุชาติ,,FALSE,FALSE,TRUE,ห้างหุ้นส่วนจำกัด ศิริวัฒน์ แมชชินเนอรี่,res_partner_office_352,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_355,บริษัท ที.ที.แอล. เอ็นจิเนียริ่ง ซีสเต็มส์ จำกัด,SP07S148,TRUE,FALSE,TRUE,,,Default,FALSE,"70 นิมิตรใหม่ 
+
+","ตำบลลำลูกกา อำเภอลำลูกกา 
+
+",12150,ปทุมธานี,Thailand,"0-2993-4937-8, 0-2597-9082-5",,0-2993-4939,,อื่น ๆ ,,Machinne  /Spare Part ,60 Days,
+res_partner_office_356,คุณเลอชาย แสงงาม,,FALSE,FALSE,TRUE,บริษัท ที.ที.แอล. เอ็นจิเนียริ่ง ซีสเต็มส์ จำกัด,res_partner_office_355,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_357,S. M. C. ( THAILAND ) LTD.,SP07S149,TRUE,FALSE,TRUE,,,Default,FALSE,1340/16 ถนนสุรนารายณ์,ตำบลในเมือง อำเภอเมืองนครราชสีมา,30000,นครราชสีมา,Thailand,0-4434-1775-6,,0-4434-1774,,อื่น ๆ ,,Machinne  /Spare Part  ,30 Days,10
+res_partner_office_358,K. Angkrit,,FALSE,FALSE,TRUE,S. M. C. ( THAILAND ) LTD.,res_partner_office_357,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_359,บริษัท พีเอ็น.แทรค เอ็นจิเนียริ่ง แอนด์ พาร์ท จำกัด,SP07S150,TRUE,FALSE,TRUE,,,Default,FALSE,154/64-66 หมู่ที่ 4,ต.เมืองเก่า อ.พนมสารคาม,24100,ฉะเชิงเทรา,Thailand,03-883-148-9,,03-880-7088,,อื่น ๆ ,,Machinne  /Spare Part  ,30 Days,10
+res_partner_office_360,บริษัท คราสส์เทค จำกัด,SP07S151,TRUE,FALSE,TRUE,,,Default,FALSE,1205 ซ.พระรามเก้า 55 ถ. พระราม 9,แขวงสวนหลวง เขตสวนหลวง,10250,กรุงเทพฯ,Thailand,02 - 732 1144  ( AUTO),, 02 - 732 2350  ,,อื่น ๆ ,,Machinne  /Spare Part  ,30 Days,10
+res_partner_office_361,คุณณัฐวุฒิ เจริญเสถียร,,FALSE,FALSE,TRUE,บริษัท คราสส์เทค จำกัด,res_partner_office_360,Contact,TRUE,,,,,Thailand,,086-377 0425,,,,,,,
+res_partner_office_362,คุณธนาวุฒิ,,FALSE,FALSE,TRUE,บริษัท คราสส์เทค จำกัด,res_partner_office_360,Contact,TRUE,,,,,Thailand,,089-3157657,,,,,,,
+res_partner_office_363,"CECO INDUSTRIAL GAS CO.,LTD.",SP07S152,TRUE,FALSE,TRUE,,,Default,FALSE,"698 Srinakarin Road,","Suanluang, Suanluang,",10250,Bangkok,Thailand,66) 2722 7928-32  ,, (66) 2321-9333  ,,อื่น ๆ ,,Machinne  /Spare Part  ,Cash,30
+res_partner_office_364,บริษัท เค. เอ็ม. ดี เซอร์วิส จำกัด,SP07S153,TRUE,FALSE,TRUE,,,Default,FALSE,254/62 หมู่5,ต. บึง อ.ศรีราชา,20230,ชลบุรี,Thailand, 038 - 481085 ,, 038-481086,,อื่น ๆ ,,Machinne  /Spare Part  ,Cash,ตามตกลง
+res_partner_office_365,คุณชาญยุทธ,,FALSE,FALSE,TRUE,บริษัท เค. เอ็ม. ดี เซอร์วิส จำกัด,res_partner_office_364,Contact,TRUE,,,,,Thailand,,089-761 0330,,,,,,,
+res_partner_office_366,บริษัท เอ็น.เอ็ม.เอ็ม.แมชชีน พาร์ท จำกัด,SP07S154,TRUE,FALSE,TRUE,,,Default,FALSE,66/3 ม.12 ถ.ธนสิทธิ์,ต.บางปลา อ.บางพลี,10540,สมุทรปราการ,Thailand,02 - 182 - 1245 - 6 ,,02 - 182 1247,,อื่น ๆ ,,Machinne  /Spare Part  ,30 Days,ตามตกลง
+res_partner_office_367,คุณนิมิตร,,FALSE,FALSE,TRUE,บริษัท เอ็น.เอ็ม.เอ็ม.แมชชีน พาร์ท จำกัด,res_partner_office_366,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_368,บริษัท วายเอสที ออโตเมชั่น จำกัด,SP07S155,TRUE,FALSE,TRUE,,,Default,FALSE,298 หมู่ 3 ซอยเทวา 1 เทพารักษ์,ตำบลเทพารักษ์ อำเภอเมืองสมุทรปราการ,10270,สมุทรปราการ,Thailand,02 - 753 0899  ,, 02-753 0890   ,,อื่น ๆ ,,Machinne  /Spare Part  ,30 Days,ตามตกลง
+res_partner_office_369,คุณรัณเดช,,FALSE,FALSE,TRUE,บริษัท วายเอสที ออโตเมชั่น จำกัด,res_partner_office_368,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_370,"EBM-PAPST (THAILAND) CO., LTD ( อะไหล่เครื่องจักร )",SP07S156,TRUE,FALSE,TRUE,,,Default,FALSE,"99/349 Na-Nakorn Bldg., 4th FloorChaeng Wattana Road,","Thungsonghong, Laksi,",10210,Bangkok,Thailand,+66 2 57615-24,,66 2 57615-42,,อื่น ๆ ,,Machinne  /Spare Part  ,7 Days,ตามตกลง
+res_partner_office_371,บริษัท อัพ โซ แอร์ จำกัด ( อุปกรณ์เครื่องจักร ),SP07S157,TRUE,FALSE,TRUE,,,Default,FALSE,3413 ถนนพระราม 9,สวนหลวง,10250,กรุงเทพฯ,Thailand,,,,,อื่น ๆ ,,Machinne  /Spare Part  ,PDC. 30 Days,ตามตกลง
+res_partner_office_372,"JINAN DELTA CNC MACHINERY CO.,LTD.",SP07S158,TRUE,FALSE,TRUE,,,Default,FALSE,"TIANCHEN INDUSTRIAL PARK, TIANCHEN ROAD HI-TECH ZONE ,","JINAN , SHANDONG PROVINCE , P.R. CHINA.", ,,Thailand, (0086 531 ) 8887-7039  ,,(0086 531 ) 8887-7041,,อื่น ๆ ,,Machinne  /Spare Part  ,,45
+res_partner_office_373,บริษัท อะมะดะ (ประเทศไทย) จำกัด ( อะไล่เครื่องจักรมือสอง ),SP07S159,TRUE,FALSE,TRUE,,,Default,FALSE,"อาคารทศพลแลนด์ 3 ชั้น 6, 947 ม.12 ถ.บางนาตราด กม.3",แขวงบางนา เขตบางนา,10260,กรุงเทพฯ,Thailand,0-2361-9152-60,,0-2361-9165-6,,อื่น ๆ ,,Machinne  /Spare Part  ,30 Days,-
+res_partner_office_374,Pongsak,,FALSE,FALSE,TRUE,บริษัท อะมะดะ (ประเทศไทย) จำกัด ( อะไล่เครื่องจักรมือสอง ),res_partner_office_373,Contact,TRUE,,,,,Thailand,,,,,,,,,
+res_partner_office_375,บริษัท เอส วาย เทค คอปอร์เรชั่น จำกัด,SP07S160,TRUE,FALSE,TRUE,,,Default,FALSE,"335/21 Srinakarin Road,","Nongbon, Pravet,",10250,Bangkok,Thailand,"02-366-0395-7 , 02-366-0731  ",, 02-366-0394-5,,อื่น ๆ ,,SPARE PART เครื่องจักร,,
+res_partner_office_376,คุณสำเร็จ,,FALSE,FALSE,TRUE,บริษัท เอส วาย เทค คอปอร์เรชั่น จำกัด,res_partner_office_375,Contact,TRUE,,,,,,,081-341 1267,,,,,,,

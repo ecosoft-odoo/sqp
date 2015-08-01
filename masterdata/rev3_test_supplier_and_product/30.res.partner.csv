@@ -1,0 +1,27 @@
+id,name,ref,is_company,customer,supplier,parent_id,type,use_parent_address,street,street2,zip,city,country_id/id,phone,mobile,fax,email,category_id/id,website,comment,property_supplier_payment_term
+Supplier_1,"KRUNGTEP UNION MFG.  CO.,LTD.",,TRUE,FALSE,TRUE,,Default,FALSE,47 หมู่ 2  ถ.สุวินทวงศ์,ลำผักชี หนองจอก,10530,กรุงเทพฯ,,02-989 7791-4,,02-989 7878,,,,"PVC , ยาง ",
+Supplier_2,คุณสุนีย์รัตน์,,FALSE,FALSE,TRUE,"KRUNGTEP UNION MFG.  CO.,LTD.",Default,FALSE,,,,,,,081 - 1701490,,,,,,
+Supplier_3,บริษัท เอส. จี สยาม จำกัด,,TRUE,FALSE,TRUE,,Default,FALSE,11/272-272  ม.10  ถ.เอกชัย,แขวงบางบอน เขตบางบอน,10150,กรุงเทพฯ,,02 - 895 0545 -6 ,,02 - 895 3029 ,,,,"PVC , ยาง ",CASH
+Supplier_4,คุณหน่อย,,FALSE,FALSE,TRUE,บริษัท เอส. จี สยาม จำกัด,Default,FALSE,,,,,,,089-4949485,,,,,,
+Supplier_5,บริษัท อินเตอร์ไพรส์ บุษราคัม โปรพลาส จำกัด,,TRUE,FALSE,TRUE,,Default,FALSE,4/7 ม.9,ต.นาดี อ.เมืองสมุทรสาคร,74000,สมุทรสาคร,,034-466011-6,,034-466017-8,,,,"PVC , ยาง  ",30
+Supplier_6,คุณทักษิณ ,,FALSE,FALSE,TRUE,บริษัท อินเตอร์ไพรส์ บุษราคัม โปรพลาส จำกัด,Default,FALSE,,,,,,,01-9099456,,,,,,
+Supplier_7,คุณเสริมศักดิ์,,FALSE,FALSE,TRUE,บริษัท อินเตอร์ไพรส์ บุษราคัม โปรพลาส จำกัด,Default,FALSE,,,,,,,081-6301569,,,,,,
+Supplier_8,คุณบี,,FALSE,FALSE,TRUE,บริษัท อินเตอร์ไพรส์ บุษราคัม โปรพลาส จำกัด,Default,FALSE,,,,,,,06-3247323,,,,,,
+Supplier_9,คุณศิริรัตน์-CN,,FALSE,FALSE,TRUE,บริษัท อินเตอร์ไพรส์ บุษราคัม โปรพลาส จำกัด,Default,FALSE,,,,,,,,,,,,,
+Supplier_10,บริษัท ซิลเวอร์โกลด์ พลาสติก จำกัด,,TRUE,FALSE,TRUE,,Default,FALSE,81/70-72 ม.20 (ไทรอัมพ์ เซ็นเตอร์) ถ.เทพารักษ์ กม.12,ต.บางพลีใหญ่ อ.บางพลี,10540,สมุทรปราการ,,01-3183339 / 02-3129720-22,,02-3129723,,,,"PVC , ยาง ",30
+Supplier_11,คุณคฑาวุธ ,,FALSE,FALSE,TRUE,บริษัท ซิลเวอร์โกลด์ พลาสติก จำกัด,Default,FALSE,,,,,,,,,,,,,
+Supplier_12,บริษัท วีเทค อีเล็คตริค เซ็นเตอร์ จำกัด,,TRUE,FALSE,TRUE,,Default,FALSE,1063 ถ.พระราม 4,แขวงวังใหม่ เขตปทุมวัน  ,10330,กรุงเทพฯ,,02-6117719,,02-6117721,,,,อุปกรณ์ไฟฟ้า ,60
+Supplier_13,สมชาย,,FALSE,FALSE,TRUE,บริษัท วีเทค อีเล็คตริค เซ็นเตอร์ จำกัด,Default,FALSE,,,,,,,,,,,,,
+Supplier_14,บริษัท เค.ซี.(กระทุ่มแบน) อุตสาหกรรม จำกัด  ,,TRUE,FALSE,TRUE,,Default,FALSE,107 หมู่ 10,ต.คลองมะเดือ อ.กระทุ่มแบน            ,,สมุทรสาคร,,0-2878-0432-6,,0-2468-3728,,,,Aluminium,CASH
+Supplier_15,บริษัท ซิมเมอร์ เมตัล สแตนดาร์ด จำกัด,,TRUE,FALSE,TRUE,,Default,FALSE,1/4 ม.7,ต.บ้านแถว อ.เสนา,13110,พระนครศรีอยุธยา,,02-6176025-6 /081-6856926,,"02-2721546, 2720877",,,,Aluminium,45
+Supplier_16,ปราวีณา / จิน,,FALSE,FALSE,TRUE,บริษัท ซิมเมอร์ เมตัล สแตนดาร์ด จำกัด,Default,FALSE,,,,,,,,,,,,,
+Supplier_17,บริษัท ไทยเม็ททอล จำกัด,,TRUE,FALSE,TRUE,,Default,FALSE,205 ม.2 ถ.บางปิ้ง-แพรกษา (พุทธรักษา),ต.ท้ายบ้าน อ.เมือง,10280,สมุทรปราการ,,02-7029787-91,,02-7028559,,,,Aluminium,60
+Supplier_18,คุณกชพร,,FALSE,FALSE,TRUE,บริษัท ไทยเม็ททอล จำกัด,Default,FALSE,,,,,,,,,,,,,
+Supplier_19,บริษัท พรนครินทร์ อลูมินั่ม จำกัด,,TRUE,FALSE,TRUE,,Default,FALSE,407/25-27 ม.5 ถนนศรีนครินทร์,ตำบลสำโรงเหนือ อำเภอเมือง,10270,สมุทรปราการ  ,,"02-3857871, 02-7587372",,"02-3857871, 02-7587372",,,,"Aluminium  ( สำเร็จรูป , PART ขายตามท้องตลาด)",15
+Supplier_20,คุณอัมพร,,FALSE,FALSE,TRUE,บริษัท พรนครินทร์ อลูมินั่ม จำกัด,Default,FALSE,,,,,,,,,,,,,
+Supplier_21,บริษัท รัตนดำรงค์  จำกัด,,TRUE,FALSE,TRUE,,Default,FALSE,258 หมู่ 4  ซอย  ว.ป.อ. 11 ( พิเศษ) ถ.เศรษฐกิจ 1,ต.ท่าไม้ อ.กระทุ่มแบน,,สมุทรสาคร,,"02 - 810 0179-80  ,02-429 1929",,02 - 4291929 ,,,,Aluminium,45
+Supplier_22,คุณสะรากรณ์,,FALSE,FALSE,TRUE,บริษัท รัตนดำรงค์  จำกัด,Default,FALSE,,,,,,,0-81 331 1687 ,,,,,,
+Supplier_23,บริษัท แอลเมทไทย จำกัด,,TRUE,FALSE,TRUE,,Default,FALSE,235 ม.7 ถ.สุขุมวิท  กม35,ต.บางปูใหม่  อ.เมือง,,สมุทรปราการ  ,,"02 - 323 2635 - 40 , 02 - 709 5608 -11",,02-709 5607,,,,Aluminium,30
+Supplier_24,คุณพิสิต,,FALSE,FALSE,TRUE,บริษัท แอลเมทไทย จำกัด,Default,FALSE,,,,,,,,,,,,,
+Supplier_25,ร้านสมานมิตร ,,TRUE,FALSE,TRUE,,Default,FALSE,802 หมู่ 1,ต.พนมสารคาม อ.พนมสารคาม,,ฉะเชิงเทรา,, (038)883 9191,, (038)883 9191,,,,"Aluminium  ( สำเร็จรูป , PART ขายตามท้องตลาด)",CASH
+Supplier_26,คุณไพรวัลย์,,FALSE,FALSE,TRUE,ร้านสมานมิตร ,Default,FALSE,,,,,,,089-964 0222,,,,,,

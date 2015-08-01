@@ -1,0 +1,4 @@
+id,name,type,parent_id
+product_cat_rawmat,Raw Material,Normal,
+product_cat_saleinfo,Sale Info,Normal,
+product_cat_finishgoods,Finished Goods,Normal,

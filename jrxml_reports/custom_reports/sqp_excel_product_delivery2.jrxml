@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="label" language="groovy" pageWidth="760" pageHeight="792" columnWidth="760" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.2396694214876123"/>
+	<property name="ireport.x" value="156"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<topPen lineWidth="0.5" lineStyle="Solid"/>
+			<leftPen lineWidth="0.5" lineStyle="Solid"/>
+			<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+			<rightPen lineWidth="0.5" lineStyle="Solid"/>
+		</box>
+	</style>
+	<parameter name="IDS" class="java.lang.Object"/>
+	<parameter name="PIDS" class="java.util.List" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{IDS}.toList()]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select sp.origin as mo_number, so.name as so_number, partner.name as customer, so.ref_project_name as project,
+product.default_code as panel_code, product."W", product."L", t.name as "T", move.product_qty, uom.name as uom,
+inside_skin.code inside_skin, outside_skin.code outside_skin
+from stock_picking sp
+inner join stock_move move on move.picking_id = sp.id
+left outer join product_uom uom on uom.id = move.product_uom
+left outer join product_product product on move.product_id = product.id
+left outer join sale_order so on sp.ref_order_id = so.id
+left outer join res_partner partner on so.partner_id = partner.id
+left outer join bom_choice_thick t on t.id = product."T"
+left outer join bom_choice_skin inside_skin on inside_skin.id = product.mat_inside_skin_choices
+left outer join bom_choice_skin outside_skin on outside_skin.id = product.mat_outside_skin_choices
+where $X{IN, sp.id, PIDS}
+order by move.date_expected desc, move.id]]>
+	</queryString>
+	<field name="mo_number" class="java.lang.String"/>
+	<field name="so_number" class="java.lang.String"/>
+	<field name="customer" class="java.lang.String"/>
+	<field name="project" class="java.lang.String"/>
+	<field name="panel_code" class="java.lang.String"/>
+	<field name="W" class="java.lang.String"/>
+	<field name="L" class="java.lang.String"/>
+	<field name="T" class="java.lang.String"/>
+	<field name="product_qty" class="java.lang.Number">
+		<fieldDescription><![CDATA[product_qty]]></fieldDescription>
+	</field>
+	<field name="uom" class="java.lang.String">
+		<fieldDescription><![CDATA[uom]]></fieldDescription>
+	</field>
+	<field name="inside_skin" class="java.lang.String"/>
+	<field name="outside_skin" class="java.lang.String"/>
+	<variable name="panel_code" class="java.lang.String">
+		<variableExpression><![CDATA[$F{panel_code}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="129" y="0" width="73" height="15" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="202" y="0" width="87" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="289" y="0" width="108" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="129" height="15" backcolor="#F8210E"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Project]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="397" y="0" width="86" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Panel Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="525" y="0" width="40" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[L]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="566" y="0" width="40" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[T]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="484" y="0" width="40" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[W]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="611" y="0" width="56" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="668" y="0" width="42" height="15" backcolor="#F8210E"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="524" y="0" width="1" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="565" y="0" width="1" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="606" y="0" width="1" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="607" y="0" width="1" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="608" y="0" width="1" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="609" y="0" width="1" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="610" y="0" width="1" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="667" y="0" width="1" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="483" y="0" width="1" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="710" y="0" width="50" height="15" forecolor="#000000" backcolor="#10FB3F"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Color]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="129" y="0" width="73" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{mo_number}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="202" y="0" width="87" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{so_number}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="289" y="0" width="108" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{customer}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="0" y="0" width="129" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{project}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="397" y="0" width="87" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{panel_code}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="484" y="0" width="40" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{W}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="525" y="0" width="40" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{L}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="566" y="0" width="40" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{T}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="668" y="0" width="42" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{uom}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0">
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="611" y="0" width="56" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{product_qty}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="524" y="0" width="1" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="565" y="0" width="1" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="606" y="0" width="1" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="607" y="0" width="1" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="608" y="0" width="1" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="609" y="0" width="1" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="610" y="0" width="1" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="667" y="0" width="1" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" x="710" y="0" width="50" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{inside_skin} == null && $F{outside_skin} == null ? "" :
+$F{inside_skin}+"/"+$F{outside_skin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

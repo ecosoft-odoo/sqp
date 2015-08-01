@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+		<record id="view_order_form_ext" model="ir.ui.view">
+            <field name="name">view.order.form.ext</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <data>
+                	<xpath expr="/form/sheet/notebook/page/group[@name='sale_total']" position="before">
+	                    <group class="oe_subtotal_footer oe_left" colspan="2" name="area_so">
+	                        <field name="area_so" />
+	                    </group>         			
+                    </xpath> 
+				</data>
+            </field>
+        </record>
+	</data>
+</openerp>

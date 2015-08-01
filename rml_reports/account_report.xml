@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>        
+        <report
+            auto="False"
+            id="account.account_invoices"
+            model="account.invoice"
+            name="sqp.account.invoice"
+            rml="rml_reports/account/account_print_invoice.rml"
+            string="Invoices"
+            attachment="(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+            attachment_use="True"
+            usage="default"
+            />
+    </data>
+</openerp>

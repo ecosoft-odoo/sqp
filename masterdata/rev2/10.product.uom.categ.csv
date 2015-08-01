@@ -1,0 +1,9 @@
+id,name
+uom_categ_weight,Weight
+uom_categ_area,Area
+uom_categ_units,Unit
+product.product_uom_categ_unit,Unit (OE)
+product.product_uom_categ_kgm,Weight (OE)
+product.uom_categ_wtime,Working Time (OE)
+product.uom_categ_length,Length / Distance (OE)
+product.product_uom_categ_vol,Volume (OE)

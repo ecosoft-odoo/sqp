@@ -1,0 +1,137 @@
+id,name,default_code,partner_id,tag_ids,sale_ok,purchase_ok,type,procure_method,supply_method,cost_method,categ_id,uom_id,uom_po_id,valuation,standard_price,list_price
+product_coldroom_1,Wall panel (T) 50 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1540
+product_coldroom_2,Ceiling panel (T) 50 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1600
+product_coldroom_3,Floor panel (T) 50 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,5700
+product_coldroom_4,Floor insulation (T) 50 mm.,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,900
+product_coldroom_5,Room lamp (Water proof type),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,10000
+product_coldroom_6,"Single swing door (3 Frame) Size : (W) 800 x (H) 1,800 x (T) 50 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,35000
+product_coldroom_7,"Single swing door (3 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 50 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,40000
+product_coldroom_8,"Single swing door (4 Frame) Size : (W) 800 x (H) 1,800 x (T) 50 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,38000
+product_coldroom_9,"Single swing door (4 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 50 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,43000
+product_coldroom_10,"Double swing door (3 Frame) Size : (W) 1,600 x (H) 1,800 x (T) 50 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,86000
+product_coldroom_11,"Double swing door (3 Frame) Size : (W) 2,400 x (H) 2,000 x (T) 50 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,96000
+product_coldroom_12,"Double swing door (4 Frame) Size : (W) 1,600 x (H) 1,800 x (T) 50 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,96000
+product_coldroom_13,"Double swing door (4 Frame) Size : (W) 2,400 x (H) 2,000 x (T) 50 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,106000
+product_coldroom_14,"Sliding door (3 Frame) Size : (W) 800 x (H) 1,800 x (T) 75 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,56000
+product_coldroom_15,"Sliding door (3 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 75 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,60000
+product_coldroom_16,"Sliding door (3 Frame) Size : (W) 2,400 x (H) 2,400 x (T) 75 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,75000
+product_coldroom_17,"Sliding door (4 Frame) Size : (W) 800 x (H) 1,800 x (T) 75 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,62000
+product_coldroom_18,"Sliding door (4 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 75 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,66000
+product_coldroom_19,"Sliding door (4 Frame) Size : (W) 2,400 x (H) 2,400 x (T) 75 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,80000
+product_coldroom_20,PVC Strip curtain,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,3500
+product_coldroom_21,Pressure relief port,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,5000
+product_coldroom_22,Steel base for Cold Room,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,6000
+product_coldroom_23,"Other fitting parts (Silicone, bolt, nut, washer, rivet & etc.)",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,400
+product_coldroom_24,Floor heater with Thermostat,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,40000
+product_coldroom_25,Wall panel (T) 75 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1900
+product_coldroom_26,Ceiling panel (T) 75 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1900
+product_coldroom_27,Floor panel (T) 75 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,5800
+product_coldroom_28,Floor insulation (T) 75 mm.,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1150
+product_coldroom_29,"Single swing door (3 Frame) Size : (W) 800 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,48000
+product_coldroom_30,"Single swing door (3 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,64000
+product_coldroom_31,"Single swing door (4 Frame) Size : (W) 800 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,51000
+product_coldroom_32,"Single swing door (4 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,67000
+product_coldroom_33,"Double swing door (3 Frame) Size : (W) 1,600 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,96000
+product_coldroom_34,"Double swing door (3 Frame) Size : (W) 2,400 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,120000
+product_coldroom_35,"Double swing door (4 Frame) Size : (W) 1,600 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,102000
+product_coldroom_36,"Double swing door (4 Frame) Size : (W) 2,400 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,128000
+product_coldroom_37,"Sliding door (3 Frame) Size : (W) 800 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,65000
+product_coldroom_38,"Sliding door (3 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,70000
+product_coldroom_39,"Sliding door (3 Frame) Size : (W) 2,400 x (H) 2,400 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,85000
+product_coldroom_40,"Sliding door (4 Frame) Size : (W) 800 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,60000
+product_coldroom_41,"Sliding door (4 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,68000
+product_coldroom_42,"Sliding door (4 Frame) Size : (W) 2,400 x (H) 2,400 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,90000
+product_coldroom_43,Wall panel (T) 100 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,2200
+product_coldroom_44,Ceiling panel (T) 100 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,2200
+product_coldroom_45,Floor panel (T) 100 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,6000
+product_coldroom_46,Floor insulation (T) 100 mm.,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1500
+product_coldroom_47,"Single swing door (3 Frame) Size : (W) 800 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,48000
+product_coldroom_48,"Single swing door (3 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,64000
+product_coldroom_49,"Single swing door (4 Frame) Size : (W) 800 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,51000
+product_coldroom_50,"Single swing door (4 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,67000
+product_coldroom_51,"Double swing door (3 Frame) Size : (W) 1,600 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,96000
+product_coldroom_52,"Double swing door (3 Frame) Size : (W) 2,400 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,120000
+product_coldroom_53,"Double swing door (4 Frame) Size : (W) 1,600 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,102000
+product_coldroom_54,"Double swing door (4 Frame) Size : (W) 2,400 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,128000
+product_coldroom_55,"Sliding door (3 Frame) Size : (W) 800 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,65000
+product_coldroom_56,"Sliding door (3 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,70000
+product_coldroom_57,"Sliding door (3 Frame) Size : (W) 2,400 x (H) 2,400 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,85000
+product_coldroom_58,"Sliding door (4 Frame) Size : (W) 800 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,68000
+product_coldroom_59,"Sliding door (4 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,75000
+product_coldroom_60,"Sliding door (4 Frame) Size : (W) 2,400 x (H) 2,400 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,90000
+product_coldroom_61,Wall panel (T) 125 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,2600
+product_coldroom_62,Ceiling panel (T) 125 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,2600
+product_coldroom_63,Floor panel (T) 125 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,6300
+product_coldroom_64,Floor Insulation (T) 125 mm.,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1700
+product_coldroom_65,"Single swing door (3 Frame) Size : (W) 800 x (H) 1,800 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,53000
+product_coldroom_66,"Single swing door (3 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,68000
+product_coldroom_67,"Single swing door (4 Frame) Size : (W) 800 x (H) 1,800 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,56000
+product_coldroom_68,"Single swing door (4 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,70000
+product_coldroom_69,"Double swing door (3 Frame) Size : (W) 1,600 x (H) 1,800 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,100000
+product_coldroom_70,"Double swing door (3 Frame) Size : (W) 2,400 x (H) 2,000 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,130000
+product_coldroom_71,"Double swing door (4 Frame) Size : (W) 1,600 x (H) 1,800 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,108000
+product_coldroom_72,"Double swing door (4 Frame) Size : (W) 2,400 x (H) 2,000 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,134400
+product_coldroom_73,"Sliding door (3 Frame) Size : (W) 800 x (H) 1,800 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,70000
+product_coldroom_74,"Sliding door (3 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,85000
+product_coldroom_75,"Sliding door (3 Frame) Size : (W) 2,400 x (H) 2,400 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,100000
+product_coldroom_76,"Sliding door (4 Frame) Size : (W) 800 x (H) 1,800 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,75000
+product_coldroom_77,"Sliding door (4 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,90000
+product_coldroom_78,"Sliding door (4 Frame) Size : (W) 2,400 x (H) 2,400 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,120000
+product_coldroom_79,Wall panel (T) 150 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,2900
+product_coldroom_80,Ceiling panel (T) 150 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,2900
+product_coldroom_81,Floor panel (T) 150 mm. (Color steel sheet/Color steel sheet),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,7000
+product_coldroom_82,Floor Insulation (T) 150 mm.,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,2100
+product_coldroom_83,"Swing door (3 Frame) Size : (W) 800 x (H) 1,800 x (T) 150 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,55000
+product_coldroom_84,"Swing door (3 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 150 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,77760
+product_coldroom_85,"Swing door (4 Frame) Size : (W) 800 x (H) 1,800 x (T) 150 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,59000
+product_coldroom_86,"Swing door (4 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 150 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,81000
+product_coldroom_87,"Sliding door (3 Frame) Size : (W) 800 x (H) 1,800 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,70000
+product_coldroom_88,"Sliding door (3 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,85000
+product_coldroom_89,"Sliding door (3 Frame) Size : (W) 2,400 x (H) 2,400 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,100000
+product_coldroom_90,"Sliding door (4 Frame) Size : (W) 800 x (H) 1,800 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,75000
+product_coldroom_91,"Sliding door (4 Frame) Size : (W) 1,200 x (H) 2,000 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,90000
+product_coldroom_92,"Sliding door (4 Frame) Size : (W) 2,400 x (H) 2,400 x (T) 125 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,120000
+product_coldroom_93,Heater for door ,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,m.,m.,Periodical (manual),0,130
+product_coldroom_94,Door hinge for Swing door (Kason) (Double) ,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,9750
+product_coldroom_95,Door Latch for Swing door (Kason) ,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,7800
+product_coldroom_96,Door Closer for Swing door ,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,3640
+product_coldroom_97,Door packing rubber (E : Shape) ,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,m.,m.,Periodical (manual),0,650
+product_coldroom_98,Door packing rubber for Sliding door ,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,m.,m.,Periodical (manual),0,780
+product_coldroom_99,"Entrance door for Swing door Size : (W) 800 x (H) 1,800 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,26000
+product_coldroom_100,"Entrance door for Swing door Size : (W) 1,200 x (H) 2,000 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,28600
+product_coldroom_101,"Panel for door Size : (W) 800 x (H) 1,800 x (T) 50 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,21060
+product_coldroom_102,"Panel for door Size : (W) 800 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,26000
+product_coldroom_103,"Panel for door Size : (W) 1,200 x (H) 2,000 x (T) 50 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,24700
+product_coldroom_104,"Panel for door Size : (W) 1,200 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,32500
+product_coldroom_105,Aluminium cap for Heater,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,m.,m.,Periodical (manual),0,390
+product_coldroom_106,Insulation bolt  (n : ½) L = 110,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,104
+product_coldroom_107,Insulation bolt  (n : ½) L = 170,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,156
+product_coldroom_108,Hanging plate with roller,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,3900
+product_coldroom_109,Handle for sliding door (Out side),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,9100
+product_coldroom_110,Handle for sliding door (Inside),,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,7800
+product_coldroom_111,Hinge for key,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,2600
+product_coldroom_112,"Entrance for Sliding door Size : (W) 800 x (H) 1,800 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,26000
+product_coldroom_113,"Entrance for Sliding door Size : (W) 1,200 x (H) 2,000 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,28600
+product_coldroom_114,"Panel for Sliding door Size : (W) 800 x (H) 1,800 x (T) 75 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,28600
+product_coldroom_115,"Panel for Sliding door Size : (W) 800 x (H) 1,800 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,31200
+product_coldroom_116,"Panel for Sliding door Size : (W) 1,200 x (H) 2,000 x (T) 75 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,31200
+product_coldroom_117,"Panel for Sliding door Size : (W) 1,200 x (H) 2,000 x (T) 100 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,40300
+product_coldroom_118,"Aluminium Rail for door Size : (W) 800 x (H) 1,800 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,7150
+product_coldroom_119,"Aluminium Rail for door Size : (W) 1,200 x (H) 2,000 mm.",,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,8450
+product_coldroom_120,Steel cover for door,,,Cold Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,m.,m.,Periodical (manual),0,1040
+product_coldroom_121,Insulation Panel for Door SUS304 / SUS304 (T) 75 mm.,,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,7800
+product_coldroom_122,Insulation Panel for Door Color / Color (T) 75 mm.,,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,5200
+product_coldroom_123,Insulation Panel for Door SUS304 / SUS304 (T) 100 mm.,,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,8450
+product_coldroom_124,Insulation Panel for Door Color / Color (T) 100 mm.,,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,5850
+product_coldroom_125,Insulation Panel for Door SUS304 / SUS304 (T) 125 mm.,,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,9100
+product_coldroom_126,Insulation Panel for Door Color / Color (T) 125 mm.,,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,6500
+product_coldroom_127,Insulation Panel for Door SUS304 / SUS304 (T) 150 mm.,,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,9750
+product_coldroom_128,Insulation Panel for Door Color / Color (T) 150 mm.,,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,7150
+product_coldroom_129,Installation Cold Room Bangkok and Surroundings 0 ~ 500 m2,,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,400
+product_coldroom_130,"Installation Cold Room Bangkok and Surroundings 501~1,000 m2",,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,350
+product_coldroom_131,"Installation Cold Room Bangkok and Surroundings 1,001 m2 Up",,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,300
+product_coldroom_132,Installation Cold Room Upcountry 0 ~ 500 m2,,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,450
+product_coldroom_133,"Installation Cold Room Upcountry 501~1,000 m2",,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,400
+product_coldroom_134,"Installation Cold Room Upcountry 1,001 m2 Up",,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,300
+product_coldroom_135,Transportation Cold Room Bangkok and Surroundings,,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,lot,lot,Periodical (manual),0,6500
+product_coldroom_136,Transportation Cold Room Upcountry,,,Cold Room,TRUE,FALSE,Service,Make to Order,Buy,Standard Price,Sale Info,lot,lot,Periodical (manual),0,0

@@ -1,0 +1,8 @@
+id,name,type,parent_id
+product_cat_rawmat,Raw Materials,Normal,All products
+product_cat_aluminium,Aluminium,Normal,Raw Materials
+product_cat_install_supply,Installation Supplies,Normal,Raw Materials
+product_cat_supply,Supplies,Normal,Raw Materials
+product_cat_pvc,PVC,Normal,Raw Materials
+product_cat_coil,Coil,Normal,Raw Materials
+product_cat_fg,Finished Goods,Normal,Raw Materials

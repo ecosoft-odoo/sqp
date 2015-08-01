@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_expenses_form_ext" model="ir.ui.view">
+            <field name="name">view.expenses.form.ext</field>
+            <field name="model">invoice.expense.expense</field>
+            <field name="inherit_id" ref="invoice_expense_tax.view_expenses_form_ext"/>
+            <field name="arch" type="xml">
+                <data>
+	                <field name="currency_id" position="after" version="7.0">
+						<field name="ref_purchase_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/> 
+						<field name="ref_order_id" on_change="onchange_ref_order_id(ref_order_id)" options="{'limit': 10, 'create': false, 'create_edit': false}"/> 
+						<field name="ref_project_name" /> 
+					</field>				
+				</data>
+			</field>
+        </record>
+	</data>
+</openerp>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="0">
+
+    <record id="mrp_production_status.group_s1" model="res.groups">
+        <field name="name">SF-Sheet Forming (s1)</field>
+        <field name="category_id" ref="base.module_category_production_status"/>
+    </record>
+    <record id="mrp_production_status.group_s2" model="res.groups">
+        <field name="name">AS-Assembly (s2)</field>
+        <field name="category_id" ref="base.module_category_production_status"/>
+    </record>
+    <record id="mrp_production_status.group_s3" model="res.groups">
+        <field name="name">IJ-Injection (s3)</field>
+        <field name="category_id" ref="base.module_category_production_status"/>
+    </record>
+    <record id="mrp_production_status.group_s4" model="res.groups">
+        <field name="name">DO-Door Finishing (s4)</field>
+        <field name="category_id" ref="base.module_category_production_status"/>
+    </record>
+    <record id="mrp_production_status.group_s5" model="res.groups">
+        <field name="name">FN-Finishing (s5)</field>
+        <field name="category_id" ref="base.module_category_production_status"/>
+    </record>
+    
+</data>
+</openerp>

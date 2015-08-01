@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_product_rapid_create_form" model="ir.ui.view">
+            <field name="name">view.product.rapid.create.form</field>
+            <field name="model">product.rapid.create</field>
+            <field name="arch" type="xml">
+                <form string="Create One-Time Product from BOM Template" version="7.0">
+                    <header>
+						<button string="Create One-Time Product" name="create_product" type="object" states="draft" class="oe_highlight"/>						
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done" />
+                	</header>                	
+					<group>
+                		<group>
+                			<field name="order_id" attrs="{'required': [('is_one_time_use','=',True)]}"/>
+                			<field name="is_one_time_use"/>
+                		</group>
+                		<group>
+                			<field name="user_id"/>
+							<field name="sale_ok"/>
+						</group>
+                	</group>
+                	<group>
+	                	<group string="Product Properties...">
+	                		<field name="product_categ_id"/>
+                			<field name="tag_ids" widget="many2many_tags" options="{'limit': 10, 'create': false, 'create_edit': false}" />	                    		
+	                		<field name="type"/>
+	                		<field name="procure_method"/>
+	                		<field name="cost_method"/>
+	                		<field name="supply_method"/>
+	                		<field name="valuation"/>
+	                	</group>
+	                	<group string="Note">            		
+							<field name="description" nolabel="1"/>
+	                	</group>
+	                </group>
+					<group string="Panel">
+						<field name="panel_lines" context="{'bom_product_type': 'panel'}" nolabel="1">
+							<tree string="Panel Lines" editable="bottom" >
+	                		    <field name="sequence" required="False"/>
+	                		    <field name="part_name" required="True"/>
+	                		    <field name="part_code" />
+	                		    <field name="bom_template_id" domain="[('bom_product_type','=','panel'),('is_bom_template','=',True)]" on_change="onchange_bom_template_id(bom_template_id)"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" />
+								<field name="mat_model_choices" 
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_model_choices_required" invisible="1"/> 			
+								<field name="bom_product_type" invisible="True"/>
+								<field name="W" attrs="{'required': [('is_W_required','=',True)]}"/><field name="is_W_required" invisible="1"/> 
+			                    <field name="L" attrs="{'required': [('is_L_required','=',True)]}"/><field name="is_L_required" invisible="1"/> 
+			                    <field name="T" attrs="{'required': [('is_T_required','=',True)]}" options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_T_required" invisible="1"/> 
+								<field name="mat_joint_choices" attrs="{'required': [('is_mat_joint_choices_required','=',True)]}"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_joint_choices_required" invisible="1"/> 			
+								<field name="mat_inside_skin_choices" attrs="{'required': [('is_mat_inside_skin_choices_required','=',True)]}"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_inside_skin_choices_required" invisible="1"/> 			
+								<field name="mat_outside_skin_choices" attrs="{'required': [('is_mat_outside_skin_choices_required','=',True)]}"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_outside_skin_choices_required" invisible="1"/> 			
+								<field name="mat_insulation_choices" attrs="{'required': [('is_mat_insulation_choices_required','=',True)]}"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_insulation_choices_required" invisible="1"/> 			
+								<field name="mat_camlock_choices"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_camlock_choices_required" invisible="1"/> 			
+								<field name="cut_area"/>
+								<field name="remark"/>
+							</tree>
+						</field>
+					</group>
+					<footer>
+						<field name="num_panel_lines" string="Lines" nolabel="1" class="oe_inline oe_right" states="draft"/>
+                        <button name="copy_lines" string="Copy Lines" type="object" class="oe_inline oe_right oe_link" states="draft" context="{'bom_product_type': 'panel','num_lines': num_panel_lines}}"/>
+					</footer>
+                	<group string="Door">
+						<field name="door_lines" context="{'bom_product_type': 'door'}" nolabel="1">
+							<tree string="Door Lines" editable="bottom" >
+	                		    <field name="sequence" required="False"/>
+	                		    <field name="part_name" required="True"/>
+	                		    <field name="part_code" />
+	                		    <field name="bom_template_id" domain="[('bom_product_type','=','door'),('is_bom_template','=',True)]" on_change="onchange_bom_template_id(bom_template_id)"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" />
+			                    <field name="bom_product_type" invisible="True"/>
+								<field name="W" attrs="{'required': [('is_W_required','=',True)]}"/><field name="is_W_required" invisible="1"/> 
+			                    <field name="L" attrs="{'required': [('is_L_required','=',True)]}"/><field name="is_L_required" invisible="1"/> 
+			                    <field name="T" attrs="{'required': [('is_T_required','=',True)]}" options="{'limit': 10, 'create': false, 'create_edit': false}"/><field name="is_T_required" invisible="1"/> 
+								<field name="mat_window_choices"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_window_choices_required" invisible="1"/> 			
+								<field name="mat_inside_skin_choices" attrs="{'required': [('is_mat_inside_skin_choices_required','=',True)]}"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_inside_skin_choices_required" invisible="1"/> 			
+								<field name="mat_outside_skin_choices" attrs="{'required': [('is_mat_outside_skin_choices_required','=',True)]}"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_outside_skin_choices_required" invisible="1"/> 			
+								<field name="mat_insulation_choices" attrs="{'required': [('is_mat_insulation_choices_required','=',True)]}"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_insulation_choices_required" invisible="1"/> 			
+								<field name="cut_area"/>
+								<field name="remark"/>
+							</tree>
+						</field>
+					</group>      
+					<footer>
+						<field name="num_door_lines" string="Lines" nolabel="1" class="oe_inline oe_right" states="draft"/>
+                        <button name="copy_lines" string="Copy Lines" type="object" class="oe_inline oe_right oe_link" states="draft" context="{'bom_product_type': 'door','num_lines': num_door_lines}"/>
+					</footer>
+                	<group string="Window">
+						<field name="window_lines" context="{'bom_product_type': 'window'}" nolabel="1">
+							<tree string="Window Lines" editable="bottom" >
+	                		    <field name="sequence" required="False"/>
+	                		    <field name="part_name" required="True"/>
+	                		    <field name="part_code" />
+	                		    <field name="bom_template_id" domain="[('bom_product_type','=','window'),('is_bom_template','=',True)]" on_change="onchange_bom_template_id(bom_template_id)"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" />
+			                    <field name="bom_product_type" invisible="True"/>
+								<field name="W" attrs="{'required': [('is_W_required','=',True)]}"/><field name="is_W_required" invisible="1"/> 
+			                    <field name="L" attrs="{'required': [('is_L_required','=',True)]}"/><field name="is_L_required" invisible="1"/> 
+			                    <field name="T" attrs="{'required': [('is_T_required','=',True)]}" options="{'limit': 10, 'create': false, 'create_edit': false}"/><field name="is_T_required" invisible="1"/> 
+								<field name="mat_window_choices"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_window_choices_required" invisible="1"/> 			
+								<field name="mat_inside_skin_choices" attrs="{'required': [('is_mat_inside_skin_choices_required','=',True)]}"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_inside_skin_choices_required" invisible="1"/> 			
+								<field name="mat_outside_skin_choices" attrs="{'required': [('is_mat_outside_skin_choices_required','=',True)]}"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_outside_skin_choices_required" invisible="1"/> 			
+								<field name="mat_insulation_choices" attrs="{'required': [('is_mat_insulation_choices_required','=',True)]}"
+	                		    	options="{'limit': 10, 'create': false, 'create_edit': false}" /><field name="is_mat_insulation_choices_required" invisible="1"/> 			
+								<field name="cut_area"/>
+								<field name="remark"/>
+							</tree>
+						</field>
+					</group>      
+					<footer>
+						<field name="num_window_lines" string="Lines" nolabel="1" class="oe_inline oe_right" states="draft"/>
+                        <button name="copy_lines" string="Copy Lines" type="object" class="oe_inline oe_right oe_link" states="draft" context="{'bom_product_type': 'window','num_lines': num_window_lines}"/>
+					</footer>
+               </form>
+            </field>
+        </record>
+        
+        <record id="view_product_rapid_create_tree" model="ir.ui.view">
+            <field name="name">view.product.rapid.create.tree</field>
+            <field name="model">product.rapid.create</field>
+            <field name="arch" type="xml">
+                <tree string="Create One-Time Product" version="7.0" colors="blue:state in ('draft')">
+                    <field name="order_id"/>
+                    <field name="user_id"/>
+                    <field name="description"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+       	<record id="action_view_product_rapid_create" model="ir.actions.act_window">
+            <field name="name">Create One-Time Product</field>
+            <field name="res_model">product.rapid.create</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to start a new Create One-Time Product Wizard.
+              </p>
+            </field>            
+        </record>
+        
+        <menuitem action="action_view_product_rapid_create"
+            id="menu_action_view_product_rapid_create" parent="mrp.menu_mrp_bom" 
+        	sequence="10" groups="mrp.group_mrp_user"/> 
+
+
+    </data>
+</openerp>

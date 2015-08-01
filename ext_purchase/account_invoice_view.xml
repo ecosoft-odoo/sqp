@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="invoice_supplier_form_ext" model="ir.ui.view">
+            <field name="name">invoice.supplier.form.ext</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='currency_id']" position="after">
+					<field name="ref_purchase_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/> 
+                    <field name="ref_order_id" options="{'limit': 10, 'create': false, 'create_edit': false}" attrs="{'invisible': ['|',('ref_order_id','=',False),('cost_order_id','!=',False)]}"/>
+                    <field name="cost_order_id" options="{'limit': 10, 'create': false, 'create_edit': false}" attrs="{'invisible': [('ref_order_id','!=',False)]}"/>
+					<field name="ref_project_name"/>
+                </xpath>
+            </field>
+        </record>
+	</data>
+</openerp>

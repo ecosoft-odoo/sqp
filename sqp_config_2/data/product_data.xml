@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+		<!-- 
+		Additional Product Category for SQP 
+		-->         
+        <record id="product.product_category_bom_template" model="product.category">
+            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="name">BOM Template</field>
+        </record>
+	</data>
+</openerp>

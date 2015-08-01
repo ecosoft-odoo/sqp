@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Receipt" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="144"/>
+	<property name="ireport.y" value="598"/>
+	<property name="OPENERP_RELATIONS" value="[&quot;line_ids&quot;]"/>
+	<style name="table" lineSpacing="Single">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF" lineSpacing="Single">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF" lineSpacing="Single">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF" lineSpacing="Single">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/home/kittiu/workspace/openerp_sqp/sqp_addons/jrxml_reports/sale/"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="xPath">
+		<![CDATA[/data/record]]>
+	</queryString>
+	<field name="Name-name" class="java.lang.String">
+		<fieldDescription><![CDATA[Partner-partner_id/Name-name]]></fieldDescription>
+	</field>
+	<field name="City-city" class="java.lang.String">
+		<fieldDescription><![CDATA[Partner-partner_id/City-city]]></fieldDescription>
+	</field>
+	<field name="State-state_id" class="java.lang.String">
+		<fieldDescription><![CDATA[Partner-partner_id/State-state_id]]></fieldDescription>
+	</field>
+	<field name="Street-street" class="java.lang.String">
+		<fieldDescription><![CDATA[Partner-partner_id/Street-street]]></fieldDescription>
+	</field>
+	<field name="Street2-street2" class="java.lang.String">
+		<fieldDescription><![CDATA[Partner-partner_id/Street2-street2]]></fieldDescription>
+	</field>
+	<field name="Zip-zip" class="java.lang.String">
+		<fieldDescription><![CDATA[Partner-partner_id/Zip-zip]]></fieldDescription>
+	</field>
+	<field name="Country_Name-name" class="java.lang.String">
+		<fieldDescription><![CDATA[Partner-partner_id/Country-country_id/Country_Name-name]]></fieldDescription>
+	</field>
+	<field name="Number-number" class="java.lang.String">
+		<fieldDescription><![CDATA[Number-number]]></fieldDescription>
+	</field>
+	<field name="Date-date" class="java.util.Date">
+		<fieldDescription><![CDATA[Date-date]]></fieldDescription>
+	</field>
+	<field name="Reference-ref" class="java.lang.String">
+		<fieldDescription><![CDATA[Credits-line_cr_ids/Journal_Item-move_line_id/Reference-ref]]></fieldDescription>
+	</field>
+	<field name="Due_Date-date_due" class="java.util.Date">
+		<fieldDescription><![CDATA[Credits-line_cr_ids/Due_Date-date_due]]></fieldDescription>
+	</field>
+	<field name="Date-date_original" class="java.util.Date">
+		<fieldDescription><![CDATA[Credits-line_cr_ids/Date-date_original]]></fieldDescription>
+	</field>
+	<field name="amount" class="java.lang.Number">
+		<fieldDescription><![CDATA[Credits-line_cr_ids/Amount-amount]]></fieldDescription>
+	</field>
+	<field name="Payment_Difference-payment_option" class="java.lang.String">
+		<fieldDescription><![CDATA[Payment_Difference-payment_option]]></fieldDescription>
+	</field>
+	<field name="writeoff_amount" class="java.lang.Number">
+		<fieldDescription><![CDATA[Difference_Amount-writeoff_amount]]></fieldDescription>
+	</field>
+	<field name="Invoice_No" class="java.lang.String">
+		<fieldDescription><![CDATA[line_ids/move_line_id/ref]]></fieldDescription>
+	</field>
+	<field name="Due_Date-date_due2" class="java.util.Date">
+		<fieldDescription><![CDATA[Voucher_Lines-line_ids/Due_Date-date_due]]></fieldDescription>
+	</field>
+	<field name="Invoice_Date" class="java.util.Date">
+		<fieldDescription><![CDATA[line_ids/date_original]]></fieldDescription>
+	</field>
+	<field name="amount2" class="java.lang.Number">
+		<fieldDescription><![CDATA[Voucher_Lines-line_ids/Amount-amount]]></fieldDescription>
+	</field>
+	<field name="Dr_Cr-type" class="java.lang.String">
+		<fieldDescription><![CDATA[Voucher_Lines-line_ids/Dr_Cr-type]]></fieldDescription>
+	</field>
+	<field name="Payment_Difference-payment_option2" class="java.lang.String">
+		<fieldDescription><![CDATA[Payment_Difference-payment_option]]></fieldDescription>
+	</field>
+	<field name="Name-name2" class="java.lang.String">
+		<fieldDescription><![CDATA[Counterpart_Account-writeoff_acc_id/Name-name]]></fieldDescription>
+	</field>
+	<field name="Customer_PO" class="java.lang.String">
+		<fieldDescription><![CDATA[Billing_Lines-line_ids/Journal_Item-move_line_id/Invoice-invoice/Sale_Orders-sale_order_ids/Customer_Reference-client_order_ref]]></fieldDescription>
+	</field>
+	<field name="Customer_SO" class="java.lang.String">
+		<fieldDescription><![CDATA[line_ids/move_line_id/invoice/sale_order_ids/name]]></fieldDescription>
+	</field>
+	<field name="Customer_INV" class="java.lang.String">
+		<fieldDescription><![CDATA[Billing_Lines-line_ids/Journal_Item-move_line_id/Invoice-invoice/number]]></fieldDescription>
+	</field>
+	<field name="Payment_Term" class="java.lang.String">
+		<fieldDescription><![CDATA[line_ids/move_line_id/invoice/sale_order_ids/payment_term/name]]></fieldDescription>
+	</field>
+	<field name="currency" class="java.lang.String">
+		<fieldDescription><![CDATA[journal_id/currency/name]]></fieldDescription>
+	</field>
+	<field name="comment" class="java.lang.String">
+		<fieldDescription><![CDATA[comment]]></fieldDescription>
+	</field>
+	<variable name="amount_subtotal" class="java.lang.Float" resetType="Group" resetGroup="Allocations" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount2} == null ? 0.0 : ($F{Dr_Cr-type}=="dr" ? -1 : 1) * $F{amount2}]]></variableExpression>
+	</variable>
+	<variable name="amount" class="java.lang.Number">
+		<variableExpression><![CDATA[$F{amount2} == null ? 0.0 : ($F{Dr_Cr-type}=="dr" ? -1 : 1) * $F{amount2}]]></variableExpression>
+	</variable>
+	<variable name="writeoff_amt" class="java.lang.Float">
+		<variableExpression><![CDATA[$F{writeoff_amount} == null ? 0.0 : $F{writeoff_amount}]]></variableExpression>
+	</variable>
+	<variable name="total" class="java.lang.Number">
+		<variableExpression><![CDATA[$V{amount_subtotal}+$V{writeoff_amt}]]></variableExpression>
+	</variable>
+	<group name="Allocations" footerPosition="StackAtBottom">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band height="842"/>
+	</background>
+	<pageHeader>
+		<band height="226" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="63" y="133" width="338" height="42"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" lineSpacing="1_1_2">
+					<font fontName="SansSerif" size="10" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[(new Scriptlet()).getAddress($F{Street-street},$F{Street2-street2},
+    $F{City-city},$F{State-state_id},$F{Country_Name-name},$F{Zip-zip})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="118" width="403" height="15"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Name-name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="502" y="169" width="80" height="15"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{Date-date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="502" y="139" width="80" height="15"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Number-number}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="8" y="0" width="111" height="31"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Customer_PO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="0" width="95" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Customer_SO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="223" y="0" width="95" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Payment_Term}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<printWhenExpression><![CDATA[$V{amount} != 0]]></printWhenExpression>
+			<textField>
+				<reportElement x="64" y="0" width="165" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Customer_INV}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="229" y="0" width="77" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{Invoice_Date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="454" y="0" width="110" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="0" width="40" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{Allocations_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="222">
+			<textField evaluationTime="Report">
+				<reportElement x="524" y="185" width="40" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="185" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["(Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="222">
+			<textField pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="454" y="4" width="110" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{amount_subtotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="454" y="28" width="110" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{Payment_Difference-payment_option2} == "with_writeoff" ?
+$V{writeoff_amt} : null]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="28" width="156" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" isBold="true" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Payment_Difference-payment_option2} == "with_writeoff" ?
+$F{comment} + " :" : ""]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="454" y="52" width="110" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{amount_subtotal}+$V{writeoff_amt}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="524" y="180" width="40" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="180" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["(Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<elementGroup>
+				<textField>
+					<reportElement x="90" y="52" width="347" height="20"/>
+					<textElement textAlignment="Center">
+						<font fontName="SansSerif" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["("+(new Scriptlet()).getAmtInWords((new BigDecimal(($V{amount_subtotal}+$V{writeoff_amt}).round(2).toString())).toString(),$F{currency}.toString()==""?"THB":$F{currency})+")"]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+		</band>
+	</lastPageFooter>
+</jasperReport>

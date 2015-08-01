@@ -1,0 +1,3 @@
+id,tag_ids,is_one_time_use,sale_ok,description,product_categ_id,temp_no_order_ref,sale_ok,is_one_time_use
+B_Grimm_Access,Standard Product,FALSE,TRUE,B.Grimm Access (Std AHU),Standard Product,TRUE,TRUE,FALSE
+B_Grimm_Panel,Standard Product,FALSE,TRUE,B.Grimm Panel (Std AHU),Standard Product,TRUE,TRUE,FALSE

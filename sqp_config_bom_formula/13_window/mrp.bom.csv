@@ -1,0 +1,12 @@
+id,bom_id/id,product_id,product_qty_formula,product_uom
+mrp.template_window_line1,mrp.template_window,[SP02169],"(line.W==1160) and (line.L==900) and (line.T.value in [42,50]) and (line.mat_window_choices.code=='Single') and (1) or 0.0",pcs
+mrp.template_window_line2,mrp.template_window,[SP01007],"(line.T.value in [42]) and (line.mat_window_choices.code=='Single') and (round(((line.W+line.L)*2/1000/6)+0.5,0)) or 0.0",pcs
+mrp.template_window_line3,mrp.template_window,[SP01095],(line.T.value in [50]) and (line.mat_window_choices.code=='Single') and () or 0.0,pcs
+mrp.template_window_line4,mrp.template_window,[SP01035],"(line.T.value in [42,50]) and (line.mat_window_choices.code=='Single') and (round(((line.W+line.L)*2/1000/6)+0.5,0)) or 0.0",pcs
+mrp.template_window_line5,mrp.template_window,[SP01039],"(line.T.value in [42,50]) and (line.mat_window_choices.code=='Single') and (round(((line.W+line.L)*2/1000/6)+0.5,0)) or 0.0",pcs
+mrp.template_window_line6,mrp.template_window,[SP02022-2],"(line.T.value in [42,50]) and (line.mat_window_choices.code=='Single') and ((line.W+line.L)*2/1000) or 0.0",m
+mrp.template_window_line7,mrp.template_window,[SP02023-2],"(line.T.value in [42,50]) and (line.mat_window_choices.code=='Single') and ((line.W+line.L)*2/1000) or 0.0",m
+mrp.template_window_line8,mrp.template_window,[SP02169],"(line.W==1160) and (line.L==900) and (line.T.value in [42,50,100]) and (line.mat_window_choices.code=='Double') and (2) or 0.0",pcs
+mrp.template_window_line9,mrp.template_window,[SP01436],"(line.T.value in [42]) and (line.mat_window_choices.code=='Double') and (round(((line.W+line.L)*2/1000/6)+0.5,0)) or 0.0",pcs
+mrp.template_window_line10,mrp.template_window,[SP01385],"(line.T.value in [50]) and (line.mat_window_choices.code=='Double') and (round(((line.W+line.L)*2/1000/6)+0.5,0)) or 0.0",pcs
+mrp.template_window_line11,mrp.template_window,[SP01440],"(line.T.value in [100]) and (line.mat_window_choices.code=='Double') and (round(((line.W+line.L)*2/1000/6)+0.5,0)) or 0.0",pcs

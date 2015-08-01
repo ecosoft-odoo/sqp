@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Product Tags View -->
+        <record id="product_tag_form_view" model="ir.ui.view">
+            <field name="name">product.tag.form.view</field>
+            <field name="model">product.tag</field>
+            <field name="arch" type="xml">
+            	<form string="Product Tags" version="7.0">
+                  <sheet>
+                    <group col="4">
+                        <group>
+							<field name="name"/>							
+                        </group>      
+                        <group>
+                        	<field name="active"/>
+                        </group>
+                    </group>             
+					<group>
+						<field name="product_ids"/>                    
+					</group>                  
+				  </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="product_tag_form_action" model="ir.actions.act_window">
+            <field name="name">Product Tags</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.tag</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new Product Tag.
+              </p>
+            </field>
+        </record>
+        <record id="product_tag_tree_view" model="ir.ui.view">
+            <field name="name">product.tag.tree.view</field>
+            <field name="model">product.tag</field>
+            <field name="arch" type="xml">
+                <tree string="Product Tags">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <menuitem action="product_tag_form_action" id="menu_product_tag_form_action" parent="product.prod_config_main" sequence="3" groups="base.group_no_one"/>
+        
+        <record id="product_normal_form_view_ext" model="ir.ui.view">
+            <field name="name">product.normal.form.view.ext</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <data>
+	                <div name="options" position="before" version="7.0">
+						<div name="tags" groups="base.group_user">
+							<label for="tag_ids"/>
+	                        <field name="tag_ids" widget="many2many_tags"/>
+	                    </div>
+	                </div>      				
+					<xpath expr="/form/sheet/notebook/page[@string='Sales']/group[@name='sale']" position="before">
+						<group>
+							<group string="Product belongs to...">
+								<field name="partner_id"/>
+							</group>
+							<group>					
+							</group>
+						</group>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+	</data>
+</openerp>

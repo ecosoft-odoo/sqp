@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+		<!-- In Create One-Time Product, set default Prod Categ to Finished Good -->
+        <function eval="('default',False,'product_categ_id', [('product.rapid.create', False)], ref('sqp_config.product_category_finished_goods'), True, False, False, False, True)" id="onetime_product_categ_default_set" model="ir.values" name="set"/>
+
+    </data>
+</openerp>

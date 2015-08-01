@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sqp_report_production_status" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="10" rightMargin="10" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.239669421487604"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table" lineSpacing="Single">
+		<box topPadding="2" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="record" lineSpacing="Single">
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineStyle="Dotted"/>
+			<bottomPen lineWidth="0.25" lineStyle="Dotted"/>
+		</box>
+	</style>
+	<style name="header" mode="Opaque" forecolor="#000000" backcolor="#C0C0C0" lineSpacing="Single">
+		<box topPadding="2" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_line" lineSpacing="Single">
+		<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<parameter name="IDS" class="java.lang.Object">
+		<defaultValueExpression><![CDATA[$P{IDS}.toList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/kittiu/workspace/openerp_sqp/sqp_addons/jrxml_reports/sale/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="partner_id" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select now() + interval '7 hours' as today, *, quantity - delivered_qty balance
+from (select *,
+	(quantity - inject) inject_bal,
+	inject / quantity * 100 inject_percent,
+	(quantity - door) door_bal,
+	(quantity - steel) steel_bal,
+	(select coalesce(sum(product_qty),0) from stock_picking p
+	join stock_move m on m.picking_id = p.id
+	where m.state = 'done' and p.ref_order_id = b.order_id and position(b.mo in p.origin) > 0) delivered_qty
+	from (
+		select mo_id, short_note, order_id, picking_id, order_type, mo_date, do_date, mo, so, cust, project, thick,
+		coalesce(sum(quantity),0) quantity,
+		coalesce(sum(inject),0) inject,
+		coalesce(sum(door),0) door,
+		coalesce(sum(steel),0) steel
+		from (
+			select prd.id mo_id, prd.short_note, prd.order_id, prd.target_picking_id picking_id,
+			tag.name order_type, prd.date_planned mo_date, pick.min_date do_date, prd.name mo, cust.name cust,
+			so.ref_project_name project,
+			so.name so, (select t.name from mrp_production prd2
+					join product_product pp on pp.id = prd2.product_id
+					join bom_choice_thick t on t.id = pp."T"
+					where prd2.parent_id = prd.id
+					and pp."T" is not null limit 1) as thick,
+			coalesce(status.product_qty, 0.0) quantity,
+			coalesce(status.s3, 0.0) inject,
+			coalesce(status.s4, 0.0) door,
+			coalesce(status.s1, 0.0) steel
+			from mrp_production prd
+			join mrp_production_status status on status.production_id = prd.id
+			left outer join sale_order so on so.id = prd.order_id
+			left outer join res_partner cust on cust.id = prd.partner_id
+			left outer join product_tag tag on tag.id = so.product_tag_id
+			left outer join stock_picking pick on pick.id = prd.target_picking_id
+			where prd.parent_id is null
+			and prd.state in ('confirmed', 'ready', 'in_production', 'done')
+			-- For performance, just make sure that we screen out all delivered MO
+			and prd.id in (select mo_id from
+					(select order_id, prd.id mo_id, prd.name mo_name, coalesce(sum(status.product_qty),0) qty
+					from mrp_production prd
+					join mrp_production_status status on status.production_id = prd.id
+					where prd.parent_id is null
+	  				and $P{partner_id} in (prd.partner_id, -1) -- for B.Grim test, and 1407 in (prd.partner_id, -1)
+					and prd.order_id is not null
+					group by prd.order_id, prd.id, prd.name) a
+					-- Only MO that DO's qty delivered not equal to that in MO
+					where a.qty >  (select coalesce(sum(product_qty),0) from stock_picking p
+							join stock_move m on m.picking_id = p.id
+							where p.ref_order_id = a.order_id and position(a.mo_name in p.origin) > 0 and m.state = 'done')
+					-- Only MO that DO's qty with some unsent / uncancelled > 0
+					and (select coalesce(sum(product_qty),0) from stock_picking p
+							join stock_move m on m.picking_id = p.id
+							where p.ref_order_id = a.order_id and position(a.mo_name in p.origin) > 0
+							and p.state in ('draft', 'progress', 'auto', 'confirmed')) > 0)
+		) a
+	group by mo_id, short_note, order_id, picking_id, order_type, mo_date, do_date, mo, so, cust, project, thick
+	) b
+) c
+order by cust, order_type, mo_date]]>
+	</queryString>
+	<field name="order_type" class="java.lang.String">
+		<fieldDescription><![CDATA[order_type]]></fieldDescription>
+	</field>
+	<field name="order_id" class="java.lang.String"/>
+	<field name="mo_id" class="java.lang.String"/>
+	<field name="picking_id" class="java.lang.String"/>
+	<field name="mo_date" class="java.util.Date"/>
+	<field name="do_date" class="java.util.Date"/>
+	<field name="mo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cust" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="so" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="project" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="thick" class="java.lang.String"/>
+	<field name="quantity" class="java.lang.Number"/>
+	<field name="inject" class="java.lang.Number"/>
+	<field name="door" class="java.lang.Number"/>
+	<field name="steel" class="java.lang.Number"/>
+	<field name="door_bal" class="java.lang.Number"/>
+	<field name="steel_bal" class="java.lang.Number"/>
+	<field name="inject_bal" class="java.lang.Number"/>
+	<field name="inject_percent" class="java.lang.Number"/>
+	<field name="delivered_qty" class="java.lang.Number"/>
+	<field name="balance" class="java.lang.Number"/>
+	<field name="short_note" class="java.lang.String"/>
+	<field name="today" class="java.sql.Timestamp"/>
+	<variable name="door" class="java.lang.Number" resetType="Group" resetGroup="UniqueID" calculation="Sum">
+		<variableExpression><![CDATA[$F{door}]]></variableExpression>
+	</variable>
+	<variable name="steel" class="java.lang.Number" resetType="Group" resetGroup="UniqueID" calculation="Sum">
+		<variableExpression><![CDATA[$F{steel}]]></variableExpression>
+	</variable>
+	<variable name="inject" class="java.lang.Number" resetType="Group" resetGroup="UniqueID" calculation="Sum">
+		<variableExpression><![CDATA[$F{inject}]]></variableExpression>
+	</variable>
+	<variable name="door_bal" class="java.lang.Number" resetType="Group" resetGroup="UniqueID" calculation="Sum">
+		<variableExpression><![CDATA[$F{door_bal}]]></variableExpression>
+	</variable>
+	<variable name="steel_bal" class="java.lang.Number" resetType="Group" resetGroup="UniqueID" calculation="Sum">
+		<variableExpression><![CDATA[$F{steel_bal}]]></variableExpression>
+	</variable>
+	<variable name="inject_bal" class="java.lang.Number" resetType="Group" resetGroup="UniqueID" calculation="Sum">
+		<variableExpression><![CDATA[$F{inject_bal}]]></variableExpression>
+	</variable>
+	<variable name="quantity" class="java.lang.Number" resetType="Group" resetGroup="UniqueID" calculation="Sum">
+		<variableExpression><![CDATA[$F{quantity}]]></variableExpression>
+	</variable>
+	<variable name="inject_percent" class="java.lang.Number" resetType="Group" resetGroup="UniqueID" calculation="Sum">
+		<variableExpression><![CDATA[$V{quantity} == null || $V{quantity} == 0 ?
+0.0 :
+$V{inject} / $V{quantity} * 100]]></variableExpression>
+	</variable>
+	<variable name="balance" class="java.lang.Number" resetType="Group" resetGroup="UniqueID" calculation="Sum">
+		<variableExpression><![CDATA[$F{balance}]]></variableExpression>
+	</variable>
+	<variable name="delivered_qty" class="java.lang.Number" resetType="Group" resetGroup="UniqueID" calculation="Sum">
+		<variableExpression><![CDATA[$F{delivered_qty}]]></variableExpression>
+	</variable>
+	<variable name="today" class="java.util.Date" resetType="Group" resetGroup="UniqueID">
+		<variableExpression><![CDATA[new Date()]]></variableExpression>
+	</variable>
+	<group name="UniqueID">
+		<groupExpression><![CDATA[$F{cust}]]></groupExpression>
+		<groupFooter>
+			<band height="20">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="0" width="522" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["รวมงาน " + $F{cust} + " ทั้งหมด"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="637" y="0" width="28" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{inject_bal}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="721" y="0" width="28" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{delivered_qty}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="665" y="0" width="28" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{door}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="693" y="0" width="28" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{door_bal}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="749" y="0" width="28" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{balance}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="523" y="0" width="30" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{quantity}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="609" y="0" width="28" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{inject}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="581" y="0" width="28" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{steel_bal}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="553" y="0" width="28" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{steel}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="777" y="0" width="45" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="-1" y="20" width="188" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="14" isBold="true" isUnderline="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[รายงานสถานะการผลิต]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="662" y="20" width="140" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="10" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[ วันที่บังคับใช้ 01/10/57]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="0" width="186" height="20"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="12" isBold="true" isUnderline="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Square Panel Co., Ltd.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="709" y="0" width="93" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="10" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[PD - F - 108]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement style="header" x="1" y="0" width="44" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Product Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="45" y="0" width="50" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[วันที่สั่งผลิต]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="95" y="0" width="50" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[กำหนดส่ง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="145" y="0" width="50" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[เลขที่ ใบสั่งผลิต]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="195" y="0" width="88" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Customer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="376" y="0" width="50" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Order]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="426" y="0" width="23" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[หนา]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="449" y="0" width="74" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[รายการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="523" y="0" width="30" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="7" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[จำนวน
+สั่งผลิต]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="609" y="0" width="56" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[แผนกฉีดโฟม]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="721" y="0" width="56" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[แผนก FG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="609" y="15" width="28" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="7" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[ผลิต]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="637" y="15" width="28" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="7" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[เหลือ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="283" y="0" width="93" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Project]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="693" y="15" width="28" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="7" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[เหลือ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="665" y="15" width="28" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="7" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[ผลิต]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="721" y="15" width="28" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="7" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[ส่ง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="749" y="15" width="28" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="7" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[เหลือ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="553" y="15" width="28" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="7" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[ตัดได้]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="581" y="15" width="28" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="7" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[เหลือ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="553" y="0" width="56" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="7" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[แผนกตัดเหล็ก]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="665" y="0" width="56" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[แผนกประตู]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="777" y="0" width="45" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[หมายเหตุ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="1" y="0" width="44" height="15"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{order_type}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="45" y="0" width="50" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{mo_date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="95" y="0" width="50" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{do_date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="145" y="0" width="50" height="15"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{mo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="195" y="0" width="88" height="15"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cust}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="283" y="0" width="93" height="15"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{project}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="376" y="0" width="50" height="15"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{so}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="426" y="0" width="23" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{thick}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="523" y="0" width="30" height="15" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="609" y="0" width="28" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{inject}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="665" y="0" width="28" height="15" backcolor="#E5E5E5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{door}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="553" y="0" width="28" height="15" backcolor="#E5E5E5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{steel}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="581" y="0" width="28" height="15" backcolor="#E5E5E5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{steel_bal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="693" y="0" width="28" height="15" backcolor="#E5E5E5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{door_bal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="637" y="0" width="28" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{inject_bal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="721" y="0" width="28" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{delivered_qty}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="749" y="0" width="28" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{balance}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="449" y="0" width="74" height="15"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{short_note}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="777" y="0" width="45" height="15"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="16">
+			<textField>
+				<reportElement x="697" y="1" width="80" height="15"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="777" y="1" width="40" height="15"/>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="78" y="1" width="177" height="15"/>
+				<textElement>
+					<font isUnderline="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{today}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="1" width="122" height="15"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="10" isBold="false" isUnderline="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Printed Date:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

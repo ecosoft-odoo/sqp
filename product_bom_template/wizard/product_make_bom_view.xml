@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    	<record id="view_product_make_bom_ext" model="ir.ui.view">
+            <field name="name">view.product.make.bom.ext</field>
+            <field name="model">product.make.bom</field>
+            <field name="inherit_id" ref="mrp_quick_bom.view_product_make_bom"/>
+            <field name="arch" type="xml">
+                <field name="product_name" position="replace">
+                 	<field name="product_name" string="Project Name"/>
+                 	<field name="is_one_time_use" />               
+                </field>                
+				<field name="product_uom_id" position="after">
+                 	<field name="ref_order_id" on_change="onchange_ref_order_id(ref_order_id)" options="{'limit': 10, 'create': false, 'create_edit': false}"/>               
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

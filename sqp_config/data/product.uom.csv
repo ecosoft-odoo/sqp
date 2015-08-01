@@ -1,0 +1,14 @@
+id,name,category_id/id,uom_type,rounding,factor_inv,factor
+product.product_uom_kgm,kg,product.product_uom_categ_kgm,reference,0.01,1,1
+product.product_uom_sqm,sqm,product.product_uom_categ_area,reference,0.01,1,1
+product.product_uom_ea,EA,product.product_uom_categ_unit,reference,0.01,1,1
+product.product_uom_set,set,product.product_uom_categ_unit,smaller,0.01,1,1
+product.product_uom_lot,lot,product.product_uom_categ_unit,smaller,0.01,1,1
+product.product_uom_meter,m,product.uom_categ_length,reference,0.01,1,1
+product.product_uom_pcs,pcs,product.product_uom_categ_unit,smaller,0.01,1,1
+product.product_uom_nos,nos,product.product_uom_categ_unit,smaller,0.01,1,1
+product.product_uom_rolls,roll,product.product_uom_categ_unit,smaller,0.01,1,1
+product.product_uom_tube,tube,product.product_uom_categ_unit,smaller,0.01,1,1
+product.product_uom_hole,hole,product.product_uom_categ_unit,smaller,0.01,1,1
+product.product_uom_gal,gal,product.product_uom_categ_vol,bigger,0.01,3.7854125343,0.264172
+product.product_uom_tank,tank,product.product_uom_categ_unit,smaller,0.01,1,1

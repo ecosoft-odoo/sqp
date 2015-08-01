@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+	    <record model="ir.ui.view" id="view_purchase_requisition_form_ext">
+	        <field name="name">view.purchase.requisition.form.ext</field>
+	        <field name="model">purchase.requisition</field>
+	        <field name="inherit_id" ref="purchase_requisition_double_validation.view_purchase_requisition_form_ext"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="/form/header/field[@name='state']" position="attributes">
+	            	<attribute name="statusbar_visible">draft,in_purchase,done</attribute>
+	            </xpath>
+	            <xpath expr="/form/header/button[@name='tender_in_progress']" position="replace">
+	            </xpath>
+	            <xpath expr="/form/sheet/group//field[@name='warehouse_id']" position="after">
+	            	<field name="ref_order_id" on_change="onchange_ref_order_id(ref_order_id)" options="{'limit': 10, 'create': false, 'create_edit': false}"/> 
+	            	<field name="ref_project_name" /> 
+	            </xpath>		        
+			</field>
+	    </record>
+	    
+	    <record model="ir.ui.view" id="view_purchase_requisition_form_ext2">
+	        <field name="name">view.purchase.requisition.form.ext2</field>
+	        <field name="model">purchase.requisition</field>
+	        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+	        <field name="arch" type="xml">
+	            <button name="tender_reset" position="attributes">
+	                <attribute name="invisible">True</attribute>
+	            </button>
+	            <xpath expr="/form/sheet/group//field[@name='date_start']" position="attributes">
+	            	<attribute name="widget">date</attribute>
+	            </xpath>	 
+	            <xpath expr="/form/sheet/group//field[@name='date_end']" position="attributes">
+	            	<attribute name="widget">date</attribute>
+	            </xpath>	 
+	            <xpath expr="/form/sheet/notebook/page/field/tree/field[@name='product_id']" position="after">
+					<field name="name"/>
+	            </xpath>	 			
+			</field>
+	    </record>
+	    
+	    <record model="ir.ui.view" id="view_purchase_requisition_tree_ext">
+	        <field name="name">view.purchase.requisition.tree.ext</field>
+	        <field name="model">purchase.requisition</field>
+	        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_tree"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="/tree/field[@name='date_start']" position="attributes">
+	            	<attribute name="widget">date</attribute>
+	            </xpath>	 
+	            <xpath expr="/tree/field[@name='date_end']" position="attributes">
+	            	<attribute name="widget">date</attribute>
+	            </xpath>	  			
+			</field>
+	    </record>
+		<menuitem name="Purchases"
+            id="base.menu_purchase_root"
+            groups="purchase_requisition.group_purchase_requisition_manager,purchase_requisition.group_purchase_requisition_user"
+            sequence="60"/>		
+        <menuitem
+	        id="purchase_requisition.menu_purchase_requisition_pro_mgt"
+	        name="Purchase Requisitions"
+	        sequence="10"
+	        parent="purchase.menu_procurement_management"
+	        groups="purchase_requisition.group_purchase_requisition_manager,purchase_requisition.group_purchase_requisition_user"
+	        action="purchase_requisition.action_purchase_requisition"/>
+	</data>
+</openerp>

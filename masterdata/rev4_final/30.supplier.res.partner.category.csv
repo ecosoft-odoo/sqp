@@ -1,0 +1,8 @@
+id,name,parent_id/id
+res_partner_category_aluminium,ALUMINIUM,
+res_partner_category_installation,INSTALLATION ,
+res_partner_category_expendables,วัสดุสิ้นเปลือง ,
+res_partner_category_pvc,PVC ,
+res_partner_category_rawmat,วัตถุดิบ,
+res_partner_category_office,อุปกรณ์/เครื่องใช้สำนักงาน,
+res_partner_category_others,อื่น ๆ ,

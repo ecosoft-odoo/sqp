@@ -1,0 +1,16 @@
+id,name,categ_id/id,sale_ok,purchase_ok,is_one_time_use,uom_id
+product.template_slipjoint_ahu,Slip Joint (AHU & Clean Room),product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_slipjoint_cr_ahu,Slip Joint (Clean Room),product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_slipjoint_std_ahu,Standard AHU,product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_slipjoint_rockwool,Slip Joint (Rockwool),product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_firejoint_rockwool,Fire Joint (Rockwool),product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_nonprogressive_joint,Non-Progressive Joint (Rockwool),product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_foamslab,Foam Slab,product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_single_door_flat,Single Door (Flat Type),product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_double_door_unseq,Double Door (Flat Type / Un-Sequence),product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_double_door_seq,Double Door (Flat Type / Sequence),product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_single_sliding_door,Single Sliding Door,product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_swing_door_cold,Swing Door (Cold Room),product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_sliding_door_cold,Sliding Door (Cold Room),product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_window,Window,product.product_category_bom_template,FALSE,FALSE,FALSE,EA
+product.template_sinko_ab,Sinko AB,product.product_category_bom_template,FALSE,FALSE,FALSE,EA

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <!--
+        Payment term
+        -->
+        <record id="account.account_payment_term_immediate" model="account.payment.term">
+            <field name="name">Cash</field>
+            <field name="note">Immediate Payment</field>
+        </record>
+        
+        <record id="account_payment_term_7days" model="account.payment.term">
+            <field name="name">7 Days</field>
+            <field name="note">7 Days</field>
+        </record>
+        
+        <record id="account_payment_term_line_7days" model="account.payment.term.line">
+            <field name="value">balance</field>
+            <field eval="7" name="days"/>
+            <field eval="0" name="days2"/>
+            <field eval="account_payment_term_7days" name="payment_id"/>
+        </record>
+        
+        <record id="account.account_payment_term_15days" model="account.payment.term">
+            <field name="name">15 Days</field>
+            <field name="note">15 Days</field>
+        </record>
+
+        <record id="account.account_payment_term_net" model="account.payment.term">
+            <field name="name">30 Days</field>
+            <field name="note">30 Days</field>
+        </record>
+
+        <record id="account_payment_term_45days" model="account.payment.term">
+            <field name="name">45 Days</field>
+            <field name="note">45 Days</field>
+        </record>
+
+        <record id="account_payment_term_line_45days" model="account.payment.term.line">
+            <field name="value">balance</field>
+            <field eval="45" name="days"/>
+            <field eval="0" name="days2"/>
+            <field eval="account_payment_term_45days" name="payment_id"/>
+        </record>        
+        
+        <record id="account_payment_term_60days" model="account.payment.term">
+            <field name="name">60 Days</field>
+            <field name="note">60 Days</field>
+        </record>
+
+        <record id="account_payment_term_line_60days" model="account.payment.term.line">
+            <field name="value">balance</field>
+            <field eval="60" name="days"/>
+            <field eval="0" name="days2"/>
+            <field eval="account_payment_term_60days" name="payment_id"/>
+        </record>        
+        
+        <record id="account_payment_term_90days" model="account.payment.term">
+            <field name="name">90 Days</field>
+            <field name="note">90 Days</field>
+        </record>
+
+        <record id="account_payment_term_line_90days" model="account.payment.term.line">
+            <field name="value">balance</field>
+            <field eval="90" name="days"/>
+            <field eval="0" name="days2"/>
+            <field eval="account_payment_term_90days" name="payment_id"/>
+        </record>        
+
+        <record id="account_payment_term_pdc15days" model="account.payment.term">
+            <field name="name">PDC. 15 Days</field>
+            <field name="note">PDC. 15 Days</field>
+        </record>
+
+        <record id="account_payment_term_line_pdc15days" model="account.payment.term.line">
+            <field name="value">balance</field>
+            <field eval="15" name="days"/>
+            <field eval="0" name="days2"/>
+            <field eval="account_payment_term_pdc15days" name="payment_id"/>
+        </record>     	
+
+        <record id="account_payment_term_pdc30days" model="account.payment.term">
+            <field name="name">PDC. 30 Days</field>
+            <field name="note">PDC. 30 Days</field>
+        </record>
+
+        <record id="account_payment_term_line_pdc30days" model="account.payment.term.line">
+            <field name="value">balance</field>
+            <field eval="30" name="days"/>
+            <field eval="0" name="days2"/>
+            <field eval="account_payment_term_pdc30days" name="payment_id"/>
+        </record>     	
+
+        <record id="account_payment_term_pdc60days" model="account.payment.term">
+            <field name="name">PDC. 60 Days</field>
+            <field name="note">PDC. 60 Days</field>
+        </record>
+
+        <record id="account_payment_term_line_pdc60days" model="account.payment.term.line">
+            <field name="value">balance</field>
+            <field eval="60" name="days"/>
+            <field eval="0" name="days2"/>
+            <field eval="account_payment_term_pdc60days" name="payment_id"/>
+        </record>     	        
+	</data>
+</openerp>

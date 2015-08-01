@@ -1,0 +1,4 @@
+id,name,parent_id/id
+base.res_partner_category_customer,Customer,
+base.res_partner_category_modern_trade,Modern Trade,base.res_partner_category_customer
+base.res_partner_category_sport_outlet,Sport Outlet,base.res_partner_category_modern_trade

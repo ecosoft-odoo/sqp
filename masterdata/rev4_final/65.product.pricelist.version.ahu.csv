@@ -1,0 +1,4 @@
+id,name,pricelist_id/id
+pricelist_ahu_v1,Default AHU Pricelist #1 Version,pricelist_ahu_1
+pricelist_ahu_v2,Default AHU Pricelist #2 Version,pricelist_ahu_2
+pricelist_ahu_v3,Default AHU Pricelist #3 Version,pricelist_ahu_3

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="view_sqp_job_cost_sheet_tree" model="ir.ui.view">
+        <field name="name">sqp.job.cost.sheet.tree</field>
+        <field name="model">sqp.job.cost.sheet</field>
+        <field name="arch" type="xml">
+            <tree create="false" string="Job Cost Sheet" > <!-- colors="red:profit_amount &lt; 0)" -->
+            	<field name="name"/>
+                <field name="partner_id" />
+				<field name="ref_project_name"/>            	
+                <field name="product_tag_id" invisible="1"/>
+                <field name="user_id" invisible="1"/>
+                <field name="date" invisible="1"/>
+                <field name="year" invisible="1"/>
+                <field name="month" invisible="1"/>
+                <field name="day" invisible="1"/>
+                <field name="amount_net" string="Order" sum="Order"/>
+				<!-- Cost -->
+   				<field name="commission_amount" string="Commission" sum="Commission"/>
+                <field name="mrp_main_rm_amount" string="Raw Materials" sum="Raw Materials"/>
+                <field name="mrp_rm_amount" string="Supply" sum="Supply"/>
+                <field name="supply_list_amount" string="Supply List" sum="Supply List"/>
+                <field name="other_invoice_list_amount" string="Parts for Project" sum="Parts for Project"/>
+                <field name="subcontract_amount" string="Sub Contractor" sum="Sub Contractor"/>
+                <field name="labor_amount" string="Labour" sum="Labour"/>
+                <field name="transport_amount" string="Transport" sum="Transport"/>
+                <field name="plane_ticket_invoice_list_amount" string="Ticket" sum="Ticket"/>
+                <field name="comm_install_invoice_list_amount" string="Install/Exp Export" sum="Install/Exp Export"/>
+                <field name="expense_list_amount" string="Expense" sum="Expense"/>
+                <field name="electric_amount" string="Electric" sum="Transport"/>
+                <field name="profit_amount" string="Total Profit" sum="Total Profit"/>
+            	<field name="state"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="view_sqp_job_cost_sheet_form" model="ir.ui.view">
+        <field name="name">sqp.job.cost.sheet.form</field>
+        <field name="model">sqp.job.cost.sheet</field>
+        <field eval="25" name="priority"/>
+        <field name="arch" type="xml">
+            <form create="false" string="Expenses Sheet" version="7.0">
+            <header>                    
+                <field name="state" widget="statusbar" statusbar_visible="draft,sent,invoiced,done" statusbar_colors='{"invoice_except":"red","waiting_date":"blue"}'/>
+            </header>
+            <!--sheet-->
+                <h1>
+                    <label string="Job Cost Sheet:  " />
+                    <field name="order_id" class="oe_inline" readonly="1"/>
+                </h1>
+            	<group>
+                    <group>
+						<field name="ref_project_name"/>
+                        <field name="partner_id"/>
+                        <field name="user_id"/>
+                        <field name="date"/>                        
+                    </group>
+                    <group>
+                    	<field name="area_so" />
+                    	<field name="area_mo" />
+                    </group>
+                    <group string="Revenue">
+		                <field name="add_disc"/>
+		                <label for="amount_net"/>
+	                    <h2><field name="amount_net"/></h2>
+                    </group>
+                    <group string="Profit">
+                    	<h2><label for="profit_amount"/>
+	                    <field name="profit_amount"/></h2>
+                    	<h2><label string="%% Profit"/>
+	                    <field name="profit_percent"/></h2>
+                    </group>
+               	</group>
+               	<group string="Cost">
+                    <group>
+           				<field name="commission_amount" string="0-Sales Commission"/>
+		                <field name="mrp_main_rm_amount" string="1-Raw Materials"/>
+		                <field name="mrp_rm_amount" string="2-Supply"/>
+		                <field name="supply_list_amount" string="3-Supply List"/>
+		                <field name="other_invoice_list_amount" string="4-Parts for Project"/>
+		                <field name="subcontract_amount" string="5-Sub Contractor"/>
+                    </group>
+                    <group>
+		                <field name="labor_amount" string="6-Labour"/>
+		                <field name="transport_amount" string="7-Transport"/>
+		                <field name="plane_ticket_invoice_list_amount" string="8-Ticket"/>
+		                <field name="comm_install_invoice_list_amount" string="9-Install/Exp Export"/>
+		                <field name="expense_list_amount" string="10-Expense"/>
+		                <field name="electric_amount" string="11-Electric"/>
+		                
+		                <h2><label for="total_cost_amount"/>
+	                    <field name="total_cost_amount"/></h2>
+                    	<h2><label string="%% Total Cost"/>
+	                    <field name="total_cost_percent"/></h2>
+                    </group>
+               	</group>
+                <notebook>
+	                <page string="Order Lines">           	
+	                    <field name="order_line">
+	                        <tree string="Sales Order Lines">
+	                            <field name="sequence" invisible="1"/>
+	                            <field name="product_id"/>
+	                            <field name="name"/>
+	                            <field name="product_uom_qty"/>
+	                            <field name="product_uom"/>
+	                            <field name="price_unit"/>
+	                            <field name="discount"/>
+	                            <field name="price_subtotal" sum="Total"/>
+	                        </tree>
+	                    </field>
+						<p class="oe_grey">
+						   This tab contain the detail order revenue of the Sales Order.
+						</p> 	     
+	        		</page>
+	                <page string="1-Raw Material">
+	                    <field name="mrp_main_rm_list">
+	                        <tree string="Main Material List">
+	                            <field name="product_id"/>
+	                            <field name="planned_qty"/>
+	                            <field name="actual_qty"/>
+	                            <field name="product_uom"/>
+	                            <field name="price_unit"/>
+	                            <field name="price_subtotal" sum="Total"/>
+	                        </tree>
+	                    </field>
+						<p class="oe_grey">
+						   Data from the Actual "Main" Material Usage of all <b>Sub-MO</b> of Manufacturing Order that products for this Sales Order
+						</p> 
+	        		</page>
+	                <page string="2-Supply">
+	                    <field name="mrp_rm_list">
+	                        <tree string="Supply Material List">
+	                            <field name="product_id"/>
+	                            <field name="planned_qty"/>
+	                            <field name="actual_qty"/>
+	                            <field name="product_uom"/>
+	                            <field name="price_unit"/>
+	                            <field name="price_subtotal" sum="Total"/>
+	                        </tree>
+	                    </field>
+						<p class="oe_grey">
+						   Data from the Actual "Non-Main" Material Usage of all <b>Sub-MO</b> of Manufacturing Order that products for this Sales Order
+						</p> 
+	        		</page>
+	                <page string="3-Supply List">
+	                    <field name="supply_list">
+	                        <tree string="Supply List">
+	                            <field name="product_id"/>
+	                            <field name="planned_qty"/>
+	                            <field name="actual_qty"/>
+	                            <field name="product_uom"/>
+	                            <field name="price_unit"/>
+	                            <field name="price_subtotal" sum="Total"/>
+	                        </tree>
+	                    </field>
+						<p class="oe_grey">
+						   Data from <b>Supply List</b> specific for this Sales Order.
+						</p> 
+	        		</page>
+	                <page string="4-Parts of Project">
+	                    <field name="other_invoice_list">
+	                        <tree string="Others">
+	                            <field name="invoice_id"/>
+	                            <field name="account_id"/>
+	                            <field name="product_id"/>
+	                            <field name="name"/>
+	                            <field name="product_qty"/>
+	                            <field name="product_uom"/>
+	                            <field name="price_unit"/>
+	                            <field name="price_subtotal" sum="Total"/>
+	                        </tree>
+	                    </field>
+						<p class="oe_grey">
+						   Data from <b>Supplier Invoices</b> that referenced to this Sales Order, but excluded those created from PO Subcontract.
+						   And only from invoice lines, whose Product's <b>Job Cost Type</b> is <b>not set</b>.
+						   <br/><b>Note:</b> product job cost type can be set in Product > Produrement window.
+						</p> 
+	        		</page>
+	                <page string="5-Sub Contractor">
+	                    <field name="po_subcontract">
+	                        <tree string="Supply List">
+	                            <field name="invoice_id"/>
+	                            <field name="product_id"/>
+	                            <field name="name"/>
+	                            <field name="product_qty"/>
+	                            <field name="product_uom"/>
+	                            <field name="price_unit"/>
+	                            <field name="price_subtotal" sum="Total"/>
+	                        </tree>
+	                    </field>
+						<p class="oe_grey">
+						   Data from <b>Supplier Invoices</b> created from <b>PO Subcontract</b> specific for this Sales Order.
+						</p> 
+	        		</page>
+	                <page string="6-Labour">
+	                    <field name="labor_list">
+	                        <tree string="Labor List">
+	                            <field name="name"/>
+	                            <field name="date"/>
+	                            <field name="amount" sum="Total"/>
+	                        </tree>
+	                    </field>
+						<p class="oe_grey">
+						   Data from <b>Labor Booking</b> information manually entered in menu <b>Job Booking</b> specific for this Sales Order.
+						</p> 
+	        		</page>
+	                <page string="7-Transport">
+	                    <field name="transport_list">
+	                        <tree string="Transport List">
+	                            <field name="name"/>
+	                            <field name="date"/>
+	                            <field name="amount" sum="Total"/>
+	                        </tree>
+	                    </field>
+						<p class="oe_grey">
+						   Data from <b>Transport Booking</b> information manually entered in menu <b>Job Booking</b> specific for this Sales Order.
+						</p> 
+	        		</page>
+	                <page string="8-Ticket">
+	                    <field name="plane_ticket_invoice_list">
+	                        <tree string="Ticket">
+	                            <field name="invoice_id"/>
+	                            <field name="account_id"/>
+	                            <field name="product_id"/>
+	                            <field name="name"/>
+	                            <field name="product_qty"/>
+	                            <field name="product_uom"/>
+	                            <field name="price_unit"/>
+	                            <field name="price_subtotal" sum="Total"/>
+	                        </tree>
+	                    </field>
+						<p class="oe_grey">
+						   Data from <b>Supplier Invoices</b> that referenced to this Sales Order, but excluded those created from PO Subcontract.
+						   And only from invoice lines, whose Product's <b>Job Cost Type</b> is set as <b>Plane Ticket</b>.
+						   <br/><b>Note:</b> product job cost type can be set in Product > Produrement window.
+						</p> 
+	        		</page>
+	                <page string="9-Install/Exp Export">
+	                    <field name="comm_install_invoice_list">
+	                        <tree string="Comm/Install">
+	                            <field name="invoice_id"/>
+	                            <field name="account_id"/>
+	                            <field name="product_id"/>
+	                            <field name="name"/>
+	                            <field name="product_qty"/>
+	                            <field name="product_uom"/>
+	                            <field name="price_unit"/>
+	                            <field name="price_subtotal" sum="Total"/>
+	                        </tree>
+	                    </field>
+						<p class="oe_grey">
+						   Data from <b>Supplier Invoices</b> that referenced to this Sales Order, but excluded those created from PO Subcontract.
+						   And only from invoice lines, whose Product's <b>Job Cost Type</b> is set as <b>Commission / Installation</b>.
+						   <br/><b>Note:</b> product job cost type can be set in Product > Produrement window.
+						</p> 
+	        		</page>
+	                <page string="10-Expense">
+	                    <field name="expense_list">
+	                        <tree string="Expense">
+	                            <field name="expense_id"/>
+	                            <field name="product_id"/>
+	                            <field name="name"/>
+	                            <field name="product_qty"/>
+	                            <field name="product_uom"/>
+	                            <field name="price_unit"/>
+	                            <field name="price_subtotal" sum="Total"/>
+	                        </tree>
+	                    </field>
+						<p class="oe_grey">
+						   Data from <b>HR Expense Line</b> that been assigned for this Sales Order.
+						</p> 
+	        		</page>
+	                <page string="11-Electric">
+	                    <field name="electric_list">
+	                        <tree string="Electric List">
+	                            <field name="name"/>
+	                            <field name="date"/>
+	                            <field name="amount" sum="Total"/>
+	                        </tree>
+	                    </field>
+						<p class="oe_grey">
+						   Data from <b>Electric Booking</b> information manually entered in menu <b>Job Booking</b> specific for this Sales Order.
+						</p> 
+	        		</page>
+                </notebook>
+            <!--/sheet-->
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sqp_job_cost_sheet_graph" model="ir.ui.view">
+         <field name="name">sqp.job.cost.sheet.graph</field>
+         <field name="model">sqp.job.cost.sheet</field>
+         <field name="arch" type="xml">
+             <graph string="Job Cost Sheet" type="bar">
+                 <field name="name"/>
+                 <field name="profit_amount"/>
+             </graph>
+         </field>
+    </record>
+
+    <record id="view_sqp_job_cost_sheet_search" model="ir.ui.view">
+        <field name="name">sqp.job.cost.sheet.search</field>
+        <field name="model">sqp.job.cost.sheet</field>
+        <field name="arch" type="xml">
+            <search string="Job Cost Sheet">
+                <field name="date"/>
+                <filter icon="terp-go-year" string="Year" name="year" domain="[('date','&lt;=', time.strftime('%%Y-%%m-%%d')),('date','&gt;=',time.strftime('%%Y-01-01'))]" help="year"/>
+                <separator/>
+                <filter string="Standard AHU" name="std_ahu" domain="[('product_tag_id','=',1)]" />
+                <filter string="Clean Room" name="clean_room" domain="[('product_tag_id','=',4)]" />
+                <filter string="AHU" name="ahu" domain="[('product_tag_id','=',6)]" />
+                <filter string="Cold Room" name="cold_room" domain="[('product_tag_id','=',7)]" />
+                <filter string="Part" name="part" domain="[('product_tag_id','=',19)]" />
+                <separator/>
+                <field name="name"/>
+                <field name="user_id" />
+                <field name="partner_id"/>
+                <group expand="1" string="Group By...">
+                    <filter string="Salesperson" name='user' icon="terp-personal" context="{'group_by':'user_id'}"/>
+                    <filter string="Customer" name="partner" icon="terp-partner" context="{'group_by':'partner_id','residual_visible':True}"/>
+                    <filter string="Day" name="day" icon="terp-go-today" context="{'group_by':'day'}" help="Group by Oder Date"/>
+                    <filter string="Month" name="month" icon="terp-go-month" context="{'group_by':'month'}" help="Group by month of Order Date"/>
+                    <filter string="Year" name="group_year" icon="terp-go-year" context="{'group_by':'year'}" help="Group by year of Order Date"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_sqp_job_cost_sheet" model="ir.actions.act_window">
+        <field name="name">Job Cost Sheet</field>
+        <field name="res_model">sqp.job.cost.sheet</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,graph</field>
+        <field name="context">{'group_by':[], 'group_by_no_leaf':0,}</field>
+        <field name="search_view_id" ref="view_sqp_job_cost_sheet_search"/>
+        <field name="help">From this report, you can have an overview of cost sheet by Sales order</field>
+        <field name="limit">10</field>
+    </record>
+
+    <menuitem action="action_sqp_job_cost_sheet" id="menu_action_sqp_job_cost_sheet" parent="menu_sqp_job_cost_sheet" sequence="20"/>
+
+</data>
+</openerp>

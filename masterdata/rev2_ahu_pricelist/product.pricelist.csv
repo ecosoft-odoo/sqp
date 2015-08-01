@@ -1,0 +1,4 @@
+id,company_id/id,currency_id/id,name,type
+pricelist_ahu_1,,base.THB,AHU Price List #1,sale
+pricelist_ahu_2,,base.THB,AHU Price List #2,sale
+pricelist_ahu_3,,base.THB,AHU Price List #3,sale

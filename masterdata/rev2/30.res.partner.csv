@@ -1,0 +1,6 @@
+id,name,ref,is_company,customer,supplier,parent_id,type,use_parent_address,street,street2,zip,city,country_id/id,phone,mobile,fax,email,category_id/id,website,comment
+base.res_partner_bgrim,"B.Grimm Airconditioning Co.,Ltd.",,TRUE,TRUE,FALSE,,Default,FALSE,,,,,,,,,,,,
+base.res_partner_amair,Amair Limited,,TRUE,TRUE,FALSE,,Default,FALSE,,,,,,,,,,,,
+base.res_partner_daikin,DAIKIN,,TRUE,TRUE,FALSE,,Default,FALSE,,,,,,,,,,,,
+base.res_partner_sinko,Sinko,,TRUE,TRUE,FALSE,,Default,FALSE,,,,,,,,,,,,
+base.res_partner_alterair,AlterAir,,TRUE,TRUE,FALSE,,Default,FALSE,,,,,,,,,,,,

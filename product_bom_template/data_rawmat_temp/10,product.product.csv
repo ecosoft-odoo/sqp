@@ -1,0 +1,21 @@
+id,name,categ_id,sale_ok,purchase_ok,is_one_time_use
+temp_rawmat_1,เหล็ก_0.5_mm_PP_(OW)_3_ฟุต,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_2,เหล็ก_0.5_mm_PP_(OW)_4_ฟุต,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_3,เหล็ก_0.45_mm_PP_(AW)_3_ฟุต,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_4,เหล็ก_0.45_mm_PP_(AW)_4_ฟุต,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_5,เหล็ก_0.4_mm_GI_3_ฟุต,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_6,เหล็ก_0.4_mm_GI_4_ฟุต,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_7,Isocyanate,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_8,เหล็ก_0.5_mm_SS_4_ฟุต,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_9,Polyol,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_10,Isocyanate_,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_11,ฝาฉีดโฟม_ตัวผู้,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_12,ฝาฉีดโฟม_ตัวเมีย,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_13,ขาตั้ง_PVC_ในแผ่น,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_14,Camlock,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_15,Protection_Film_70_micron,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_16,เหล็ก_0.8_mm_PP_(OW)_3_ฟุต,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_17,Rockwool,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_18,กาว,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_19,al.Frame,Raw Material,FALSE,TRUE,FALSE
+temp_rawmat_20,Craft_(Brown)_Paper,Raw Material,FALSE,TRUE,FALSE

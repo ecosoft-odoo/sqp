@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="invoice_form_ext" model="ir.ui.view">
+            <field name="name">invoice.form.ext.</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                <field name="amount_total" position="after">
+                	<!-- field name="amount_total_text" / -->
+                </field>       
+            </field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+	    <record id="mrp_production_form_view_ext3" model="ir.ui.view">
+	        <field name="name">mrp.production.form.view.ext2</field>
+	        <field name="model">mrp.production</field>
+	        <field name="inherit_id" ref="ext_mrp.mrp_production_form_view_ext2"/>
+	        <field name="arch" type="xml">
+				<field name="order_id" position="replace">
+					<field name="order_id" attrs="{'required': ['&amp;',('parent_id','=',False),'|',('tmp_partner_id','=',False),('tmp_ref_order','=',False)]}" />
+				</field>
+	            <xpath expr="/form/sheet/group/group[3]" position="after">
+	                <group>
+						<field name="tmp_partner_id" attrs="{'invisible': [('order_id','!=',False)]}"/>
+						<field name="tmp_ref_order" attrs="{'invisible': [('order_id','!=',False)]}"/>
+					</group>
+				</xpath>	        
+			</field>
+	    </record>
+	    
+	    <record id="mrp_production_tree_view_ext2" model="ir.ui.view">
+	        <field name="name">mrp.production.tree.view.ext</field>
+	        <field name="model">mrp.production</field>
+	        <field name="inherit_id" ref="mrp_sale_rel.mrp_production_tree_view_ext"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="/tree/field[@name='order_id']" position="after">
+	            	<field name="tmp_ref_order"/>
+	            </xpath>
+	        </field>
+	    </record>
+	    
+	    <record id="view_mrp_production_filter_ext2" model="ir.ui.view">
+	        <field name="name">view.mrp.production.filter.ext</field>
+	        <field name="model">mrp.production</field>
+	        <field name="inherit_id" ref="mrp_sale_rel.view_mrp_production_filter_ext"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="/search//field[@name='name']" position="replace">
+                    <field name="name" string="Production" filter_domain="['|','|','|',('name','ilike',self),('origin','ilike',self),('order_id','ilike',self),('tmp_ref_order','ilike',self)]"/>
+	            </xpath>	            
+	            <xpath expr="/search/group" position="inside">
+                    <filter string="Temp SO" domain="[]" context="{'group_by':'tmp_ref_order'}"/>
+	            </xpath>
+	        </field>
+	    </record>	    
+	       
+    </data>
+</openerp>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+		<!--
+		Machine Setup Master
+		-->        
+        <record id="mrp_machine_setup_25" model="mrp.machine.setup.master">
+            <field name="thickness">25</field>
+            <field name="flowrate_1">1.12</field>
+            <field name="flowrate_2">0.594</field>
+            <field name="density">40</field>
+            <field name="overpack_1">13</field>
+            <field name="overpack_2">11</field>
+            <field name="settime">30</field>
+        </record>        
+        <record id="mrp_machine_setup_42" model="mrp.machine.setup.master">
+            <field name="thickness">42</field>
+            <field name="flowrate_1">1.12</field>
+            <field name="flowrate_2">0.594</field>
+            <field name="density">40</field>
+            <field name="overpack_1">13</field>
+            <field name="overpack_2">11</field>
+            <field name="settime">35</field>
+        </record>        
+        <record id="mrp_machine_setup_50" model="mrp.machine.setup.master">
+            <field name="thickness">50</field>
+            <field name="flowrate_1">1.12</field>
+            <field name="flowrate_2">0.594</field>
+            <field name="density">40</field>
+            <field name="overpack_1">13</field>
+            <field name="overpack_2">11</field>
+            <field name="settime">40</field>
+        </record>        
+        <record id="mrp_machine_setup_75" model="mrp.machine.setup.master">
+            <field name="thickness">75</field>
+            <field name="flowrate_1">1.12</field>
+            <field name="flowrate_2">0.594</field>
+            <field name="density">40</field>
+            <field name="overpack_1">13</field>
+            <field name="overpack_2">11</field>
+            <field name="settime">45</field>
+        </record>        
+        <record id="mrp_machine_setup_100" model="mrp.machine.setup.master">
+            <field name="thickness">100</field>
+            <field name="flowrate_1">1.12</field>
+            <field name="flowrate_2">0.594</field>
+            <field name="density">40</field>
+            <field name="overpack_1">13</field>
+            <field name="overpack_2">11</field>
+            <field name="settime">50</field>
+        </record>        
+        <record id="mrp_machine_setup_125" model="mrp.machine.setup.master">
+            <field name="thickness">125</field>
+            <field name="flowrate_1">1.12</field>
+            <field name="flowrate_2">0.594</field>
+            <field name="density">40</field>
+            <field name="overpack_1">13</field>
+            <field name="overpack_2">11</field>
+            <field name="settime">60</field>
+        </record>        
+        <record id="mrp_machine_setup_150" model="mrp.machine.setup.master">
+            <field name="thickness">150</field>
+            <field name="flowrate_1">1.12</field>
+            <field name="flowrate_2">0.594</field>
+            <field name="density">40</field>
+            <field name="overpack_1">13</field>
+            <field name="overpack_2">11</field>
+            <field name="settime">110</field>
+        </record>
+	</data>
+</openerp>

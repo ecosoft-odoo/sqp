@@ -1,0 +1,5 @@
+REF#,id,name,ref,is_company,customer,supplier,parent_id,type,use_parent_address,street,street2,zip,city,country_id/id,phone,mobile,fax,email,category_id/id,website,comment
+base.res_partner_z003,base.res_partner_001,"ซินฮวดจักรยาน, พังโคน",Z003,TRUE,TRUE,FALSE,,Default,FALSE,33/3 ถ.นิตโย,อ.พังโคน,,สกลนคร,base.th,0-4277-1070,,,,base.res_partner_category_wholesaler,,
+base.res_partner_z002,base.res_partner_002,ซีสปอร์ต,Z002,TRUE,TRUE,FALSE,,Default,FALSE,224/5 ถ.พานิชย์,ต.หน้าเมือง อ.เมือง,,ฉะเชิงเทรา,base.th,0-6819-0449,,,,base.res_partner_category_wholesaler,,
+base.res_partner_z001,base.res_partner_003,ซินฮวดจักรยาน,Z001,TRUE,TRUE,FALSE,,Default,FALSE,210 ถ.หมากแข้ง,ต.หมากแข้ง อ.เมือง,41000,อุดรธานี,base.th,0-4224-3075,,,,base.res_partner_category_wholesaler,,
+base.res_partner_y007,base.res_partner_004,"Yee Shin Co., Ltd.",Y007,TRUE,TRUE,FALSE,,Default,FALSE,63/64 Bahosi Housing Estate,Lamadaw Township,,Yangon Myanmar,base.mm,,,,,base.res_partner_category_wholesaler,,

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Quotation / Purchase Order, domain: is_subcontract = False -->
+        <record id="purchase.purchase_rfq" model="ir.actions.act_window">
+            <field name="domain">[('state','in',('draft','sent','confirmed')),('is_subcontract','=',False)]</field>
+        </record>
+        
+        <record id="purchase.purchase_form_action" model="ir.actions.act_window">
+            <field name="domain">[('state','not in',('draft','sent','confirmed')),('is_subcontract','=',False)]</field>
+        </record>
+        
+        <!-- PO Subcontract -->
+        <record id="purchase_subcontract_form_action" model="ir.actions.act_window">
+            <field name="name">PO Subcontract</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_mode">tree,form,graph,calendar</field>
+            <field name="context">{'is_subcontract': True}</field>
+            <field name="domain">[('is_subcontract','=',True)]</field>
+            <field name="search_view_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a quotation that will be converted into a purchase order for subcontract. 
+              </p><p>
+                Use this menu to search within your purchase orders by
+                references, supplier, products, etc. For each purchase order,
+                you can track the related discussion with the supplier, control
+                the products received and control the supplier invoices.
+              </p>
+            </field>
+        </record>
+        <menuitem action="purchase_subcontract_form_action" id="menu_purchase_subcontract_form_action" parent="purchase.menu_procurement_management" sequence="7"/>
+
+		<!-- Purchase Order Form -->
+		<record id="purchase_order_form_ext" model="ir.ui.view">
+            <field name="name">purchase.order.form.ext</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="model">purchase.order</field>
+            <field name="arch" type="xml">
+                <field name="date_order" position="before">
+                	<field name="sale_order_id" on_change="onchange_sale_order_id(sale_order_id)" attrs="{'invisible':[('is_subcontract','=',False)]}"/>
+				</field>                        
+                <field name="pricelist_id" position="after">
+                	<field name="is_subcontract" attrs="{'invisible':[('is_subcontract','=',False)]}"/>
+					<field name="ref_attention_2_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/> 
+				</field>
+                <xpath expr="/form/sheet/notebook/page/field/tree/field[@name='product_qty']" position="before">
+					<field name="product_so_qty" invisible="not context.get('is_subcontract',False)"/>
+				</xpath>
+                <xpath expr="/form/sheet/notebook/page/field/tree/field[@name='product_id']" position="before">
+                	<field name="sequence" widget="handle"/>
+				</xpath>
+			</field>
+        </record>
+
+    </data>
+</openerp>

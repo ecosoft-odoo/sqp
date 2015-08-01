@@ -1,0 +1,25 @@
+id,name,category_id,uom_type,rounding,factor_inv,factor
+product.product_uom_kgm,kg,Weight,Reference Unit of Measure for this category,0.01,1,1
+product.uom_sqm,sqm,Area,Reference Unit of Measure for this category,0.01,1,1
+product.uom_ea,EA,Unit,Reference Unit of Measure for this category,0.01,1,1
+product.uom_set,set,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+product.uom_lot,lot,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+product.product_uom_meter,m,Length / Distance,Reference Unit of Measure for this category,0.01,1,1
+product.uom_pcs,pcs,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+product.uom_nos,nos,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+product.uom_rolls,roll,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+product.uom_tube,tube,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+product.uom_hole,hole,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+,,,,,,
+,,,,,,
+product.product_uom_cm,cm,,,,,
+product.product_uom_day,Day(s),,,,,
+product.product_uom_dozen,Dozen(s),,,,,
+product.product_uom_gram,g,,,,,
+product.product_uom_hour,Hour(s),,,,,
+product.product_uom_kgm,kg,,,,,
+product.product_uom_km,km,,,,,
+product.product_uom_litre,Liter(s),,,,,
+product.product_uom_meter,m,,,,,
+product.product_uom_ton,t,,,,,
+product.product_uom_unit,Unit(s),,,,,

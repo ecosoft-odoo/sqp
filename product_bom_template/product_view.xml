@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        
+        <record id="product_kanban_view_ext" model="ir.ui.view">
+            <field name="name">product.kanban.view.ext</field>
+            <field name="inherit_id" ref="product.product_kanban_view" />
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <data>				
+					<xpath expr="/kanban/templates/t/div/div/ul[1]" position="inside">
+						<li><t t-if="record.is_one_time_use.raw_value"><field invisible="1" name="is_one_time_use"/><font color="red">One-Time</font></t></li>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record id="product_search_form_view_ext" model="ir.ui.view">
+            <field name="name">product.search.form.view.ext</field>
+            <field name="inherit_id" ref="product.product_search_form_view" />
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <data>
+                	<xpath expr="//field[@name='name']" position="after">
+                		<field name="name" filter_domain="[('ref_order_id','ilike',self)]" string="Sale Order" /> 
+         			</xpath>
+  
+                    <separator position="after">
+                   		<filter string="One-Time" name="onetime" domain="[('is_one_time_use','=',True)]" help="One-Time Use products"/>                   		
+						<separator/>
+					</separator>  
+                	<xpath expr="//group/filter[@string='Type']" position="after">
+                		<filter string='Sales Order' domain="[]" context="{'group_by' : 'ref_order_id'}"/>
+         			</xpath>
+				</data>
+            </field>
+        </record>
+
+        <record id="product_normal_form_view_ext" model="ir.ui.view">
+            <field name="name">product.normal.form.view.ext</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <data>
+					<xpath expr="/form/sheet//field[@name='categ_id']" position="after">
+		                <field name="is_one_time_use"/>
+		                <label for="is_one_time_use"/>
+                    </xpath>                                
+                    <xpath expr="/form/sheet/notebook/page[@string='Sales']" position="after">
+	                    <page string="Part Spec" groups="base.group_user" >
+	                        <group>
+	                            <group name="order_ref" string="Order Reference">
+	                                <field name="ref_order_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+	                            </group>
+	                            <group>
+	                            </group>
+	                            <group name="dimension" string="Dimension">
+	                                <field name="W"/>
+	                                <field name="L"/>
+	                                <field name="T"/>
+	                            </group>
+	                            <group name="skin" string="Skin">
+	                                <field name="mat_inside_skin_choices"/>
+	                                <field name="mat_outside_skin_choices"/>
+	                                <field name="mat_insulation_choices"/>
+	                            </group>			
+	                            <group name="other" string="Others">
+	                                <field name="sequence"/>
+	                                <field name="bom_product_type"/>
+	                                <field name="cut_area"/>
+	                                <field name="remark"/>
+	                            </group>					
+							</group>
+	                    </page>                    
+					</xpath>         
+				</data>
+            </field>
+        </record> 
+
+
+        <record id="product_product_tree_view_ext" model="ir.ui.view">
+            <field name="name">product.product.tree.view.ext</field>
+            <field name="inherit_id" ref="product.product_product_tree_view" />
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="name" position="after">
+                    	<field name="ref_order_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+					</field>  
+				</data>
+            </field>
+        </record>
+
+  	</data>
+</openerp>

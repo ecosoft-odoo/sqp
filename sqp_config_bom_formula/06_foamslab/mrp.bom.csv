@@ -1,0 +1,6 @@
+id,bom_id/id,product_id,product_qty_formula,product_uom
+mrp.template_foamslab_line1,mrp.template_foamslab,[SP05002],line.W*line.L*line.T.value/1000000000*40*0.437*1.13-(line.cut_area*line.T.value*40*0.437*1.13/1000),kg
+mrp.template_foamslab_line2,mrp.template_foamslab,[SP05003],line.W*line.L*line.T.value/1000000000*40*0.563*1.13-(line.cut_area*line.T.value*40*0.563*1.13/1000),kg
+mrp.template_foamslab_line3,mrp.template_foamslab,[SP05024],line.W*line.L*line.T.value/1000000000*36*0.242*1.2*1.05-(line.cut_area*line.T.value*36*0.242*1.2*1.05/1000),kg
+mrp.template_foamslab_line4,mrp.template_foamslab,[SP05003],line.W*line.L*line.T.value/1000000000*36*0.714*1.2*1.05-(line.cut_area*line.T.value*36*0.714*1.2*1.05/1000),kg
+mrp.template_foamslab_line5,mrp.template_foamslab,[SP05023],line.W*line.L*line.T.value/1000000000*36*0.044*1.2*1.05-(line.cut_area*line.T.value*36*0.044*1.2*1.05/1000),kg

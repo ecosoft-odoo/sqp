@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        
+		<!-- Office, remane -->
+		<record id="stock.stock_location_company" model="stock.location">
+            <field name="name">Office</field>
+        </record>
+        
+		<!-- Factory -->
+        <record id="stock_location_factory" model="stock.location">
+            <field name="name">Factory</field>
+            <field name="usage">view</field>
+            <field name="location_id" ref="stock.stock_location_locations"/>
+        </record>
+
+        <record id="stock_location_factory_output" model="stock.location">
+            <field name="name">Output</field>
+            <field name="location_id" ref="stock_location_factory"/>
+            <field name="usage">internal</field>
+            <field name="chained_location_type">customer</field>
+            <field name="chained_auto_packing">transparent</field>
+            <field name="chained_picking_type">out</field>
+            <field name="chained_journal_id" ref="stock.journal_delivery"/>
+        </record>
+        
+        <record id="stock_location_factory_rm" model="stock.location">
+            <field name="name">Stock RM</field>
+            <field name="location_id" ref="stock_location_factory"/>
+        </record>
+        
+        <record id="stock_location_factory_fg" model="stock.location">
+            <field name="name">Stock FG</field>
+            <field name="location_id" ref="stock_location_factory"/>
+        </record>
+
+        <!--
+    	Resource: stock.warehouse
+    	-->
+        <record id="stock.warehouse0" model="stock.warehouse">
+            <field name="name">Office Bangna</field>
+        </record>
+        
+        <record id="warehouse_factory_rm" model="stock.warehouse">
+            <field name="name">Factory Prachin (RM)</field>
+            <field name="lot_input_id" ref="stock_location_factory_rm"/>
+            <field name="lot_stock_id" ref="stock_location_factory_rm"/>
+            <field name="lot_output_id" ref="stock_location_factory_output"/>
+        </record>
+
+        <record id="warehouse_factory_fg" model="stock.warehouse">
+            <field name="name">Factory Prachin (FG)</field>
+            <field name="lot_input_id" ref="stock_location_factory_fg"/>
+            <field name="lot_stock_id" ref="stock_location_factory_fg"/>
+            <field name="lot_output_id" ref="stock_location_factory_output"/>
+        </record>
+
+    </data>
+</openerp>

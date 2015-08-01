@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="invoice_form_ext" model="ir.ui.view">
+            <field name="name">invoice.form.ext.</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                <field name="fiscal_position" position="after">
+                	<field name="note"/>
+                </field>
+            	<xpath expr="/form/sheet/notebook/page//field[@name='payment_term']"  position="after">
+                	<field name="print_text_in_english" />
+                </xpath>            
+            </field>
+        </record>        
+		<record id="invoice_tree_ext" model="ir.ui.view">
+            <field name="name">account.invoice.tree_ext</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree" />
+            <field name="arch" type="xml">
+            	<xpath expr="//tree/field[@name='number']"  position="after">
+                	<field name="supplier_invoice_number" string="Supplier INV. No."/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

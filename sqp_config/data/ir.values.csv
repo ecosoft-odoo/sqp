@@ -1,0 +1,5 @@
+id,action_id/id,company_id/id,value_unpickle,model_id/id,model,name,key2,res_id,key,user_id/id,value
+ir_values_standard_ahu,,base.main_company,picking,,sale.order,order_policy,product_tag_id=1,,Default,,S'picking' p0 .
+ir_values_ahu,,base.main_company,manual,,sale.order,order_policy,product_tag_id=3,,Default,,S'manual' p0 .
+ir_values_cleanroom,,base.main_company,manual,,sale.order,order_policy,product_tag_id=4,,Default,,S'manual' p0 .
+ir_values_coldroom,,base.main_company,manual,,sale.order,order_policy,product_tag_id=2,,Default,,S'manual' p0 .

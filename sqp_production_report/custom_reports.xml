@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+	# Production Status
+    <record id="sqp_report_production_status" model="ir.actions.report.xml">
+        <field name="name">Production Status Report</field>
+        <field name="type">ir.actions.report.xml</field>
+        <field name="model">mrp.production</field>
+        <field name="report_name">sqp_report_production_status</field>
+        <field name="report_rml">sqp_production_report/sqp_report_production_status.jrxml</field>
+        <field name="report_type">pdf</field>
+        <field name="jasper_report">True</field>
+        <field name="jasper_output">pdf</field>
+    </record>    
+    <record id="sqp_report_production_status_excel" model="ir.actions.report.xml">
+        <field name="name">Production Status Report (Excel)</field>
+        <field name="type">ir.actions.report.xml</field>
+        <field name="model">pawn.order</field>
+        <field name="report_name">sqp_report_production_status_excel</field>
+        <field name="report_rml">sqp_production_report/sqp_report_production_status.jrxml</field>
+        <field name="report_type">pdf</field>
+        <field name="jasper_report">True</field>
+        <field name="jasper_output">xls</field>
+    </record>   
+	# Production Daily
+    <record id="sqp_report_production_daily" model="ir.actions.report.xml">
+        <field name="name">Production Daily Report</field>
+        <field name="type">ir.actions.report.xml</field>
+        <field name="model">mrp.production</field>
+        <field name="report_name">sqp_report_production_daily</field>
+        <field name="report_rml">sqp_production_report/sqp_report_production_daily.jrxml</field>
+        <field name="report_type">pdf</field>
+        <field name="jasper_report">True</field>
+        <field name="jasper_output">pdf</field>
+    </record>    
+    <record id="sqp_report_production_daily_excel" model="ir.actions.report.xml">
+        <field name="name">Production Daily Report (Excel)</field>
+        <field name="type">ir.actions.report.xml</field>
+        <field name="model">mrp.production</field>
+        <field name="report_name">sqp_report_production_daily_excel</field>
+        <field name="report_rml">sqp_production_report/sqp_report_production_daily.jrxml</field>
+        <field name="report_type">pdf</field>
+        <field name="jasper_report">True</field>
+        <field name="jasper_output">xls</field>
+    </record>   
+</data>
+</openerp>

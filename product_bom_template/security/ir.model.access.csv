@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_rapid_create_mrp_user,product.rapid.create mrp_user,model_product_rapid_create,mrp.group_mrp_user,1,1,1,1
+access_product_rapid_create_line_mrp_user,product.rapid.create.line mrp_user,model_product_rapid_create_line,mrp.group_mrp_user,1,1,1,1
+access_bom_choice_camlock mrp_user,bom.choice.camlock mrp_user,model_bom_choice_camlock,mrp.group_mrp_user,1,0,0,0
+access_bom_choice_insulation mrp_user,bom.choice.insulation mrp_user,model_bom_choice_insulation,mrp.group_mrp_user,1,0,0,0
+access_bom_choice_joint mrp_user,bom.choice.joint mrp_user,model_bom_choice_joint,mrp.group_mrp_user,1,0,0,0
+access_bom_choice_skin mrp_user,bom.choice.skin mrp_user,model_bom_choice_skin,mrp.group_mrp_user,1,0,0,0
+access_bom_choice_window_mrp_user,bom.choice.window mrp_user,model_bom_choice_window,mrp.group_mrp_user,1,0,0,0
+access_bom_choice_model_mrp_user,bom.choice.model mrp_user,model_bom_choice_model,mrp.group_mrp_user,1,0,0,0
+access_product_rapid_create_mrp_manager,product.rapid.create mrp_manager,model_product_rapid_create,mrp.group_mrp_manager,1,1,1,1
+access_product_rapid_create_line_mrp_manager,product.rapid.create.line mrp_manager,model_product_rapid_create_line,mrp.group_mrp_manager,1,1,1,1
+access_bom_choice_camlock mrp_manager,bom.choice.camlock mrp_manager,model_bom_choice_camlock,mrp.group_mrp_manager,1,1,1,1
+access_bom_choice_insulation mrp_manager,bom.choice.insulation mrp_manager,model_bom_choice_insulation,mrp.group_mrp_manager,1,1,1,1
+access_bom_choice_joint mrp_manager,bom.choice.joint mrp_manager,model_bom_choice_joint,mrp.group_mrp_manager,1,1,1,1
+access_bom_choice_skin mrp_manager,bom.choice.skin mrp_manager,model_bom_choice_skin,mrp.group_mrp_manager,1,1,1,1
+access_bom_choice_window mrp_manager,bom.choice.window mrp_manager,model_bom_choice_window,mrp.group_mrp_manager,1,1,1,1

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_expenses_form_ext" model="ir.ui.view">
+            <field name="name">view.expenses.form.ext</field>
+            <field name="inherit_id" ref="hr_expense.view_expenses_form" />
+            <field name="model">hr.expense.expense</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/form/sheet/group/group/field[@name='employee_id']" position="before">
+						<field name="sqp_employee_id" />
+					</xpath>		
+                    <xpath expr="/form/sheet/notebook/page/field/tree/field[@name='product_id']" position="after">
+						<field name="cost_order_id" options="{'limit': 10, 'create': false, 'create_edit': false}" />
+					</xpath>	
+				</data>
+            </field>
+        </record>
+        <record id="view_expenses_tree_ext" model="ir.ui.view">
+            <field name="name">view.expenses.tree.ext</field>
+            <field name="inherit_id" ref="hr_expense.view_expenses_tree" />
+            <field name="model">hr.expense.expense</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/tree/field[@name='employee_id']" position="replace">
+						<field name="employee_id" invisible="1"/>
+						<field name="sqp_employee_id" />
+					</xpath>
+				</data>
+            </field>
+        </record>
+        <record id="view_hr_expense_filter_ext" model="ir.ui.view">
+            <field name="name">view.hr.expense.filter.ext</field>
+            <field name="inherit_id" ref="hr_expense.view_hr_expense_filter" />
+            <field name="model">hr.expense.expense</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/search/field[@name='employee_id']" position="replace">
+						<field name="sqp_employee_id" />
+					</xpath>
+                    <xpath expr="/search/group/filter[@string='Employee']" position="replace">
+                        <filter string="Employee SQP" icon="terp-personal" domain="[]" context="{'group_by':'sqp_employee_id'}"/>
+					</xpath>				
+				</data>
+            </field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+	    <record model="ir.ui.view" id="view_product_stock_card_tree_ext">
+	        <field name="name">view.product.stock.card.tree.ext</field>
+	        <field name="model">product.stock.card</field>
+	        <field name="inherit_id" ref="product_stock_card.view_product_stock_card_tree"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="/tree/field[@name='name']" position="after">
+					<field name="partner_id"/>
+					<field name="ref_order_id"/>
+					<field name="ref_project_name"/>
+	            </xpath>	        
+			</field>
+	    </record>
+	</data>
+</openerp>

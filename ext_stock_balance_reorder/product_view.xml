@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="product_product_tree_view_ext2" model="ir.ui.view">
+            <field name="name">product.product.tree.view.ext2</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock_balance_reorder.product_product_tree_view_ext"/>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">    	
+            	<xpath expr="/tree//field[@name='qty_safety']" position="replace">	                
+	                <field name="qty_safety" invisible="not context.get('is_safety',False)"/>  	
+	                <field name="qty_mo_resv" invisible="not context.get('is_safety',False)"/>  		  
+				</xpath>     				        					
+            </field>
+        </record>
+    </data>
+</openerp>

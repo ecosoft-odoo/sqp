@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+	    <record id="mrp_production_form_view_ext" model="ir.ui.view">
+	        <field name="name">mrp.production.form.view.ext</field>
+	        <field name="model">mrp.production</field>
+	        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+	        <field name="arch" type="xml">  	    
+	            <field name="bom_id" position="attributes">
+            		<attribute name="required">0</attribute>
+				</field>        
+	    	</field>
+	    </record>
+	    
+        <record model="ir.cron" id="cronjob_vacumm_bom">
+            <field name='name'>Vacumm BOM (improve performance)</field>
+            <field name='interval_number'>30</field>
+            <field name='interval_type'>minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+            <field name="doall" eval="False" />
+            <field name="model">mrp.bom</field>
+            <field name="function">process_vacumm_bom</field>
+            <field name="args">()</field>
+        </record>
+
+    </data>
+</openerp>

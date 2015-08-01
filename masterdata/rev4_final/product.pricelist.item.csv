@@ -1,0 +1,106 @@
+id,price_version_id,name,product_tmpl_id,base,price_discount,price_surcharge
+pricelist_ahu_v1_prod_1,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_1,PU Panel (T) 25 mm. (Galvanized/Off White steel sheet) None PVC. Frame,1,-1,826.88
+pricelist_ahu_v1_prod_2,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_2,PU Panel (T) 25 mm. (Off White/Off White steel sheet) None PVC. Frame,1,-1,882
+pricelist_ahu_v1_prod_3,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_3,PU Panel (T) 25 mm. (Stainless/Off White steel sheet) None PVC. Frame,1,-1,1982
+pricelist_ahu_v1_prod_4,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_4,PU Panel (T) 25 mm. (Stainless/Stainless steel sheet) None PVC. Frame,1,-1,3082
+pricelist_ahu_v1_prod_5,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_5,PU Panel (T) 25 mm. (Galvanized/Off White steel sheet) PVC. Frame,1,-1,1405.3
+pricelist_ahu_v1_prod_6,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_6,PU Panel (T) 25 mm. (Off White/Off White steel sheet) PVC. Frame,1,-1,1455.3
+pricelist_ahu_v1_prod_7,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_7,PU Panel (T) 25 mm. (Stainless/Off White steel sheet) PVC. Frame,1,-1,2555.3
+pricelist_ahu_v1_prod_8,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_8,PU Panel (T) 25 mm. (Stainless/Stainless steel sheet) PVC. Frame,1,-1,3655.3
+pricelist_ahu_v1_prod_9,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_9,"PU Panel (T) 25 mm. (Off White/Off White steel sheet) PVC. Frame. , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v1_prod_10,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_10,"PU Panel (T) 25 mm. (Stainless/Off White steel sheet) PVC. Frame. , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v1_prod_11,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_11,"PU Panel (T) 25 mm. (Stainless/Stainless steel sheet) PVC. Frame. , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v1_prod_12,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_12,PU Panel (T) 42 mm. (Galvanized/Off White steel sheet) Slip joint with PVC. Frame,1,-1,1598.24
+pricelist_ahu_v1_prod_13,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_13,PU Panel (T) 42 mm. (Off White/Off White steel sheet) Slip joint with PVC. Frame,1,-1,1648.24
+pricelist_ahu_v1_prod_14,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_14,PU Panel (T) 42 mm. (Stainless/Off White steel sheet) Slip joint with PVC. Frame,1,-1,2748.24
+pricelist_ahu_v1_prod_15,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_15,PU Panel (T) 42 mm. (Stainless/Stainless steel sheet) Slip joint with PVC. Frame,1,-1,3848.24
+pricelist_ahu_v1_prod_16,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_16,PU Panel (T) 50 mm. (Galvanized/Off White steel sheet) Slip joint with Camlock,1,-1,1162.75
+pricelist_ahu_v1_prod_17,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_17,PU Panel (T) 50 mm. (Off White/Off White steel sheet) Slip joint with Camlock,1,-1,1212.75
+pricelist_ahu_v1_prod_18,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_18,PU Panel (T) 50 mm. (Stainless/Off White steel sheet) Slip joint with Camlock,1,-1,2312.75
+pricelist_ahu_v1_prod_19,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_19,PU Panel (T) 50 mm. (Stainless/Stainless steel sheet) Slip joint with Camlock,1,-1,3412.75
+pricelist_ahu_v1_prod_20,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_20,"TGH : PU Panel (T) 50 mm. (Off White/Off White steel sheet) Slip joint + Cam lock , PVC. Frame. , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v1_prod_21,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_21,"TGH : PU Panel (T) 50 mm. (Stainless/Off White steel sheet) Slip joint + Cam lock , PVC. Frame. , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v1_prod_22,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_22,"TGH : PU Panel (T) 50 mm. (Stainless/Stainless steel sheet) Slip joint + Cam lock , PVC. Frame. , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v1_prod_23,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_23,"CJ : PU Panel (T) 50 mm. (Off White/Off White steel sheet) PVC. Frame CJ. Type A & B , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v1_prod_24,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_24,"CJ : PU Panel (T) 50 mm. (Stainless/Off White steel sheet) PVC. Frame CJ. Type A & B , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v1_prod_25,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_25,"CJ : PU Panel (T) 50 mm. (Stainless/Stainless steel sheet) PVC. Frame CJ. Type A & B , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v1_prod_26,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_26,Rockwool Panel (T) 50 mm. ( Off White / Off White steel sheet),1,-1,1
+pricelist_ahu_v1_prod_27,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_27,Rockwool Panel (T) 50 mm. ( Styainless / Off White steel sheet),1,-1,1
+pricelist_ahu_v1_prod_28,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_28,Rockwool Panel (T) 50 mm. ( Stainlesse / Stainless steel sheet),1,-1,1
+pricelist_ahu_v1_prod_29,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_29,Single swing door 4 frame.(Color/Color steel sheet) (W) 500 x (H) 700 x (T) 50 mm.(Standard size),1,-1,4410
+pricelist_ahu_v1_prod_30,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_30,CJ : Single swing door 4 frame.(Color/Color steel sheet),1,-1,1
+pricelist_ahu_v1_prod_31,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_31,TGH : Single swing door 4 frame.(Color / Color steel sheet),1,-1,1
+pricelist_ahu_v1_prod_32,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_32,Stainless steel sheet (T) 0.5 mm. (Add 1 side panel),1,-1,1100
+pricelist_ahu_v1_prod_33,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_33,Aluminium Angle 40x40 (Off white color) (L) 6 m.,1,-1,937.13
+pricelist_ahu_v1_prod_34,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_34,Off white color steel sheet (T) 0.5 mm. ,1,-1,367.5
+pricelist_ahu_v1_prod_35,Default AHU Pricelist #1 Version,pricelist_ahu_v1_prod_35,Color Off White Spray (MT158),1,-1,367.5
+pricelist_ahu_v2_prod_1,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_1,PU Panel (T) 25 mm. (Galvanized/Off White steel sheet) None PVC. Frame,1,-1,1
+pricelist_ahu_v2_prod_2,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_2,PU Panel (T) 25 mm. (Off White/Off White steel sheet) None PVC. Frame,1,-1,880
+pricelist_ahu_v2_prod_3,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_3,PU Panel (T) 25 mm. (Stainless/Off White steel sheet) None PVC. Frame,1,-1,1980
+pricelist_ahu_v2_prod_4,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_4,PU Panel (T) 25 mm. (Stainless/Stainless steel sheet) None PVC. Frame,1,-1,3080
+pricelist_ahu_v2_prod_5,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_5,PU Panel (T) 25 mm. (Galvanized/Off White steel sheet) PVC. Frame,1,-1,1
+pricelist_ahu_v2_prod_6,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_6,PU Panel (T) 25 mm. (Off White/Off White steel sheet) PVC. Frame,1,-1,935
+pricelist_ahu_v2_prod_7,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_7,PU Panel (T) 25 mm. (Stainless/Off White steel sheet) PVC. Frame,1,-1,2035
+pricelist_ahu_v2_prod_8,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_8,PU Panel (T) 25 mm. (Stainless/Stainless steel sheet) PVC. Frame,1,-1,3135
+pricelist_ahu_v2_prod_9,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_9,"PU Panel (T) 25 mm. (Off White/Off White steel sheet) PVC. Frame. , Steel Flat-Bar",1,-1,995
+pricelist_ahu_v2_prod_10,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_10,"PU Panel (T) 25 mm. (Stainless/Off White steel sheet) PVC. Frame. , Steel Flat-Bar",1,-1,2095
+pricelist_ahu_v2_prod_11,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_11,"PU Panel (T) 25 mm. (Stainless/Stainless steel sheet) PVC. Frame. , Steel Flat-Bar",1,-1,3195
+pricelist_ahu_v2_prod_12,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_12,PU Panel (T) 42 mm. (Galvanized/Off White steel sheet) Slip joint with PVC. Frame,1,-1,1
+pricelist_ahu_v2_prod_13,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_13,PU Panel (T) 42 mm. (Off White/Off White steel sheet) Slip joint with PVC. Frame,1,-1,1
+pricelist_ahu_v2_prod_14,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_14,PU Panel (T) 42 mm. (Stainless/Off White steel sheet) Slip joint with PVC. Frame,1,-1,1
+pricelist_ahu_v2_prod_15,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_15,PU Panel (T) 42 mm. (Stainless/Stainless steel sheet) Slip joint with PVC. Frame,1,-1,1
+pricelist_ahu_v2_prod_16,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_16,PU Panel (T) 50 mm. (Galvanized/Off White steel sheet) Slip joint with Camlock,1,-1,1
+pricelist_ahu_v2_prod_17,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_17,PU Panel (T) 50 mm. (Off White/Off White steel sheet) Slip joint with Camlock,1,-1,1
+pricelist_ahu_v2_prod_18,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_18,PU Panel (T) 50 mm. (Stainless/Off White steel sheet) Slip joint with Camlock,1,-1,1
+pricelist_ahu_v2_prod_19,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_19,PU Panel (T) 50 mm. (Stainless/Stainless steel sheet) Slip joint with Camlock,1,-1,1
+pricelist_ahu_v2_prod_20,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_20,"TGH : PU Panel (T) 50 mm. (Off White/Off White steel sheet) Slip joint + Cam lock , PVC. Frame. , Steel Flat-Bar",1,-1,1210
+pricelist_ahu_v2_prod_21,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_21,"TGH : PU Panel (T) 50 mm. (Stainless/Off White steel sheet) Slip joint + Cam lock , PVC. Frame. , Steel Flat-Bar",1,-1,2310
+pricelist_ahu_v2_prod_22,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_22,"TGH : PU Panel (T) 50 mm. (Stainless/Stainless steel sheet) Slip joint + Cam lock , PVC. Frame. , Steel Flat-Bar",1,-1,3410
+pricelist_ahu_v2_prod_23,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_23,"CJ : PU Panel (T) 50 mm. (Off White/Off White steel sheet) PVC. Frame CJ. Type A & B , Steel Flat-Bar",1,-1,1210
+pricelist_ahu_v2_prod_24,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_24,"CJ : PU Panel (T) 50 mm. (Stainless/Off White steel sheet) PVC. Frame CJ. Type A & B , Steel Flat-Bar",1,-1,2310
+pricelist_ahu_v2_prod_25,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_25,"CJ : PU Panel (T) 50 mm. (Stainless/Stainless steel sheet) PVC. Frame CJ. Type A & B , Steel Flat-Bar",1,-1,3410
+pricelist_ahu_v2_prod_26,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_26,Rockwool Panel (T) 50 mm. ( Off White / Off White steel sheet),1,-1,2755
+pricelist_ahu_v2_prod_27,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_27,Rockwool Panel (T) 50 mm. ( Styainless / Off White steel sheet),1,-1,3855
+pricelist_ahu_v2_prod_28,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_28,Rockwool Panel (T) 50 mm. ( Stainlesse / Stainless steel sheet),1,-1,4955
+pricelist_ahu_v2_prod_29,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_29,Single swing door 4 frame.(Color/Color steel sheet) (W) 500 x (H) 700 x (T) 50 mm.(Standard size),1,-1,1
+pricelist_ahu_v2_prod_30,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_30,CJ : Single swing door 4 frame.(Color/Color steel sheet),1,-1,2450
+pricelist_ahu_v2_prod_31,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_31,TGH : Single swing door 4 frame.(Color / Color steel sheet),1,-1,3300
+pricelist_ahu_v2_prod_32,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_32,Stainless steel sheet (T) 0.5 mm. (Add 1 side panel),1,-1,1100
+pricelist_ahu_v2_prod_33,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_33,Aluminium Angle 40x40 (Off white color) (L) 6 m.,1,-1,1
+pricelist_ahu_v2_prod_34,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_34,Off white color steel sheet (T) 0.5 mm. ,1,-1,345
+pricelist_ahu_v2_prod_35,Default AHU Pricelist #2 Version,pricelist_ahu_v2_prod_35,Color Off White Spray (MT158),1,-1,370
+pricelist_ahu_v3_prod_1,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_1,PU Panel (T) 25 mm. (Galvanized/Off White steel sheet) None PVC. Frame,1,-1,830
+pricelist_ahu_v3_prod_2,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_2,PU Panel (T) 25 mm. (Off White/Off White steel sheet) None PVC. Frame,1,-1,850
+pricelist_ahu_v3_prod_3,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_3,PU Panel (T) 25 mm. (Stainless/Off White steel sheet) None PVC. Frame,1,-1,1900
+pricelist_ahu_v3_prod_4,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_4,PU Panel (T) 25 mm. (Stainless/Stainless steel sheet) None PVC. Frame,1,-1,2900
+pricelist_ahu_v3_prod_5,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_5,PU Panel (T) 25 mm. (Galvanized/Off White steel sheet) PVC. Frame,1,-1,900
+pricelist_ahu_v3_prod_6,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_6,PU Panel (T) 25 mm. (Off White/Off White steel sheet) PVC. Frame,1,-1,950
+pricelist_ahu_v3_prod_7,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_7,PU Panel (T) 25 mm. (Stainless/Off White steel sheet) PVC. Frame,1,-1,2000
+pricelist_ahu_v3_prod_8,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_8,PU Panel (T) 25 mm. (Stainless/Stainless steel sheet) PVC. Frame,1,-1,3000
+pricelist_ahu_v3_prod_9,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_9,"PU Panel (T) 25 mm. (Off White/Off White steel sheet) PVC. Frame. , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v3_prod_10,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_10,"PU Panel (T) 25 mm. (Stainless/Off White steel sheet) PVC. Frame. , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v3_prod_11,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_11,"PU Panel (T) 25 mm. (Stainless/Stainless steel sheet) PVC. Frame. , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v3_prod_12,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_12,PU Panel (T) 42 mm. (Galvanized/Off White steel sheet) Slip joint with PVC. Frame,1,-1,1
+pricelist_ahu_v3_prod_13,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_13,PU Panel (T) 42 mm. (Off White/Off White steel sheet) Slip joint with PVC. Frame,1,-1,1
+pricelist_ahu_v3_prod_14,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_14,PU Panel (T) 42 mm. (Stainless/Off White steel sheet) Slip joint with PVC. Frame,1,-1,1
+pricelist_ahu_v3_prod_15,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_15,PU Panel (T) 42 mm. (Stainless/Stainless steel sheet) Slip joint with PVC. Frame,1,-1,1
+pricelist_ahu_v3_prod_16,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_16,PU Panel (T) 50 mm. (Galvanized/Off White steel sheet) Slip joint with Camlock,1,-1,1080
+pricelist_ahu_v3_prod_17,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_17,PU Panel (T) 50 mm. (Off White/Off White steel sheet) Slip joint with Camlock,1,-1,1100
+pricelist_ahu_v3_prod_18,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_18,PU Panel (T) 50 mm. (Stainless/Off White steel sheet) Slip joint with Camlock,1,-1,2100
+pricelist_ahu_v3_prod_19,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_19,PU Panel (T) 50 mm. (Stainless/Stainless steel sheet) Slip joint with Camlock,1,-1,3100
+pricelist_ahu_v3_prod_20,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_20,"TGH : PU Panel (T) 50 mm. (Off White/Off White steel sheet) Slip joint + Cam lock , PVC. Frame. , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v3_prod_21,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_21,"TGH : PU Panel (T) 50 mm. (Stainless/Off White steel sheet) Slip joint + Cam lock , PVC. Frame. , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v3_prod_22,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_22,"TGH : PU Panel (T) 50 mm. (Stainless/Stainless steel sheet) Slip joint + Cam lock , PVC. Frame. , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v3_prod_23,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_23,"CJ : PU Panel (T) 50 mm. (Off White/Off White steel sheet) PVC. Frame CJ. Type A & B , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v3_prod_24,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_24,"CJ : PU Panel (T) 50 mm. (Stainless/Off White steel sheet) PVC. Frame CJ. Type A & B , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v3_prod_25,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_25,"CJ : PU Panel (T) 50 mm. (Stainless/Stainless steel sheet) PVC. Frame CJ. Type A & B , Steel Flat-Bar",1,-1,1
+pricelist_ahu_v3_prod_26,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_26,Rockwool Panel (T) 50 mm. ( Off White / Off White steel sheet),1,-1,1
+pricelist_ahu_v3_prod_27,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_27,Rockwool Panel (T) 50 mm. ( Styainless / Off White steel sheet),1,-1,1
+pricelist_ahu_v3_prod_28,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_28,Rockwool Panel (T) 50 mm. ( Stainlesse / Stainless steel sheet),1,-1,1
+pricelist_ahu_v3_prod_29,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_29,Single swing door 4 frame.(Color/Color steel sheet) (W) 500 x (H) 700 x (T) 50 mm.(Standard size),1,-1,3500
+pricelist_ahu_v3_prod_30,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_30,CJ : Single swing door 4 frame.(Color/Color steel sheet),1,-1,1
+pricelist_ahu_v3_prod_31,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_31,TGH : Single swing door 4 frame.(Color / Color steel sheet),1,-1,1
+pricelist_ahu_v3_prod_32,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_32,Stainless steel sheet (T) 0.5 mm. (Add 1 side panel),1,-1,1000
+pricelist_ahu_v3_prod_33,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_33,Aluminium Angle 40x40 (Off white color) (L) 6 m.,1,-1,1
+pricelist_ahu_v3_prod_34,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_34,Off white color steel sheet (T) 0.5 mm. ,1,-1,350
+pricelist_ahu_v3_prod_35,Default AHU Pricelist #3 Version,pricelist_ahu_v3_prod_35,Color Off White Spray (MT158),1,-1,1

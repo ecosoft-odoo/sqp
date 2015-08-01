@@ -1,0 +1,2 @@
+-- We need this because, somehow, we can't set Product_ID in product.pricelist.item.csv
+update product_pricelist_item set product_id = product_tmpl_id where price_discount = -1;

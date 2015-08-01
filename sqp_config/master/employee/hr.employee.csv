@@ -1,0 +1,79 @@
+"id","code","name","notes","department_id"
+"hr_employee_1",,"Visak  Thunyawan","กรรมการผู้จัดการ","บริหารสูงสุด"
+"hr_employee_10",,"Potchamal Apisitmontree","เจ้าหน้าที่ธุรการแผนกขาย","แผนกขาย"
+"hr_employee_11",,"Surasak Sompruk","วิศวกรขาย","แผนกขาย"
+"hr_employee_12",,"Phaisan  Nakwijit","หัวหน้าแผนกติดตั้ง","แผนกติดตั้ง"
+"hr_employee_13",,"Suwannee Aiem-On","ผู้จัดการฝ่ายบัญชีและการเงิน","ฝ่ายบัญชีและการเงิน"
+"hr_employee_14",,"Dusit Thara","วิศวกรขาย","แผนกขาย"
+"hr_employee_15",,"Nirintana Thamasiri","ผู้แทนฝ่ายบริหารงานคุณภาพ","แผนกบริหารงานคุณภาพ"
+"hr_employee_16",,"Saranya Kijsarikan","หัวหน้าแผนกจัดซื้อ","แผนกจัดซื้อ"
+"hr_employee_17",,"Chaiwat Poldechsathaporn","หัวหน้าส่วนเขียนแบบ","แผนกเขียนแบบ"
+"hr_employee_18",,"Vichai  Panyong","หัวหน้าแผนกเขียนแบบ","แผนกเขียนแบบ"
+"hr_employee_19",,"Thanurawet Srisornthong","วิศวกรติดตั้ง","แผนกติดตั้ง"
+"hr_employee_2",,"Somboon Thunyavan","กรรมการบริหารฝ่ายสำนักงานใหญ่","ฝ่ายบริหารสำนักงานใหญ่"
+"hr_employee_20",,"Rawee Suksaeng","วิศวกรติดตั้ง","แผนกติดตั้ง"
+"hr_employee_21",,"Pimpaphutsorn Khuamsawang","หัวหน้าแผนกบุคคล","แผนกบุคคล"
+"hr_employee_22",,"Surasak Boonkaew","หัวหน้าส่วนบริการ","แผนกติดตั้ง"
+"hr_employee_23",,"Weeranuwat Sukhontananon","วิศวกรขาย","แผนกขาย"
+"hr_employee_24",,"Prawit  Phensingkhon","เจ้าหน้าที่เขียนแบบ","แผนกเขียนแบบ"
+"hr_employee_25",,"Wannee Chaisue","หัวหน้าแผนกบัญชีและการเงิน","แผนกบัญชีและการเงิน"
+"hr_employee_26",,"Jongluk Pookphan","โฟร์แมนประจำไซด์งาน","แผนกติดตั้ง"
+"hr_employee_27",,"Satit Intrawang","เจ้าหน้าที่เขียนแบบ","แผนกเขียนแบบ"
+"hr_employee_28",,"Yuwaluk Wongkaew","เจ้าหน้าที่จัดซื้อ","แผนกจัดซื้อ"
+"hr_employee_29",,"Nattapong Rakkeatpakpum","เจ้าหน้าที่เทคโนโลยีสารสนเทศ","แผนก IT"
+"hr_employee_3",,"Niphon Chookaew","ผู้จัดการฝ่ายวิศวกรรมและ R&D","ฝ่ายวิศวกรรมและ R&D"
+"hr_employee_30",,"Pattama Mingsuk","เจ้าหน้าที่ถอดแบบ","แผนกขาย"
+"hr_employee_31",,"Parpon Kailob","เจ้าหน้าที่เขียนแบบ","แผนกเขียนแบบ"
+"hr_employee_32",,"Theeravat Phuangkaeo","พนักงานหน่วยบริการ","แผนกติดตั้ง"
+"hr_employee_33",,"Kamonrat Reabsomret","เจ้าหน้าที่ประสานงานแผนกขาย","แผนกขาย"
+"hr_employee_34",,"Utorn Phawan","พนักงานรับส่ง-เอกสาร","แผนกขาย"
+"hr_employee_35",,"Bunnari Thipmusik","พนักงานรับส่ง-เอกสาร","แผนกขาย"
+"hr_employee_36",,"Saychon Sattham","พนักงานหน่วยบริการ","แผนกติดตั้ง"
+"hr_employee_37",,"Tapin Runpapan","พนักงานหน่วยบริการ","แผนกติดตั้ง"
+"hr_employee_38",,"Suwanna Yamkayan","วิศวกร","แผนกวิศวกรรม"
+"hr_employee_39",,"Thawisak Buaphet","พนักงานหน่วยบริการ","แผนกติดตั้ง"
+"hr_employee_4",,"Supot Promsawat","ผู้จัดการฝ่ายติดตั้ง","ฝ่ายติดตั้ง"
+"hr_employee_40",,"Umaporn Suksaeng","ธุรการแผนกติดตั้ง","แผนกติดตั้ง"
+"hr_employee_41",,"Anurak Sutthitham","วิศวกร","แผนกวิศวกรรม"
+"hr_employee_42",,"Maliwan Onlamun","เจ้าหน้าที่การเงิน","แผนกบัญชีและการเงิน"
+"hr_employee_43",,"Warin Pitakdamrongchai","วิศวกร","แผนกวิศวกรรม"
+"hr_employee_44",,"Oranat Subsudsakul","เจ้าหน้าที่ถอดแบบ","แผนกขาย"
+"hr_employee_46",,"Laphatrada  Sungsikaew","หัวหน้าแผนกบุคคลและความปลอดภัยโรงงาน","ฝ่ายผลิต"
+"hr_employee_5",,"Saowaluck  Promsawat","เลขานุการฝ่ายนำเข้าและส่งออก","ฝ่ายนำเข้าและส่งออก"
+"hr_employee_6",,"Somkiat Sangthongsakullert","วิศวกรติดตั้ง","แผนกติดตั้ง"
+"hr_employee_7",,"Chairat  Sangchot","วิศวกรขาย","แผนกขาย"
+"hr_employee_8",,"Boonsong Heangpraseet","แม่บ้าน","แผนกบุคคล"
+"hr_employee_9",,"Chatchai Tueansa-Ard","วิศวกรขาย","แผนกขาย"
+"hr_employee_SP143005","SP143005","Sanan Lothalad","หัวหน้าส่วนประตู, แผนกผลิต",
+"hr_employee_SP143006","SP143006","Kongjak Rodphai","หัวหน้าแผนกซ่อมบำรุง, แผนกซ่อมบำรุง",
+"hr_employee_SP143009","SP143009","Decho Thongchai","หัวหน้าส่วนประกอบ, แผนกผลิต",
+"hr_employee_SP144002","SP144002","Teerasak Donmon","หัวหน้าส่วนธุรการผลิตและจัดส่ง, แผนกผลิต",
+"hr_employee_SP144004","SP144004","Apidet Kaewketkieng","หัวหน้าส่วนตัดเหล็ก, แผนกผลิต",
+"hr_employee_SP144007","SP144007","Sang-arun Subbunchong","พนักงานขับรถ, หน่วยธุรการผลิตและจัดส่ง",
+"hr_employee_SP145003","SP145003","Charn Srichan","พนักงานขับรถ, หน่วยธุรการผลิตและจัดส่ง",
+"hr_employee_SP146007","SP146007","Pairoj Khansonthey","หัวหน้าส่วนประกันคุณภาพ, แผนกประกันคุณภาพ",
+"hr_employee_SP146012","SP146012","Thatnapong Rodphai","พนักงานหน่วยซ่อมบำรุง, หน่วยซ่อมบำรุง",
+"hr_employee_SP146013","SP146013","Narongsak Phombut","พนักงานหน่วยสำเร็จรูป, หน่วยสำเร็จรูป",
+"hr_employee_SP147010","SP147010","Komsan Kaewketkieng","หัวหน้าหน่วยตัดเหล็ก 3, ส่วนตัดเหล็ก",
+"hr_employee_SP147018","SP147018","Jirapong Thamma","หัวหน้าหน่วยฉีดโฟม 2, ส่วนฉีดโฟม",
+"hr_employee_SP149005","SP149005","Wongnet Sathi","หัวหน้าหน่วยตัดเหล็ก 2, ส่วนตัดเหล็ก",
+"hr_employee_SP149082","SP149082","Pithak Fangpaiboon","พนักงานขับรถ, หน่วยธุรการผลิตและจัดส่ง",
+"hr_employee_SP149096","SP149096","Charoemphol Wongthongdee","พนักงานขับรถ, หน่วยธุรการผลิตและจัดส่ง",
+"hr_employee_SP150038","SP150038","Rungnapha Pusawat","หัวหน้าหน่วยคลังสินค้า, ส่วนธุรการผลิตและจัดส่ง",
+"hr_employee_SP150067","SP150067","Niphon Satsue","หัวหน้าหน่วยประกอบประตู, ส่วนประกอบ",
+"hr_employee_SP150080","SP150080","Laphatrada Sungsikaew","หัวหน้าแผนกบุคคลและความปลอดภัยโรงงาน, ฝ่ายผลิต",
+"hr_employee_SP150099","SP150099","Paphatsorn Keingkhan","หัวหน้าหน่วยสำเร็จรูป, ส่วนธุรการผลิตและจัดส่ง",
+"hr_employee_SP150102","SP150102","Manop Boonto","หัวหน้าหน่วยพ่นสี, ส่วนประกอบ",
+"hr_employee_SP151005","SP151005","Pornchai Phathan","พนักงานขับรถ, หน่วยธุรการผลิตและจัดส่ง",
+"hr_employee_SP151076","SP151076","Janda Kotwong","หัวหน้าแผนกผลิต, ฝ่ายผลิต",
+"hr_employee_SP151079","SP151079","Chhaly Hong","หัวหน้าหน่วยฉีดโฟม 1, ส่วนฉีดโฟม",
+"hr_employee_SP151083","SP151083","Niwat Songwichai","หัวหน้าส่วนฉีดโฟม, แผนกผลิต",
+"hr_employee_SP152013","SP152013","Pongsakorn Loelab","หัวหน้าส่วนคลังวัตถุดิบ, แผนกคลังวัตถุดิบ",
+"hr_employee_SP152029","SP152029","Warunee Nadee","เลขานุการแผนกผลิต, แผนกผลิต",
+"hr_employee_SP153071","SP153071","Komthorn Butsri","พนักงานขับรถ, หน่วยธุรการผลิตและจัดส่ง",
+"hr_employee_SP154022","SP154022","Nat Angsila","เจ้าหน้าที่บุคคลโรงงาน, ส่วนบุคคลและความปลอดภัยโรงงาน",
+"hr_employee_SP155028","SP155028","Phaiwong Jenkarn","หัวหน้าหน่วยซ่อมบำรุง, ส่วนซ่อมบำรุง",
+"hr_employee_SP155034","SP155034","Suparnee Kotsuwan","เจ้าหน้าที่ธุรการแผนกซ่อมบำรุง, ส่วนซ่อมบำรุง",
+"hr_employee_SP155059","SP155059","Wanphen Sodsanoi","เจ้าหน้าที่ถอดแบบผลิต, ส่วนคลังวัตถุดิบ",
+"hr_employee_SP155098","SP155098","Anek Sitthiwanchai","หัวหน้าหน่วยฉีดโฟม 4, ส่วนฉีดโฟม",
+"hr_employee_SP156001","SP156001","Chamnan Sanguansri","หัวหน้าหน่วยตัดเหล็ก 1, ส่วนตัดเหล็ก",

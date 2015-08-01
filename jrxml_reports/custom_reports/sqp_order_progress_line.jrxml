@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sqp_order_progress_line" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.2100000000000057"/>
+	<property name="ireport.x" value="239"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table" lineSpacing="Single">
+		<box topPadding="2" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="record" lineSpacing="Single">
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineStyle="Dotted"/>
+			<bottomPen lineWidth="0.25" lineStyle="Dotted"/>
+		</box>
+	</style>
+	<parameter name="order_id" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select order_line_id, order_id, sequence, product_id, product_name, uom, price_unit, coalesce(order_qty,0) order_qty,
+coalesce(invoice1_qty,0) invoice1_qty, coalesce(invoice2_qty,0) invoice2_qty
+
+from
+
+(select sale_order.order_line_id, sale_order.order_id, coalesce(inv_draft.sequence,inv_all.sequence,0) as sequence, sale_order.product_id,
+sale_order.name as product_name, uom, sale_order.price_unit, order_qty, invoice1_qty, invoice2_qty from
+
+(select ol.id as order_line_id, o.id as order_id, product_id, ol.name, uom.name as uom, price_unit, sum(product_uom_qty) order_qty from sale_order o
+inner join sale_order_line ol on o.id = ol.order_id
+left outer join product_uom uom on uom.id = ol.product_uom
+where o.id = $P{order_id}
+group by ol.id, o.id, product_id, ol.name, uom.name, price_unit) sale_order
+
+
+left outer join
+
+(select lr.order_line_id, il.sequence, product_id, il.name, sum(quantity) invoice1_qty from account_invoice i
+inner join account_invoice_line il on i.id = il.invoice_id
+inner join sale_order_line_invoice_rel lr on il.id = lr.invoice_id
+where i.state = 'draft'
+group by lr.order_line_id, il.sequence, product_id, il.name) inv_draft
+
+on sale_order.order_line_id = inv_draft.order_line_id
+
+left outer join
+
+
+(select lr.order_line_id, il.sequence, product_id, il.name, sum(quantity) invoice2_qty from account_invoice i
+inner join account_invoice_line il on i.id = il.invoice_id
+inner join sale_order_line_invoice_rel lr on il.id = lr.invoice_id
+where i.state != 'cancel'
+group by lr.order_line_id, il.sequence, product_id, il.name) inv_all
+
+on sale_order.order_line_id = inv_all.order_line_id) a
+
+order by order_id, sequence, order_line_id
+]]>
+	</queryString>
+	<field name="order_id" class="java.lang.Integer"/>
+	<field name="product_id" class="java.lang.Integer"/>
+	<field name="product_name" class="java.lang.String"/>
+	<field name="uom" class="java.lang.String"/>
+	<field name="price_unit" class="java.math.BigDecimal"/>
+	<field name="order_qty" class="java.math.BigDecimal"/>
+	<field name="invoice1_qty" class="java.math.BigDecimal"/>
+	<field name="invoice2_qty" class="java.math.BigDecimal"/>
+	<variable name="order_line_total" class="java.lang.Number">
+		<variableExpression><![CDATA[$F{price_unit}*$F{order_qty}]]></variableExpression>
+	</variable>
+	<variable name="invoice1_line_percent" class="java.lang.Number">
+		<variableExpression><![CDATA[($F{invoice1_qty}/$F{order_qty})*100]]></variableExpression>
+	</variable>
+	<variable name="invoice2_line_percent" class="java.lang.Number">
+		<variableExpression><![CDATA[($F{invoice2_qty}/$F{order_qty})*100]]></variableExpression>
+	</variable>
+	<variable name="invoice1_line_total" class="java.lang.Number">
+		<variableExpression><![CDATA[$F{price_unit}*$F{invoice1_qty}]]></variableExpression>
+	</variable>
+	<variable name="invoice2_line_total" class="java.lang.Number">
+		<variableExpression><![CDATA[$F{price_unit}*$F{invoice2_qty}]]></variableExpression>
+	</variable>
+	<variable name="invoice3_line_percent" class="java.lang.Number">
+		<variableExpression><![CDATA[100-$V{invoice2_line_percent}]]></variableExpression>
+	</variable>
+	<variable name="invoice3_qty" class="java.lang.Number">
+		<variableExpression><![CDATA[$F{order_qty}-$F{invoice2_qty}]]></variableExpression>
+	</variable>
+	<variable name="invoice3_line_total" class="java.lang.Number">
+		<variableExpression><![CDATA[$F{price_unit}*$V{invoice3_qty}]]></variableExpression>
+	</variable>
+	<variable name="order_sub_total" class="java.lang.Number" resetType="Group" resetGroup="order_id" calculation="Sum">
+		<variableExpression><![CDATA[$V{order_line_total}]]></variableExpression>
+	</variable>
+	<variable name="invoice1_sub_total" class="java.lang.Number" resetType="Group" resetGroup="order_id" calculation="Sum">
+		<variableExpression><![CDATA[$V{invoice1_line_total}]]></variableExpression>
+	</variable>
+	<variable name="invoice2_sub_total" class="java.lang.Number" resetType="Group" resetGroup="order_id" calculation="Sum">
+		<variableExpression><![CDATA[$V{invoice2_line_total}]]></variableExpression>
+	</variable>
+	<variable name="invoice3_sub_total" class="java.lang.Number" resetType="Group" resetGroup="order_id" calculation="Sum">
+		<variableExpression><![CDATA[$V{invoice3_line_total}]]></variableExpression>
+	</variable>
+	<variable name="invoice1_total_percent" class="java.lang.Number">
+		<variableExpression><![CDATA[($V{invoice1_sub_total}/$V{order_sub_total})*100]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="invoice2_total_percent" class="java.lang.Number">
+		<variableExpression><![CDATA[($V{invoice2_sub_total}/$V{order_sub_total})*100]]></variableExpression>
+	</variable>
+	<variable name="invoice3_total_percent" class="java.lang.Number">
+		<variableExpression><![CDATA[($V{invoice3_sub_total}/$V{order_sub_total})*100]]></variableExpression>
+	</variable>
+	<group name="order_id">
+		<groupExpression><![CDATA[$F{order_id}]]></groupExpression>
+		<groupFooter>
+			<band height="20">
+				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" x="393" y="0" width="60" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="table" stretchType="RelativeToTallestObject" x="362" y="0" width="31" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<text><![CDATA[100%]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="table" stretchType="RelativeToTallestObject" x="0" y="0" width="362" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" x="741" y="0" width="60" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" x="625" y="0" width="60" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" x="509" y="0" width="60" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" x="453" y="0" width="56" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" x="569" y="0" width="56" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="table" stretchType="RelativeToTallestObject" x="685" y="0" width="56" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+						<font size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="453" y="0" width="47" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{invoice1_total_percent} != null ? $V{invoice1_total_percent} : 0]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="500" y="0" width="5" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["%"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="616" y="0" width="5" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["%"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="569" y="0" width="47" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{invoice2_total_percent} != null ? $V{invoice2_total_percent} : 0]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="732" y="0" width="5" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["%"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="685" y="0" width="47" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{invoice3_total_percent} != null ? $V{invoice3_total_percent} : 0]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="355" y="0" width="98" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{order_sub_total}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="471" y="0" width="98" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{invoice1_sub_total}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="700" y="0" width="98" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{invoice3_sub_total}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="587" y="0" width="98" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Number"><![CDATA[$V{invoice2_sub_total}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="20">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="25" y="0" width="252" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{product_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="307" y="0" width="55" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{price_unit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="362" y="0" width="31" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="478" y="0" width="31" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="594" y="0" width="31" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="0" y="0" width="25" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="277" y="0" width="30" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{uom}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="393" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="453" y="0" width="25" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{invoice1_line_percent}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="569" y="0" width="25" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{invoice2_line_percent}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="509" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="625" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="685" y="0" width="25" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{invoice3_line_percent}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="710" y="0" width="31" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement style="record" stretchType="RelativeToTallestObject" x="741" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="348" y="0" width="45" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{order_qty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="467" y="0" width="42" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{invoice1_qty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="584" y="0" width="41" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{invoice2_qty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="700" y="0" width="41" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{invoice3_qty}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="355" y="0" width="98" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{order_line_total}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="471" y="0" width="98" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{invoice1_line_total}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="587" y="0" width="98" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{invoice2_line_total}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="702" y="0" width="98" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{invoice3_line_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,3 @@
+id,name,parent_id,type
+product.product_category_panel,Panel,Finished Goods,Normal
+product.product_category_project,Project,Finished Goods,Normal

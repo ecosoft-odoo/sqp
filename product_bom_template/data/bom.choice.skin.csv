@@ -1,0 +1,6 @@
+"id","code","name"
+"joint_choice_int_OW","OW","0.5 mm PP (OW)"
+"joint_choice_int_AW","AW","0.45 mm PP (AW)"
+"joint_choice_int_GI","GI","0.4 mm GI"
+"joint_choice_int_SS","SS","0.5 mm SS"
+"joint_choice_int_OW8","GI8","0.8 mm GI"

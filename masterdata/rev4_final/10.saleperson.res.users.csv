@@ -1,0 +1,8 @@
+id,name,login,password,company_id/id,active,lang,tz,action_id/id,notification_email_send,email,signature,groups_id/id
+base.user_chatchai,Chatchai T.,chatchai,chatchai,base.main_company,True,en_US,Asia/Bangkok,,Never,admin@example.com,Chatchai T.,base.group_user
+base.user_weeranuwat,Weeranuwat S.,weeranuwat,weeranuwat,base.main_company,True,en_US,Asia/Bangkok,,Never,admin@example.com,Weeranuwat S.,base.group_user
+base.user_dusit,Dusit T.,dusit,dusit,base.main_company,True,en_US,Asia/Bangkok,,Never,admin@example.com,Dusit T.,base.group_user
+base.user_surasak,Surasak S.,surasak,surasak,base.main_company,True,en_US,Asia/Bangkok,,Never,admin@example.com,Surasak S.,base.group_user
+base.user_visak,Visak T.,visak,visak,base.main_company,True,en_US,Asia/Bangkok,,Never,admin@example.com,Visak T.,base.group_user
+base.user_somboon,Somboon T.,somboon,somboon,base.main_company,True,en_US,Asia/Bangkok,,Never,admin@example.com,Somboon T.,base.group_user
+base.user_chairat,Chairat S.,chairat,chairat,base.main_company,True,en_US,Asia/Bangkok,,Never,admin@example.com,Chairat S.,base.group_user

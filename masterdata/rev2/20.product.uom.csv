@@ -1,0 +1,12 @@
+id,name,category_id,uom_type,rounding,factor_inv,factor
+product.uom_กก,กก,Weight,Reference Unit of Measure for this category,0.01,1,1
+product.uom_sqm,sqm.,Area,Reference Unit of Measure for this category,0.01,1,1
+product.uom_ea,EA,Unit,Reference Unit of Measure for this category,0.01,1,1
+product.uom_set,set,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+product.uom_lot,lot,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+product.uom_m,m.,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+product.uom_pcs,pcs.,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+product.uom_nos,nos.,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+product.uom_ชิ้น,ชิ้น,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+product.uom_คู่,คู่,Unit,Smaller than the reference Unit of Measure,0.01,1,1
+product.uom_rolls,Rolls,Unit,Smaller than the reference Unit of Measure,0.01,1,1

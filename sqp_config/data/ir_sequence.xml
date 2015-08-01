@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        
+		<!-- 
+		Sales Order 
+		-->
+		<!-- QUOTATION DOMESTIC-->
+        <record id="sale.seq_type_sale_order" model="ir.sequence.type">
+            <field name="name">Quotation</field>
+            <field name="code">sale.order</field>
+        </record>
+		
+        <record id="sale.seq_sale_order" model="ir.sequence">
+            <field name="name">Quotation SQP</field>
+            <field name="code">sale.order</field>
+            <field name="prefix">QD%(y)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
+        </record>
+        
+		<!-- QUOTATION INTERNATIONAL -->
+        <record id="ext_sale.seq_type_sale_order_inter" model="ir.sequence.type">
+            <field name="name">Quotation (International)</field>
+            <field name="code">sale.order.inter</field>
+        </record>
+		
+        <record id="ext_sale.seq_sale_order_inter" model="ir.sequence">
+            <field name="name">Quotation SQP (International)</field>
+            <field name="code">sale.order.inter</field>
+            <field name="prefix">QI%(y)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
+        </record>
+
+        <!-- SALE ORDER DOMESTIC -->
+        <record id="ext_sale.seq_type_confirmed_sale_order" model="ir.sequence.type">
+            <field name="name">Sales Order</field>
+            <field name="code">confirmed.sale.order</field>
+        </record>
+
+        <record id="ext_sale.seq_confirmed_sale_order" model="ir.sequence">
+            <field name="name">Sales Order SQP</field>
+            <field name="code">confirmed.sale.order</field>
+            <field name="prefix">SD%(y)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
+        </record>
+
+        <!-- SALE ORDER INTERNATIONAL -->
+        <record id="ext_sale.seq_type_confirmed_sale_order_inter" model="ir.sequence.type">
+            <field name="name">Sales Order (International)</field>
+            <field name="code">confirmed.sale.order.inter</field>
+        </record>
+
+        <record id="ext_sale.seq_confirmed_sale_order_inter" model="ir.sequence">
+            <field name="name">Sales Order SQP (International)</field>
+            <field name="code">confirmed.sale.order.inter</field>
+            <field name="prefix">SI%(y)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
+        </record>
+        
+		<!--
+		Purchase Order
+		-->
+        <record id="purchase.seq_purchase_order" model="ir.sequence">
+            <field name="name">Purchase Order</field>
+            <field name="code">purchase.order</field>
+            <field name="prefix">SP%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
+        </record>
+
+		<!--
+		Purchase Requisition
+		-->
+        <record id="purchase_requisition.seq_purchase_requisition" model="ir.sequence">
+            <field name="name">Purchase Requisition Order</field>
+            <field name="code">purchase.order.requisition</field>
+            <field name="prefix">PR%(y)s/</field>
+            <field name="padding">4</field>
+            <field name="implementation">no_gap</field>
+        </record>    
+
+		<!--
+		Account Journal
+		-->
+        <record id="account.sequence_sale_journal" model="ir.sequence">
+            <field name="name">Account Default Sales Journal</field>
+            <field name="prefix">CI%(y)s/</field>
+            <field name="padding">4</field>
+            <field name="implementation">no_gap</field>
+        </record>
+        <record id="account.sequence_refund_sales_journal" model="ir.sequence">
+            <field name="name">Account Default Sales Credit Note Journal</field>
+            <field name="prefix">CN%(y)s/</field>
+            <field name="padding">4</field>
+            <field name="implementation">no_gap</field>
+        </record>
+        
+		<!--
+		Billing
+		-->
+        <record id="account_billing.seq_account_billing" model="ir.sequence">
+            <field name="name">Billing</field>
+            <field name="code">account.billing</field>
+            <field name="prefix">BI%(y)s/</field>
+            <field name="padding">4</field>
+            <field name="implementation">no_gap</field>
+            <field name="company_id" eval="False"/>
+        </record>
+	</data>
+</openerp>

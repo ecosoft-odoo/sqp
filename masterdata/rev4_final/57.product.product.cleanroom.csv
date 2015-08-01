@@ -1,0 +1,81 @@
+id,name,default_code,partner_id,tag_ids,sale_ok,purchase_ok,type,procure_method,supply_method,cost_method,categ_id,uom_id,uom_po_id,valuation,standard_price,list_price
+product_cleanroom_1,"Double sliding door 3 Frame (W) 1,800 x (H) 2,100 x (T) 42 mm. (Stainless)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,60000
+product_cleanroom_2,"Emergency Double swing door 3 Frame (W) 1,800 x (H) 2,100 x (T) 42 mm. (Color steel sheet)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,55000
+product_cleanroom_3,"Double sliding door 3 Frame (W) 1,800 x (H) 2,100 x (T) 42 mm. (Color steel sheet)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,54000
+product_cleanroom_4,"Double swing door 3 Frame (W) 1,800 x (H) 2,100 x (T) 42 mm. (SS/SS)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,40000
+product_cleanroom_5,"Double swing door 4 Frame (W) 1,800 x (H) 2,100 x (T) 42 mm. (SS/SS)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,40000
+product_cleanroom_6,"Combination swing door 3 Frame (W) 1,800 x (H) 2,100 x (T) 42 mm. (SS/SS)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,40000
+product_cleanroom_7,"Single sliding door 3 Frame (W) 900 x (H) 2,100 x (T) 42 mm. (Stainless)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,40000
+product_cleanroom_8,"Emergency Single swing door 3 Frame (W) 900 x (H) 2,100 x (T) 42 mm. (Color steel sheet)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,40000
+product_cleanroom_9,Inter Lock 2 CH,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,40000
+product_cleanroom_10,"Double swing door 3 Frame (W) 1,800 x (H) 2,100 x (T) 42 mm. (Color steel sheet)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,35000
+product_cleanroom_11,"Double swing door 4 Frame (W) 1,800 x (H) 2,100 x (T) 42 mm. (Color steel sheet)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,35000
+product_cleanroom_12,"Combination swing door 3 Frame (W) 1,800 x (H) 2,100 x (T) 42 mm. (Color steel sheet)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,35000
+product_cleanroom_13,"Single sliding door 3 Frame (W) 900 x (H) 2,100 x (T) 42 mm. (Color steel sheet)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,35000
+product_cleanroom_14,"Single swing door 3 Frame (W) 900 x (H) 2,100 x (T) 50 mm. (SS/SS)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,34000
+product_cleanroom_15,"Single swing door 4 Frame (W) 900 x (H) 2,100 x (T) 50 mm. (SS/SS)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,34000
+product_cleanroom_16,"Single swing door 3 Frame (W) 900 x (H) 2,100 x (T) 42 mm. (SS/SS)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,30000
+product_cleanroom_17,"Single swing door 4 Frame (W) 900 x (H) 2,100 x (T) 42 mm. (SS/SS)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,30000
+product_cleanroom_18,"Sliding window (Glass) (W) 900 x (H) 2,000 (T) 6 mm.",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,30000
+product_cleanroom_19,"Single swing door 3 Frame (W) 900 x (H) 2,100 x (T) 50 mm. (Color steel sheet)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,27000
+product_cleanroom_20,"Single swing door 4 Frame (W) 900 x (H) 2,100 x (T) 50 mm. (Color steel sheet)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,27000
+product_cleanroom_21,"Single swing door 3 Frame (W) 900 x (H) 2,100 x (T) 42 mm. (Color steel sheet)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,25000
+product_cleanroom_22,"Single swing door 4 Frame (W) 900 x (H) 2,100 x (T) 42 mm. (Color steel sheet)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,25000
+product_cleanroom_23,Panel (T) 200 mm. Wall return for Hepa (Stainless /Stainless) ไม่รวม Hepa,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,20000
+product_cleanroom_24,"Emergency Service door (Single swing) 4 Frame (W) 600 x (H) 1,000 x (T) 42 mm. (Color steel sheet)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,20000
+product_cleanroom_25,"Sliding window (Glass) (W) 900 x (H) 1,800 (T) 6 mm.",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,20000
+product_cleanroom_26,Panel (T) 200 mm. Wall return air (Stainless /Stainless),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,16000
+product_cleanroom_27,Panel (T) 100 mm. Wall return air (Stainless /Stainless),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,12000
+product_cleanroom_28,Panel (T) 200 mm. Wall return for Hepa (Color/Color) ไม่รวม Hepa,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,12000
+product_cleanroom_29,"Double fixed window (Temper glass) (W) 1,160 x (H) 900 (T) 6 mm.",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,12000
+product_cleanroom_30,Panel (T) 200 mm. Wall return air (Color / Color),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,8000
+product_cleanroom_31,Double fixed window (Temper glass) (W) 865 x (H) 865 (T) 6 mm.,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,8000
+product_cleanroom_32,"หุ้มเสามาตรฐาน ผนังอย่างเดียว (400 x 400 mm. , 4 ด้าน)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,8000
+product_cleanroom_33,"Single fixed window (Temper glass) (W) 1,160 x (H) 900 (T) 6 mm.",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,7500
+product_cleanroom_34,Transportation Clean RoomBangkok and Surroudings,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,lot,lot,Periodical (manual),0,7000
+product_cleanroom_35,Panel (T) 100 mm. Wall return air (Color / Color),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,6000
+product_cleanroom_36,Single fixed window (Temper glass) (W) 865 x (H) 865 (T) 6 mm.,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,5500
+product_cleanroom_37,Panel (T) 125 mm. Rock Wool (Color / Color),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,4500
+product_cleanroom_38,Panel (T) 100 mm. Rock Wool (Color / Color),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,4000
+product_cleanroom_39,Temporary wall,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,4000
+product_cleanroom_40,Panel (T) 75 mm. Rock Wool (Color / Color),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,3500
+product_cleanroom_41,Panel (T) 50 mm. Rock Wool (Color / Color),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,3000
+product_cleanroom_42,Panel (T) 42 mm. Rock Wool (Color / Color),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,2840
+product_cleanroom_43,Panel (T) 100 mm. Polyurethane Foam (Color / Color),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,2000
+product_cleanroom_44,Panel (T) 75 mm. Polyurethane Foam (Color / Color),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1900
+product_cleanroom_45,Panel (T) 100 mm. Polyurethane Foam (Color / Galvanized),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1900
+product_cleanroom_46,Panel (T) 75 mm. Polyurethane Foam (Color / Galvanized),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1850
+product_cleanroom_47,Panel (T) 100 mm. Polyurethane Foam (Galvanized / Galvanized),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1850
+product_cleanroom_48,Panel (T) 75 mm. Polyurethane Foam (Galvanized / Galvanized),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1800
+product_cleanroom_49,Panel (T) 50 mm. Polyurethane Foam (Color / Color),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1540
+product_cleanroom_50,Panel (T) 50 mm. Polyurethane Foam (Color / Galvanized),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1500
+product_cleanroom_51,"Hanging system (Ceiling beam, bracket, T-Bar)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,m.,m.,Periodical (manual),0,1500
+product_cleanroom_52,"Opening panel with aluminium frame for Hepa, Lighting",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,1500
+product_cleanroom_53,Demolish Single swing / sliding door,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,1500
+product_cleanroom_54,Demolish Double swing / sliding door,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,1500
+product_cleanroom_55,Panel (T) 50 mm. Polyurethane Foam (Galvanized / Galvanized),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1450
+product_cleanroom_56,Panel (T) 42 mm. Polyurethane Foam (Color / Color),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1350
+product_cleanroom_57,Panel (T) 42 mm. Polyurethane Foam (Color / Galvanized),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1300
+product_cleanroom_58,Panel (T) 42 mm. Polyurethane Foam (Galvanized / Galvanized),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1250
+product_cleanroom_59,Panel (T) 25 mm. Polyurethane Foam (Color / Color),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1200
+product_cleanroom_60,Aluminium beam support,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,m.,m.,Periodical (manual),0,1200
+product_cleanroom_61,Aluminium Curve,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,m.,m.,Periodical (manual),0,1200
+product_cleanroom_62,Opening cutting Lighting,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,1200
+product_cleanroom_63,Panel (T) 25 mm. Polyurethane Foam (Color / Galvanized),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1150
+product_cleanroom_64,Panel (T) 25 mm. Polyurethane Foam (Galvanized / Galvanized),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,1100
+product_cleanroom_65,Aluminium angle + PVC Curve (30 x 30),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,m.,m.,Periodical (manual),0,800
+product_cleanroom_66,Aluminium floor base,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,m.,m.,Periodical (manual),0,700
+product_cleanroom_67,Aluminium Angle 40 x 40,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,m.,m.,Periodical (manual),0,500
+product_cleanroom_68,Spray paint,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,tube,tube,Periodical (manual),0,500
+product_cleanroom_69,Installation Clean Room with Supervisor (Upcountry),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,450
+product_cleanroom_70,Installation Clean Room with Supervisor (Bangkok and Surroudings area),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,400
+product_cleanroom_71,"Other fitting parts (Silicone, bolt, nut & washer)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,300
+product_cleanroom_72,"Silicone ""Sika"" (0.4 Tube/m2)",,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,tube,tube,Periodical (manual),0,200
+product_cleanroom_73,ฝังท่อ BOX - SWITCH,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,200
+product_cleanroom_74,Demolish C/R Panel with fitting parts,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,150
+product_cleanroom_75,Demolish window glass,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,150
+product_cleanroom_76,Hole for Sprinkle Head,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,hole,hole,Periodical (manual),0,80
+product_cleanroom_77,Lighting,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,set,set,Periodical (manual),0,0
+product_cleanroom_78,Installation Clean Room with Supervisor (Oversea),,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,sqm.,sqm.,Periodical (manual),0,0
+product_cleanroom_79,Transportation Clean Room Upcountry,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,lot,lot,Periodical (manual),0,0
+product_cleanroom_80,Transportation Clean Room Oversea,,,Clean Room,TRUE,FALSE,Consumable,Make to Order,Buy,Standard Price,Sale Info,lot,lot,Periodical (manual),0,0

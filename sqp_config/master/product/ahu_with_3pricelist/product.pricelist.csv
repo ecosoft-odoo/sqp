@@ -1,0 +1,4 @@
+id,company_id/id,currency_id/id,name,type
+pricelist_ahu_1,,base.THB,AHU Price DAIKIN,sale
+pricelist_ahu_2,,base.THB,AHU Price Shinko,sale
+pricelist_ahu_3,,base.THB,AHU Price AlterAir,sale

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="product_normal_form_view_ext" model="ir.ui.view">
+            <field name="name">product.normal.form.view.ext</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <data>  				
+					<xpath expr="/form/sheet//field[@name='categ_id']" position="after">
+		                <field name="is_international"/>
+		                <label for="is_international"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+	</data>
+</openerp>

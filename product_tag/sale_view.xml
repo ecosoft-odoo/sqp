@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_order_form_ext" model="ir.ui.view">
+            <field name="name">view.order.form.ext</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit"/>
+            <field name="arch" type="xml">
+                <data>
+	                <field name="partner_id" position="before" version="7.0">
+						<field name="product_tag_id" string="Quotation Type" domain="[('active' , '=', True)]"
+								options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+	                </field>               
+					<xpath expr="/form/sheet/notebook/page/field/form//field[@name='product_id']" position="attributes">
+						<attribute name="required">True</attribute>
+						<attribute name="domain">[('tag_ids', 'in', parent.product_tag_id),'|',('partner_id', '=', False),('partner_id', '=', parent.partner_id)]</attribute>
+						<attribute name="options">{'limit': 10, 'create': false, 'create_edit': false}</attribute>
+	                </xpath>
+					<xpath expr="/form/sheet/notebook/page/field/tree//field[@name='product_id']" position="attributes">
+						<attribute name="required">True</attribute>
+						<attribute name="domain">[('tag_ids', 'in', parent.product_tag_id),'|',('partner_id', '=', False),('partner_id', '=', parent.partner_id)]</attribute>
+						<attribute name="options">{'limit': 10, 'create': false, 'create_edit': false}</attribute>
+	                </xpath>
+				</data>
+			</field>
+        </record>
+	</data>
+</openerp>

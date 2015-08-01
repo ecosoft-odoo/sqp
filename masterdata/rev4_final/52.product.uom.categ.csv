@@ -1,0 +1,7 @@
+id,name,active
+product.product_uom_categ_area,Area,TRUE
+product.product_uom_categ_unit,Unit,TRUE
+product.product_uom_categ_kgm,Weight,TRUE
+product.uom_categ_wtime,Working Time (NOT USED),FALSE
+product.uom_categ_length,Length / Distance (NOT USED),FALSE
+product.product_uom_categ_vol,Volume (NOT USED),FALSE

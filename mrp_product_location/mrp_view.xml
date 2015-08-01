@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	    <record id="mrp_production_form_view_ext" model="ir.ui.view">
+	        <field name="name">mrp.production.form.view.ext</field>
+	        <field name="model">mrp.production</field>
+	        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="/form/sheet/notebook/page[last()]" position="after">            		
+	            	<page string="Existing Stock" attrs="{'invisible': ['|', ('state','!=','draft'), ('parent_id','!=',False)]}">
+            			<field name="mrp_product_location_ids" readonly="1" >
+            				<tree>
+            					<field name="product_id" />
+            					<field name="location_id"/>
+                            	<field name="qty_available" sum='Total Quantity' />
+                            </tree>
+            			</field>
+            		</page>
+				</xpath>
+	            <xpath expr="/form/sheet/notebook" position="before">
+	            	<field name="total_qty_returned" invisible="1"/>
+					<div style="color:red" states="draft">
+						<h2>				
+							<label string="Some Standard Product is returned. Please check 'Existing Stock' tab before proceeding." attrs="{'invisible': [('total_qty_returned','=',0)]}" />		
+						</h2>			
+					</div>		  
+	            </xpath>            		
+	        </field>
+	    </record>
+    </data>
+</openerp>

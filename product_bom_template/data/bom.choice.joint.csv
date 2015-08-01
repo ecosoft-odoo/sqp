@@ -1,0 +1,10 @@
+id,code,name
+joint_choice_MF,MF,MF (Male-Female)
+joint_choice_MM,MM,MM (Male-Male)
+joint_choice_FF,FF,FF (Female-Female)
+joint_choice_MN,MN,MN (Male-None)
+joint_choice_FN,FN,FN (Female-None)
+joint_choice_NN,NN,NN (None-None)
+joint_choice_FJ,FJ,Fire Joint
+joint_choice_NJ,NJ,Normal Slip Joint
+joint_choice_NP,NP,Non Progressive

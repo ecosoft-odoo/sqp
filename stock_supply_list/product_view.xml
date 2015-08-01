@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="product_category_form_view_ext" model="ir.ui.view">
+            <field name="name">product.category.form.view.ext</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <field name="is_supply_list" context="{'address_out_id': partner_id, 'picking_type': 'out', 'form_view_ref':'view_move_picking_form', 'tree_view_ref':'view_move_picking_tree', 'is_supply_list': is_supply_list, 'product_categ_id': product_categ_id }"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
