@@ -249,6 +249,8 @@
         <field name="jasper_output">pdf</field>
         <field name="invisible">context.get('is_supply_list',False)</field>
     </record> 
+ 
+ 	<!-- 
     <report string="Shipment Panel Form (Merged)"
         model="stock.picking.out"
         auto="False"
@@ -266,7 +268,8 @@
         <field name="multi">True</field>
         <field name="invisible">context.get('is_supply_list',False)</field>
     </record> 
-
+ 	-->
+ 
 	<!-- END -->
 
     <report string="Work Progression (SQP)"
