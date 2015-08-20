@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Supply List" language="groovy" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="1328"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;move_lines&quot;]"/>
 	<import value="org.apache.commons.codec.binary.Base64"/>
 	<style name="table" lineSpacing="Single">
@@ -74,6 +74,9 @@
 	<field name="SO No." class="java.lang.String">
 		<fieldDescription><![CDATA[move_lines/purchase_id/ref_order_id/name]]></fieldDescription>
 	</field>
+	<field name="Note" class="java.lang.String">
+		<fieldDescription><![CDATA[note]]></fieldDescription>
+	</field>
 	<variable name="Item No" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{Moving Line ID}]]></variableExpression>
 	</variable>
@@ -86,28 +89,28 @@
 				<reportElement x="883" y="119" width="1" height="591"/>
 			</line>
 			<rectangle>
-				<reportElement x="0" y="92" width="34" height="655"/>
+				<reportElement x="0" y="92" width="34" height="574"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="34" y="92" width="137" height="655"/>
+				<reportElement x="34" y="92" width="137" height="574"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="358" y="92" width="123" height="655"/>
+				<reportElement x="358" y="92" width="123" height="574"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="481" y="92" width="94" height="655"/>
+				<reportElement x="481" y="92" width="94" height="574"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="171" y="92" width="31" height="655"/>
+				<reportElement x="171" y="92" width="31" height="574"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="202" y="92" width="36" height="655"/>
+				<reportElement x="202" y="92" width="36" height="574"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="238" y="92" width="61" height="655"/>
+				<reportElement x="238" y="92" width="61" height="574"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="299" y="92" width="59" height="655"/>
+				<reportElement x="299" y="92" width="59" height="574"/>
 			</rectangle>
 		</band>
 	</background>
@@ -302,12 +305,30 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="50"/>
+		<band height="130">
+			<frame>
+				<reportElement style="table" x="0" y="0" width="575" height="83"/>
+				<staticText>
+					<reportElement x="2" y="1" width="78" height="20"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[Internal Note:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="2" y="18" width="572" height="59"/>
+					<textElement>
+						<font fontName="Monospaced" size="9"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Note}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
 	</pageFooter>
 	<lastPageFooter>
-		<band height="50">
+		<band height="130">
 			<frame>
-				<reportElement style="table" x="0" y="5" width="107" height="40"/>
+				<reportElement style="table" x="0" y="89" width="107" height="40"/>
 				<staticText>
 					<reportElement x="9" y="20" width="78" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
@@ -320,7 +341,7 @@
 				</line>
 			</frame>
 			<frame>
-				<reportElement style="table" x="107" y="5" width="154" height="40"/>
+				<reportElement style="table" x="107" y="89" width="154" height="40"/>
 				<staticText>
 					<reportElement x="2" y="20" width="62" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
@@ -343,7 +364,7 @@
 				</line>
 			</frame>
 			<frame>
-				<reportElement style="table" x="261" y="5" width="100" height="40"/>
+				<reportElement style="table" x="261" y="89" width="100" height="40"/>
 				<staticText>
 					<reportElement x="14" y="20" width="65" height="20"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
@@ -356,7 +377,7 @@
 				</line>
 			</frame>
 			<frame>
-				<reportElement style="table" x="361" y="5" width="214" height="40"/>
+				<reportElement style="table" x="361" y="89" width="214" height="40"/>
 				<staticText>
 					<reportElement x="24" y="20" width="106" height="20"/>
 					<textElement verticalAlignment="Middle" lineSpacing="Single">
@@ -387,6 +408,23 @@
 				<line>
 					<reportElement x="120" y="19" width="85" height="1"/>
 				</line>
+			</frame>
+			<frame>
+				<reportElement style="table" x="0" y="0" width="575" height="83"/>
+				<staticText>
+					<reportElement x="2" y="1" width="78" height="20"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[Internal Note:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="2" y="18" width="572" height="59"/>
+					<textElement>
+						<font fontName="Monospaced" size="9"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Note}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</lastPageFooter>
