@@ -19,30 +19,34 @@
 #
 ##############################################################################
 
-import netsvc
-from osv import osv, fields
-from openerp.tools.amount_to_text_en import amount_to_text
+{
+    'name' : 'Amount to Word for Various Fields',
+    'version' : '1.0',
+    'author' : 'Ecosoft',
+    'summary': '',
+    'description': """
 
-class account_invoice(osv.osv):
-    
-    def _amount_total_text(self, cursor, user, ids, name, arg, context=None):
-        res = {}
-        for invoice in self.browse(cursor, user, ids, context=context):
-            a = 'Baht'
-            b = 'Satang'
-            if invoice.currency_id.name == 'USD':
-                a = 'Dollar'
-                b = 'Cent'
-            if invoice.currency_id.name == 'EUR':
-                a = 'Euro'
-                b = 'Cent'   
-            res[invoice.id] = amount_to_text(invoice.amount_total, 'en', a).replace('Cent', b).replace('Cents', b)
-        return res
-    
-    _inherit = 'account.invoice'
-    _columns = {
-        'amount_total_text': fields.function(_amount_total_text, string='Amount Total (Text)', type='char'),
-    }
+Total Fields include,
 
-account_invoice()
+* Invoice Amount
+* Sales Order
+* Payment
+
+
+    """,
+    'category': 'Tools',
+    'sequence': 4,
+    'website' : 'http://www.ecosoft.co.th',
+    'images' : [],
+    'depends' : ['account', 'sale'],
+    'demo' : [],
+    'data' : ['all_docs_view.xml'
+    ],
+    'test' : [
+    ],
+    'auto_install': False,
+    'application': True,
+    'installable': True,
+}
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

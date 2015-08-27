@@ -2,8 +2,8 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice Form" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.layers" value="##Fri Aug 06 11:09:44 ICT 2010\nlayer.1.name=Invoice BG\nlayer.1.visible=true\nlayer.1.id=1\nlayer.0.name=Background\nlayer.0.visible=true\nlayer.0.id=0"/>
 	<property name="ireport.zoom" value="1.9487171000000154"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="240"/>
+	<property name="ireport.x" value="440"/>
+	<property name="ireport.y" value="1193"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;invoice_line&quot;]"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String">
 		<defaultValueExpression><![CDATA["/home/kittiu/workspace/openerp_sqp/sqp_addons/jrxml_reports/sale/"]]></defaultValueExpression>
@@ -176,8 +176,8 @@
 	<field name="print_english" class="java.lang.Boolean">
 		<fieldDescription><![CDATA[print_text_in_english]]></fieldDescription>
 	</field>
-	<field name="amount_total_text" class="java.lang.String">
-		<fieldDescription><![CDATA[amount_total_text]]></fieldDescription>
+	<field name="amount_total_text_en" class="java.lang.String">
+		<fieldDescription><![CDATA[amount_total_text_en]]></fieldDescription>
 	</field>
 	<field name="amount_total" class="java.lang.Number">
 		<fieldDescription><![CDATA[amount_total]]></fieldDescription>
@@ -193,6 +193,9 @@
 	</field>
 	<field name="Deposit_Amt" class="java.lang.String">
 		<fieldDescription><![CDATA[amount_deposit]]></fieldDescription>
+	</field>
+	<field name="amount_total_text_th" class="java.lang.String">
+		<fieldDescription><![CDATA[amount_total_text_th]]></fieldDescription>
 	</field>
 	<variable name="discount" class="java.lang.Number">
 		<variableExpression><![CDATA[$F{Discount-discount}.toString() == "" ? 0.0 : $F{Discount-discount} == null ? 0.0 : Float.parseFloat($F{Discount-discount})]]></variableExpression>
@@ -389,15 +392,6 @@ $F{Quantity-quantity}]]></textFieldExpression>
 	</pageFooter>
 	<lastPageFooter>
 		<band height="283">
-			<textField isBlankWhenNull="true">
-				<reportElement x="24" y="114" width="500" height="20">
-					<printWhenExpression><![CDATA[$F{print_english} == true ? false : true]]></printWhenExpression>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font fontName="SansSerif" size="10" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["("+(new Scriptlet()).getAmtInWords((new BigDecimal(($F{amount_total}==null?0.00:$F{amount_total}).toString())).setScale(2).toString(),$F{currency})+")"]]></textFieldExpression>
-			</textField>
 			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
 				<reportElement x="448" y="111" width="115" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -478,13 +472,11 @@ $F{Quantity-quantity}]]></textFieldExpression>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{ref_project_name}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="24" y="114" width="500" height="20">
-					<printWhenExpression><![CDATA[$F{print_english} == true ? true : false]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="24" y="114" width="420" height="20"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="10" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["(" + $F{amount_total_text} + ")"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{print_english} ? "(" + $F{amount_total_text_en} + ")" : "("+$F{amount_total_text_th}+")"]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
 				<reportElement x="467" y="29" width="94" height="20"/>

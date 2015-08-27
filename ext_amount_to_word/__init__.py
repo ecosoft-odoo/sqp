@@ -19,31 +19,8 @@
 #
 ##############################################################################
 
-{
-    'name' : 'Amount to Word for Various Fields',
-    'version' : '1.0',
-    'author' : 'Ecosoft',
-    'summary': '',
-    'description': """
+import amount_to_text_th
+import all_docs
 
-Fields include,
-
-* Invoice Amount
-
-    """,
-    'category': 'Tools',
-    'sequence': 4,
-    'website' : 'http://www.ecosoft.co.th',
-    'images' : [],
-    'depends' : ['account'],
-    'demo' : [],
-    'data' : ['account_invoice_view.xml'
-    ],
-    'test' : [
-    ],
-    'auto_install': False,
-    'application': True,
-    'installable': True,
-}
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

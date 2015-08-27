@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Purchase Order" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.2396694214876158"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="144"/>
+	<property name="ireport.y" value="380"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;invoice_line&quot;]"/>
 	<style name="table" lineSpacing="Single">
 		<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
@@ -185,11 +185,14 @@
 	<field name="currency" class="java.lang.String">
 		<fieldDescription><![CDATA[currency_id/name]]></fieldDescription>
 	</field>
-	<field name="amount_total_text" class="java.lang.String">
-		<fieldDescription><![CDATA[amount_total_text]]></fieldDescription>
+	<field name="amount_total_text_en" class="java.lang.String">
+		<fieldDescription><![CDATA[amount_total_text_en]]></fieldDescription>
 	</field>
 	<field name="print_english" class="java.lang.Boolean">
 		<fieldDescription><![CDATA[print_text_in_english]]></fieldDescription>
+	</field>
+	<field name="amount_total_text_th" class="java.lang.String">
+		<fieldDescription><![CDATA[amount_total_text_th]]></fieldDescription>
 	</field>
 	<variable name="price_unit" class="java.lang.Number">
 		<variableExpression><![CDATA[$F{price_unit} == null ? 0.0 : $F{price_unit}]]></variableExpression>
@@ -597,15 +600,6 @@
 			<rectangle radius="10">
 				<reportElement x="192" y="105" width="172" height="64"/>
 			</rectangle>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="0" y="82" width="352" height="20">
-					<printWhenExpression><![CDATA[$F{print_english} == true ? false : true]]></printWhenExpression>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="12" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["("+(new Scriptlet()).getAmtInWords((new BigDecimal($V{string_total}==""?0:$V{string_total})).setScale(2).toString(),$F{currency})+")"]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="0" y="154" width="172" height="15"/>
 				<textElement textAlignment="Center" lineSpacing="Single">
@@ -730,13 +724,11 @@
 				<textFieldExpression class="java.lang.Number"><![CDATA[$V{add_disc_amt}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="1" y="82" width="350" height="20">
-					<printWhenExpression><![CDATA[$F{print_english} == true ? true : false]]></printWhenExpression>
-				</reportElement>
+				<reportElement stretchType="RelativeToTallestObject" x="1" y="82" width="350" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="10" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["(" + $F{amount_total_text} + ")"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{print_english} ? "(" + $F{amount_total_text_en} + ")" : "("+$F{amount_total_text_th}+")"]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

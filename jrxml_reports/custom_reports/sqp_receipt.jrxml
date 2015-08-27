@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Receipt" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.6105100000000014"/>
-	<property name="ireport.x" value="144"/>
-	<property name="ireport.y" value="598"/>
+	<property name="ireport.x" value="232"/>
+	<property name="ireport.y" value="832"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;line_ids&quot;]"/>
 	<style name="table" lineSpacing="Single">
 		<box>
@@ -117,13 +117,19 @@
 	<field name="comment" class="java.lang.String">
 		<fieldDescription><![CDATA[comment]]></fieldDescription>
 	</field>
-	<variable name="amount_subtotal" class="java.lang.Float" resetType="Group" resetGroup="Allocations" calculation="Sum">
+	<field name="amount_total_text_th" class="java.lang.String">
+		<fieldDescription><![CDATA[amount_total_text_th]]></fieldDescription>
+	</field>
+	<field name="Amount Total" class="java.lang.Number">
+		<fieldDescription><![CDATA[amount_total]]></fieldDescription>
+	</field>
+	<variable name="amount_subtotal" class="java.lang.Number" resetType="Group" resetGroup="Allocations" calculation="Sum">
 		<variableExpression><![CDATA[$F{amount2} == null ? 0.0 : ($F{Dr_Cr-type}=="dr" ? -1 : 1) * $F{amount2}]]></variableExpression>
 	</variable>
 	<variable name="amount" class="java.lang.Number">
 		<variableExpression><![CDATA[$F{amount2} == null ? 0.0 : ($F{Dr_Cr-type}=="dr" ? -1 : 1) * $F{amount2}]]></variableExpression>
 	</variable>
-	<variable name="writeoff_amt" class="java.lang.Float">
+	<variable name="writeoff_amt" class="java.lang.Number">
 		<variableExpression><![CDATA[$F{writeoff_amount} == null ? 0.0 : $F{writeoff_amount}]]></variableExpression>
 	</variable>
 	<variable name="total" class="java.lang.Number">
@@ -291,15 +297,14 @@ $F{comment} + " :" : ""]]></textFieldExpression>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["(Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
-			<elementGroup>
-				<textField>
-					<reportElement x="90" y="52" width="347" height="20"/>
-					<textElement textAlignment="Center">
-						<font fontName="SansSerif" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA["("+(new Scriptlet()).getAmtInWords((new BigDecimal(($V{amount_subtotal}+$V{writeoff_amt}).round(2).toString())).toString(),$F{currency}.toString()==""?"THB":$F{currency})+")"]]></textFieldExpression>
-				</textField>
-			</elementGroup>
+			<elementGroup/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="90" y="52" width="347" height="20"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["( "+$F{amount_total_text_th}+" )"]]></textFieldExpression>
+			</textField>
 		</band>
 	</lastPageFooter>
 </jasperReport>

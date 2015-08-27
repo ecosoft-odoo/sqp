@@ -185,11 +185,14 @@
 	<field name="currency" class="java.lang.String">
 		<fieldDescription><![CDATA[currency_id/name]]></fieldDescription>
 	</field>
-	<field name="amount_total_text" class="java.lang.String">
-		<fieldDescription><![CDATA[amount_total_text]]></fieldDescription>
+	<field name="amount_total_text_en" class="java.lang.String">
+		<fieldDescription><![CDATA[amount_total_text_en]]></fieldDescription>
 	</field>
 	<field name="print_english" class="java.lang.Boolean">
 		<fieldDescription><![CDATA[print_text_in_english]]></fieldDescription>
+	</field>
+	<field name="amount_total_text_th" class="java.lang.String">
+		<fieldDescription><![CDATA[amount_total_text_th]]></fieldDescription>
 	</field>
 	<variable name="quantity" class="java.math.BigDecimal">
 		<variableExpression><![CDATA[$F{quantity}.toString() == "" ? new BigDecimal("0.0") : $F{quantity} == null ? new BigDecimal("0.0") : new BigDecimal($F{quantity})]]></variableExpression>
@@ -591,15 +594,6 @@
 			<rectangle radius="10">
 				<reportElement x="192" y="105" width="172" height="64"/>
 			</rectangle>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="0" y="80" width="352" height="20">
-					<printWhenExpression><![CDATA[$F{print_english} == true ? false : true]]></printWhenExpression>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Monospaced" size="12" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["("+(new Scriptlet()).getAmtInWords((new BigDecimal($V{string_total}==""?0:$V{string_total})).setScale(2).toString(),$F{currency})+")"]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="0" y="154" width="172" height="15"/>
 				<textElement textAlignment="Center" lineSpacing="Single">
@@ -724,13 +718,11 @@
 				<textFieldExpression class="java.lang.Number"><![CDATA[$V{add_disc_amt}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="0" y="80" width="350" height="20">
-					<printWhenExpression><![CDATA[$F{print_english} == true ? true : false]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="0" y="80" width="350" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="10" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["(" + $F{amount_total_text} + ")"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{print_english} ? "(" + $F{amount_total_text_en} + ")" : "("+$F{amount_total_text_th}+")"]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
