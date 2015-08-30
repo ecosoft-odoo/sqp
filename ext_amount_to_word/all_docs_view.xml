@@ -7,8 +7,8 @@
             <field name="inherit_id" ref="account.invoice_form" />
             <field name="arch" type="xml">
                 <field name="amount_total" position="after">
-                	<field name="amount_total_text_en" invisible="1"/>
-                	<field name="amount_total_text_th" invisible="1"/>
+                	<field name="amount_total_text_en" invisible="0"/>
+                	<field name="amount_total_text_th" invisible="0"/>
                 </field>       
             </field>
         </record>
@@ -29,8 +29,8 @@
             <field name="inherit_id" ref="account_voucher.view_vendor_receipt_form" />
             <field name="arch" type="xml">
                 <field name="amount" position="after">
-                	<field name="amount_total_text_en" invisible="1"/>
-                	<field name="amount_total_text_th" invisible="1"/>
+                	<field name="amount_total_text_en" invisible="0"/>
+                	<field name="amount_total_text_th" invisible="0"/>
                 </field>       
             </field>
         </record>

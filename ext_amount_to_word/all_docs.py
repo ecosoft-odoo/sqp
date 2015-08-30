@@ -82,6 +82,18 @@ class AmountToWord(object):
 class account_invoice(AmountToWord, osv.osv):
     
     _inherit = 'account.invoice'
+
+    def _get_invoice_line(self, cr, uid, ids, context=None):
+        result = {}
+        for line in self.pool.get('account.invoice.line').browse(cr, uid, ids, context=context):
+            result[line.invoice_id.id] = True
+        return result.keys()
+
+    def _get_invoice_tax(self, cr, uid, ids, context=None):
+        result = {}
+        for tax in self.pool.get('account.invoice.tax').browse(cr, uid, ids, context=context):
+            result[tax.invoice_id.id] = True
+        return result.keys()
     
     def _amount_total_text_en(self, cursor, user, ids, name, arg, context=None):   
         return self._amount_to_word_en(cursor, user, ids, name, arg, context=context)
@@ -91,9 +103,17 @@ class account_invoice(AmountToWord, osv.osv):
     
     _columns = {
         'amount_total_text_en': fields.function(_amount_total_text_en, string='Amount Total (EN)', type='char',
-            store={'account.invoice': (lambda self, cr, uid, ids, c={}: ids, ['amount_total'], 100),}),
+            store={
+                'account.invoice': (lambda self, cr, uid, ids, c={}: ids, ['invoice_line'], 20),
+                'account.invoice.tax': (_get_invoice_tax, None, 20),
+                'account.invoice.line': (_get_invoice_line, ['price_unit','invoice_line_tax_id','quantity','discount','invoice_id'], 20),
+            }),
         'amount_total_text_th': fields.function(_amount_total_text_th, string='Amount Total (TH)', type='char',
-            store={'account.invoice': (lambda self, cr, uid, ids, c={}: ids, ['amount_total'], 100),}),
+            store={
+                'account.invoice': (lambda self, cr, uid, ids, c={}: ids, ['invoice_line'], 20),
+                'account.invoice.tax': (_get_invoice_tax, None, 20),
+                'account.invoice.line': (_get_invoice_line, ['price_unit','invoice_line_tax_id','quantity','discount','invoice_id'], 20),
+            }),
     }
     
 class account_voucher(AmountToWord, osv.osv):
