@@ -32,7 +32,7 @@ class invoice_merge(osv.osv_memory):
 
         data = self.browse(cr, uid, ids, context=context)[0]
         for invoice in data.invoices:
-            if invoice.type == 'out_invoice':
+            if invoice.type in ('out_invoice', 'out_refund'):
                 raise osv.except_osv(_('Error!'), _('You cannot merge the customer invoices.'))
         
         res =  super(invoice_merge, self).merge_invoices(cr, uid, ids, context)
