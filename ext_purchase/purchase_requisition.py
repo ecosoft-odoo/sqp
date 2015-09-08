@@ -33,6 +33,7 @@ class purchase_requisition(osv.osv):
     _inherit = 'purchase.requisition'
     
     _columns = {
+        'warehouse_id': fields.many2one('stock.warehouse', 'Destination Warehouse', required=True),
         'ref_order_id': fields.many2one('sale.order', 'Ref Sales Order', domain="[('state','not in',('draft','sent','cancel'))]"),
         'ref_project_name': fields.char('Ref Project Name', size=64, readonly=False),
     }
