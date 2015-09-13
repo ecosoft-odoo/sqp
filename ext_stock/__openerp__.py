@@ -31,6 +31,7 @@ Features
 * Adding new "Sales Order Ref." in header.
 * If schedule date is updated by user, make sure it will change all the move line's schedule date.
 * Simplified Internal Move, do not show recorded auto generated from MO.
+* Feature #3098 Adding "Customer Name" in header        Nantachai S.
 
 """,
     'category': 'Stock',

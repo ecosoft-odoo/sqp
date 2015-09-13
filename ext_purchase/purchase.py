@@ -32,6 +32,7 @@ class purchase_order(osv.osv):
         'ref_order_id': fields.many2one('sale.order', 'Ref Sales Order', domain="[('state','not in',('draft','sent','cancel'))]", readonly=False),
         'ref_project_name': fields.char('Ref Project Name', size=128, readonly=False),
         'ref_purchase_id': fields.many2one('purchase.order', 'Ref Purchase Order', domain="[('state','not in',('draft','sent','confirmed'))]", readonly=False),
+        'ref_partner_id': fields.many2one('res.partner', 'Customer Name', readonly=False),
     }
     
     def onchange_ref_order_id(self, cr, uid, ids, ref_order_id, context=None):
@@ -40,6 +41,8 @@ class purchase_order(osv.osv):
             order = self.pool.get('sale.order').browse(cr, uid, ref_order_id, context=context)
             if order.ref_project_name:
                 v['ref_project_name'] = order.ref_project_name
+            if order.partner_id:
+                v['ref_partner_id'] = order.partner_id.id
         return {'value': v}
     
     #   Enhancement issue #1006 
