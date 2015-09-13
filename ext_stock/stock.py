@@ -40,6 +40,7 @@ class stock_picking(osv.osv):
     _columns = {
         'ref_order_id': fields.many2one('sale.order', 'Ref Sales Order', domain="[('state','not in',('draft','sent','cancel'))]", ondelete='set null', select=True),
         'ref_project_name': fields.char('Ref Project Name', size=64, readonly=False),
+        'ref_partner_id': fields.many2one('res.partner', 'Customer Name', ondelete='set null', readonly=False),        
         'department_id': fields.many2one('hr.department', 'Department', readonly=False),
         'car_plate': fields.char('Car Plate', size=64, readonly=False),
         'ref_order_tag_no': fields.related('ref_order_id', 'tag_no', type='text', relation='sale.order', string='TAG No. from Order', store=False, readonly=True),
@@ -52,6 +53,8 @@ class stock_picking(osv.osv):
             order = self.pool.get('sale.order').browse(cr, uid, ref_order_id, context=context)
             if order.ref_project_name:
                 v['ref_project_name'] = order.ref_project_name
+            if order.partner_id:
+                v['ref_partner_id'] = order.partner_id.id
         return {'value': v}
 
 stock_picking()

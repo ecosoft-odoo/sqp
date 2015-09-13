@@ -33,6 +33,8 @@ Features
 * * Purchase Order (SP)
 * * Purchase Requisition (PR)
 * In Purchase Requisition, field Date Start and Date End to be date, not datetime.
+* Feature Issue #3098 by Nantachai S.
+* * Add Customer Name linked to Selected 'Ref Sales Order' 
 * Enhancement issue #1006 
 * * Purchase Requisition
 * * * new Attention, Ref Sales Order, Ref Project Name field
