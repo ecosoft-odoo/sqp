@@ -72,7 +72,7 @@ date, order_qty, normal_qty, ot_qty from
     join audittrail_log_line atl on at.id = atl.log_id
     where at.object_id = (select id from ir_model where model='mrp.production.status')
     and atl.field_description in ('S1', 'S2', 'S3', 'S4', 'S5')
-    and at.create_date - interval '7 hour' >= $P{date} and at.create_date - interval '17 hour' <= $P{date}
+    and at.create_date - interval '13 hour' >= $P{date} and at.create_date - interval '24 hour' <= $P{date}
     ) normal
     group by dept, mo_id, line_number, product_id, date, order_qty
 ) normal
@@ -95,7 +95,7 @@ full outer join
     join audittrail_log_line atl on at.id = atl.log_id
     where at.object_id = (select id from ir_model where model='mrp.production.status')
     and atl.field_description in ('S1', 'S2', 'S3', 'S4', 'S5')
-    and at.create_date - interval '17 hour' > $P{date}  and at.create_date - interval '24 hour' <= $P{date}
+    and at.create_date - interval '31 hour' > $P{date}  and at.create_date - interval '37 hour' <= $P{date}
     ) ot
     group by dept, mo_id, line_number, product_id, date, order_qty
 ) ot
