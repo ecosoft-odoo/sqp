@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Supper Mo" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.996500000000026"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="716"/>
 	<property name="ireport.y" value="384"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;product_lines&quot;]"/>
 	<import value="org.apache.commons.codec.binary.Base64"/>
@@ -636,14 +636,14 @@ Code]]></text>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
-					<text><![CDATA[บ่าย]]></text>
+					<text><![CDATA[PU]]></text>
 				</staticText>
 				<staticText>
 					<reportElement style="table" mode="Opaque" x="579" y="22" width="29" height="20" backcolor="#B5E7D3"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
-					<text><![CDATA[เช้า]]></text>
+					<text><![CDATA[PIR]]></text>
 				</staticText>
 			</band>
 		</groupHeader>
@@ -947,12 +947,12 @@ Code]]></text>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.000" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="608" y="0" width="29" height="15" forecolor="#000000" backcolor="#FFFFFF">
-					<printWhenExpression><![CDATA[$F{bom_product_type} == "panel" && $F{mat_insulation_choice} == "PIR"]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{bom_product_type} == "panel" && $F{mat_insulation_choice} == "PU"]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Number"><![CDATA[$F{line5_inject2}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{line1_inject1}*1.12]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1"/>
