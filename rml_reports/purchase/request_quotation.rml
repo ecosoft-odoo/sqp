@@ -167,7 +167,7 @@
           </td>
           <td>
             <para style="terp_default_Right_9">
-                [[ formatLang(order_line.product_qty )]] [[ (order_line.product_uom and order_line.product_uom.name) or '' ]]
+                [[ '%.2f' % order_line.product_qty]] [[ (order_line.product_uom and order_line.product_uom.name) or '' ]]
             </para>
           </td>
         </tr>
