@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sqp_report_production_status" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="10" rightMargin="10" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.3636363636363646"/>
+	<property name="ireport.zoom" value="1.5000000000000018"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table" lineSpacing="Single">
@@ -48,7 +48,7 @@
 		when dept='S4' then 'DO'
 		when dept='S5' then 'FN'
 	end as dept,
-  so.name so, so.ref_project_name project, history.line_number, pp.name_template as product, pp."W", pp."L", thick.value as "T",
+  mo.name mo, so.name so, so.ref_project_name project, history.line_number, pp.name_template as product, pp."W", pp."L", thick.value as "T",
 (select name from res_partner where id = so.partner_id) as customer,
 (select code from bom_choice_skin where id = pp.mat_inside_skin_choices) inside,
 (select code from bom_choice_skin where id = pp.mat_outside_skin_choices) outside,
@@ -122,6 +122,7 @@ where a.dept = $P{dept}]]>
 	<field name="today" class="java.sql.Timestamp"/>
 	<field name="line_number" class="java.lang.String"/>
 	<field name="customer" class="java.lang.String"/>
+	<field name="mo" class="java.lang.String"/>
 	<variable name="dept" class="java.lang.String">
 		<variableExpression><![CDATA[$F{dept}]]></variableExpression>
 	</variable>
@@ -220,55 +221,55 @@ where a.dept = $P{dept}]]>
 		<groupFooter>
 			<band height="27">
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="622" y="0" width="35" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="627" y="0" width="35" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_ot_qty_1}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="552" y="0" width="35" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="557" y="0" width="35" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_order_qty_1}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="587" y="0" width="35" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="592" y="0" width="35" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_normal_qty_1}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="0" width="551" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="0" width="556" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
 					<textElement verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="772" y="0" width="50" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="777" y="0" width="45" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_sqm_1}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="657" y="0" width="35" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="662" y="0" width="35" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_total_qty_1}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="692" y="0" width="40" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="697" y="0" width="40" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_sqm_day_1}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="732" y="0" width="40" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="737" y="0" width="40" height="27" forecolor="#000000" backcolor="#CCCCCC"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
@@ -282,7 +283,7 @@ where a.dept = $P{dept}]]>
 		<groupHeader>
 			<band height="20">
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="1" y="0" width="821" height="19"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="1" y="0" width="821" height="20"/>
 					<textElement verticalAlignment="Top" lineSpacing="Single">
 						<font fontName="Monospaced" size="12" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
@@ -304,55 +305,55 @@ where a.dept = $P{dept}]]>
 		<groupFooter>
 			<band height="25">
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="0" width="551" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="0" width="556" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
 					<textElement verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="587" y="0" width="35" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="592" y="0" width="35" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_normal_qty_2}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="622" y="0" width="35" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="627" y="0" width="35" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_ot_qty_2}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="772" y="0" width="50" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="777" y="0" width="45" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_sqm_2}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="552" y="0" width="35" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="557" y="0" width="35" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_order_qty_2}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="657" y="0" width="35" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="662" y="0" width="35" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_total_qty_2}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="692" y="0" width="40" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="697" y="0" width="40" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_sqm_day_2}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="732" y="0" width="40" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="737" y="0" width="40" height="20" forecolor="#000000" backcolor="#CDCDCD"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
@@ -366,55 +367,55 @@ where a.dept = $P{dept}]]>
 		<groupFooter>
 			<band height="20">
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="552" y="0" width="35" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="557" y="0" width="35" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_order_qty}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="622" y="0" width="35" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="627" y="0" width="35" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_ot_qty}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="772" y="0" width="50" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="777" y="0" width="45" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_sqm}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="587" y="0" width="35" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="592" y="0" width="35" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_normal_qty}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="657" y="0" width="35" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="662" y="0" width="35" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_total_qty}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="0" width="551" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="0" width="556" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
 					<textElement verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="692" y="0" width="40" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="697" y="0" width="40" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_sqm_day}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="732" y="0" width="40" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
+					<reportElement style="table" stretchType="RelativeToTallestObject" mode="Opaque" x="737" y="0" width="40" height="20" forecolor="#000000" backcolor="#E5E5E5"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 						<font fontName="Monospaced" size="8" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
@@ -465,7 +466,7 @@ where a.dept = $P{dept}]]>
 	<columnHeader>
 		<band height="30" splitType="Stretch">
 			<staticText>
-				<reportElement style="header" x="1" y="0" width="60" height="30"/>
+				<reportElement style="header" x="53" y="0" width="55" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -473,21 +474,21 @@ where a.dept = $P{dept}]]>
 NO.CRL-]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="header" x="138" y="0" width="166" height="30"/>
+				<reportElement style="header" x="185" y="0" width="132" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Project Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="header" x="304" y="0" width="93" height="30"/>
+				<reportElement style="header" x="317" y="0" width="85" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Panel No. Code]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="header" x="397" y="0" width="40" height="30"/>
+				<reportElement style="header" x="402" y="0" width="40" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -495,7 +496,7 @@ NO.CRL-]]></text>
 (m.m.)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="header" x="517" y="0" width="35" height="30"/>
+				<reportElement style="header" x="522" y="0" width="35" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -503,7 +504,7 @@ NO.CRL-]]></text>
 (m.m.)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="header" x="477" y="0" width="40" height="30"/>
+				<reportElement style="header" x="482" y="0" width="40" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -511,7 +512,7 @@ NO.CRL-]]></text>
 หน้า/หลัง]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="header" x="437" y="0" width="40" height="30"/>
+				<reportElement style="header" x="442" y="0" width="40" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -519,7 +520,7 @@ NO.CRL-]]></text>
 (m.m.)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="header" x="552" y="0" width="35" height="30"/>
+				<reportElement style="header" x="557" y="0" width="35" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -527,7 +528,7 @@ NO.CRL-]]></text>
 รวม]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="header" x="587" y="0" width="35" height="30"/>
+				<reportElement style="header" x="592" y="0" width="35" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -535,7 +536,7 @@ NO.CRL-]]></text>
 (pcs.)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="header" x="622" y="0" width="35" height="30"/>
+				<reportElement style="header" x="627" y="0" width="35" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -543,7 +544,7 @@ NO.CRL-]]></text>
 (pcs.)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="header" x="772" y="0" width="50" height="30"/>
+				<reportElement style="header" x="777" y="0" width="45" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -551,7 +552,7 @@ NO.CRL-]]></text>
 (sqm)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="header" x="657" y="0" width="35" height="30"/>
+				<reportElement style="header" x="662" y="0" width="35" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -559,7 +560,7 @@ NO.CRL-]]></text>
 (pcs.)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="61" y="0" width="77" height="30" forecolor="#000000" backcolor="#C0C0C0"/>
+				<reportElement mode="Opaque" x="108" y="0" width="77" height="30" forecolor="#000000" backcolor="#C0C0C0"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -573,7 +574,7 @@ NO.CRL-]]></text>
 				<text><![CDATA[Customer]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="header" x="732" y="0" width="40" height="30"/>
+				<reportElement style="header" x="737" y="0" width="40" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -581,103 +582,110 @@ NO.CRL-]]></text>
 (sqm)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="header" x="692" y="0" width="40" height="30"/>
+				<reportElement style="header" x="697" y="0" width="40" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Day
 (sqm)]]></text>
 			</staticText>
+			<staticText>
+				<reportElement style="header" x="1" y="0" width="52" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" isBold="false" isItalic="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[MO]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="15" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="1" y="0" width="60" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="53" y="0" width="55" height="15"/>
 				<textElement verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{so}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="138" y="0" width="166" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="185" y="0" width="132" height="15"/>
 				<textElement verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{project}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="304" y="0" width="93" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="317" y="0" width="85" height="15"/>
 				<textElement verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{product}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="397" y="0" width="40" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="402" y="0" width="40" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$F{W}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="437" y="0" width="40" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="442" y="0" width="40" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$F{L}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="517" y="0" width="35" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="522" y="0" width="35" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{T}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="477" y="0" width="40" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="482" y="0" width="40" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{skin}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="552" y="0" width="35" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="557" y="0" width="35" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$F{order_qty}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="587" y="0" width="35" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="592" y="0" width="35" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$V{normal_qty}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="622" y="0" width="35" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="627" y="0" width="35" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$V{ot_qty}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="772" y="0" width="50" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="777" y="0" width="45" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$V{sqm}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="657" y="0" width="35" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="662" y="0" width="35" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$V{total_qty}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="61" y="0" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="108" y="0" width="77" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -691,18 +699,25 @@ NO.CRL-]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{customer}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="692" y="0" width="40" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="697" y="0" width="40" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$V{sqm_day}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="732" y="0" width="40" height="15"/>
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="737" y="0" width="40" height="15"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$V{sqm_ot}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table" stretchType="RelativeToTallestObject" mode="Transparent" x="1" y="0" width="52" height="15"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{mo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
