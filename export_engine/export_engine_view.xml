@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+       <record id="view_export_report_search" model="ir.ui.view">
+            <field name="name">view.export.report.search</field>
+            <field name="model">export.config</field>
+            <field name="arch" type="xml">
+                <search string="Search Exports">
+                    <field name="model_id" string="Model" filter_domain="['|',('name','ilike',self)]"/>
+                    <filter string="Exported" domain="[('exported','=',True)]" help="Exported" icon="terp-dolar_ok!"/>
+                    <filter string="Export updated records" domain="[('allow_to_export_updated_rec','=',True)]" help="Allow to Export Updated records" icon="terp-dolar_ok!"/>
+                    <separator/>
+	                <group expand="0" string="Group By...">
+                        <filter string="Model" icon="terp-personal" domain="[]" context="{'group_by':'model_id'}"/>
+                        <filter string="Start Export on" icon="terp-go-month" domain="[]" context="{'group_by':'start_export_on'}"/>
+                        <filter string="Last Exported on" icon="terp-go-month" domain="[]" context="{'group_by':'last_exported_on'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="export_report_tree">
+            <field name="name">export.report.tree</field>
+            <field name="model">export.config</field>
+            <field name="arch" type="xml">
+                <tree string="Export Configuration">
+                	<field name="name"/>
+                	<field name="model_id"/>
+                	<field name="start_export_on"/>
+                	<field name="last_exported_on"/>
+                	<field name="exported"/>
+                </tree>
+              </field>
+          </record>
+                
+        
+        <record model="ir.ui.view" id="export_report_form">
+            <field name="name">export.report.form</field>
+            <field name="model">export.config</field>
+            <field name="arch" type="xml">
+                <form string="Export Configuration" version="7.0">
+                        <sheet>
+                            <label for="name" class="oe_edit_only"/><h1><field name="name" required="1"/></h1>
+ 							<group col="4" colspan="6">
+								<field name="model_id" on_change="onchange_model()" required="1" options="{'no_create': True}"/>
+                             	<field name="start_export_on"/>
+ 								<field name="export_sequence"/>
+                             	<field name="last_exported_on"/>
+                             	 <field name="offset"/>
+                             	 <field name="order_by_field"/>
+	                             <field name="limit_rec"/>
+	                             <field name="allow_to_export_updated_rec"/>
+	                            <field name="exported" on_change="onchange_exported(exported)"/>
+	                            <button string= "Export Now" name="start_export" type="object"
+	                                    icon="gtk-go-forward"
+	                                    help="Export the records now !">
+                            	</button>
+                            </group>
+						<notebook>
+							<page string="Fields to Export">
+                                <field name="field_ids"  colspan="8" nolabel="1" domain="[('model_id','=',model_id)]">
+	                                 <tree string="Fields Description">
+	                                    <field name="name"/>
+	                                    <field name="field_description"/>
+	                                    <field name="ttype"/>
+	                                </tree>
+	                            </field>
+                           </page>
+                           <page string="Record Filters">
+                                <field name="domain_lines"  colspan="8" nolabel="1">
+	                                 <tree string="Filters" editable="top">
+	                                    <field name="field_name"/>
+	                                    <field name="operator"/>
+	                                    <field name="value"/>
+	                                </tree>
+	                            </field>
+                           </page>
+                            <page string="Custom Labels">
+                                <field name="custom_labels"  colspan="8" nolabel="1">
+	                                 <tree string="Custom Labels" editable="top">
+	                                    <field name="field_name"/>
+	                                    <field name="value" required="1"/>
+	                                </tree>
+	                            </field>
+                           </page>
+                           <page string="Records Exported">
+                                <field name="exported_ids"  colspan="8" nolabel="1" domain="[('model_id','=',model_id)">
+	                                 <tree string="Fields Description">
+	                                    <field name="name"/>
+	                                    <field name="last_logged_on"/>
+	                                </tree>
+	                            </field>
+                           </page>
+						</notebook>
+	               </sheet>
+	         </form>
+	       </field>
+     </record>
+     
+     <record id="action_export_config" model="ir.actions.act_window">
+        <field name="name">Export Config</field>
+        <field name="res_model">export.config</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+         <field name="view_id" ref="export_report_tree"/>
+        <field name="search_view_id" ref="view_export_report_search"/>
+    </record>
+    
+    <menuitem action="action_export_config"
+        id="menu_export_config" parent="base.menu_reporting_config"
+        sequence="2"/>
+    </data>
+</openerp>
+  

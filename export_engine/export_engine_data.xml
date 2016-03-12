@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+    	
+    	<!--  import parameter -->
+    	<record id="export_path" model="ir.config_parameter">
+            <field name="key">export_path</field>
+            <field name="value">/opt/odoo_export</field>
+        </record>
+        
+       
+        <!--  cron job -->
+         
+        <record model="ir.cron" id="export_engine_cron">
+            <field name="name">Export Launcher</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model" eval="'export.config'"/>
+            <field name="function" eval="'launch_export'"/>
+            <field name="args" eval="'()'" />
+        </record>
+	    
+	   
+    
+    </data>
+</openerp>
