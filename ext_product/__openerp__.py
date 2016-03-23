@@ -34,6 +34,7 @@
     'depends' : ['product'],
     'demo' : [],
     'data' : [
+        'product_view.xml'
     ],
     'test' : [
     ],
