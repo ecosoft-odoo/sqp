@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    	<!-- Always show Title field for both partner and contact -->
+        <record id="view_users_form" model="ir.ui.view">
+            <field name="name">view.users.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                	<field name="search_key"/>
+                </field>
+            </field>
+        </record>
+        
+        <record id="view_users_tree" model="ir.ui.view">
+            <field name="name">view.users.tree</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                	<field name="search_key"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>
+
