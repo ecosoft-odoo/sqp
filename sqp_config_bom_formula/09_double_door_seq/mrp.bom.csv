@@ -44,16 +44,19 @@ mrp.template_double_door_seq_line42,mrp.template_double_door_seq,[SP03032],(2) o
 mrp.template_double_door_seq_line43,mrp.template_double_door_seq,[SP02197],(2) or 0.0,set
 mrp.template_double_door_seq_line44,mrp.template_double_door_seq,[SP02195],(4) or 0.0,set
 mrp.template_double_door_seq_line45,mrp.template_double_door_seq,[SP02196],(4) or 0.0,set
-mrp.template_double_door_seq_line46,mrp.template_double_door_seq,[SP03173],(4) or 0.0,pcs
-mrp.template_double_door_seq_line47,mrp.template_double_door_seq,[SP03177],(2) or 0.0,pcs
-mrp.template_double_door_seq_line48,mrp.template_double_door_seq,[SP03178],(2) or 0.0,pcs
-mrp.template_double_door_seq_line49,mrp.template_double_door_seq,[SP02147],(2) or 0.0,set
-mrp.template_double_door_seq_line50,mrp.template_double_door_seq,[SP02148],(2) or 0.0,pcs
-mrp.template_double_door_seq_line51,mrp.template_double_door_seq,[SP03007],(line.mat_inside_skin_choices.code=='SS') and (line.mat_outside_skin_choices.code=='SS') and (line.L/1000/200*2) or 0.0,roll
-mrp.template_double_door_seq_line52,mrp.template_double_door_seq,[SP03006],(line.mat_inside_skin_choices.code=='OW') and (line.mat_outside_skin_choices.code=='OW') and (line.L/1000/200*2) or 0.0,roll
-mrp.template_double_door_seq_line53,mrp.template_double_door_seq,[SP03006],(line.mat_inside_skin_choices.code=='AW') and (line.mat_outside_skin_choices.code=='AW') and (line.L/1000/200*2) or 0.0,roll
-mrp.template_double_door_seq_line54,mrp.template_double_door_seq,[SP03007],(line.mat_inside_skin_choices.code=='SS') and (line.mat_outside_skin_choices.code=='OW') and (line.L/1000/200) or 0.0,roll
-mrp.template_double_door_seq_line55,mrp.template_double_door_seq,[SP03006],(line.mat_inside_skin_choices.code=='SS') and (line.mat_outside_skin_choices.code=='OW') and (line.L/1000/200) or 0.0,roll
-mrp.template_double_door_seq_line56,mrp.template_double_door_seq,[SP03007],(line.mat_inside_skin_choices.code=='SS') and (line.mat_outside_skin_choices.code=='AW') and (line.L/1000/200) or 0.0,roll
-mrp.template_double_door_seq_line57,mrp.template_double_door_seq,[SP03006],(line.mat_inside_skin_choices.code=='SS') and (line.mat_outside_skin_choices.code=='AW') and (line.L/1000/200) or 0.0,roll
-mrp.template_double_door_seq_line58,mrp.template_double_door_seq,[SP03007],(line.mat_inside_skin_choices.code=='SS') and (line.mat_outside_skin_choices.code=='GI') and (line.L/1000/200) or 0.0,roll
+mrp.template_double_door_seq_line46,mrp.template_double_door_seq,[SP03173-1],(line.T.name=='42(F42)') and (2) or 0.0,pcs
+mrp.template_double_door_seq_line47,mrp.template_double_door_seq,[SP03173-1],(line.T.name=='50(F50)') and (2) or 0.0,pcs
+mrp.template_double_door_seq_line48,mrp.template_double_door_seq,[SP03173-2],(line.T.name=='42(F100)') and (2) or 0.0,pcs
+mrp.template_double_door_seq_line49,mrp.template_double_door_seq,[SP03173-2],(line.T.name=='50(F100)') and (2) or 0.0,pcs
+mrp.template_double_door_seq_line50,mrp.template_double_door_seq,[SP03177],(2) or 0.0,pcs
+mrp.template_double_door_seq_line51,mrp.template_double_door_seq,[SP03178],(2) or 0.0,pcs
+mrp.template_double_door_seq_line52,mrp.template_double_door_seq,[SP02147],(2) or 0.0,set
+mrp.template_double_door_seq_line53,mrp.template_double_door_seq,[SP02148],(2) or 0.0,pcs
+mrp.template_double_door_seq_line54,mrp.template_double_door_seq,[SP03007],(line.mat_inside_skin_choices.code=='SS') and (line.mat_outside_skin_choices.code=='SS') and (line.L/1000/200*2) or 0.0,roll
+mrp.template_double_door_seq_line55,mrp.template_double_door_seq,[SP03006],(line.mat_inside_skin_choices.code=='OW') and (line.mat_outside_skin_choices.code=='OW') and (line.L/1000/200*2) or 0.0,roll
+mrp.template_double_door_seq_line56,mrp.template_double_door_seq,[SP03006],(line.mat_inside_skin_choices.code=='AW') and (line.mat_outside_skin_choices.code=='AW') and (line.L/1000/200*2) or 0.0,roll
+mrp.template_double_door_seq_line57,mrp.template_double_door_seq,[SP03007],(line.mat_inside_skin_choices.code=='SS') and (line.mat_outside_skin_choices.code=='OW') and (line.L/1000/200) or 0.0,roll
+mrp.template_double_door_seq_line58,mrp.template_double_door_seq,[SP03006],(line.mat_inside_skin_choices.code=='SS') and (line.mat_outside_skin_choices.code=='OW') and (line.L/1000/200) or 0.0,roll
+mrp.template_double_door_seq_line59,mrp.template_double_door_seq,[SP03007],(line.mat_inside_skin_choices.code=='SS') and (line.mat_outside_skin_choices.code=='AW') and (line.L/1000/200) or 0.0,roll
+mrp.template_double_door_seq_line60,mrp.template_double_door_seq,[SP03006],(line.mat_inside_skin_choices.code=='SS') and (line.mat_outside_skin_choices.code=='AW') and (line.L/1000/200) or 0.0,roll
+mrp.template_double_door_seq_line61,mrp.template_double_door_seq,[SP03007],(line.mat_inside_skin_choices.code=='SS') and (line.mat_outside_skin_choices.code=='GI') and (line.L/1000/200) or 0.0,roll

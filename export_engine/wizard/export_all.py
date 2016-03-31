@@ -3,7 +3,8 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
-#
+#    Author: Naresh Soni
+#    Copyright 2016 Cozy Business Solutions Pvt.Ltd
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -19,28 +20,22 @@
 #
 ##############################################################################
 
-{
-    'name' : 'Product Extension for SQP',
-    'version' : '1.0',
-    'author' : 'Ecosoft',
-    'summary': 'Product Extensions for SQP',
-    'description': """
-    
-    """,
-    'category': 'Sales',
-    'sequence': 7,
-    'website' : 'http://www.ecosoft.co.th',
-    'images' : [],
-    'depends' : ['product'],
-    'demo' : [],
-    'data' : [
-        'product_view.xml'
-    ],
-    'test' : [
-    ],
-    'auto_install': False,
-    'application': True,
-    'installable': True,
-}
+from openerp.osv import osv
+from openerp import pooler
+
+class export_all(osv.osv_memory):
+    _name = "export.all"
+    _description = "Export All"
+
+    def export_all(self, cr, uid, ids, context=None):
+        if context is None:
+            context = {}
+        records = context.get('active_ids', [])
+        pool_obj = pooler.get_pool(cr.dbname)
+        data_inv = pool_obj.get('export.config').start_export(cr, uid, records,context)
+        return {'type': 'ir.actions.act_window_close'}
+
+export_all()
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

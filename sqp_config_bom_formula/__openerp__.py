@@ -28,7 +28,7 @@
     'author': 'Ecosoft',
     'website': 'http://www.ecosoft.co.th/',
     'depends': [
-        'mrp',
+        'mrp', 'product_bom_template'
                 ],
     'data': [
         'product.product.csv',

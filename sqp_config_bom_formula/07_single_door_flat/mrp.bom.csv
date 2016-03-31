@@ -85,8 +85,8 @@ mrp.template_single_door_flat_line83,mrp.template_single_door_flat,[SP05013],((1
 mrp.template_single_door_flat_line84,mrp.template_single_door_flat,[SP05026],((14+line.W)>1219 and (14+line.W)<=1788) and (line.mat_inside_skin_choices.code=='SS') and (line.mat_outside_skin_choices.code=='GI') and (914*line.L/1000000*3.2*2) or 0.0,kg
 mrp.template_single_door_flat_line85,mrp.template_single_door_flat,[SP05002],(line.mat_insulation_choices.code == 'PU') and (line.W*line.L*line.T.value/1000000000*40*0.437*1.13-(line.cut_area*line.T.value*40*0.437*1.13/1000)) or 0.0,kg
 mrp.template_single_door_flat_line86,mrp.template_single_door_flat,[SP05003],(line.mat_insulation_choices.code == 'PU') and (line.W*line.L*line.T.value/1000000000*40*0.563*1.13-(line.cut_area*line.T.value*40*0.563*1.13/1000)) or 0.0,kg
-mrp.template_single_door_flat_line87,mrp.template_single_door_flat,[SP05025],(line.mat_insulation_choices.code == PU(DEN80)') and (line.W*line.L*line.T.value/1000000000*67*0.445*1.13-(line.cut_area*line.T.value*67*0.445*1.13/1000)) or 0.0,kg
-mrp.template_single_door_flat_line88,mrp.template_single_door_flat,[SP05003],(line.mat_insulation_choices.code == PU(DEN80)') and (line.W*line.L*line.T.value/1000000000*67*0.556*1.13-(line.cut_area*line.T.value*67*0.556*1.13/1000)) or 0.0,kg
+mrp.template_single_door_flat_line87,mrp.template_single_door_flat,[SP05025],(line.mat_insulation_choices.code == 'PU(DEN80)') and (line.W*line.L*line.T.value/1000000000*67*0.445*1.13-(line.cut_area*line.T.value*67*0.445*1.13/1000)) or 0.0,kg
+mrp.template_single_door_flat_line88,mrp.template_single_door_flat,[SP05003],(line.mat_insulation_choices.code == 'PU(DEN80)') and (line.W*line.L*line.T.value/1000000000*67*0.556*1.13-(line.cut_area*line.T.value*67*0.556*1.13/1000)) or 0.0,kg
 mrp.template_single_door_flat_line89,mrp.template_single_door_flat,[SP01329],(line.T.name=='42(F42)') and (line.mat_inside_skin_choices.code=='OW') and (line.mat_outside_skin_choices.code=='OW') and (((line.L+line.L+line.W)/6000) < 0.47 and 0.5 or ((line.L+line.L+line.W)/6000) < 0.97 and 1.0 or ((line.L+line.L+line.W)/6000) < 1.47 and 1.5 or ((line.L+line.L+line.W)/6000) < 1.97 and 2) or 0.0,pcs
 mrp.template_single_door_flat_line90,mrp.template_single_door_flat,[SP01341],(line.T.name=='50(F50)') and (line.mat_inside_skin_choices.code=='OW') and (line.mat_outside_skin_choices.code=='OW') and (((line.L+line.L+line.W)/6000) < 0.47 and 0.5 or ((line.L+line.L+line.W)/6000) < 0.97 and 1.0 or ((line.L+line.L+line.W)/6000) < 1.47 and 1.5 or ((line.L+line.L+line.W)/6000) < 1.97 and 2) or 0.0,pcs
 mrp.template_single_door_flat_line91,mrp.template_single_door_flat,[SP01345],(line.T.name=='42(F100)') and (line.mat_inside_skin_choices.code=='OW') and (line.mat_outside_skin_choices.code=='OW') and (((line.L+line.L+line.W)/6000) < 0.47 and 0.5 or ((line.L+line.L+line.W)/6000) < 0.97 and 1.0 or ((line.L+line.L+line.W)/6000) < 1.47 and 1.5 or ((line.L+line.L+line.W)/6000) < 1.97 and 2) or 0.0,pcs
@@ -327,12 +327,7 @@ mrp.template_single_door_flat_line325,mrp.template_single_door_flat,[SP01095],(l
 mrp.template_single_door_flat_line326,mrp.template_single_door_flat,[SP01356],(0.06) or 0.0,pcs
 mrp.template_single_door_flat_line327,mrp.template_single_door_flat,[SP04094],(15) or 0.0,pcs
 mrp.template_single_door_flat_line328,mrp.template_single_door_flat,[SP03185],(15) or 0.0,pcs
-mrp.template_single_door_flat_line329,mrp.template_single_door_flat,[SP03185],(15) or 0.0,pcs
-mrp.template_single_door_flat_line330,mrp.template_single_door_flat,[SP03185],(15) or 0.0,pcs
-mrp.template_single_door_flat_line331,mrp.template_single_door_flat,[SP03185],(15) or 0.0,pcs
-mrp.template_single_door_flat_line332,mrp.template_single_door_flat,[SP03185],(15) or 0.0,pcs
-mrp.template_single_door_flat_line333,mrp.template_single_door_flat,[SP03185],(15) or 0.0,pcs
-mrp.template_single_door_flat_line334,mrp.template_single_door_flat,[SP03185],(15) or 0.0,pcs
-mrp.template_single_door_flat_line335,mrp.template_single_door_flat,[SP02134],(0.5) or 0.0,tube
-mrp.template_single_door_flat_line336,mrp.template_single_door_flat,[SP02010],(8) or 0.0,pcs
-mrp.template_single_door_flat_line337,mrp.template_single_door_flat,[SP03189],(2) or 0.0,pcs
+mrp.template_single_door_flat_line329,mrp.template_single_door_flat,[SP03195],(2) or 0.0,pcs
+mrp.template_single_door_flat_line330,mrp.template_single_door_flat,[SP02134],(0.5) or 0.0,tube
+mrp.template_single_door_flat_line331,mrp.template_single_door_flat,[SP02010],(30) or 0.0,pcs
+mrp.template_single_door_flat_line332,mrp.template_single_door_flat,[SP03189],(2) or 0.0,pcs

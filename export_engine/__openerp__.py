@@ -3,7 +3,8 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
-#
+#    Author: Naresh Soni
+#    Copyright 2016 Cozy Business Solutions Pvt.Ltd
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -20,26 +21,20 @@
 ##############################################################################
 
 {
-    'name' : 'Product Extension for SQP',
-    'version' : '1.0',
-    'author' : 'Ecosoft',
-    'summary': 'Product Extensions for SQP',
-    'description': """
-    
-    """,
-    'category': 'Sales',
-    'sequence': 7,
-    'website' : 'http://www.ecosoft.co.th',
-    'images' : [],
-    'depends' : ['product'],
-    'demo' : [],
+    'name': 'Export Engine',
+    'description': '''Export CSV from any odoo model. Select the fields you need and get the csv.
+      Schedule the export as and when needed.''',
+    'summary': 'Export Engine',
+    'category': 'tools',
+    'version': '1.1',
+    'author': 'Cozy Business Solutions Pvt.Ltd.',
+    'depends' : ['base'],
     'data' : [
-        'product_view.xml'
-    ],
-    'test' : [
+        'wizard/export_all_view.xml',
+        'export_engine_view.xml',
+        'export_engine_data.xml',
     ],
     'auto_install': False,
-    'application': True,
     'installable': True,
 }
 

@@ -29,7 +29,9 @@
     'depends': ['base'],
     'category': 'Tools',
     'demo': [],
-    'data': ['res_partner_view.xml',],
+    'data': ['res_partner_view.xml',
+             'res_users_view.xml',
+             ],
     'auto_install': False,
     'installable': True,
 }
