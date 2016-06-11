@@ -316,7 +316,7 @@ class sqp_job_cost_sheet(osv.osv):
             for mo in sheet.order_id.ref_mo_ids:
                 if mo.state != 'cancel':
                     for line in mo.product_lines:
-                        area += ((line.L/1000 * line.W/1000) - line.cut_area) * line.product_qty
+                        area += (line.L/1000 * line.W/1000) * line.product_qty
             res[sheet.id] = area
         return res
 
