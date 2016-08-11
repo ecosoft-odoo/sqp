@@ -773,9 +773,9 @@ Effective : 19/02/14]]></text>
 				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="7" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[21/485 หมู่ 12 ถนนบางนา-ตราด แขวงบางนา เขตบางนา กรุงเทพฯ 10260 โทรศัพท์ : 0-2749-2954, 0-2744-6300-2 โทรสาร : 0-2744-6303 www.squarepanel.com
+				<text><![CDATA[21/485 หมู่ 12 ถนนบางนา-ตราด แขวงบางนา เขตบางนา กรุงเทพฯ 10260 โทรศัพท์ : 0-2744-6300 โทรสาร : 0-2744-6303 www.squarepanel.com
 
-21/485 Moo 12, Bangna-Trad Rd., Sub-District Bangna,  Bangna,  Bangkok 10260  Tel : 0-2749-2954, 0-2744-6300-2  Fax : 0-2744-6303 www.squarepanel.com]]></text>
+21/485 Moo 12, Bangna-Trad Rd., Sub-District Bangna,  Bangna,  Bangkok 10260  Tel : 0-2744-6300  Fax : 0-2744-6303 www.squarepanel.com]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="footer" x="-2" y="3" width="554" height="38"/>
@@ -800,9 +800,9 @@ Effective : 19/02/14]]></text>
 				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="7" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[21/485 หมู่ 12 ถนนบางนา-ตราด แขวงบางนา เขตบางนา กรุงเทพฯ 10260 โทรศัพท์ : 0-2749-2954, 0-2744-6300-2 โทรสาร : 0-2744-6303 www.squarepanel.com
+				<text><![CDATA[21/485 หมู่ 12 ถนนบางนา-ตราด แขวงบางนา เขตบางนา กรุงเทพฯ 10260 โทรศัพท์ : 0-2744-6300 โทรสาร : 0-2744-6303 www.squarepanel.com
 
-21/485 Moo 12, Bangna-Trad Rd., Sub-District Bangna,  Bangna,  Bangkok 10260  Tel : 0-2749-2954, 0-2744-6300-2  Fax : 0-2744-6303 www.squarepanel.com]]></text>
+21/485 Moo 12, Bangna-Trad Rd., Sub-District Bangna,  Bangna,  Bangkok 10260  Tel : 0-2744-6300  Fax : 0-2744-6303 www.squarepanel.com]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="396" y="86" width="156" height="13"/>
