@@ -19,6 +19,20 @@
 #
 ##############################################################################
 
-import product
+import sohd
+import sodt
+import sohdremark
+import emcust
+import emgood
+import emvendor
+import issuestock
+import podeposit
+import podeposit
+import pohd
+import podhremark
+import receiptfg
+import sodeposit
+import soinvoice
+import transferout
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

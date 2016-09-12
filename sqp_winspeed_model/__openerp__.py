@@ -20,23 +20,22 @@
 ##############################################################################
 
 {
-    'name' : 'Product Extension for SQP',
-    'version' : '1.0',
-    'author' : 'Ecosoft',
-    'summary': 'Product Extensions for SQP',
+    'name': 'Exort Models for Export Engine',
+    'version': '1.0',
+    'author': 'Ecosoft',
+    'summary': '',
     'description': """
-    
+
     """,
-    'category': 'Sales',
+    'category': 'Tools',
     'sequence': 7,
-    'website' : 'http://www.ecosoft.co.th',
-    'images' : [],
-    'depends' : ['product'],
-    'demo' : [],
-    'data' : [
-        'product_view.xml'
+    'website': 'http://www.ecosoft.co.th',
+    'images': [],
+    'depends': ['product'],
+    'demo': [],
+    'data': [
     ],
-    'test' : [
+    'test': [
     ],
     'auto_install': False,
     'application': True,
