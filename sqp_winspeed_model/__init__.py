@@ -27,9 +27,9 @@ import emgood
 import emvendor
 import issuestock
 import podeposit
-import podeposit
+import podt
 import pohd
-import podhremark
+import pohdremark
 import receiptfg
 import sodeposit
 import soinvoice

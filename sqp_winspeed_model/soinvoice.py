@@ -89,7 +89,7 @@ class ws_soinvoice(osv.osv):
         'no': fields.char('no'),
         'desciption': fields.char('desciption'),
         'advnno': fields.char('advnno'),
-        'invno': fields.char('invno'),
+        # 'invno': fields.char('invno'),
         'advndate': fields.char('advndate'),
         'advntotaamnt': fields.char('advntotaamnt'),
         'lastremaamnt': fields.char('lastremaamnt'),
@@ -101,7 +101,7 @@ class ws_soinvoice(osv.osv):
         'brchname': fields.char('brchname'),
         'brchnameeng': fields.char('brchnameeng'),
         'basevat': fields.char('basevat'),
-        'vatrate': fields.char('vatrate'),
+        # 'vatrate': fields.char('vatrate'),
         'vatamount': fields.char('vatamount'),
     }
 
@@ -176,7 +176,7 @@ round(cr.rate, 4) as Exchrate,
 null as No,
 null as Desciption,
 null as AdvnNo,
-null as InvNo,
+-- null as InvNo,
 null as AdvnDate,
 null as AdvnTotaAmnt,
 null as LastRemaAmnt,
@@ -188,9 +188,9 @@ rp.vat as taxid,
 rp.branch as Brchname,
 rp.branch as Brchnameeng,
 ai.amount_beforetax as BaseVat,
-    case when ai.amount_beforetax = 0 then 0 else
-        round((ai.amount_total - ai.amount_beforetax)
-            / ai.amount_beforetax * 100, 2) end as VatRate,
+-- case when ai.amount_beforetax = 0 then 0 else
+--        round((ai.amount_total - ai.amount_beforetax)
+--            / ai.amount_beforetax * 100, 2) end as VatRate,
 ai.amount_tax as VatAmount
 
 from account_invoice ai

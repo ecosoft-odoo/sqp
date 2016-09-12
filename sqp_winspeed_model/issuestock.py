@@ -61,7 +61,7 @@ class ws_issuestock(osv.osv):
         cr.execute("""CREATE or REPLACE VIEW ws_issuestock as (
 select sm.id, 1 as docutypecode,
     sp.name as docuno,
-    to_char(sp.date, 'dd/mm/yyyy') as docudate,
+    to_char(sp.date + interval '543 years', 'dd/mm/yyyy') as docudate,
     null as deptcode,
     null as deptname,
     null as jobcodehd,
@@ -95,7 +95,7 @@ left outer join product_uom pu on pu.id = sm.product_uom
 where sp.type = 'internal'
 and sm.state = 'done'
 and ((src.name = 'FC_RM' and dst.name = 'Production') or (src.name = 'Production' and dst.name = 'FC_RM'))
-and sp.e >= '2016-09-01'
+and sp.date >= '2016-09-01'
 order by sp.date desc
         )""")
 

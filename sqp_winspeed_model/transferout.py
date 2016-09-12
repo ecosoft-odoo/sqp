@@ -58,8 +58,8 @@ class ws_transferout(osv.osv):
         # self._table = so_inv_pay_report
         tools.drop_view_if_exists(cr, self._table)
         cr.execute("""CREATE or REPLACE VIEW ws_transferout as (
-select sp.name as docuno,
-    to_char(sp.date, 'dd/mm/yyyy') as docudate,
+select sm.id, sp.name as docuno,
+    to_char(sp.date + interval '543 years', 'dd/mm/yyyy') as docudate,
     sp.note as remark,
     ru.search_key as appvempcode,
     ru.login as appvempname,
