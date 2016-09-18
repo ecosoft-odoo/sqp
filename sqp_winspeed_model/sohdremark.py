@@ -29,6 +29,7 @@ class ws_sohdremark(osv.osv):
     _auto = False
 
     _columns = {
+        'date': fields.date('CompareDate'),
         'brchcode': fields.char('brchcode'),
         'brchid': fields.char('brchid'),
         'docuno': fields.char('docuno'),
@@ -42,7 +43,8 @@ class ws_sohdremark(osv.osv):
         # self._table = so_inv_pay_report
         tools.drop_view_if_exists(cr, self._table)
         cr.execute("""CREATE or REPLACE VIEW ws_sohdremark as (
-select so.id, '00000' as BrchCode,
+select so.id, so.date_order as date,
+    '00000' as BrchCode,
     null as BrchID,
     replace(so.name, '"', '''') as DocuNo,
     rp.search_key as VendorCode,
@@ -51,8 +53,7 @@ select so.id, '00000' as BrchCode,
     left(so.note, 255) as Remark
 from sale_order so
 left outer join res_partner rp on rp.id = so.partner_id
-where so.date_order > '2016-09-01'
-and so.state in ('progress', 'manual', 'done')
+where so.state in ('progress', 'manual', 'done')
 order by so.id desc
         )""")
 

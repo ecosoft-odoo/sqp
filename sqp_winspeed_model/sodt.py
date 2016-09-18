@@ -29,6 +29,7 @@ class ws_sodt(osv.osv):
     _auto = False
 
     _columns = {
+        'date': fields.date('CompareDate'),
         'brchcode': fields.char('brchcode'),
         'docuno': fields.char('docuno'),
         'goodcode': fields.char('goodcode'),
@@ -122,7 +123,8 @@ class ws_sodt(osv.osv):
         # self._table = so_inv_pay_report
         tools.drop_view_if_exists(cr, self._table)
         cr.execute("""CREATE or REPLACE VIEW ws_sodt as (
-    select sol.id, '00000' as brchcode,
+    select sol.id, so.date_order as date,
+    '00000' as brchcode,
     so.name as DocuNo,
     pp.search_key as goodcode,
     left(replace(pp.name_template, '"', ''''), 255) as GoodName,
@@ -234,8 +236,7 @@ JOIN res_currency_rate cr ON (cr.currency_id = ppl.currency_id)
           AND ((so.date_order IS NOT NULL AND cr2.name <= so.date_order)
         OR (so.date_order IS NULL AND cr2.name <= NOW()))
       ORDER BY name DESC LIMIT 1)
-where so.date_order > '2016-09-01'
-and so.state in ('progress', 'manual', 'done')
+where so.state in ('progress', 'manual', 'done')
 order by so.id desc, sol.id
         )""")
 

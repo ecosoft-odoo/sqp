@@ -29,6 +29,7 @@ class ws_sohd(osv.osv):
     _auto = False
 
     _columns = {
+        'date': fields.date('CompareDate'),
         'brchcode': fields.char('brchcode'),
         'docuno': fields.char('docuno'),
         'docudate': fields.char('docudate'),
@@ -140,7 +141,8 @@ class ws_sohd(osv.osv):
         # self._table = so_inv_pay_report
         tools.drop_view_if_exists(cr, self._table)
         cr.execute("""CREATE or REPLACE VIEW ws_sohd as (
-            select so.id, '00000' as brchcode,
+            select so.id, so.date_order as date,
+                '00000' as brchcode,
                 so.name as DocuNo,
                 to_char(so.date_order, 'dd/mm/yyyy') as DocuDate,
                 rp.search_key as custcode,
@@ -274,8 +276,7 @@ class ws_sohd(osv.osv):
                       AND ((so.date_order IS NOT NULL AND cr2.name <= so.date_order)
                     OR (so.date_order IS NULL AND cr2.name <= NOW()))
                   ORDER BY name DESC LIMIT 1)
-            where so.date_order > '2016-09-01'
-            and so.state in ('progress', 'manual', 'done')
+            where so.state in ('progress', 'manual', 'done')
             order by so.id desc
         )""")
 

@@ -29,6 +29,7 @@ class ws_issuestock(osv.osv):
     _auto = False
 
     _columns = {
+        'date': fields.date('CompareDate'),
         'docutypecode': fields.char('docutypecode'),
         'docuno': fields.char('docuno'),
         'docudate': fields.char('docudate'),
@@ -59,7 +60,8 @@ class ws_issuestock(osv.osv):
         # self._table = so_inv_pay_report
         tools.drop_view_if_exists(cr, self._table)
         cr.execute("""CREATE or REPLACE VIEW ws_issuestock as (
-select sm.id, 1 as docutypecode,
+select sm.id, sp.date as date,
+    1 as docutypecode,
     sp.name as docuno,
     to_char(sp.date + interval '543 years', 'dd/mm/yyyy') as docudate,
     null as deptcode,
@@ -95,7 +97,6 @@ left outer join product_uom pu on pu.id = sm.product_uom
 where sp.type = 'internal'
 and sm.state = 'done'
 and ((src.name = 'FC_RM' and dst.name = 'Production') or (src.name = 'Production' and dst.name = 'FC_RM'))
-and sp.date >= '2016-09-01'
 order by sp.date desc
         )""")
 

@@ -21,18 +21,20 @@
 ##############################################################################
 import xlwt
 import re
+import types
 from datetime import datetime
 from openerp.osv import fields, osv
 
-    
+
 class export_config(osv.osv):
     _name = 'export.config'
-    
+
     _columns = {
-                
+
     'name': fields.char('Name', translate=True, required=True),
     'model_id' : fields.many2one('ir.model', 'Model', required=True, domain=[('osv_memory','=',False)]),
-    'field_ids': fields.many2many('ir.model.fields','model_field_rel', 'model_id', 'field_id', string='Fields'),
+    # 'field_ids': fields.many2many('ir.model.fields','model_field_rel', 'model_id', 'field_id', string='Fields'),
+    'field_ids': fields.one2many('export.column', 'config_id', string='Fields'),
     'start_export_on': fields.datetime('Launch Export on', help="Date on which records needs to be exported."),
     'last_exported_on': fields.datetime('Last Exported on', readonly=True, select=True, help="Date on which last export was done."),
     'exported': fields.boolean('Exported ?'),
@@ -46,8 +48,8 @@ class export_config(osv.osv):
     'domain_lines': fields.one2many('domain.line','export_cofig_id', 'Domain',help="Record Filters !"),
     'custom_labels': fields.one2many('custom.label','export_cofig_id', 'Custom Labels',help="Custom Field Labels to be shown !"),
     }
-    
-    
+
+
     def copy(self, cr, uid, id, default=None, context=None):
         if default is None:
             default = {}
@@ -66,39 +68,36 @@ class export_config(osv.osv):
         if exported:
             res['value'] = {'last_exported_on':datetime.today().strftime('%Y-%m-%d %H:%M:%S')}
         return res
-    
+
     def onchange_model(self, cr, uid, ids, context=None):
         res = {}
         res['value'] = {'field_ids':[]}
         return res
-    
+
     def init_excel(self):
         workbook = xlwt.Workbook()
         data_style = xlwt.easyxf('font: name Times New Roman,bold off, italic off; align: wrap yes')
         return workbook, data_style
-    
+
     def export_headers(self, workbook, title, headers):
-        main_title_style = xlwt.easyxf('font: name Times New Roman,bold on, italic on')
         title_style = xlwt.easyxf('font: name Times New Roman,bold on, italic on')
         al = xlwt.Alignment()
         al.horz = xlwt.Alignment.HORZ_CENTER
         title_style.alignment = al
-        
-        col = 5
-        row = 0
+
         sheet = workbook.add_sheet('Exported-%s'%(title))
         sheet.row(0).height = 256*3
-        sheet.write(row, col, title, main_title_style)
-        row = 2
+        # sheet.write(row, col, title, main_title_style)
+        row = 0
         col = 0
         for i, fieldname in enumerate(headers):
             sheet.write(row, col, fieldname, title_style)
             sheet.col(i).width = 8000
             col += 1
         return sheet
-    
+
     def export_data(self, sheet, rows, style):
-        row = 3
+        row = 1
         col = 0
         for data in rows:
             for cell_value in data:
@@ -110,7 +109,7 @@ class export_config(osv.osv):
             row += 1
             col = 0
         return True
-    
+
     def get_domain(self, record):
         domain = []
         for line in record.domain_lines:
@@ -121,7 +120,7 @@ class export_config(osv.osv):
                 val  = True
             domain.append((line.field_name.name, line.operator, val))
         return domain
-    
+
     def get_unique_records(self, record, data):
         unique_records = []
         exported = []
@@ -133,7 +132,7 @@ class export_config(osv.osv):
             if export_id not in list(set(exported)):
                 unique_records.append(export_id)
         return unique_records
-    
+
     def start_export(self, cr, uid, ids, *args):
         for rec in self.browse(cr, uid, ids):
             if rec.exported and not rec.allow_to_export_updated_rec: continue
@@ -143,7 +142,8 @@ class export_config(osv.osv):
             workbook, data_style = self.init_excel()
             for custom_label in rec.custom_labels:
                 custom_labels.update({custom_label.field_name.id:custom_label.value})
-            for field in rec.field_ids:
+            for column in rec.field_ids:
+                field = column.field_id
                 if field.ttype in ('one2many','many2many'):
                     child_fields = self.pool.get(field.relation).fields_view_get(cr, uid, view_type='tree')['fields']
                     for child in child_fields.keys():
@@ -175,7 +175,7 @@ class export_config(osv.osv):
             workbook.save(export_path+'/'+rec.name+'_'+last_exported_on+'.xls')
             self.log_export(cr, uid, rec, unique_records, last_exported_on)
         return True
-    
+
     def log_export(self, cr, uid, rec, exported_records, last_exported_on):
         vals = {'exported':True,'last_exported_on':last_exported_on}
         if len(exported_records):
@@ -184,9 +184,9 @@ class export_config(osv.osv):
                                                      'config_id':rec.id,
                                                      'last_logged_on':last_exported_on,
                                                      'name':', '.join(str(x) for x in exported_records)})]})
-        self.write(cr, uid, rec.id, vals) 
+        self.write(cr, uid, rec.id, vals)
         return True
-    
+
     def launch_export(self, cr, uid, context=None):
         search_domain = [('start_export_on', '<=', datetime.today().strftime('%Y-%m-%d %H:%M:00')),
                          '|',('exported','=', False),('allow_to_export_updated_rec','=',True)]
@@ -194,12 +194,47 @@ class export_config(osv.osv):
         if records:
             self.start_export(cr, uid, records)
         return True
-     
+
 export_config()
-    
+
+
+class export_column(osv.osv):
+    _name = 'export.column'
+    _order = 'sequence, id'
+
+    def _get_fields_type(self, cr, uid, context=None):
+        # Avoid too many nested `if`s below, as RedHat's Python 2.6
+        # break on it. See bug 939653.
+        return sorted([(k, k) for k, v in fields.__dict__.iteritems()
+                          if type(v) == types.TypeType and \
+                             issubclass(v, fields._column) and \
+                             v != fields._column and \
+                             not v._deprecated and \
+                             not issubclass(v, fields.function)])
+
+    _columns = {
+        'config_id': fields.many2one('export.config', 'Config',
+                                     ondelete='cascade', select=True,
+                                     readonly=True,),
+        'sequence': fields.integer('Sequence'),
+        'field_id': fields.many2one('ir.model.fields', 'Column'),
+        'ttype': fields.related('field_id', 'ttype', type="selection",
+                                selection=_get_fields_type,
+                                store=True, string="Type", readonly=True,),
+        'field_description': fields.related('field_id', 'field_description',
+                                            type="char", store=True,
+                                            string="Description",
+                                            readonly=True,),
+    }
+    _defaults = {
+        'sequence': 1000,
+    }
+export_column()
+
+
 class export_ids(osv.osv):
     _name = 'export.ids'
-    
+
     _columns = {
             'model_id' : fields.many2one('ir.model', 'Object', required=True, domain=[('osv_memory','=',False)]),
             'config_id' : fields.many2one('export.config', 'Export Config'),

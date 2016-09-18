@@ -29,6 +29,7 @@ class ws_receiptfg(osv.osv):
     _auto = False
 
     _columns = {
+        'date': fields.date('CompareDate'),
         'docuno': fields.char('docuno'),
         'docudate': fields.char('docudate'),
         'deptcode': fields.char('deptcode'),
@@ -58,7 +59,8 @@ class ws_receiptfg(osv.osv):
         # self._table = so_inv_pay_report
         tools.drop_view_if_exists(cr, self._table)
         cr.execute("""CREATE or REPLACE VIEW ws_receiptfg as (
-select sm.id, sm.name as docuno,  -- By MO, no picking
+select sm.id, sm.date as date,
+    sm.name as docuno,  -- By MO, no picking
     to_char(sm.date + interval '543 years', 'dd/mm/yyyy') as docudate,
     null as deptcode,
     null as deptname,
@@ -91,8 +93,7 @@ left outer join product_template pt on pt.id = pp.product_tmpl_id
 left outer join product_uom pu on pu.id = sm.product_uom
 where sm.state = 'done'
 and ((src.name = 'Production' and dst.name = 'FC_FG') or (src.name = 'FC_FG' and dst.name = 'Production'))
-and is_one_time_use = false  -- Not include 1 time use product.
-and sm.date >= '2016-09-01'
+and is_one_time_use = false  -- Not include 1 time use product
 order by sm.date desc
         )""")
 

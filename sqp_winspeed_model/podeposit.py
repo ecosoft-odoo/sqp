@@ -9,6 +9,7 @@ class ws_podeposit(osv.osv):
     _auto = False
 
     _columns = {
+        'date': fields.date('CompareDate'),
         'docuno': fields.char('docuno'),
         'docudate': fields.char('docudate'),
         'invno': fields.char('invno'),
@@ -22,7 +23,7 @@ class ws_podeposit(osv.osv):
         'jobcode': fields.char('jobcode'),
         'jobname': fields.char('jobname'),
         'pono': fields.char('pono'),
-        '"ref. po"': fields.char('"ref. po"'),
+        'ref_po': fields.char('ref. po'),
         'goodremark': fields.char('goodremark'),
         'goodamount': fields.char('goodamount'),
         'sumgoodamnt': fields.char('sumgoodamnt'),
@@ -47,7 +48,8 @@ class ws_podeposit(osv.osv):
         # self._table = so_inv_pay_report
         tools.drop_view_if_exists(cr, self._table)
         cr.execute("""CREATE or REPLACE VIEW ws_podeposit as (
-select ail.id, ai.number as Docuno,
+select ail.id, ai.date_invoice as date,
+    ai.number as Docuno,
     to_char(ai.date_invoice + interval '543 years', 'dd/mm/yyyy') as Docudate,
     ai.number as InvNo,
     to_char(ai.date_invoice + interval '543 years', 'dd/mm/yyyy') as InvDate,
@@ -60,7 +62,7 @@ select ail.id, ai.number as Docuno,
     null as JobCode,
     null as JobName,
     po.name as PoNo,
-    po.name as "Ref. PO",
+    po.name as "ref_po",
     ail.name as Goodremark,
     ail.price_subtotal as GoodAmount,
     ai.amount_beforetax as Sumgoodamnt,
@@ -104,7 +106,6 @@ from account_invoice ai
 
 where ai.type = 'in_invoice' and (ail.is_deposit = true or ail.is_advance = true)
     and ai.state not in ('draft', 'cancel')
-    and ai.date_invoice >= '2016-01-01'
 order by ai.id desc
         )""")
 

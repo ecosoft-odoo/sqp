@@ -29,6 +29,7 @@ class ws_transferout(osv.osv):
     _auto = False
 
     _columns = {
+        'date': fields.date('CompareDate'),
         'docuno': fields.char('docuno'),
         'docudate': fields.char('docudate'),
         'remark': fields.char('remark'),
@@ -58,7 +59,8 @@ class ws_transferout(osv.osv):
         # self._table = so_inv_pay_report
         tools.drop_view_if_exists(cr, self._table)
         cr.execute("""CREATE or REPLACE VIEW ws_transferout as (
-select sm.id, sp.name as docuno,
+select sm.id, sp.date as date,
+    sp.name as docuno,
     to_char(sp.date + interval '543 years', 'dd/mm/yyyy') as docudate,
     sp.note as remark,
     ru.search_key as appvempcode,
@@ -99,7 +101,6 @@ and not (src.name = 'FC_FG' and dst.name = 'Production')
 and not (src.name = dst.name)
 and src.name not in ('Suppliers', 'Customers', 'Output', 'Procurements', 'Scrapped')
 and dst.name not in ('Suppliers', 'Customers', 'Output', 'Procurements', 'Scrapped')
-and sp.date >= '2016-09-01'
 order by sp.id
         )""")
 

@@ -29,6 +29,7 @@ class ws_sodeposit(osv.osv):
     _auto = False
 
     _columns = {
+        'date': fields.date('CompareDate'),
         'docuno': fields.char('docuno'),
         'docudate': fields.char('docudate'),
         'invno': fields.char('invno'),
@@ -72,7 +73,8 @@ class ws_sodeposit(osv.osv):
         # self._table = so_inv_pay_report
         tools.drop_view_if_exists(cr, self._table)
         cr.execute("""CREATE or REPLACE VIEW ws_sodeposit as (
-select ail.id, ai.number as DocuNo,
+select ail.id, ai.date_invoice as date,
+    ai.number as DocuNo,
     to_char(ai.date_invoice + interval '543 years', 'dd/mm/yyyy') as DocuDate,
     ai.number as InvNo,
     to_char(ai.date_invoice + interval '543 years', 'dd/mm/yyyy') as InvDate,
@@ -137,7 +139,6 @@ from account_invoice ai
 where ai.type in ('out_invoice') and (ail.is_deposit = true or ail.is_advance = true)
     and ai.state not in ('draft', 'cancel')
     and ail.price_subtotal > 0
-    and ai.date_invoice >= '2016-09-01'
 order by ai.id desc
         )""")
 

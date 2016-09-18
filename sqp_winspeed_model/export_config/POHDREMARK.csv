@@ -1,0 +1,8 @@
+id,name,model_id,domain_lines/field_name,domain_lines/operator,domain_lines/value,field_ids/sequence,field_ids/field_id
+base.export_config_pohdremark,POHDREMARK,ws.pohdremark,CompareDate,>=,2016-08-01,1,brchcode
+,,,,,,2,brchid
+,,,,,,3,docuno
+,,,,,,4,vendorcode
+,,,,,,5,poid
+,,,,,,6,listno
+,,,,,,7,remark
