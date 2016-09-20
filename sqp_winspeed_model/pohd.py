@@ -63,7 +63,6 @@ class ws_pohd(osv.osv):
         'exchrate': fields.char('exchrate'),
         'docutype': fields.char('docutype'),
         'vatgroupcode': fields.char('vatgroupcode'),
-        'poid': fields.char('poid'),
         'vendorid': fields.char('vendorid'),
         'billtoid': fields.char('billtoid'),
         'vatgroupid': fields.char('vatgroupid'),
@@ -161,7 +160,6 @@ select po.id, po.date_order as date,
     case when round((po.amount_total - po.amount_net)
         / po.amount_net * 100, 2) = 7
         then 'PO-EX7' else 'NO' end) end as vatgroupcode,
-    po.id as POID,
     null as  VendorID,
     null as  BillToID,
     null as  VATGroupID,

@@ -61,6 +61,7 @@ class ws_soinvoice(osv.osv):
         'vattype': fields.char('vattype'),
         'goodcompareunitcode': fields.char('goodcompareunitcode'),
         'goodcompareqty': fields.char('goodcompareqty'),
+        'refeno': fields.char('refeno'),
         'sumgoodamnt': fields.char('sumgoodamnt'),
         'billdiscformula': fields.char('billdiscformula'),
         'billaftrdiscamnt': fields.char('billaftrdiscamnt'),
@@ -102,7 +103,7 @@ class ws_soinvoice(osv.osv):
         'brchname': fields.char('brchname'),
         'brchnameeng': fields.char('brchnameeng'),
         'basevat': fields.char('basevat'),
-        # 'vatrate': fields.char('vatrate'),
+        'vatrate1': fields.char('vatrate1'),
         'vatamount': fields.char('vatamount'),
     }
 
@@ -190,9 +191,9 @@ select ail.id, ai.date_invoice as date,
     rp.branch as Brchname,
     rp.branch as Brchnameeng,
     ai.amount_beforetax as BaseVat,
-    -- case when ai.amount_beforetax = 0 then 0 else
-    --        round((ai.amount_total - ai.amount_beforetax)
-    --            / ai.amount_beforetax * 100, 2) end as VatRate,
+    case when ai.amount_beforetax = 0 then 0 else
+        round((ai.amount_total - ai.amount_beforetax)
+            / ai.amount_beforetax * 100, 2) end as VatRate1,
     ai.amount_tax as VatAmount
 
 from account_invoice ai

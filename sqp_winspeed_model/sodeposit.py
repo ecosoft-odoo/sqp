@@ -46,6 +46,7 @@ class ws_sodeposit(osv.osv):
         'empname': fields.char('empname'),
         'custpono': fields.char('custpono'),
         'custpodate': fields.char('custpodate'),
+        'refeno': fields.char('refeno'),
         'goodremark': fields.char('goodremark'),
         'goodamount': fields.char('goodamount'),
         'sumgoodamnt': fields.char('sumgoodamnt'),
