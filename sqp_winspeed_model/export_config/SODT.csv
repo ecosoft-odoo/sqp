@@ -1,5 +1,5 @@
 id,name,model_id,domain_lines/field_name,domain_lines/operator,domain_lines/value,field_ids/sequence,field_ids/field_id
-base.export_config_sodt,SODT,ws.sodt,CompareDate,>=,2016-08-01,1,brchcode
+base.export_config_sodt,SODT,ws.sodt,CompareDate,>=,2016-09-01,1,brchcode
 ,,,,,,2,docuno
 ,,,,,,3,goodcode
 ,,,,,,4,goodname

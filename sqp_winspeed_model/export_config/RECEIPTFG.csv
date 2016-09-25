@@ -1,5 +1,5 @@
 id,name,model_id,domain_lines/field_name,domain_lines/operator,domain_lines/value,field_ids/sequence,field_ids/field_id
-base.export_config_receiptfg,RECEIPTFG,ws.receiptfg,CompareDate,>=,2016-08-01,1,docuno
+base.export_config_receiptfg,RECEIPTFG,ws.receiptfg,CompareDate,>=,2016-09-01,1,docuno
 ,,,,,,2,docudate
 ,,,,,,3,deptcode
 ,,,,,,4,deptname

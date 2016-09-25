@@ -33,8 +33,8 @@ class ws_sohdremark(osv.osv):
         'brchcode': fields.char('brchcode'),
         'brchid': fields.char('brchid'),
         'docuno': fields.char('docuno'),
-        'vendorcode': fields.char('vendorcode'),
-        'poid': fields.char('poid'),
+        'custcode': fields.char('custcode'),
+        'soid': fields.char('soid'),
         'listno': fields.char('listno'),
         'remark': fields.char('remark'),
     }
@@ -47,8 +47,8 @@ select so.id, so.date_order as date,
     '00000' as BrchCode,
     null as BrchID,
     replace(so.name, '"', '''') as DocuNo,
-    rp.search_key as VendorCode,
-    null as POID,
+    rp.search_key as CustCode,
+    null as SOID,
     1 as ListNo,
     left(so.note, 255) as Remark
 from sale_order so

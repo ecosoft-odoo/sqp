@@ -1,5 +1,5 @@
 id,name,model_id,domain_lines/field_name,domain_lines/operator,domain_lines/value,field_ids/sequence,field_ids/field_id
-base.export_config_podeposit,PODEPOSIT,ws.podeposit,CompareDate,>=,2016-08-01,1,docuno
+base.export_config_podeposit,PODEPOSIT,ws.podeposit,CompareDate,>=,2016-04-01,1,docuno
 ,,,,,,2,docudate
 ,,,,,,3,invno
 ,,,,,,4,invdate
@@ -12,7 +12,7 @@ base.export_config_podeposit,PODEPOSIT,ws.podeposit,CompareDate,>=,2016-08-01,1,
 ,,,,,,11,jobcode
 ,,,,,,12,jobname
 ,,,,,,13,pono
-,,,,,,14,ref. po
+,,,,,,14,ponodt
 ,,,,,,15,goodremark
 ,,,,,,16,goodamount
 ,,,,,,17,sumgoodamnt
@@ -23,3 +23,11 @@ base.export_config_podeposit,PODEPOSIT,ws.podeposit,CompareDate,>=,2016-08-01,1,
 ,,,,,,22,vatgroupcode
 ,,,,,,23,departmentcode
 ,,,,,,24,departmentname
+,,,,,,25,exchdate
+,,,,,,26,currcode
+,,,,,,27,currname
+,,,,,,28,currtypecode
+,,,,,,29,currtypename
+,,,,,,30,exchrate
+,,,,,,31,no
+,,,,,,32,desciption
