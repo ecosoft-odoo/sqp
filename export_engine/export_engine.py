@@ -167,11 +167,7 @@ class export_config(osv.osv):
                 domain.append(('write_date','>=',rec.last_exported_on))
             order = rec.order_by_field and rec.order_by_field.name or None
             sheet = self.export_headers(workbook, rec.name, fields_title)
-            print '----------------'
-            print domain
-            print '----------------'
             rec_to_export = self.pool.get(rec.model_id.model).search(cr, uid, domain, offset=rec.offset, limit=rec.limit_rec or None, order=order)
-            print rec_to_export
             unique_records = rec_to_export
             if not rec.allow_to_export_updated_rec:
                 unique_records = self.get_unique_records(rec, rec_to_export)
