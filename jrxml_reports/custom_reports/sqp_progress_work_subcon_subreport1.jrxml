@@ -22,14 +22,14 @@ and pir.purchase_id = $P{id};]]>
 		<band height="15" splitType="Stretch">
 			<textField pattern="###0">
 				<reportElement x="11" y="0" width="92" height="15"/>
-				<textElement textAlignment="Right">
+				<textElement textAlignment="Right" lineSpacing="Single">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$F{num_invoiced} == null ? 0 : $F{num_invoiced}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="301" y="0" width="92" height="15"/>
-				<textElement textAlignment="Right">
+				<textElement textAlignment="Right" lineSpacing="Single">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$F{total_invoiced} == null ? 0.0 : $F{total_invoiced}]]></textFieldExpression>
@@ -64,7 +64,7 @@ and pir.purchase_id = $P{id};]]>
 			</staticText>
 			<textField pattern="#,##0.00">
 				<reportElement x="131" y="0" width="92" height="15"/>
-				<textElement textAlignment="Right">
+				<textElement textAlignment="Right" lineSpacing="Single">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$F{percent} == null ? 0.0 : $F{percent}]]></textFieldExpression>

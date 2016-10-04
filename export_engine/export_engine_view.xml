@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
+      <menuitem id="menu_export_engine_menu" name="Export Engine" parent="base.menu_reporting" sequence="200" groups="group_export_engine"/>
+
         <record id="view_export_report_search" model="ir.ui.view">
             <field name="name">view.export.report.search</field>
             <field name="model">export.config</field>
             <field name="arch" type="xml">
                 <search string="Search Exports">
-                    <field name="model_id" string="Model" filter_domain="['|',('name','ilike',self)]"/>
+                    <field name="name" string="Model" filter_domain="[('name','ilike',self)]"/>
                     <filter string="Exported" domain="[('exported','=',True)]" help="Exported" icon="terp-dolar_ok!"/>
                     <filter string="Export updated records" domain="[('allow_to_export_updated_rec','=',True)]" help="Allow to Export Updated records" icon="terp-dolar_ok!"/>
                     <separator/>
@@ -54,15 +56,14 @@
                             <button string="Export Now" name="start_export" type="object" icon="gtk-go-forward" help="Export the records now !"></button>
                         </group>
                         <notebook>
-                            <!--page string="Fields to Export">
-                                <field name="field_ids" colspan="8" nolabel="1" domain="[('model_id','=',model_id)]">
+                            <page string="Records Exported">
+                                <field name="exported_ids" colspan="8" nolabel="1" domain="[('model_id','=',model_id)">
                                     <tree string="Fields Description">
                                         <field name="name"/>
-                                        <field name="field_description"/>
-                                        <field name="ttype"/>
+                                        <field name="last_logged_on"/>
                                     </tree>
                                 </field>
-                            </page-->
+                            </page>
                             <page string="Fields to Export">
                                 <field name="field_ids" >
                                     <tree string="Fields Description" editable="top">
@@ -90,14 +91,6 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page string="Records Exported">
-                                <field name="exported_ids" colspan="8" nolabel="1" domain="[('model_id','=',model_id)">
-                                    <tree string="Fields Description">
-                                        <field name="name"/>
-                                        <field name="last_logged_on"/>
-                                    </tree>
-                                </field>
-                            </page>
                         </notebook>
                     </sheet>
                 </form>
@@ -113,6 +106,7 @@
             <field name="search_view_id" ref="view_export_report_search"/>
         </record>
 
-        <menuitem action="action_export_config" id="menu_export_config" parent="base.menu_reporting_config" sequence="2"/>
+        <menuitem action="action_export_config" id="menu_export_config" parent="menu_export_engine_menu" sequence="1"/>
+
     </data>
 </openerp>

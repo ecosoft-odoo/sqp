@@ -176,7 +176,8 @@ class export_config(osv.osv):
             self.export_data(sheet, result, data_style)
             export_path = self.pool.get('ir.config_parameter').get_param(cr, uid, 'export_path')
             last_exported_on = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-            workbook.save(export_path+'/'+rec.name+'_'+last_exported_on+'.xls')
+            file_name = export_path+'/'+rec.name+'_'+last_exported_on+'.xls'
+            workbook.save(file_name.replace(" ", "_").replace(":", "-"))
             self.log_export(cr, uid, rec, unique_records, last_exported_on)
         return True
 
@@ -238,7 +239,7 @@ export_column()
 
 class export_ids(osv.osv):
     _name = 'export.ids'
-
+    _order = 'last_logged_on desc'
     _columns = {
             'model_id' : fields.many2one('ir.model', 'Object', required=True, domain=[('osv_memory','=',False)]),
             'config_id' : fields.many2one('export.config', 'Export Config'),

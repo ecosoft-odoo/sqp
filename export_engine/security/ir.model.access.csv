@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_export_config_user,access_export_config_user,export_engine.model_export_config,base.group_user,1,1,1,1
+access_export_column_user,access_export_column_user,export_engine.model_export_column,base.group_user,1,1,1,1
+access_export_ids_user,access_export_ids_user,export_engine.model_export_ids,base.group_user,1,1,1,1
+access_custom_label_user,access_custom_label_user,export_engine.model_custom_label,base.group_user,1,1,1,1
+access_domain_line_user,access_domain_line_user,export_engine.model_domain_line,base.group_user,1,1,1,1

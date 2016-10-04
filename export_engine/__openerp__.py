@@ -28,8 +28,10 @@
     'category': 'tools',
     'version': '1.1',
     'author': 'Cozy Business Solutions Pvt.Ltd.',
-    'depends' : ['base'],
-    'data' : [
+    'depends': ['base'],
+    'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
         'wizard/export_all_view.xml',
         'export_engine_view.xml',
         'export_engine_data.xml',
