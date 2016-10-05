@@ -30,23 +30,23 @@ class export_config(osv.osv):
     _name = 'export.config'
 
     _columns = {
-
-    'name': fields.char('Name', translate=True, required=True),
-    'model_id' : fields.many2one('ir.model', 'Model', required=True, domain=[('osv_memory','=',False)]),
-    # 'field_ids': fields.many2many('ir.model.fields','model_field_rel', 'model_id', 'field_id', string='Fields'),
-    'field_ids': fields.one2many('export.column', 'config_id', string='Fields'),
-    'start_export_on': fields.datetime('Launch Export on', help="Date on which records needs to be exported."),
-    'last_exported_on': fields.datetime('Last Exported on', readonly=True, select=True, help="Date on which last export was done."),
-    'exported': fields.boolean('Exported ?'),
-    'allow_to_export_updated_rec': fields.boolean('Allow to Export Updated records ?'),
-    'export_sequence': fields.integer('Export Sequence', help="Export will be done in this order. Lower the number, higher the priority."),
-    'exported_ids': fields.one2many('export.ids', 'config_id', 'Exported Records'),
-    'search_domain':fields.char('Domain'),
-    'limit_rec': fields.integer('Limit', help="Limit your records"),
-    'order_by_field' : fields.many2one('ir.model.fields','Order BY',domain="[('model_id','=',model_id)]",help="Sort order by Field. default by ID Ascending"),
-    'offset': fields.integer('Offset'),
-    'domain_lines': fields.one2many('domain.line','export_cofig_id', 'Domain',help="Record Filters !"),
-    'custom_labels': fields.one2many('custom.label','export_cofig_id', 'Custom Labels',help="Custom Field Labels to be shown !"),
+        'name': fields.char('Name', translate=True, required=True),
+        'model_id' : fields.many2one('ir.model', 'Model', required=True, domain=[('osv_memory','=',False)]),
+        # 'field_ids': fields.many2many('ir.model.fields','model_field_rel', 'model_id', 'field_id', string='Fields'),
+        'field_ids': fields.one2many('export.column', 'config_id', string='Fields'),
+        'start_export_on': fields.datetime('Launch Export on', help="Date on which records needs to be exported."),
+        'last_exported_on': fields.datetime('Last Exported on', readonly=True, select=True, help="Date on which last export was done."),
+        'exported': fields.boolean('Exported ?'),
+        'allow_to_export_updated_rec': fields.boolean('Allow to Export Updated records ?'),
+        'export_sequence': fields.integer('Export Sequence', help="Export will be done in this order. Lower the number, higher the priority."),
+        'exported_ids': fields.one2many('export.ids', 'config_id', 'Exported Records'),
+        'search_domain':fields.char('Domain'),
+        'limit_rec': fields.integer('Limit', help="Limit your records"),
+        'order_by_field' : fields.many2one('ir.model.fields','Order BY',domain="[('model_id','=',model_id)]",help="Sort order by Field. default by ID Ascending"),
+        'offset': fields.integer('Offset'),
+        'domain_lines': fields.one2many('domain.line','export_cofig_id', 'Domain',help="Record Filters !"),
+        'custom_labels': fields.one2many('custom.label','export_cofig_id', 'Custom Labels',help="Custom Field Labels to be shown !"),
+        'export_folder': fields.char('Exported Folder', help="Export folder specific to this config")
     }
 
 
@@ -174,7 +174,8 @@ class export_config(osv.osv):
             if not len(unique_records):continue
             result = self.pool.get(rec.model_id.model).export_data(cr, uid, unique_records, fields_to_export).get('datas',[])
             self.export_data(sheet, result, data_style)
-            export_path = self.pool.get('ir.config_parameter').get_param(cr, uid, 'export_path')
+            export_path = rec.export_folder or \
+                self.pool.get('ir.config_parameter').get_param(cr, uid, 'export_path')
             last_exported_on = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
             file_name = export_path+'/'+rec.name+'_'+last_exported_on+'.xls'
             workbook.save(file_name.replace(" ", "_").replace(":", "-"))
