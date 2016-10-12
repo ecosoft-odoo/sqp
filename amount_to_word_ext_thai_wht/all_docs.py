@@ -41,22 +41,21 @@ class AmountToWordExt(AmountToWord):
 #                amount_total -= (dr_line.amount + dr_line.amount_retention + dr_line.amount_wht)
                 amount_total -= dr_line.amount
             amount_total = abs(amount_total)
-            print amount_total
         return amount_total
 
 
 class sale_order(AmountToWordExt, osv.osv):
-    
+
     _inherit = 'sale.order'
-   
-    
+
+
 class account_invoice(AmountToWordExt, osv.osv):
-    
+
     _inherit = 'account.invoice'
-    
-    
+
+
 class account_voucher(AmountToWordExt, osv.osv):
-    
-    _inherit = 'account.voucher'    
+
+    _inherit = 'account.voucher'
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -12,7 +12,6 @@ class account_invoice(osv.osv):
         for invoice in self.browse(cr, uid, ids, context=context):
             res[invoice.id] = False
             for line in invoice.invoice_line:
-                print line.product_id.categ_id
                 search_key = line.product_id and line.product_id.categ_id and \
                     line.product_id.categ_id.search_key
                 if search_key in _NON_STD_CATEG:

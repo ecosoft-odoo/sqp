@@ -51,55 +51,55 @@ class sqp_job_cost_sheet(osv.osv):
                 'profit_percent': 0.0,
             }
 
-            cr.execute("""select sum(price_subtotal) from sqp_job_cost_sheet_mrp_rm_list a 
+            cr.execute("""select sum(price_subtotal) from sqp_job_cost_sheet_mrp_rm_list a
                             join product_product b on b.id = a.product_id
                             where a.order_id = %s and b.main_material = %s""", (order.id, True))
-            res[order.id]['mrp_main_rm_amount'] = cr.fetchone()[0] or 0.0    
-            
-            cr.execute("""select sum(price_subtotal) from sqp_job_cost_sheet_mrp_rm_list a 
+            res[order.id]['mrp_main_rm_amount'] = cr.fetchone()[0] or 0.0
+
+            cr.execute("""select sum(price_subtotal) from sqp_job_cost_sheet_mrp_rm_list a
                             join product_product b on b.id = a.product_id
                             where a.order_id = %s and b.main_material = %s""", (order.id, False))
-            res[order.id]['mrp_rm_amount'] = cr.fetchone()[0] or 0.0         
-            
+            res[order.id]['mrp_rm_amount'] = cr.fetchone()[0] or 0.0
+
             cr.execute("""select sum(amount) from sqp_job_book_labor
                             where order_id = %s""", (order.id,))
-            res[order.id]['labor_amount'] = cr.fetchone()[0] or 0.0 
-             
+            res[order.id]['labor_amount'] = cr.fetchone()[0] or 0.0
+
             cr.execute("""select sum(amount) from sqp_job_book_transport
                             where order_id = %s""", (order.id,))
-            res[order.id]['transport_amount'] = cr.fetchone()[0] or 0.0 
-            
+            res[order.id]['transport_amount'] = cr.fetchone()[0] or 0.0
+
             cr.execute("""select sum(amount) from sqp_job_book_electric
                             where order_id = %s""", (order.id,))
-            res[order.id]['electric_amount'] = cr.fetchone()[0] or 0.0 
-            
+            res[order.id]['electric_amount'] = cr.fetchone()[0] or 0.0
+
             cr.execute("""select sum(price_subtotal) from sqp_job_cost_sheet_supply_list
                             where order_id = %s""", (order.id,))
-            res[order.id]['supply_list_amount'] = cr.fetchone()[0] or 0.0 
-            
+            res[order.id]['supply_list_amount'] = cr.fetchone()[0] or 0.0
+
             cr.execute("""select sum(price_subtotal) from sqp_job_cost_sheet_po_subcontract
                             where order_id = %s""", (order.id,))
-            res[order.id]['subcontract_amount'] = cr.fetchone()[0] or 0.0 
+            res[order.id]['subcontract_amount'] = cr.fetchone()[0] or 0.0
 
             cr.execute("""select sum(price_subtotal) from sqp_job_cost_sheet_expense_list
                             where order_id = %s""", (order.id,))
-            res[order.id]['expense_list_amount'] = cr.fetchone()[0] or 0.0 
-            
-            cr.execute("""select sum(price_subtotal) from sqp_job_cost_sheet_invoice_list a 
+            res[order.id]['expense_list_amount'] = cr.fetchone()[0] or 0.0
+
+            cr.execute("""select sum(price_subtotal) from sqp_job_cost_sheet_invoice_list a
                             join product_product b on b.id = a.product_id
                             where a.order_id = %s and b.job_cost_type = %s""", (order.id, 'plane_ticket'))
-            res[order.id]['plane_ticket_invoice_list_amount'] = cr.fetchone()[0] or 0.0      
+            res[order.id]['plane_ticket_invoice_list_amount'] = cr.fetchone()[0] or 0.0
 
-            cr.execute("""select sum(price_subtotal) from sqp_job_cost_sheet_invoice_list a 
+            cr.execute("""select sum(price_subtotal) from sqp_job_cost_sheet_invoice_list a
                             join product_product b on b.id = a.product_id
                             where a.order_id = %s and b.job_cost_type = %s""", (order.id, 'comm_install'))
-            res[order.id]['comm_install_invoice_list_amount'] = cr.fetchone()[0] or 0.0            
+            res[order.id]['comm_install_invoice_list_amount'] = cr.fetchone()[0] or 0.0
 
-            cr.execute("""select sum(price_subtotal) from sqp_job_cost_sheet_invoice_list a 
+            cr.execute("""select sum(price_subtotal) from sqp_job_cost_sheet_invoice_list a
                             join product_product b on b.id = a.product_id
                             where a.order_id = %s and b.job_cost_type is %s""", (order.id, None))
-            res[order.id]['other_invoice_list_amount'] = cr.fetchone()[0] or 0.0    
-            
+            res[order.id]['other_invoice_list_amount'] = cr.fetchone()[0] or 0.0
+
             # Commisison Amount
             cwl_ids = self.pool.get('commission.worksheet.line').search(cr, uid, [('order_id', '=', order.id), ('commission_state', 'in', ('valid', 'done'))])
             for cwl in self.pool.get('commission.worksheet.line').read(cr, uid, cwl_ids, ['commission_amt']):
@@ -136,7 +136,7 @@ class sqp_job_cost_sheet(osv.osv):
         return [('id', '=', '0')]
 
     # ============ SEARCH FUNCTIONS ============
-    # main_material = True    
+    # main_material = True
     QUERY_MAIN_RM_AMOUNT = """
             (select so.id, sum(case when coalesce(pp.main_material, false) = true then coalesce(rm.price_subtotal, 0.0) else 0 end) amount
                 from sale_order so
@@ -296,7 +296,6 @@ class sqp_job_cost_sheet(osv.osv):
         QUERY = """(select c.id, case when coalesce(sale_order.amount_net, 0) = 0 then 100 else (sale_order.amount_net - c.amount) / sale_order.amount_net * 100 end amount
                 from sale_order left outer join
                 (select id, sum(amount) amount from ( """ + self.QUERY_TOTAL_COST_AMOUNT + """ ) b group by id) c on sale_order.id = c.id)"""
-        print QUERY
         return self._search_amount(cr, uid, obj, name, args, QUERY, context=context)
 
     def _area_so(self, cursor, user, ids, name, arg, context=None):
@@ -308,7 +307,7 @@ class sqp_job_cost_sheet(osv.osv):
 #                     area += line.product_uom_qty
             res[sheet.id] = area
         return res
-    
+
     def _area_mo(self, cursor, user, ids, name, arg, context=None):
         res = {}
         for sheet in self.browse(cursor, user, ids, context=context):
@@ -600,7 +599,7 @@ class sqp_job_cost_sheet_po_subcontract(osv.osv):
                 ail.uos_id product_uom, ail.price_unit,
                 case when ai.type = 'in_invoice' then price_subtotal else -price_subtotal end as price_subtotal
             from account_invoice ai
-            join (select purchase_id purchase_id, invoice_id from purchase_invoice_rel) pil 
+            join (select purchase_id purchase_id, invoice_id from purchase_invoice_rel) pil
             on pil.invoice_id = ai.id
             join purchase_order po on po.id = pil.purchase_id and po.is_subcontract = True and po.ref_order_id is not null
             join account_invoice_line ail on ail.invoice_id = ai.id
@@ -663,7 +662,7 @@ class sqp_job_cost_sheet_inovice_list(osv.osv):
             join     (select invoice_id, order_id from (
                 -- Invoice with Reference to PO (non-Subcontract)
                 (select pil.invoice_id, po.ref_order_id as order_id from purchase_order po
-                join (select purchase_id, invoice_id from purchase_invoice_rel) pil 
+                join (select purchase_id, invoice_id from purchase_invoice_rel) pil
                         on po.id = pil.purchase_id
                 where po.is_subcontract = False and po.ref_order_id is not null)
                 union -- Invoice with direct reference to PO
