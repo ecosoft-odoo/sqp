@@ -126,8 +126,8 @@ select pol.id, po.date_order as date,
     sw.name as invecode,
     sl.name as locacode,
     pu.name as goodunitcode,
-    case when pt.categ_id not in (6, 36) then pu.name else 'cm' end as maingoodunitcode,  -- Same as goodunitcode ???
-    case when pt.categ_id not in (6, 36) then 1 else null end as GoodStockRate2,
+    case when pt.type != 'service' then pu.name else 'cm' end as maingoodunitcode,  -- Same as goodunitcode ???
+    case when pt.type != 'service' then 1 else null end as GoodStockRate2,
     round(pol.product_qty, 4) as GoodQty2,
     round(pol.price_unit, 2) as GoodPrice2,
     round(pol.discount/100 * pol.product_qty * pol.price_unit, 2) as GoodDiscFormula,

@@ -132,8 +132,8 @@ class ws_sodt(osv.osv):
     sl.name as locacode,  -- Can we use shop in ERP?
     pu.name as goodunitcode,
     -- mainggoodunitcode is from a specific requirement that non-standard must alwasy be 'cm'
-    case when pt.categ_id not in (6, 36) then pu.name else 'cm' end as maingoodunitcode,  -- Same as goodunitcode ???
-    case when pt.categ_id not in (6, 36) then 1 else null end as GoodStockRate2,
+    case when pt.type != 'service' then pu.name else 'cm' end as maingoodunitcode,  -- Same as goodunitcode ???
+    case when pt.type != 'service' then 1 else null end as GoodStockRate2,
     round(sol.product_uom_qty, 4) as GoodQty2,  -- What is "2" means?
     round(sol.price_unit, 4) as GoodPrice2,
     round(sol.discount/100 * sol.product_uom_qty * sol.price_unit, 4) as GoodDiscFormula,
