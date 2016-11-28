@@ -141,10 +141,14 @@ select po.id, po.date_order as date,
     po.amount_net as BillAftrDiscAmnt,
     po.amount_net as TotabaseAmnt,
     case when po.amount_tax > 0 then 1 else 3 end  as VATType,  -- Has tax = 1, no tax = 3
-    case when coalesce(nullif(po.amount_net, 0.0), 0.0) = 0 then 0
+    case when
+    (case when coalesce(nullif(po.amount_net, 0.0), 0.0) = 0 then 0
     else round((po.amount_total - po.amount_net)
-    / po.amount_net * 100, 2) end as VATRate,
-    (po.amount_total - po.amount_net) as VatAmnt,
+    / po.amount_net * 100, 2) end) = 0 then -0.01
+    else (case when coalesce(nullif(po.amount_net, 0.0), 0.0) = 0 then 0
+    else round((po.amount_total - po.amount_net)
+    / po.amount_net * 100, 2) end) end as VATRate,
+    case when (po.amount_total - po.amount_net) = 0 then -0.01 else (po.amount_total - po.amount_net) end as VatAmnt,
     po.amount_total as Netamnt,
     case when pt.type = 'service' then 2 else 1 end as GoodType, -- In order_line, can mixed.
     null as FOB,

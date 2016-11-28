@@ -103,7 +103,10 @@ class export_config(osv.osv):
             for cell_value in data:
                 if isinstance(cell_value, basestring):
                     cell_value = re.sub("\r", " ", cell_value)
-                if cell_value is False: cell_value = None
+                if cell_value == '-0.01':
+                    cell_value = '0'
+                elif cell_value is False:
+                    cell_value = None
                 sheet.write(row, col, cell_value, style)
                 col += 1
             row += 1

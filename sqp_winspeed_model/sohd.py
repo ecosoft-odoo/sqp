@@ -159,11 +159,15 @@ class ws_sohd(osv.osv):
                 so.add_disc_amt as BillDiscAmnt,
                 so.amount_net as BillAftrDiscAmnt,
                 so.amount_net as TotaBaseAmnt,
-                case when so.amount_tax > 0 then 1 else 3 end  as VatType,  -- Has tax = 1, no tax = 3
-                case when coalesce(nullif(so.amount_net, 0.0), 0.0) = 0 then 0
+                case when so.amount_tax > 0 then 1 else 3 end  as VATType,  -- Has tax = 1, no tax = 3
+                case when
+                (case when coalesce(nullif(so.amount_net, 0.0), 0.0) = 0 then 0
                 else round((so.amount_total - so.amount_net)
-                / so.amount_net * 100, 2) end as VatRate,
-                (so.amount_total - so.amount_net) as VatAmnt,
+                / so.amount_net * 100, 2) end) = 0 then -0.01
+                else (case when coalesce(nullif(so.amount_net, 0.0), 0.0) = 0 then 0
+                else round((so.amount_total - so.amount_net)
+                / so.amount_net * 100, 2) end) end as VATRate,
+                case when (so.amount_total - so.amount_net) = 0 then -0.01 else (so.amount_total - so.amount_net) end as VatAmnt,
                 so.amount_total as Netamnt,
                 case when pt.type = 'service' then 2 else 1 end as GoodType, -- In order_line, can mixed.
                 null as Commission,
