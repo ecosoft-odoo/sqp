@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Purchase Order" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.1566298682886"/>
+	<property name="ireport.zoom" value="1.1566298682886007"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="48"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;order_line&quot;]"/>
 	<style name="table" lineSpacing="Single">
 		<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
@@ -206,7 +206,7 @@
 				<reportElement x="295" y="217" width="45" height="430"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="340" y="217" width="55" height="430"/>
+				<reportElement x="340" y="217" width="46" height="430"/>
 			</rectangle>
 			<rectangle>
 				<reportElement x="445" y="217" width="40" height="430"/>
@@ -215,7 +215,7 @@
 				<reportElement x="485" y="217" width="70" height="430"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="394" y="217" width="51" height="430"/>
+				<reportElement x="386" y="217" width="59" height="430"/>
 			</rectangle>
 		</band>
 	</background>
@@ -515,14 +515,14 @@
 				<text><![CDATA[DESCRIPTION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="table" mode="Opaque" x="340" y="0" width="54" height="23" backcolor="#B5E7D3"/>
+				<reportElement style="table" mode="Opaque" x="340" y="0" width="45" height="23" backcolor="#B5E7D3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[UNIT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="table" mode="Opaque" x="394" y="0" width="51" height="23" backcolor="#B5E7D3"/>
+				<reportElement style="table" mode="Opaque" x="385" y="0" width="60" height="23" backcolor="#B5E7D3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -576,14 +576,14 @@ PRICE]]></text>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$V{product_qty}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="340" y="3" width="54" height="17"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="340" y="3" width="45" height="17"/>
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$V{product_uom}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="394" y="3" width="51" height="17"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="371" y="3" width="74" height="17"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
