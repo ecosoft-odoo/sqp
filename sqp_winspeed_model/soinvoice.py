@@ -226,7 +226,7 @@ from account_invoice ai
                   ORDER BY name DESC LIMIT 1)
 
 where ai.type in ('out_invoice', 'out_refund') and (ail.is_deposit = false and ail.is_advance = false)
-    and ai.state not in ('draft', 'cancel') and ai.non_standard = false
+    and ai.state not in ('draft', 'cancel') and ai.non_standard is not true
 order by ai.id desc
         )""")
 
