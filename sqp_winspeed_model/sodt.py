@@ -180,7 +180,7 @@ class ws_sodt(osv.osv):
     null as Remark,
     null as LotNo,
     null as LotFlag,
-    case when pt.type != 'service' then 1 else 2 end as GoodType,
+    case when pt.type != 'service' or pt.categ_id in (6,36) then 1 else 2 end as GoodType,
     null as SerialFlag,
     null as GoodStockUnitID,
     null as PostFlag,
