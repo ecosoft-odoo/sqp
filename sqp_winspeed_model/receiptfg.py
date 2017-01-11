@@ -61,7 +61,7 @@ class ws_receiptfg(osv.osv):
         cr.execute("""CREATE or REPLACE VIEW ws_receiptfg as (
 select sm.id, sm.date as date,
     sm.name as docuno,  -- By MO, no picking
-    to_char(sm.date + interval '543 years', 'dd/mm/yyyy') as docudate,
+    to_char(sm.date, 'dd/mm/yyyy') as docudate,
     null as deptcode,
     null as deptname,
     null as jobcodehd,

@@ -61,7 +61,7 @@ class ws_transferout(osv.osv):
         cr.execute("""CREATE or REPLACE VIEW ws_transferout as (
 select sm.id, sp.date as date,
     sp.name as docuno,
-    to_char(sp.date + interval '543 years', 'dd/mm/yyyy') as docudate,
+    to_char(sp.date, 'dd/mm/yyyy') as docudate,
     sp.note as remark,
     ru.search_key as appvempcode,
     ru.login as appvempname,

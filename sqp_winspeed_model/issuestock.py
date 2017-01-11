@@ -63,7 +63,7 @@ class ws_issuestock(osv.osv):
 select sm.id, sp.date as date,
     1 as docutypecode,
     sp.name as docuno,
-    to_char(sp.date + interval '543 years', 'dd/mm/yyyy') as docudate,
+    to_char(sp.date, 'dd/mm/yyyy') as docudate,
     null as deptcode,
     null as deptname,
     null as jobcodehd,
