@@ -1,0 +1,1458 @@
+1    [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error preparing statement for executing the report query : 
+
+select * from
+(
+
+select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+invoice_tax.date_invoice, invoice_tax.doc_id, invoice_tax.doc_number, invoice_tax.supplier_doc_number, invoice_tax.tax_amount, invoice_base.base_amount from
+
+----------------------
+-- TAX FROM INVOICE --
+----------------------
+(select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+date_invoice, doc_id, doc_number, supplier_doc_number, sum(tax_amount) as tax_amount
+from (
+select rc.name as company_name, rp.vat as tax,
+ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, ai.id as doc_id, partner.vat, partner.branch,
+ai.number as doc_number, ai.supplier_invoice_number as supplier_doc_number, ai.date_invoice, (aml.credit - aml.debit) as tax_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+-- Header Info
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+-- Line Info
+join res_partner partner on partner.id = ai.partner_id
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- Only non-suspend account_id
+	and (aml.account_id in (select account_collected_id from account_tax tax where tax.tax_code_id = ?)
+	or aml.account_id in (select account_paid_id from account_tax tax where tax.ref_tax_code_id = ?))
+) a
+group by company_name, tax, period, fiscalyear, partner_name, vat, branch, date_invoice, doc_id, doc_number, supplier_doc_number) invoice_tax
+-------------------------
+
+join
+
+-----------------------
+-- BASE FROM INVOICE --
+-----------------------
+(select date_invoice, doc_id, doc_number, supplier_doc_number, sum(base_amount) as base_amount
+from (
+select  ai.id as doc_id, ai.number as doc_number, ai.date_invoice, ai.supplier_invoice_number as supplier_doc_number, (aml.credit - aml.debit) as base_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- For Base Amount, require deduction of Additional Discount, Advance Amount, Deposit Amount
+or aml.name in ('Additional Discount', 'Advance Amount', 'Deposit Amount')
+order by doc_number
+) a
+group by date_invoice, doc_id, doc_number, supplier_doc_number) invoice_base
+--------------------------------
+
+on invoice_tax.doc_id = invoice_base.doc_id
+
+
+----------------------------------
+-- union Payment Tax -----
+----------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, partner.vat, partner.branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number,
+CASE WHEN av.type in ('sale','receipt') THEN avt.tax_amount ELSE -avt.tax_amount END as tax_amount,
+CASE WHEN av.type in ('sale','receipt') THEN avt.base_amount ELSE -avt.base_amount END as tax_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('posted')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+
+------------------------------------
+-- union Cancelled Payment Tax -----
+------------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('cancel')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+----------------------------------------
+-- union Cancelled Invoice (Sales) -----
+----------------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+ai.date_invoice, ai.id as doc_id, ai.internal_number as doc_number, null as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_invoice ai
+join res_company rc on rc.id = ai.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = ai.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = ai.partner_id
+-- only invoice with lines that has the tax_id selected
+and ai.id in (select distinct ai.id from account_invoice ai
+join account_invoice_line ail on ail.invoice_id = ai.id
+join account_invoice_line_tax ailt on ailt.invoice_line_id = ail.id
+where ai.company_id = ? and ai.period_id = ? and ailt.tax_id = ?
+and ai.state = 'cancel' and ai.type in ('out_invoice', 'out_refund') and ai.internal_number is not null))
+
+
+------------------------------------------
+
+----------------------------------
+-- union VAT INFO (Purchase) -----
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+ail.vatinfo_supplier_name as partner_name, ail.vatinfo_tin as vat, ail.vatinfo_branch as branch,
+ail.vatinfo_date as date_invoice, ai.id as doc_id, null as doc_number, ail.vatinfo_number as supplier_doc_number, -ail.vatinfo_tax_amount as tax_amount, -ail.vatinfo_base_amount as base_amount
+from account_invoice_line ail
+join account_invoice ai on ai.id = ail.invoice_id and ai.state in ('open','paid') -- For purhcase, we don't need cancel state
+join account_move am on am.id = ai.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and ail.vatinfo_tax_id = ?
+and ail.vatinfo_tax_amount > 0)
+------------------------------------------
+
+----------------------------------
+-- union HR EXPENSE (Purchase) ---
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+hel.vatinfo_supplier_name as partner_name, hel.vatinfo_tin as vat, hel.vatinfo_branch as branch,
+hel.vatinfo_date as date_invoice, he.id as doc_id, null as doc_number, hel.vatinfo_number as supplier_doc_number, -hel.vatinfo_tax_amount as tax_amount, -hel.vatinfo_base_amount as base_amount
+from hr_expense_line hel
+join hr_expense_expense he on he.id = hel.expense_id and he.state in ('done','paid')
+join account_move am on am.id = he.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and hel.vatinfo_tax_id = ?
+and hel.vatinfo_tax_amount > 0)
+------------------------------------------
+
+) b
+
+order by date_invoice, doc_number, supplier_doc_number
+
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error preparing statement for executing the report query : 
+
+select * from
+(
+
+select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+invoice_tax.date_invoice, invoice_tax.doc_id, invoice_tax.doc_number, invoice_tax.supplier_doc_number, invoice_tax.tax_amount, invoice_base.base_amount from
+
+----------------------
+-- TAX FROM INVOICE --
+----------------------
+(select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+date_invoice, doc_id, doc_number, supplier_doc_number, sum(tax_amount) as tax_amount
+from (
+select rc.name as company_name, rp.vat as tax,
+ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, ai.id as doc_id, partner.vat, partner.branch,
+ai.number as doc_number, ai.supplier_invoice_number as supplier_doc_number, ai.date_invoice, (aml.credit - aml.debit) as tax_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+-- Header Info
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+-- Line Info
+join res_partner partner on partner.id = ai.partner_id
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- Only non-suspend account_id
+	and (aml.account_id in (select account_collected_id from account_tax tax where tax.tax_code_id = ?)
+	or aml.account_id in (select account_paid_id from account_tax tax where tax.ref_tax_code_id = ?))
+) a
+group by company_name, tax, period, fiscalyear, partner_name, vat, branch, date_invoice, doc_id, doc_number, supplier_doc_number) invoice_tax
+-------------------------
+
+join
+
+-----------------------
+-- BASE FROM INVOICE --
+-----------------------
+(select date_invoice, doc_id, doc_number, supplier_doc_number, sum(base_amount) as base_amount
+from (
+select  ai.id as doc_id, ai.number as doc_number, ai.date_invoice, ai.supplier_invoice_number as supplier_doc_number, (aml.credit - aml.debit) as base_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- For Base Amount, require deduction of Additional Discount, Advance Amount, Deposit Amount
+or aml.name in ('Additional Discount', 'Advance Amount', 'Deposit Amount')
+order by doc_number
+) a
+group by date_invoice, doc_id, doc_number, supplier_doc_number) invoice_base
+--------------------------------
+
+on invoice_tax.doc_id = invoice_base.doc_id
+
+
+----------------------------------
+-- union Payment Tax -----
+----------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, partner.vat, partner.branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number,
+CASE WHEN av.type in ('sale','receipt') THEN avt.tax_amount ELSE -avt.tax_amount END as tax_amount,
+CASE WHEN av.type in ('sale','receipt') THEN avt.base_amount ELSE -avt.base_amount END as tax_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('posted')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+
+------------------------------------
+-- union Cancelled Payment Tax -----
+------------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('cancel')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+----------------------------------------
+-- union Cancelled Invoice (Sales) -----
+----------------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+ai.date_invoice, ai.id as doc_id, ai.internal_number as doc_number, null as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_invoice ai
+join res_company rc on rc.id = ai.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = ai.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = ai.partner_id
+-- only invoice with lines that has the tax_id selected
+and ai.id in (select distinct ai.id from account_invoice ai
+join account_invoice_line ail on ail.invoice_id = ai.id
+join account_invoice_line_tax ailt on ailt.invoice_line_id = ail.id
+where ai.company_id = ? and ai.period_id = ? and ailt.tax_id = ?
+and ai.state = 'cancel' and ai.type in ('out_invoice', 'out_refund') and ai.internal_number is not null))
+
+
+------------------------------------------
+
+----------------------------------
+-- union VAT INFO (Purchase) -----
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+ail.vatinfo_supplier_name as partner_name, ail.vatinfo_tin as vat, ail.vatinfo_branch as branch,
+ail.vatinfo_date as date_invoice, ai.id as doc_id, null as doc_number, ail.vatinfo_number as supplier_doc_number, -ail.vatinfo_tax_amount as tax_amount, -ail.vatinfo_base_amount as base_amount
+from account_invoice_line ail
+join account_invoice ai on ai.id = ail.invoice_id and ai.state in ('open','paid') -- For purhcase, we don't need cancel state
+join account_move am on am.id = ai.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and ail.vatinfo_tax_id = ?
+and ail.vatinfo_tax_amount > 0)
+------------------------------------------
+
+----------------------------------
+-- union HR EXPENSE (Purchase) ---
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+hel.vatinfo_supplier_name as partner_name, hel.vatinfo_tin as vat, hel.vatinfo_branch as branch,
+hel.vatinfo_date as date_invoice, he.id as doc_id, null as doc_number, hel.vatinfo_number as supplier_doc_number, -hel.vatinfo_tax_amount as tax_amount, -hel.vatinfo_base_amount as base_amount
+from hr_expense_line hel
+join hr_expense_expense he on he.id = hel.expense_id and he.state in ('done','paid')
+join account_move am on am.id = he.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and hel.vatinfo_tax_id = ?
+and hel.vatinfo_tax_amount > 0)
+------------------------------------------
+
+) b
+
+order by date_invoice, doc_number, supplier_doc_number
+
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error preparing statement for executing the report query : 
+
+select * from
+(
+
+select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+invoice_tax.date_invoice, invoice_tax.doc_id, invoice_tax.doc_number, invoice_tax.supplier_doc_number, invoice_tax.tax_amount, invoice_base.base_amount from
+
+----------------------
+-- TAX FROM INVOICE --
+----------------------
+(select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+date_invoice, doc_id, doc_number, supplier_doc_number, sum(tax_amount) as tax_amount
+from (
+select rc.name as company_name, rp.vat as tax,
+ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, ai.id as doc_id, partner.vat, partner.branch,
+ai.number as doc_number, ai.supplier_invoice_number as supplier_doc_number, ai.date_invoice, (aml.credit - aml.debit) as tax_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+-- Header Info
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+-- Line Info
+join res_partner partner on partner.id = ai.partner_id
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- Only non-suspend account_id
+	and (aml.account_id in (select account_collected_id from account_tax tax where tax.tax_code_id = ?)
+	or aml.account_id in (select account_paid_id from account_tax tax where tax.ref_tax_code_id = ?))
+) a
+group by company_name, tax, period, fiscalyear, partner_name, vat, branch, date_invoice, doc_id, doc_number, supplier_doc_number) invoice_tax
+-------------------------
+
+join
+
+-----------------------
+-- BASE FROM INVOICE --
+-----------------------
+(select date_invoice, doc_id, doc_number, supplier_doc_number, sum(base_amount) as base_amount
+from (
+select  ai.id as doc_id, ai.number as doc_number, ai.date_invoice, ai.supplier_invoice_number as supplier_doc_number, (aml.credit - aml.debit) as base_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- For Base Amount, require deduction of Additional Discount, Advance Amount, Deposit Amount
+or aml.name in ('Additional Discount', 'Advance Amount', 'Deposit Amount')
+order by doc_number
+) a
+group by date_invoice, doc_id, doc_number, supplier_doc_number) invoice_base
+--------------------------------
+
+on invoice_tax.doc_id = invoice_base.doc_id
+
+
+----------------------------------
+-- union Payment Tax -----
+----------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, partner.vat, partner.branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number,
+CASE WHEN av.type in ('sale','receipt') THEN avt.tax_amount ELSE -avt.tax_amount END as tax_amount,
+CASE WHEN av.type in ('sale','receipt') THEN avt.base_amount ELSE -avt.base_amount END as tax_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('posted')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+
+------------------------------------
+-- union Cancelled Payment Tax -----
+------------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('cancel')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+----------------------------------------
+-- union Cancelled Invoice (Sales) -----
+----------------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+ai.date_invoice, ai.id as doc_id, ai.internal_number as doc_number, null as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_invoice ai
+join res_company rc on rc.id = ai.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = ai.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = ai.partner_id
+-- only invoice with lines that has the tax_id selected
+and ai.id in (select distinct ai.id from account_invoice ai
+join account_invoice_line ail on ail.invoice_id = ai.id
+join account_invoice_line_tax ailt on ailt.invoice_line_id = ail.id
+where ai.company_id = ? and ai.period_id = ? and ailt.tax_id = ?
+and ai.state = 'cancel' and ai.type in ('out_invoice', 'out_refund') and ai.internal_number is not null))
+
+
+------------------------------------------
+
+----------------------------------
+-- union VAT INFO (Purchase) -----
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+ail.vatinfo_supplier_name as partner_name, ail.vatinfo_tin as vat, ail.vatinfo_branch as branch,
+ail.vatinfo_date as date_invoice, ai.id as doc_id, null as doc_number, ail.vatinfo_number as supplier_doc_number, -ail.vatinfo_tax_amount as tax_amount, -ail.vatinfo_base_amount as base_amount
+from account_invoice_line ail
+join account_invoice ai on ai.id = ail.invoice_id and ai.state in ('open','paid') -- For purhcase, we don't need cancel state
+join account_move am on am.id = ai.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and ail.vatinfo_tax_id = ?
+and ail.vatinfo_tax_amount > 0)
+------------------------------------------
+
+----------------------------------
+-- union HR EXPENSE (Purchase) ---
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+hel.vatinfo_supplier_name as partner_name, hel.vatinfo_tin as vat, hel.vatinfo_branch as branch,
+hel.vatinfo_date as date_invoice, he.id as doc_id, null as doc_number, hel.vatinfo_number as supplier_doc_number, -hel.vatinfo_tax_amount as tax_amount, -hel.vatinfo_base_amount as base_amount
+from hr_expense_line hel
+join hr_expense_expense he on he.id = hel.expense_id and he.state in ('done','paid')
+join account_move am on am.id = he.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and hel.vatinfo_tax_id = ?
+and hel.vatinfo_tax_amount > 0)
+------------------------------------------
+
+) b
+
+order by date_invoice, doc_number, supplier_doc_number
+
+
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:266)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:157)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: The column index is out of range: 22, number of columns: 21.
+	at org.postgresql.core.v3.SimpleParameterList.bind(SimpleParameterList.java:53)
+	at org.postgresql.core.v3.SimpleParameterList.setLiteralParameter(SimpleParameterList.java:114)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.bindLiteral(AbstractJdbc2Statement.java:2143)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.setInt(AbstractJdbc2Statement.java:1186)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:407)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:283)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:258)
+	... 21 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error preparing statement for executing the report query : 
+
+select * from
+(
+
+select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+invoice_tax.date_invoice, invoice_tax.doc_id, invoice_tax.doc_number, invoice_tax.supplier_doc_number, invoice_tax.tax_amount, invoice_base.base_amount from
+
+----------------------
+-- TAX FROM INVOICE --
+----------------------
+(select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+date_invoice, doc_id, doc_number, supplier_doc_number, sum(tax_amount) as tax_amount
+from (
+select rc.name as company_name, rp.vat as tax,
+ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, ai.id as doc_id, partner.vat, partner.branch,
+ai.number as doc_number, ai.supplier_invoice_number as supplier_doc_number, ai.date_invoice, (aml.credit - aml.debit) as tax_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+-- Header Info
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+-- Line Info
+join res_partner partner on partner.id = ai.partner_id
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- Only non-suspend account_id
+	and (aml.account_id in (select account_collected_id from account_tax tax where tax.tax_code_id = ?)
+	or aml.account_id in (select account_paid_id from account_tax tax where tax.ref_tax_code_id = ?))
+) a
+group by company_name, tax, period, fiscalyear, partner_name, vat, branch, date_invoice, doc_id, doc_number, supplier_doc_number) invoice_tax
+-------------------------
+
+join
+
+-----------------------
+-- BASE FROM INVOICE --
+-----------------------
+(select date_invoice, doc_id, doc_number, supplier_doc_number, sum(base_amount) as base_amount
+from (
+select  ai.id as doc_id, ai.number as doc_number, ai.date_invoice, ai.supplier_invoice_number as supplier_doc_number, (aml.credit - aml.debit) as base_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- For Base Amount, require deduction of Additional Discount, Advance Amount, Deposit Amount
+or aml.name in ('Additional Discount', 'Advance Amount', 'Deposit Amount')
+order by doc_number
+) a
+group by date_invoice, doc_id, doc_number, supplier_doc_number) invoice_base
+--------------------------------
+
+on invoice_tax.doc_id = invoice_base.doc_id
+
+
+----------------------------------
+-- union Payment Tax -----
+----------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, partner.vat, partner.branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number,
+CASE WHEN av.type in ('sale','receipt') THEN avt.tax_amount ELSE -avt.tax_amount END as tax_amount,
+CASE WHEN av.type in ('sale','receipt') THEN avt.base_amount ELSE -avt.base_amount END as tax_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('posted')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+
+------------------------------------
+-- union Cancelled Payment Tax -----
+------------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('cancel')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+----------------------------------------
+-- union Cancelled Invoice (Sales) -----
+----------------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+ai.date_invoice, ai.id as doc_id, ai.internal_number as doc_number, null as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_invoice ai
+join res_company rc on rc.id = ai.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = ai.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = ai.partner_id
+-- only invoice with lines that has the tax_id selected
+and ai.id in (select distinct ai.id from account_invoice ai
+join account_invoice_line ail on ail.invoice_id = ai.id
+join account_invoice_line_tax ailt on ailt.invoice_line_id = ail.id
+where ai.company_id = ? and ai.period_id = ? and ailt.tax_id = ?
+and ai.state = 'cancel' and ai.type in ('out_invoice', 'out_refund') and ai.internal_number is not null))
+
+
+------------------------------------------
+
+----------------------------------
+-- union VAT INFO (Purchase) -----
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+ail.vatinfo_supplier_name as partner_name, ail.vatinfo_tin as vat, ail.vatinfo_branch as branch,
+ail.vatinfo_date as date_invoice, ai.id as doc_id, null as doc_number, ail.vatinfo_number as supplier_doc_number, -ail.vatinfo_tax_amount as tax_amount, -ail.vatinfo_base_amount as base_amount
+from account_invoice_line ail
+join account_invoice ai on ai.id = ail.invoice_id and ai.state in ('open','paid') -- For purhcase, we don't need cancel state
+join account_move am on am.id = ai.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and ail.vatinfo_tax_id = ?
+and ail.vatinfo_tax_amount > 0)
+------------------------------------------
+
+----------------------------------
+-- union HR EXPENSE (Purchase) ---
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+hel.vatinfo_supplier_name as partner_name, hel.vatinfo_tin as vat, hel.vatinfo_branch as branch,
+hel.vatinfo_date as date_invoice, he.id as doc_id, null as doc_number, hel.vatinfo_number as supplier_doc_number, -hel.vatinfo_tax_amount as tax_amount, -hel.vatinfo_base_amount as base_amount
+from hr_expense_line hel
+join hr_expense_expense he on he.id = hel.expense_id and he.state in ('done','paid')
+join account_move am on am.id = he.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and hel.vatinfo_tax_id = ?
+and hel.vatinfo_tax_amount > 0)
+------------------------------------------
+
+) b
+
+order by date_invoice, doc_number, supplier_doc_number
+
+
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:266)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:157)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: The column index is out of range: 22, number of columns: 21.
+	at org.postgresql.core.v3.SimpleParameterList.bind(SimpleParameterList.java:53)
+	at org.postgresql.core.v3.SimpleParameterList.setLiteralParameter(SimpleParameterList.java:114)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.bindLiteral(AbstractJdbc2Statement.java:2143)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.setInt(AbstractJdbc2Statement.java:1186)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:407)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:283)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:258)
+	... 21 more
+10689 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error preparing statement for executing the report query : 
+
+select * from
+(
+
+select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+invoice_tax.date_invoice, invoice_tax.doc_id, invoice_tax.doc_number, invoice_tax.supplier_doc_number, invoice_tax.tax_amount, invoice_base.base_amount from
+
+----------------------
+-- TAX FROM INVOICE --
+----------------------
+(select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+date_invoice, doc_id, doc_number, supplier_doc_number, sum(tax_amount) as tax_amount
+from (
+select rc.name as company_name, rp.vat as tax,
+ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, ai.id as doc_id, partner.vat, partner.branch,
+ai.number as doc_number, ai.supplier_invoice_number as supplier_doc_number, ai.date_invoice, (aml.credit - aml.debit) as tax_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+-- Header Info
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+-- Line Info
+join res_partner partner on partner.id = ai.partner_id
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- Only non-suspend account_id
+	and (aml.account_id in (select account_collected_id from account_tax tax where tax.tax_code_id = ?)
+	or aml.account_id in (select account_paid_id from account_tax tax where tax.ref_tax_code_id = ?))
+) a
+group by company_name, tax, period, fiscalyear, partner_name, vat, branch, date_invoice, doc_id, doc_number, supplier_doc_number) invoice_tax
+-------------------------
+
+join
+
+-----------------------
+-- BASE FROM INVOICE --
+-----------------------
+(select date_invoice, doc_id, doc_number, supplier_doc_number, sum(base_amount) as base_amount
+from (
+select  ai.id as doc_id, ai.number as doc_number, ai.date_invoice, ai.supplier_invoice_number as supplier_doc_number, (aml.credit - aml.debit) as base_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- For Base Amount, require deduction of Additional Discount, Advance Amount, Deposit Amount
+or aml.name in ('Additional Discount', 'Advance Amount', 'Deposit Amount')
+order by doc_number
+) a
+group by date_invoice, doc_id, doc_number, supplier_doc_number) invoice_base
+--------------------------------
+
+on invoice_tax.doc_id = invoice_base.doc_id
+
+
+----------------------------------
+-- union Payment Tax -----
+----------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, partner.vat, partner.branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number,
+CASE WHEN av.type in ('sale','receipt') THEN avt.tax_amount ELSE -avt.tax_amount END as tax_amount,
+CASE WHEN av.type in ('sale','receipt') THEN avt.base_amount ELSE -avt.base_amount END as tax_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('posted')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+
+------------------------------------
+-- union Cancelled Payment Tax -----
+------------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('cancel')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+----------------------------------------
+-- union Cancelled Invoice (Sales) -----
+----------------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+ai.date_invoice, ai.id as doc_id, ai.internal_number as doc_number, null as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_invoice ai
+join res_company rc on rc.id = ai.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = ai.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = ai.partner_id
+-- only invoice with lines that has the tax_id selected
+and ai.id in (select distinct ai.id from account_invoice ai
+join account_invoice_line ail on ail.invoice_id = ai.id
+join account_invoice_line_tax ailt on ailt.invoice_line_id = ail.id
+where ai.company_id = ? and ai.period_id = ? and ailt.tax_id = ?
+and ai.state = 'cancel' and ai.type in ('out_invoice', 'out_refund') and ai.internal_number is not null))
+
+
+------------------------------------------
+
+----------------------------------
+-- union VAT INFO (Purchase) -----
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+ail.vatinfo_supplier_name as partner_name, ail.vatinfo_tin as vat, ail.vatinfo_branch as branch,
+ail.vatinfo_date as date_invoice, ai.id as doc_id, null as doc_number, ail.vatinfo_number as supplier_doc_number, -ail.vatinfo_tax_amount as tax_amount, -ail.vatinfo_base_amount as base_amount
+from account_invoice_line ail
+join account_invoice ai on ai.id = ail.invoice_id and ai.state in ('open','paid') -- For purhcase, we don't need cancel state
+join account_move am on am.id = ai.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and ail.vatinfo_tax_id = ?
+and ail.vatinfo_tax_amount > 0)
+------------------------------------------
+
+----------------------------------
+-- union HR EXPENSE (Purchase) ---
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+hel.vatinfo_supplier_name as partner_name, hel.vatinfo_tin as vat, hel.vatinfo_branch as branch,
+hel.vatinfo_date as date_invoice, he.id as doc_id, null as doc_number, hel.vatinfo_number as supplier_doc_number, -hel.vatinfo_tax_amount as tax_amount, -hel.vatinfo_base_amount as base_amount
+from hr_expense_line hel
+join hr_expense_expense he on he.id = hel.expense_id and he.state in ('done','paid')
+join account_move am on am.id = he.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and hel.vatinfo_tax_id = ?
+and hel.vatinfo_tax_amount > 0)
+------------------------------------------
+
+) b
+
+order by date_invoice, doc_number, supplier_doc_number
+
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error preparing statement for executing the report query : 
+
+select * from
+(
+
+select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+invoice_tax.date_invoice, invoice_tax.doc_id, invoice_tax.doc_number, invoice_tax.supplier_doc_number, invoice_tax.tax_amount, invoice_base.base_amount from
+
+----------------------
+-- TAX FROM INVOICE --
+----------------------
+(select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+date_invoice, doc_id, doc_number, supplier_doc_number, sum(tax_amount) as tax_amount
+from (
+select rc.name as company_name, rp.vat as tax,
+ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, ai.id as doc_id, partner.vat, partner.branch,
+ai.number as doc_number, ai.supplier_invoice_number as supplier_doc_number, ai.date_invoice, (aml.credit - aml.debit) as tax_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+-- Header Info
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+-- Line Info
+join res_partner partner on partner.id = ai.partner_id
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- Only non-suspend account_id
+	and (aml.account_id in (select account_collected_id from account_tax tax where tax.tax_code_id = ?)
+	or aml.account_id in (select account_paid_id from account_tax tax where tax.ref_tax_code_id = ?))
+) a
+group by company_name, tax, period, fiscalyear, partner_name, vat, branch, date_invoice, doc_id, doc_number, supplier_doc_number) invoice_tax
+-------------------------
+
+join
+
+-----------------------
+-- BASE FROM INVOICE --
+-----------------------
+(select date_invoice, doc_id, doc_number, supplier_doc_number, sum(base_amount) as base_amount
+from (
+select  ai.id as doc_id, ai.number as doc_number, ai.date_invoice, ai.supplier_invoice_number as supplier_doc_number, (aml.credit - aml.debit) as base_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- For Base Amount, require deduction of Additional Discount, Advance Amount, Deposit Amount
+or aml.name in ('Additional Discount', 'Advance Amount', 'Deposit Amount')
+order by doc_number
+) a
+group by date_invoice, doc_id, doc_number, supplier_doc_number) invoice_base
+--------------------------------
+
+on invoice_tax.doc_id = invoice_base.doc_id
+
+
+----------------------------------
+-- union Payment Tax -----
+----------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, partner.vat, partner.branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number,
+CASE WHEN av.type in ('sale','receipt') THEN avt.tax_amount ELSE -avt.tax_amount END as tax_amount,
+CASE WHEN av.type in ('sale','receipt') THEN avt.base_amount ELSE -avt.base_amount END as tax_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('posted')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+
+------------------------------------
+-- union Cancelled Payment Tax -----
+------------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('cancel')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+----------------------------------------
+-- union Cancelled Invoice (Sales) -----
+----------------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+ai.date_invoice, ai.id as doc_id, ai.internal_number as doc_number, null as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_invoice ai
+join res_company rc on rc.id = ai.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = ai.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = ai.partner_id
+-- only invoice with lines that has the tax_id selected
+and ai.id in (select distinct ai.id from account_invoice ai
+join account_invoice_line ail on ail.invoice_id = ai.id
+join account_invoice_line_tax ailt on ailt.invoice_line_id = ail.id
+where ai.company_id = ? and ai.period_id = ? and ailt.tax_id = ?
+and ai.state = 'cancel' and ai.type in ('out_invoice', 'out_refund') and ai.internal_number is not null))
+
+
+------------------------------------------
+
+----------------------------------
+-- union VAT INFO (Purchase) -----
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+ail.vatinfo_supplier_name as partner_name, ail.vatinfo_tin as vat, ail.vatinfo_branch as branch,
+ail.vatinfo_date as date_invoice, ai.id as doc_id, null as doc_number, ail.vatinfo_number as supplier_doc_number, -ail.vatinfo_tax_amount as tax_amount, -ail.vatinfo_base_amount as base_amount
+from account_invoice_line ail
+join account_invoice ai on ai.id = ail.invoice_id and ai.state in ('open','paid') -- For purhcase, we don't need cancel state
+join account_move am on am.id = ai.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and ail.vatinfo_tax_id = ?
+and ail.vatinfo_tax_amount > 0)
+------------------------------------------
+
+----------------------------------
+-- union HR EXPENSE (Purchase) ---
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+hel.vatinfo_supplier_name as partner_name, hel.vatinfo_tin as vat, hel.vatinfo_branch as branch,
+hel.vatinfo_date as date_invoice, he.id as doc_id, null as doc_number, hel.vatinfo_number as supplier_doc_number, -hel.vatinfo_tax_amount as tax_amount, -hel.vatinfo_base_amount as base_amount
+from hr_expense_line hel
+join hr_expense_expense he on he.id = hel.expense_id and he.state in ('done','paid')
+join account_move am on am.id = he.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and hel.vatinfo_tax_id = ?
+and hel.vatinfo_tax_amount > 0)
+------------------------------------------
+
+) b
+
+order by date_invoice, doc_number, supplier_doc_number
+
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error preparing statement for executing the report query : 
+
+select * from
+(
+
+select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+invoice_tax.date_invoice, invoice_tax.doc_id, invoice_tax.doc_number, invoice_tax.supplier_doc_number, invoice_tax.tax_amount, invoice_base.base_amount from
+
+----------------------
+-- TAX FROM INVOICE --
+----------------------
+(select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+date_invoice, doc_id, doc_number, supplier_doc_number, sum(tax_amount) as tax_amount
+from (
+select rc.name as company_name, rp.vat as tax,
+ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, ai.id as doc_id, partner.vat, partner.branch,
+ai.number as doc_number, ai.supplier_invoice_number as supplier_doc_number, ai.date_invoice, (aml.credit - aml.debit) as tax_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+-- Header Info
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+-- Line Info
+join res_partner partner on partner.id = ai.partner_id
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- Only non-suspend account_id
+	and (aml.account_id in (select account_collected_id from account_tax tax where tax.tax_code_id = ?)
+	or aml.account_id in (select account_paid_id from account_tax tax where tax.ref_tax_code_id = ?))
+) a
+group by company_name, tax, period, fiscalyear, partner_name, vat, branch, date_invoice, doc_id, doc_number, supplier_doc_number) invoice_tax
+-------------------------
+
+join
+
+-----------------------
+-- BASE FROM INVOICE --
+-----------------------
+(select date_invoice, doc_id, doc_number, supplier_doc_number, sum(base_amount) as base_amount
+from (
+select  ai.id as doc_id, ai.number as doc_number, ai.date_invoice, ai.supplier_invoice_number as supplier_doc_number, (aml.credit - aml.debit) as base_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- For Base Amount, require deduction of Additional Discount, Advance Amount, Deposit Amount
+or aml.name in ('Additional Discount', 'Advance Amount', 'Deposit Amount')
+order by doc_number
+) a
+group by date_invoice, doc_id, doc_number, supplier_doc_number) invoice_base
+--------------------------------
+
+on invoice_tax.doc_id = invoice_base.doc_id
+
+
+----------------------------------
+-- union Payment Tax -----
+----------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, partner.vat, partner.branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number,
+CASE WHEN av.type in ('sale','receipt') THEN avt.tax_amount ELSE -avt.tax_amount END as tax_amount,
+CASE WHEN av.type in ('sale','receipt') THEN avt.base_amount ELSE -avt.base_amount END as tax_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('posted')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+
+------------------------------------
+-- union Cancelled Payment Tax -----
+------------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('cancel')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+----------------------------------------
+-- union Cancelled Invoice (Sales) -----
+----------------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+ai.date_invoice, ai.id as doc_id, ai.internal_number as doc_number, null as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_invoice ai
+join res_company rc on rc.id = ai.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = ai.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = ai.partner_id
+-- only invoice with lines that has the tax_id selected
+and ai.id in (select distinct ai.id from account_invoice ai
+join account_invoice_line ail on ail.invoice_id = ai.id
+join account_invoice_line_tax ailt on ailt.invoice_line_id = ail.id
+where ai.company_id = ? and ai.period_id = ? and ailt.tax_id = ?
+and ai.state = 'cancel' and ai.type in ('out_invoice', 'out_refund') and ai.internal_number is not null))
+
+
+------------------------------------------
+
+----------------------------------
+-- union VAT INFO (Purchase) -----
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+ail.vatinfo_supplier_name as partner_name, ail.vatinfo_tin as vat, ail.vatinfo_branch as branch,
+ail.vatinfo_date as date_invoice, ai.id as doc_id, null as doc_number, ail.vatinfo_number as supplier_doc_number, -ail.vatinfo_tax_amount as tax_amount, -ail.vatinfo_base_amount as base_amount
+from account_invoice_line ail
+join account_invoice ai on ai.id = ail.invoice_id and ai.state in ('open','paid') -- For purhcase, we don't need cancel state
+join account_move am on am.id = ai.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and ail.vatinfo_tax_id = ?
+and ail.vatinfo_tax_amount > 0)
+------------------------------------------
+
+----------------------------------
+-- union HR EXPENSE (Purchase) ---
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+hel.vatinfo_supplier_name as partner_name, hel.vatinfo_tin as vat, hel.vatinfo_branch as branch,
+hel.vatinfo_date as date_invoice, he.id as doc_id, null as doc_number, hel.vatinfo_number as supplier_doc_number, -hel.vatinfo_tax_amount as tax_amount, -hel.vatinfo_base_amount as base_amount
+from hr_expense_line hel
+join hr_expense_expense he on he.id = hel.expense_id and he.state in ('done','paid')
+join account_move am on am.id = he.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and hel.vatinfo_tax_id = ?
+and hel.vatinfo_tax_amount > 0)
+------------------------------------------
+
+) b
+
+order by date_invoice, doc_number, supplier_doc_number
+
+
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:266)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:157)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: The column index is out of range: 22, number of columns: 21.
+	at org.postgresql.core.v3.SimpleParameterList.bind(SimpleParameterList.java:53)
+	at org.postgresql.core.v3.SimpleParameterList.setLiteralParameter(SimpleParameterList.java:114)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.bindLiteral(AbstractJdbc2Statement.java:2143)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.setInt(AbstractJdbc2Statement.java:1186)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:407)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:283)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:258)
+	... 21 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error preparing statement for executing the report query : 
+
+select * from
+(
+
+select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+invoice_tax.date_invoice, invoice_tax.doc_id, invoice_tax.doc_number, invoice_tax.supplier_doc_number, invoice_tax.tax_amount, invoice_base.base_amount from
+
+----------------------
+-- TAX FROM INVOICE --
+----------------------
+(select company_name, tax, period, fiscalyear, partner_name, vat, branch,
+date_invoice, doc_id, doc_number, supplier_doc_number, sum(tax_amount) as tax_amount
+from (
+select rc.name as company_name, rp.vat as tax,
+ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, ai.id as doc_id, partner.vat, partner.branch,
+ai.number as doc_number, ai.supplier_invoice_number as supplier_doc_number, ai.date_invoice, (aml.credit - aml.debit) as tax_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+-- Header Info
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+-- Line Info
+join res_partner partner on partner.id = ai.partner_id
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- Only non-suspend account_id
+	and (aml.account_id in (select account_collected_id from account_tax tax where tax.tax_code_id = ?)
+	or aml.account_id in (select account_paid_id from account_tax tax where tax.ref_tax_code_id = ?))
+) a
+group by company_name, tax, period, fiscalyear, partner_name, vat, branch, date_invoice, doc_id, doc_number, supplier_doc_number) invoice_tax
+-------------------------
+
+join
+
+-----------------------
+-- BASE FROM INVOICE --
+-----------------------
+(select date_invoice, doc_id, doc_number, supplier_doc_number, sum(base_amount) as base_amount
+from (
+select  ai.id as doc_id, ai.number as doc_number, ai.date_invoice, ai.supplier_invoice_number as supplier_doc_number, (aml.credit - aml.debit) as base_amount
+-- Main Tables
+from account_move am join account_move_line aml on am.id = aml.move_id
+join account_invoice ai on ai.move_id = am.id and ai.state in ('open','paid')
+
+-- All Tax from Account Invoice
+where am.company_id = ? and am.period_id = ? and aml.tax_code_id = ?
+-- For Base Amount, require deduction of Additional Discount, Advance Amount, Deposit Amount
+or aml.name in ('Additional Discount', 'Advance Amount', 'Deposit Amount')
+order by doc_number
+) a
+group by date_invoice, doc_id, doc_number, supplier_doc_number) invoice_base
+--------------------------------
+
+on invoice_tax.doc_id = invoice_base.doc_id
+
+
+----------------------------------
+-- union Payment Tax -----
+----------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+partner.name as partner_name, partner.vat, partner.branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number,
+CASE WHEN av.type in ('sale','receipt') THEN avt.tax_amount ELSE -avt.tax_amount END as tax_amount,
+CASE WHEN av.type in ('sale','receipt') THEN avt.base_amount ELSE -avt.base_amount END as tax_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('posted')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+
+------------------------------------
+-- union Cancelled Payment Tax -----
+------------------------------------
+union
+(
+select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+av.date as date_invoice, av.id as doc_id, av.number as doc_number, reference as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_voucher_taxinv avt
+join account_voucher av on av.id = avt.voucher_id and av.state in ('cancel')
+join res_company rc on rc.id = av.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = av.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = av.partner_id
+where av.company_id = ? and av.period_id = ? --and avt.tax_id = ?
+-- Only suspend tax
+	and avt.tax_id in (select id from account_tax where is_suspend_tax = true)
+and av.is_taxinv_publish = true and avt.tax_amount > 0)
+----------------------------------------
+-- union Cancelled Invoice (Sales) -----
+----------------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+'CANCELLED' as partner_name, '-' as vat, '-' as branch,
+ai.date_invoice, ai.id as doc_id, ai.internal_number as doc_number, null as supplier_doc_number, 0.0 as tax_amount, 0.0 as base_amount
+from account_invoice ai
+join res_company rc on rc.id = ai.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = ai.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+join res_partner partner on partner.id = ai.partner_id
+-- only invoice with lines that has the tax_id selected
+and ai.id in (select distinct ai.id from account_invoice ai
+join account_invoice_line ail on ail.invoice_id = ai.id
+join account_invoice_line_tax ailt on ailt.invoice_line_id = ail.id
+where ai.company_id = ? and ai.period_id = ? and ailt.tax_id = ?
+and ai.state = 'cancel' and ai.type in ('out_invoice', 'out_refund') and ai.internal_number is not null))
+
+
+------------------------------------------
+
+----------------------------------
+-- union VAT INFO (Purchase) -----
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+ail.vatinfo_supplier_name as partner_name, ail.vatinfo_tin as vat, ail.vatinfo_branch as branch,
+ail.vatinfo_date as date_invoice, ai.id as doc_id, null as doc_number, ail.vatinfo_number as supplier_doc_number, -ail.vatinfo_tax_amount as tax_amount, -ail.vatinfo_base_amount as base_amount
+from account_invoice_line ail
+join account_invoice ai on ai.id = ail.invoice_id and ai.state in ('open','paid') -- For purhcase, we don't need cancel state
+join account_move am on am.id = ai.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and ail.vatinfo_tax_id = ?
+and ail.vatinfo_tax_amount > 0)
+------------------------------------------
+
+----------------------------------
+-- union HR EXPENSE (Purchase) ---
+----------------------------------
+union
+(select rc.name as company_name, rp.vat as tax, ap.name as period, af.name as fiscalyear,
+hel.vatinfo_supplier_name as partner_name, hel.vatinfo_tin as vat, hel.vatinfo_branch as branch,
+hel.vatinfo_date as date_invoice, he.id as doc_id, null as doc_number, hel.vatinfo_number as supplier_doc_number, -hel.vatinfo_tax_amount as tax_amount, -hel.vatinfo_base_amount as base_amount
+from hr_expense_line hel
+join hr_expense_expense he on he.id = hel.expense_id and he.state in ('done','paid')
+join account_move am on am.id = he.vatinfo_move_id
+join res_company rc on rc.id = am.company_id
+join res_partner rp on rp.id = rc.partner_id
+join account_period ap on ap.id = am.period_id
+join account_fiscalyear af on af.id = ap.fiscalyear_id
+where am.company_id = ? and am.period_id = ? and hel.vatinfo_tax_id = ?
+and hel.vatinfo_tax_amount > 0)
+------------------------------------------
+
+) b
+
+order by date_invoice, doc_number, supplier_doc_number
+
+
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:266)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:157)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: The column index is out of range: 22, number of columns: 21.
+	at org.postgresql.core.v3.SimpleParameterList.bind(SimpleParameterList.java:53)
+	at org.postgresql.core.v3.SimpleParameterList.setLiteralParameter(SimpleParameterList.java:114)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.bindLiteral(AbstractJdbc2Statement.java:2143)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.setInt(AbstractJdbc2Statement.java:1186)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:407)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:283)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:258)
+	... 21 more

@@ -1,0 +1,2348 @@
+1    [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date >= character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date >= character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+53921 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error preparing statement for executing the report query : 
+
+select pw.date_order, pw.name pawn_number, rp.name cust_name,
+	rp.address_full cust_address, pwl.name item_desc, pwl.product_qty qty,
+	uom.name uom_name, pwl.carat, pwl.gram, plp.other_property,
+	floor(pp.price_pawned) baht, floor(pp.price_pawned % 1*100) satang
+from pawn_order pw
+	join pawn_order_line pwl on pwl.order_id = pw.id
+	join product_product pp on pp.order_line_id = pwl.id
+	join product_uom uom on uom.id = pwl.product_uom
+	join res_partner rp on rp.id = pw.partner_id
+	left outer join pawn_order_line_properties plp on plp.order_line_id = pwl.id
+where date_expired
+--between ? and ?
+	pawn_shop_id = ?
+	and rule_id = ?
+
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error preparing statement for executing the report query : 
+
+select pw.date_order, pw.name pawn_number, rp.name cust_name,
+	rp.address_full cust_address, pwl.name item_desc, pwl.product_qty qty,
+	uom.name uom_name, pwl.carat, pwl.gram, plp.other_property,
+	floor(pp.price_pawned) baht, floor(pp.price_pawned % 1*100) satang
+from pawn_order pw
+	join pawn_order_line pwl on pwl.order_id = pw.id
+	join product_product pp on pp.order_line_id = pwl.id
+	join product_uom uom on uom.id = pwl.product_uom
+	join res_partner rp on rp.id = pw.partner_id
+	left outer join pawn_order_line_properties plp on plp.order_line_id = pwl.id
+where date_expired
+--between ? and ?
+	pawn_shop_id = ?
+	and rule_id = ?
+
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error preparing statement for executing the report query : 
+
+select pw.date_order, pw.name pawn_number, rp.name cust_name,
+	rp.address_full cust_address, pwl.name item_desc, pwl.product_qty qty,
+	uom.name uom_name, pwl.carat, pwl.gram, plp.other_property,
+	floor(pp.price_pawned) baht, floor(pp.price_pawned % 1*100) satang
+from pawn_order pw
+	join pawn_order_line pwl on pwl.order_id = pw.id
+	join product_product pp on pp.order_line_id = pwl.id
+	join product_uom uom on uom.id = pwl.product_uom
+	join res_partner rp on rp.id = pw.partner_id
+	left outer join pawn_order_line_properties plp on plp.order_line_id = pwl.id
+where date_expired
+--between ? and ?
+	pawn_shop_id = ?
+	and rule_id = ?
+
+
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:266)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:157)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: The column index is out of range: 3, number of columns: 2.
+	at org.postgresql.core.v3.SimpleParameterList.bind(SimpleParameterList.java:53)
+	at org.postgresql.core.v3.SimpleParameterList.setLiteralParameter(SimpleParameterList.java:114)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.bindLiteral(AbstractJdbc2Statement.java:2143)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.setInt(AbstractJdbc2Statement.java:1186)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:407)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:283)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:258)
+	... 21 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error preparing statement for executing the report query : 
+
+select pw.date_order, pw.name pawn_number, rp.name cust_name,
+	rp.address_full cust_address, pwl.name item_desc, pwl.product_qty qty,
+	uom.name uom_name, pwl.carat, pwl.gram, plp.other_property,
+	floor(pp.price_pawned) baht, floor(pp.price_pawned % 1*100) satang
+from pawn_order pw
+	join pawn_order_line pwl on pwl.order_id = pw.id
+	join product_product pp on pp.order_line_id = pwl.id
+	join product_uom uom on uom.id = pwl.product_uom
+	join res_partner rp on rp.id = pw.partner_id
+	left outer join pawn_order_line_properties plp on plp.order_line_id = pwl.id
+where date_expired
+--between ? and ?
+	pawn_shop_id = ?
+	and rule_id = ?
+
+
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:266)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:157)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: The column index is out of range: 3, number of columns: 2.
+	at org.postgresql.core.v3.SimpleParameterList.bind(SimpleParameterList.java:53)
+	at org.postgresql.core.v3.SimpleParameterList.setLiteralParameter(SimpleParameterList.java:114)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.bindLiteral(AbstractJdbc2Statement.java:2143)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.setInt(AbstractJdbc2Statement.java:1186)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:407)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:283)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:258)
+	... 21 more
+228900 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date >= character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 581
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date >= character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 581
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+378012 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Incompatible java.lang.String value assigned to parameter report_from_date in the pawn_jor6_report dataset.
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Incompatible java.lang.String value assigned to parameter report_from_date in the pawn_jor6_report dataset.
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Incompatible java.lang.String value assigned to parameter report_from_date in the pawn_jor6_report dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Incompatible java.lang.String value assigned to parameter report_from_date in the pawn_jor6_report dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+423092 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date >= character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date >= character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+1    [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date >= character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date >= character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+1    [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date >= character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date >= character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+0    [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date >= character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date >= character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+105157 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error preparing statement for executing the report query : 
+
+select pw.date_order, pw.name pawn_number, rp.name cust_name,
+	rp.address_full cust_address, pwl.name item_desc, pwl.product_qty qty,
+	uom.name uom_name, pwl.carat, pwl.gram, plp.other_property,
+	floor(pp.price_pawned) baht, floor(pp.price_pawned % 1*100) satang
+from pawn_order pw
+	join pawn_order_line pwl on pwl.order_id = pw.id
+	join product_product pp on pp.order_line_id = pwl.id
+	join product_uom uom on uom.id = pwl.product_uom
+	join res_partner rp on rp.id = pw.partner_id
+	left outer join pawn_order_line_properties plp on plp.order_line_id = pwl.id
+--where date_expired >= ?
+	where pawn_shop_id = ?
+	and rule_id = ?
+
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error preparing statement for executing the report query : 
+
+select pw.date_order, pw.name pawn_number, rp.name cust_name,
+	rp.address_full cust_address, pwl.name item_desc, pwl.product_qty qty,
+	uom.name uom_name, pwl.carat, pwl.gram, plp.other_property,
+	floor(pp.price_pawned) baht, floor(pp.price_pawned % 1*100) satang
+from pawn_order pw
+	join pawn_order_line pwl on pwl.order_id = pw.id
+	join product_product pp on pp.order_line_id = pwl.id
+	join product_uom uom on uom.id = pwl.product_uom
+	join res_partner rp on rp.id = pw.partner_id
+	left outer join pawn_order_line_properties plp on plp.order_line_id = pwl.id
+--where date_expired >= ?
+	where pawn_shop_id = ?
+	and rule_id = ?
+
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error preparing statement for executing the report query : 
+
+select pw.date_order, pw.name pawn_number, rp.name cust_name,
+	rp.address_full cust_address, pwl.name item_desc, pwl.product_qty qty,
+	uom.name uom_name, pwl.carat, pwl.gram, plp.other_property,
+	floor(pp.price_pawned) baht, floor(pp.price_pawned % 1*100) satang
+from pawn_order pw
+	join pawn_order_line pwl on pwl.order_id = pw.id
+	join product_product pp on pp.order_line_id = pwl.id
+	join product_uom uom on uom.id = pwl.product_uom
+	join res_partner rp on rp.id = pw.partner_id
+	left outer join pawn_order_line_properties plp on plp.order_line_id = pwl.id
+--where date_expired >= ?
+	where pawn_shop_id = ?
+	and rule_id = ?
+
+
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:266)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:157)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: The column index is out of range: 3, number of columns: 2.
+	at org.postgresql.core.v3.SimpleParameterList.bind(SimpleParameterList.java:53)
+	at org.postgresql.core.v3.SimpleParameterList.setLiteralParameter(SimpleParameterList.java:114)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.bindLiteral(AbstractJdbc2Statement.java:2143)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.setInt(AbstractJdbc2Statement.java:1186)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:407)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:283)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:258)
+	... 21 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error preparing statement for executing the report query : 
+
+select pw.date_order, pw.name pawn_number, rp.name cust_name,
+	rp.address_full cust_address, pwl.name item_desc, pwl.product_qty qty,
+	uom.name uom_name, pwl.carat, pwl.gram, plp.other_property,
+	floor(pp.price_pawned) baht, floor(pp.price_pawned % 1*100) satang
+from pawn_order pw
+	join pawn_order_line pwl on pwl.order_id = pw.id
+	join product_product pp on pp.order_line_id = pwl.id
+	join product_uom uom on uom.id = pwl.product_uom
+	join res_partner rp on rp.id = pw.partner_id
+	left outer join pawn_order_line_properties plp on plp.order_line_id = pwl.id
+--where date_expired >= ?
+	where pawn_shop_id = ?
+	and rule_id = ?
+
+
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:266)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:157)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: The column index is out of range: 3, number of columns: 2.
+	at org.postgresql.core.v3.SimpleParameterList.bind(SimpleParameterList.java:53)
+	at org.postgresql.core.v3.SimpleParameterList.setLiteralParameter(SimpleParameterList.java:114)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.bindLiteral(AbstractJdbc2Statement.java:2143)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.setInt(AbstractJdbc2Statement.java:1186)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:407)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:283)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:258)
+	... 21 more
+205934 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error preparing statement for executing the report query : 
+
+select pw.date_order, pw.name pawn_number, rp.name cust_name,
+	rp.address_full cust_address, pwl.name item_desc, pwl.product_qty qty,
+	uom.name uom_name, pwl.carat, pwl.gram, plp.other_property,
+	floor(pp.price_pawned) baht, floor(pp.price_pawned % 1*100) satang
+from pawn_order pw
+	join pawn_order_line pwl on pwl.order_id = pw.id
+	join product_product pp on pp.order_line_id = pwl.id
+	join product_uom uom on uom.id = pwl.product_uom
+	join res_partner rp on rp.id = pw.partner_id
+	left outer join pawn_order_line_properties plp on plp.order_line_id = pwl.id
+where date_expired > ?
+	--where pawn_shop_id = ?
+	--and rule_id = ?
+
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error preparing statement for executing the report query : 
+
+select pw.date_order, pw.name pawn_number, rp.name cust_name,
+	rp.address_full cust_address, pwl.name item_desc, pwl.product_qty qty,
+	uom.name uom_name, pwl.carat, pwl.gram, plp.other_property,
+	floor(pp.price_pawned) baht, floor(pp.price_pawned % 1*100) satang
+from pawn_order pw
+	join pawn_order_line pwl on pwl.order_id = pw.id
+	join product_product pp on pp.order_line_id = pwl.id
+	join product_uom uom on uom.id = pwl.product_uom
+	join res_partner rp on rp.id = pw.partner_id
+	left outer join pawn_order_line_properties plp on plp.order_line_id = pwl.id
+where date_expired > ?
+	--where pawn_shop_id = ?
+	--and rule_id = ?
+
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error preparing statement for executing the report query : 
+
+select pw.date_order, pw.name pawn_number, rp.name cust_name,
+	rp.address_full cust_address, pwl.name item_desc, pwl.product_qty qty,
+	uom.name uom_name, pwl.carat, pwl.gram, plp.other_property,
+	floor(pp.price_pawned) baht, floor(pp.price_pawned % 1*100) satang
+from pawn_order pw
+	join pawn_order_line pwl on pwl.order_id = pw.id
+	join product_product pp on pp.order_line_id = pwl.id
+	join product_uom uom on uom.id = pwl.product_uom
+	join res_partner rp on rp.id = pw.partner_id
+	left outer join pawn_order_line_properties plp on plp.order_line_id = pwl.id
+where date_expired > ?
+	--where pawn_shop_id = ?
+	--and rule_id = ?
+
+
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:266)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:157)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: The column index is out of range: 2, number of columns: 1.
+	at org.postgresql.core.v3.SimpleParameterList.bind(SimpleParameterList.java:53)
+	at org.postgresql.core.v3.SimpleParameterList.setLiteralParameter(SimpleParameterList.java:114)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.bindLiteral(AbstractJdbc2Statement.java:2143)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.setInt(AbstractJdbc2Statement.java:1186)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:407)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:283)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:258)
+	... 21 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error preparing statement for executing the report query : 
+
+select pw.date_order, pw.name pawn_number, rp.name cust_name,
+	rp.address_full cust_address, pwl.name item_desc, pwl.product_qty qty,
+	uom.name uom_name, pwl.carat, pwl.gram, plp.other_property,
+	floor(pp.price_pawned) baht, floor(pp.price_pawned % 1*100) satang
+from pawn_order pw
+	join pawn_order_line pwl on pwl.order_id = pw.id
+	join product_product pp on pp.order_line_id = pwl.id
+	join product_uom uom on uom.id = pwl.product_uom
+	join res_partner rp on rp.id = pw.partner_id
+	left outer join pawn_order_line_properties plp on plp.order_line_id = pwl.id
+where date_expired > ?
+	--where pawn_shop_id = ?
+	--and rule_id = ?
+
+
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:266)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:157)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: The column index is out of range: 2, number of columns: 1.
+	at org.postgresql.core.v3.SimpleParameterList.bind(SimpleParameterList.java:53)
+	at org.postgresql.core.v3.SimpleParameterList.setLiteralParameter(SimpleParameterList.java:114)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.bindLiteral(AbstractJdbc2Statement.java:2143)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.setInt(AbstractJdbc2Statement.java:1186)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:407)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:283)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:258)
+	... 21 more
+236724 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date > character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date > character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+307719 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date > character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: date > character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 580
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+1594232 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error executing SQL statement for : pawn_jor6_report
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: ERROR: syntax error at or near "$"
+  Position: 588
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : pawn_jor6_report
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: ERROR: syntax error at or near "$"
+  Position: 588
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 20 more
+1    [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980122058_426791: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980122058_426791: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980122058_426791: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980122058_426791: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 18 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980122058_426791: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980122058_426791: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 18 more
+46496 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980168536_835964: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980168536_835964: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980168536_835964: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980168536_835964: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980168536_835964: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980168536_835964: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+77124 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error evaluating expression : 
+	Source text : $F{item_desc} + " "
+$F{qty}.toString() + " " + $F{uom_name} + " "
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error evaluating expression : 
+	Source text : $F{item_desc} + " "
+$F{qty}.toString() + " " + $F{uom_name} + " "
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.fill.JRExpressionEvalException: Error evaluating expression : 
+	Source text : $F{item_desc} + " "
+$F{qty}.toString() + " " + $F{uom_name} + " "
+	at net.sf.jasperreports.engine.fill.JREvaluator.evaluate(JREvaluator.java:195)
+	at net.sf.jasperreports.engine.fill.JRCalculator.evaluate(JRCalculator.java:589)
+	at net.sf.jasperreports.engine.fill.JRCalculator.evaluate(JRCalculator.java:557)
+	at net.sf.jasperreports.engine.fill.JRFillElement.evaluateExpression(JRFillElement.java:929)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.evaluateText(JRFillTextField.java:383)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.evaluate(JRFillTextField.java:368)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.evaluate(JRFillElementContainer.java:258)
+	at net.sf.jasperreports.engine.fill.JRFillBand.evaluate(JRFillBand.java:499)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillColumnBand(JRVerticalFiller.java:2036)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillDetail(JRVerticalFiller.java:760)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportStart(JRVerticalFiller.java:270)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:128)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: groovy.lang.MissingMethodException: No signature of method: pawn_jor6_report_1409980198461_152400. () is applicable for argument types: (java.math.BigDecimal) values: [1.000]
+Possible solutions: tr(java.lang.String), is(java.lang.Object), any(), str(java.lang.String), tr(java.lang.String, [Ljava.lang.Object;), tr(java.lang.String, java.lang.Object)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.unwrap(ScriptBytecodeAdapter.java:54)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:78)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at pawn_jor6_report_1409980198461_152400.evaluate(calculator_pawn_jor6_report_1409980198461_152400:786)
+	at net.sf.jasperreports.engine.fill.JREvaluator.evaluate(JREvaluator.java:182)
+	... 27 more
+Caused by:
+net.sf.jasperreports.engine.fill.JRExpressionEvalException: Error evaluating expression : 
+	Source text : $F{item_desc} + " "
+$F{qty}.toString() + " " + $F{uom_name} + " "
+	at net.sf.jasperreports.engine.fill.JREvaluator.evaluate(JREvaluator.java:195)
+	at net.sf.jasperreports.engine.fill.JRCalculator.evaluate(JRCalculator.java:589)
+	at net.sf.jasperreports.engine.fill.JRCalculator.evaluate(JRCalculator.java:557)
+	at net.sf.jasperreports.engine.fill.JRFillElement.evaluateExpression(JRFillElement.java:929)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.evaluateText(JRFillTextField.java:383)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.evaluate(JRFillTextField.java:368)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.evaluate(JRFillElementContainer.java:258)
+	at net.sf.jasperreports.engine.fill.JRFillBand.evaluate(JRFillBand.java:499)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillColumnBand(JRVerticalFiller.java:2036)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillDetail(JRVerticalFiller.java:760)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportStart(JRVerticalFiller.java:270)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:128)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: groovy.lang.MissingMethodException: No signature of method: pawn_jor6_report_1409980198461_152400. () is applicable for argument types: (java.math.BigDecimal) values: [1.000]
+Possible solutions: tr(java.lang.String), is(java.lang.Object), any(), str(java.lang.String), tr(java.lang.String, [Ljava.lang.Object;), tr(java.lang.String, java.lang.Object)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.unwrap(ScriptBytecodeAdapter.java:54)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:78)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:44)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:141)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:149)
+	at pawn_jor6_report_1409980198461_152400.evaluate(calculator_pawn_jor6_report_1409980198461_152400:786)
+	at net.sf.jasperreports.engine.fill.JREvaluator.evaluate(JREvaluator.java:182)
+	... 27 more
+212593 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980334659_866716: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980334659_866716: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980334659_866716: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980334659_866716: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980334659_866716: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980334659_866716: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+259031 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980381086_412048: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980381086_412048: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980381086_412048: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980381086_412048: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980381086_412048: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980381086_412048: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+303796 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980425861_221683: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980425861_221683: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980425861_221683: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980425861_221683: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980425861_221683: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980425861_221683: 787: expecting ')', found ':' @ line 787, column 73.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+382373 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980504431_30949: 785: expecting ')', found ':' @ line 785, column 112.
+1 error
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980504431_30949: 785: expecting ')', found ':' @ line 785, column 112.
+1 error
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980504431_30949: 785: expecting ')', found ':' @ line 785, column 112.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980504431_30949: 785: expecting ')', found ':' @ line 785, column 112.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980504431_30949: 785: expecting ')', found ':' @ line 785, column 112.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980504431_30949: 785: expecting ')', found ':' @ line 785, column 112.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+423923 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980545987_311036: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980545987_311036: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980545987_311036: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980545987_311036: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980545987_311036: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980545987_311036: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+514704 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980636760_89885: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980636760_89885: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980636760_89885: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980636760_89885: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980636760_89885: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409980636760_89885: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+19225453 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409999347512_647634: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409999347512_647634: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409999347512_647634: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409999347512_647634: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409999347512_647634: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409999347512_647634: 785: illegal colon after argument expression;
+   solution: a complex label expression before a colon must be parenthesized @ line 785, column 111.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:143)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:113)
+	at org.codehaus.groovy.control.ErrorCollector.addError(ErrorCollector.java:125)
+	at org.codehaus.groovy.control.SourceUnit.addError(SourceUnit.java:337)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.transformCSTIntoAST(AntlrParserPlugin.java:104)
+	at org.codehaus.groovy.antlr.AntlrParserPlugin.parseCST(AntlrParserPlugin.java:71)
+	at org.codehaus.groovy.control.SourceUnit.parse(SourceUnit.java:236)
+	at org.codehaus.groovy.control.CompilationUnit$1.call(CompilationUnit.java:158)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:814)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+19637069 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error evaluating expression : 
+	Source text : $F{item_desc}.toString() + " " + $F{qty} + " " + $F{uom_name} +
+($F{carat} > 0 ? " " + $F{carat}.toString() + " กะรัต" : "") +
+($F{gram} > 0 ? " " + $F{gram}.toString() + " กรัม" : "") +
+($F{other_property} > 0 ? " " + $F{other_property}.toString() : "")
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error evaluating expression : 
+	Source text : $F{item_desc}.toString() + " " + $F{qty} + " " + $F{uom_name} +
+($F{carat} > 0 ? " " + $F{carat}.toString() + " กะรัต" : "") +
+($F{gram} > 0 ? " " + $F{gram}.toString() + " กรัม" : "") +
+($F{other_property} > 0 ? " " + $F{other_property}.toString() : "")
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.fill.JRExpressionEvalException: Error evaluating expression : 
+	Source text : $F{item_desc}.toString() + " " + $F{qty} + " " + $F{uom_name} +
+($F{carat} > 0 ? " " + $F{carat}.toString() + " กะรัต" : "") +
+($F{gram} > 0 ? " " + $F{gram}.toString() + " กรัม" : "") +
+($F{other_property} > 0 ? " " + $F{other_property}.toString() : "")
+	at net.sf.jasperreports.engine.fill.JREvaluator.evaluate(JREvaluator.java:195)
+	at net.sf.jasperreports.engine.fill.JRCalculator.evaluate(JRCalculator.java:589)
+	at net.sf.jasperreports.engine.fill.JRCalculator.evaluate(JRCalculator.java:557)
+	at net.sf.jasperreports.engine.fill.JRFillElement.evaluateExpression(JRFillElement.java:929)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.evaluateText(JRFillTextField.java:383)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.evaluate(JRFillTextField.java:368)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.evaluate(JRFillElementContainer.java:258)
+	at net.sf.jasperreports.engine.fill.JRFillBand.evaluate(JRFillBand.java:499)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillColumnBand(JRVerticalFiller.java:2036)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillDetail(JRVerticalFiller.java:760)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportStart(JRVerticalFiller.java:270)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:128)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.String
+	at java.lang.String.compareTo(String.java:108)
+	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.compareToWithEqualityCheck(DefaultTypeTransformation.java:566)
+	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.compareTo(DefaultTypeTransformation.java:521)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.compareTo(ScriptBytecodeAdapter.java:692)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.compareGreaterThan(ScriptBytecodeAdapter.java:709)
+	at pawn_jor6_report_1409999758886_928258.evaluate(calculator_pawn_jor6_report_1409999758886_928258:788)
+	at net.sf.jasperreports.engine.fill.JREvaluator.evaluate(JREvaluator.java:182)
+	... 27 more
+Caused by:
+net.sf.jasperreports.engine.fill.JRExpressionEvalException: Error evaluating expression : 
+	Source text : $F{item_desc}.toString() + " " + $F{qty} + " " + $F{uom_name} +
+($F{carat} > 0 ? " " + $F{carat}.toString() + " กะรัต" : "") +
+($F{gram} > 0 ? " " + $F{gram}.toString() + " กรัม" : "") +
+($F{other_property} > 0 ? " " + $F{other_property}.toString() : "")
+	at net.sf.jasperreports.engine.fill.JREvaluator.evaluate(JREvaluator.java:195)
+	at net.sf.jasperreports.engine.fill.JRCalculator.evaluate(JRCalculator.java:589)
+	at net.sf.jasperreports.engine.fill.JRCalculator.evaluate(JRCalculator.java:557)
+	at net.sf.jasperreports.engine.fill.JRFillElement.evaluateExpression(JRFillElement.java:929)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.evaluateText(JRFillTextField.java:383)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.evaluate(JRFillTextField.java:368)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.evaluate(JRFillElementContainer.java:258)
+	at net.sf.jasperreports.engine.fill.JRFillBand.evaluate(JRFillBand.java:499)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillColumnBand(JRVerticalFiller.java:2036)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillDetail(JRVerticalFiller.java:760)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportStart(JRVerticalFiller.java:270)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:128)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.String
+	at java.lang.String.compareTo(String.java:108)
+	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.compareToWithEqualityCheck(DefaultTypeTransformation.java:566)
+	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.compareTo(DefaultTypeTransformation.java:521)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.compareTo(ScriptBytecodeAdapter.java:692)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.compareGreaterThan(ScriptBytecodeAdapter.java:709)
+	at pawn_jor6_report_1409999758886_928258.evaluate(calculator_pawn_jor6_report_1409999758886_928258:788)
+	at net.sf.jasperreports.engine.fill.JREvaluator.evaluate(JREvaluator.java:182)
+	... 27 more
+19711415 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error evaluating expression : 
+	Source text : $F{item_desc}.toString() + " " + $F{qty} + " " + $F{uom_name} +
+($F{carat} > 0 ? " " + $F{carat}.toString() + " กะรัต" : "") +
+($F{gram} > 0 ? " " + $F{gram}.toString() + " กรัม" : "") +
+($F{other_property} > 0 ? " " + $F{other_property}.toString() : "")
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error evaluating expression : 
+	Source text : $F{item_desc}.toString() + " " + $F{qty} + " " + $F{uom_name} +
+($F{carat} > 0 ? " " + $F{carat}.toString() + " กะรัต" : "") +
+($F{gram} > 0 ? " " + $F{gram}.toString() + " กรัม" : "") +
+($F{other_property} > 0 ? " " + $F{other_property}.toString() : "")
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.fill.JRExpressionEvalException: Error evaluating expression : 
+	Source text : $F{item_desc}.toString() + " " + $F{qty} + " " + $F{uom_name} +
+($F{carat} > 0 ? " " + $F{carat}.toString() + " กะรัต" : "") +
+($F{gram} > 0 ? " " + $F{gram}.toString() + " กรัม" : "") +
+($F{other_property} > 0 ? " " + $F{other_property}.toString() : "")
+	at net.sf.jasperreports.engine.fill.JREvaluator.evaluate(JREvaluator.java:195)
+	at net.sf.jasperreports.engine.fill.JRCalculator.evaluate(JRCalculator.java:589)
+	at net.sf.jasperreports.engine.fill.JRCalculator.evaluate(JRCalculator.java:557)
+	at net.sf.jasperreports.engine.fill.JRFillElement.evaluateExpression(JRFillElement.java:929)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.evaluateText(JRFillTextField.java:383)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.evaluate(JRFillTextField.java:368)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.evaluate(JRFillElementContainer.java:258)
+	at net.sf.jasperreports.engine.fill.JRFillBand.evaluate(JRFillBand.java:499)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillColumnBand(JRVerticalFiller.java:2036)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillDetail(JRVerticalFiller.java:760)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportStart(JRVerticalFiller.java:270)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:128)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.String
+	at java.lang.String.compareTo(String.java:108)
+	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.compareToWithEqualityCheck(DefaultTypeTransformation.java:566)
+	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.compareTo(DefaultTypeTransformation.java:521)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.compareTo(ScriptBytecodeAdapter.java:692)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.compareGreaterThan(ScriptBytecodeAdapter.java:709)
+	at pawn_jor6_report_1409999833257_567108.evaluate(calculator_pawn_jor6_report_1409999833257_567108:788)
+	at net.sf.jasperreports.engine.fill.JREvaluator.evaluate(JREvaluator.java:182)
+	... 27 more
+Caused by:
+net.sf.jasperreports.engine.fill.JRExpressionEvalException: Error evaluating expression : 
+	Source text : $F{item_desc}.toString() + " " + $F{qty} + " " + $F{uom_name} +
+($F{carat} > 0 ? " " + $F{carat}.toString() + " กะรัต" : "") +
+($F{gram} > 0 ? " " + $F{gram}.toString() + " กรัม" : "") +
+($F{other_property} > 0 ? " " + $F{other_property}.toString() : "")
+	at net.sf.jasperreports.engine.fill.JREvaluator.evaluate(JREvaluator.java:195)
+	at net.sf.jasperreports.engine.fill.JRCalculator.evaluate(JRCalculator.java:589)
+	at net.sf.jasperreports.engine.fill.JRCalculator.evaluate(JRCalculator.java:557)
+	at net.sf.jasperreports.engine.fill.JRFillElement.evaluateExpression(JRFillElement.java:929)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.evaluateText(JRFillTextField.java:383)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.evaluate(JRFillTextField.java:368)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.evaluate(JRFillElementContainer.java:258)
+	at net.sf.jasperreports.engine.fill.JRFillBand.evaluate(JRFillBand.java:499)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillColumnBand(JRVerticalFiller.java:2036)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillDetail(JRVerticalFiller.java:760)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportStart(JRVerticalFiller.java:270)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:128)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.String
+	at java.lang.String.compareTo(String.java:108)
+	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.compareToWithEqualityCheck(DefaultTypeTransformation.java:566)
+	at org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation.compareTo(DefaultTypeTransformation.java:521)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.compareTo(ScriptBytecodeAdapter.java:692)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.compareGreaterThan(ScriptBytecodeAdapter.java:709)
+	at pawn_jor6_report_1409999833257_567108.evaluate(calculator_pawn_jor6_report_1409999833257_567108:788)
+	at net.sf.jasperreports.engine.fill.JREvaluator.evaluate(JREvaluator.java:182)
+	... 27 more
+19800362 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409999922403_902335: 786: Primitive type literal: float cannot be used as a method name at line: 786 column: 2. File: calculator_pawn_jor6_report_1409999922403_902335 @ line 786, column 2.
+1 error
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409999922403_902335: 786: Primitive type literal: float cannot be used as a method name at line: 786 column: 2. File: calculator_pawn_jor6_report_1409999922403_902335 @ line 786, column 2.
+1 error
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409999922403_902335: 786: Primitive type literal: float cannot be used as a method name at line: 786 column: 2. File: calculator_pawn_jor6_report_1409999922403_902335 @ line 786, column 2.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409999922403_902335: 786: Primitive type literal: float cannot be used as a method name at line: 786 column: 2. File: calculator_pawn_jor6_report_1409999922403_902335 @ line 786, column 2.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:829)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Errors were encountered when compiling report expressions class file:
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409999922403_902335: 786: Primitive type literal: float cannot be used as a method name at line: 786 column: 2. File: calculator_pawn_jor6_report_1409999922403_902335 @ line 786, column 2.
+1 error
+
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:101)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:188)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+calculator_pawn_jor6_report_1409999922403_902335: 786: Primitive type literal: float cannot be used as a method name at line: 786 column: 2. File: calculator_pawn_jor6_report_1409999922403_902335 @ line 786, column 2.
+1 error
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:296)
+	at org.codehaus.groovy.control.CompilationUnit.applyToSourceUnits(CompilationUnit.java:829)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:511)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:487)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:464)
+	at net.sf.jasperreports.compilers.JRGroovyCompiler.compileUnits(JRGroovyCompiler.java:97)
+	... 17 more

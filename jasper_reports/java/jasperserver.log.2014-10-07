@@ -1,0 +1,447 @@
+1    [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Incompatible [Ljava.lang.Object; value assigned to parameter user_id in the Daily Customer Payment dataset.
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Incompatible [Ljava.lang.Object; value assigned to parameter user_id in the Daily Customer Payment dataset.
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Incompatible [Ljava.lang.Object; value assigned to parameter user_id in the Daily Customer Payment dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Incompatible [Ljava.lang.Object; value assigned to parameter user_id in the Daily Customer Payment dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+56327 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error preparing statement for executing the report query : 
+
+select * from
+(
+select id, voucher.number, partner_name, date, name, coalesce(is_mh_novat, False) as is_mh_novat, open_amount, paid_amount, narration,
+CASE WHEN payment_option='with_writeoff' THEN (case when open_amount-paid_amount = 0 then null else  open_amount-paid_amount end) ELSE null END writeoff_amount,
+CASE WHEN payment_option='without_writeoff' THEN (case when open_amount-paid_amount = 0 then null else  open_amount-paid_amount end) ELSE null END unpaid_amount,
+cash_amount, check_amount, transfer_amount
+from
+-- Payment Voucher
+(select av.id, av.state, av.number,
+-- If no mh_novat flag from billing, get some 1 line from voucher_line
+case when ab.is_mh_novat is null then
+	(select ai.is_mh_novat from account_voucher_line avl
+	join account_move_line aml on aml.id = avl.move_line_id
+	join account_invoice ai on ai.move_id = aml.move_id
+	where avl.voucher_id = av.id
+	limit 1)
+else ab.is_mh_novat end is_mh_novat, p.name as partner_name, av.date, av.name, av.narration, av.amount as paid_amount, av.payment_option,
+sum(avl.amount_unreconciled) as open_amount, sum(avl.amount) allocate_amoun
+from account_voucher av
+join account_voucher_line avl on av.id = avl.voucher_id
+join res_partner p on p.id = av.partner_id
+left outer join account_billing ab on av.billing_id = ab.id
+where ab.create_uid = ?
+group by av.id, av.state, av.number, ab.is_mh_novat, p.name, av.date, av.name, av.narration, av.amount, av.payment_option) voucher
+left outer join
+-- Total Cash
+(select voucher_id, sum(amount) cash_amount from payment_register
+where type='cash'
+group by voucher_id) cash on voucher.id = cash.voucher_id
+left outer join
+-- Total Check
+(select voucher_id, sum(amount) check_amount from payment_register
+where type='check'
+group by voucher_id) cheque on voucher.id = cheque.voucher_id
+left outer join
+-- Total Transfer
+(select voucher_id, sum(amount) transfer_amount from payment_register
+where type='transfer'
+group by voucher_id) transfer on voucher.id = transfer.voucher_id
+where voucher.state = 'posted' and date = date(?)
+) a
+order by a.is_mh_novat, a.date
+
+
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Error preparing statement for executing the report query : 
+
+select * from
+(
+select id, voucher.number, partner_name, date, name, coalesce(is_mh_novat, False) as is_mh_novat, open_amount, paid_amount, narration,
+CASE WHEN payment_option='with_writeoff' THEN (case when open_amount-paid_amount = 0 then null else  open_amount-paid_amount end) ELSE null END writeoff_amount,
+CASE WHEN payment_option='without_writeoff' THEN (case when open_amount-paid_amount = 0 then null else  open_amount-paid_amount end) ELSE null END unpaid_amount,
+cash_amount, check_amount, transfer_amount
+from
+-- Payment Voucher
+(select av.id, av.state, av.number,
+-- If no mh_novat flag from billing, get some 1 line from voucher_line
+case when ab.is_mh_novat is null then
+	(select ai.is_mh_novat from account_voucher_line avl
+	join account_move_line aml on aml.id = avl.move_line_id
+	join account_invoice ai on ai.move_id = aml.move_id
+	where avl.voucher_id = av.id
+	limit 1)
+else ab.is_mh_novat end is_mh_novat, p.name as partner_name, av.date, av.name, av.narration, av.amount as paid_amount, av.payment_option,
+sum(avl.amount_unreconciled) as open_amount, sum(avl.amount) allocate_amoun
+from account_voucher av
+join account_voucher_line avl on av.id = avl.voucher_id
+join res_partner p on p.id = av.partner_id
+left outer join account_billing ab on av.billing_id = ab.id
+where ab.create_uid = ?
+group by av.id, av.state, av.number, ab.is_mh_novat, p.name, av.date, av.name, av.narration, av.amount, av.payment_option) voucher
+left outer join
+-- Total Cash
+(select voucher_id, sum(amount) cash_amount from payment_register
+where type='cash'
+group by voucher_id) cash on voucher.id = cash.voucher_id
+left outer join
+-- Total Check
+(select voucher_id, sum(amount) check_amount from payment_register
+where type='check'
+group by voucher_id) cheque on voucher.id = cheque.voucher_id
+left outer join
+-- Total Transfer
+(select voucher_id, sum(amount) transfer_amount from payment_register
+where type='transfer'
+group by voucher_id) transfer on voucher.id = transfer.voucher_id
+where voucher.state = 'posted' and date = date(?)
+) a
+order by a.is_mh_novat, a.date
+
+
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Error preparing statement for executing the report query : 
+
+select * from
+(
+select id, voucher.number, partner_name, date, name, coalesce(is_mh_novat, False) as is_mh_novat, open_amount, paid_amount, narration,
+CASE WHEN payment_option='with_writeoff' THEN (case when open_amount-paid_amount = 0 then null else  open_amount-paid_amount end) ELSE null END writeoff_amount,
+CASE WHEN payment_option='without_writeoff' THEN (case when open_amount-paid_amount = 0 then null else  open_amount-paid_amount end) ELSE null END unpaid_amount,
+cash_amount, check_amount, transfer_amount
+from
+-- Payment Voucher
+(select av.id, av.state, av.number,
+-- If no mh_novat flag from billing, get some 1 line from voucher_line
+case when ab.is_mh_novat is null then
+	(select ai.is_mh_novat from account_voucher_line avl
+	join account_move_line aml on aml.id = avl.move_line_id
+	join account_invoice ai on ai.move_id = aml.move_id
+	where avl.voucher_id = av.id
+	limit 1)
+else ab.is_mh_novat end is_mh_novat, p.name as partner_name, av.date, av.name, av.narration, av.amount as paid_amount, av.payment_option,
+sum(avl.amount_unreconciled) as open_amount, sum(avl.amount) allocate_amoun
+from account_voucher av
+join account_voucher_line avl on av.id = avl.voucher_id
+join res_partner p on p.id = av.partner_id
+left outer join account_billing ab on av.billing_id = ab.id
+where ab.create_uid = ?
+group by av.id, av.state, av.number, ab.is_mh_novat, p.name, av.date, av.name, av.narration, av.amount, av.payment_option) voucher
+left outer join
+-- Total Cash
+(select voucher_id, sum(amount) cash_amount from payment_register
+where type='cash'
+group by voucher_id) cash on voucher.id = cash.voucher_id
+left outer join
+-- Total Check
+(select voucher_id, sum(amount) check_amount from payment_register
+where type='check'
+group by voucher_id) cheque on voucher.id = cheque.voucher_id
+left outer join
+-- Total Transfer
+(select voucher_id, sum(amount) transfer_amount from payment_register
+where type='transfer'
+group by voucher_id) transfer on voucher.id = transfer.voucher_id
+where voucher.state = 'posted' and date = date(?)
+) a
+order by a.is_mh_novat, a.date
+
+
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:266)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:157)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by: org.postgresql.util.PSQLException: Can't infer the SQL type to use for an instance of [Ljava.lang.Object;. Use setObject() with an explicit Types value to specify the type to use.
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.setObject(AbstractJdbc2Statement.java:1772)
+	at org.postgresql.jdbc3g.AbstractJdbc3gStatement.setObject(AbstractJdbc3gStatement.java:37)
+	at org.postgresql.jdbc4.AbstractJdbc4Statement.setObject(AbstractJdbc4Statement.java:46)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:495)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:283)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:258)
+	... 21 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Error preparing statement for executing the report query : 
+
+select * from
+(
+select id, voucher.number, partner_name, date, name, coalesce(is_mh_novat, False) as is_mh_novat, open_amount, paid_amount, narration,
+CASE WHEN payment_option='with_writeoff' THEN (case when open_amount-paid_amount = 0 then null else  open_amount-paid_amount end) ELSE null END writeoff_amount,
+CASE WHEN payment_option='without_writeoff' THEN (case when open_amount-paid_amount = 0 then null else  open_amount-paid_amount end) ELSE null END unpaid_amount,
+cash_amount, check_amount, transfer_amount
+from
+-- Payment Voucher
+(select av.id, av.state, av.number,
+-- If no mh_novat flag from billing, get some 1 line from voucher_line
+case when ab.is_mh_novat is null then
+	(select ai.is_mh_novat from account_voucher_line avl
+	join account_move_line aml on aml.id = avl.move_line_id
+	join account_invoice ai on ai.move_id = aml.move_id
+	where avl.voucher_id = av.id
+	limit 1)
+else ab.is_mh_novat end is_mh_novat, p.name as partner_name, av.date, av.name, av.narration, av.amount as paid_amount, av.payment_option,
+sum(avl.amount_unreconciled) as open_amount, sum(avl.amount) allocate_amoun
+from account_voucher av
+join account_voucher_line avl on av.id = avl.voucher_id
+join res_partner p on p.id = av.partner_id
+left outer join account_billing ab on av.billing_id = ab.id
+where ab.create_uid = ?
+group by av.id, av.state, av.number, ab.is_mh_novat, p.name, av.date, av.name, av.narration, av.amount, av.payment_option) voucher
+left outer join
+-- Total Cash
+(select voucher_id, sum(amount) cash_amount from payment_register
+where type='cash'
+group by voucher_id) cash on voucher.id = cash.voucher_id
+left outer join
+-- Total Check
+(select voucher_id, sum(amount) check_amount from payment_register
+where type='check'
+group by voucher_id) cheque on voucher.id = cheque.voucher_id
+left outer join
+-- Total Transfer
+(select voucher_id, sum(amount) transfer_amount from payment_register
+where type='transfer'
+group by voucher_id) transfer on voucher.id = transfer.voucher_id
+where voucher.state = 'posted' and date = date(?)
+) a
+order by a.is_mh_novat, a.date
+
+
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:266)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:157)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: org.postgresql.util.PSQLException: Can't infer the SQL type to use for an instance of [Ljava.lang.Object;. Use setObject() with an explicit Types value to specify the type to use.
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.setObject(AbstractJdbc2Statement.java:1772)
+	at org.postgresql.jdbc3g.AbstractJdbc3gStatement.setObject(AbstractJdbc3gStatement.java:37)
+	at org.postgresql.jdbc4.AbstractJdbc4Statement.setObject(AbstractJdbc4Statement.java:46)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:495)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.setStatementParameter(JRJdbcQueryExecuter.java:283)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createStatement(JRJdbcQueryExecuter.java:258)
+	... 21 more
+1    [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Report design not valid : 
+	 1. Parameter type not supported in query : user_id class java.lang.Number
+	 2. Parameter type not supported in query : user_id class java.lang.Number
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Report design not valid : 
+	 1. Parameter type not supported in query : user_id class java.lang.Number
+	 2. Parameter type not supported in query : user_id class java.lang.Number
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.design.JRValidationException: Report design not valid : 
+	 1. Parameter type not supported in query : user_id class java.lang.Number
+	 2. Parameter type not supported in query : user_id class java.lang.Number
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.verifyDesign(JRAbstractCompiler.java:258)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:140)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by:
+net.sf.jasperreports.engine.design.JRValidationException: Report design not valid : 
+	 1. Parameter type not supported in query : user_id class java.lang.Number
+	 2. Parameter type not supported in query : user_id class java.lang.Number
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.verifyDesign(JRAbstractCompiler.java:258)
+	at net.sf.jasperreports.engine.design.JRAbstractCompiler.compileReport(JRAbstractCompiler.java:140)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReport(JasperCompileManager.java:215)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:131)
+	at net.sf.jasperreports.engine.JasperCompileManager.compileReportToFile(JasperCompileManager.java:113)
+	at com.nantic.jasperreports.JasperServer.compile(JasperServer.java:97)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:136)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+1    [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Incompatible java.lang.Boolean value assigned to parameter prepared_by in the Daily Customer Payment dataset.
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Incompatible java.lang.Boolean value assigned to parameter prepared_by in the Daily Customer Payment dataset.
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Boolean value assigned to parameter prepared_by in the Daily Customer Payment dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Incompatible java.lang.Boolean value assigned to parameter prepared_by in the Daily Customer Payment dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+76398 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Incompatible java.lang.Boolean value assigned to parameter prepared_by in the Daily Customer Payment dataset.
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: Incompatible java.lang.Boolean value assigned to parameter prepared_by in the Daily Customer Payment dataset.
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Boolean value assigned to parameter prepared_by in the Daily Customer Payment dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	... 6 more
+Caused by:
+net.sf.jasperreports.engine.JRException: Incompatible java.lang.Boolean value assigned to parameter prepared_by in the Daily Customer Payment dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFiller.fillReport(JRFiller.java:58)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:417)
+	at com.nantic.jasperreports.JasperServer.privateExecute(JasperServer.java:221)
+	at com.nantic.jasperreports.JasperServer.execute(JasperServer.java:120)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:115)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)

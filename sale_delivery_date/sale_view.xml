@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_order_form_ext" model="ir.ui.view">
+            <field name="name">view.order.form.ext</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <field name="date_order" position="after">
+                    <field name='date_expected'/>
+                </field>
+                <field name="order_line" pisition="attributes">
+					<attribute name="context">{'date_expected':date_expected}</attribute>                       
+                </field>            
+			</field>
+        </record>        
+		<record id="view_order_form_delivery_date" model="ir.ui.view">
+            <field name="name">sale.order.form.delivery_date</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Order Lines']/field[@name='order_line']/form[@string='Sales Order Lines']/group/group[2]/div" position="replace">                   
+                </xpath>
+				<xpath expr="//page[@string='Order Lines']/field[@name='order_line']/form[@string='Sales Order Lines']/group/group//label[@for='delay']" position="replace">                   
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

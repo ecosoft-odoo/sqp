@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+        <!-- Top menu item -->
+        <menuitem name="Assets"
+            id="menu_finance_assets"
+            parent="account.menu_finance"
+            sequence="9"/>
+            
+        <record id="assets_tree_view" model="ir.ui.view">
+            <field name="name">asset.asset.tree</field>
+            <field name="model">asset.asset</field>
+            <field name="arch" type="xml">
+                <tree string="Assets">
+                    <field name="name"/>
+                    <field name="property_stock_asset"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="assets_form_view" model="ir.ui.view">
+            <field name="name">asset.asset.form</field>
+            <field name="model">asset.asset</field>
+            <field name="arch" type="xml">
+                <form string="Assets" version="7.0">
+                    <header>
+                    </header>
+                    <sheet>
+                        <field name="image_medium" widget="image" class="oe_avatar oe_left"/>
+                        <div class="oe_title">
+                            <h1>Asset Name <field name="name" class="oe_inline"/></h1>
+                        </div>
+                        <group>
+                            <field name="property_stock_asset" domain="[('usage','=','asset')]"/>
+                            <field name="active"/>
+                        </group>
+                        <notebook>
+                            <page string="Info">
+                                <group>
+                                    <field name="model"/>
+                                    <field name="manufacturer"/>
+                                    <field name="serial"/>
+                                </group>
+                                <group>
+                                </group>
+                            </page>
+                        </notebook>
+                     </sheet>
+                     <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Asset Kanban View  -->
+        <record model="ir.ui.view" id="assets_kanban_view">
+            <field name="name">Asset Kanban</field>
+            <field name="model">asset.asset</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_vignette">
+                                <a type="open"><img t-att-src="kanban_image('asset.asset', 'image_small', record.id.value)" class="oe_kanban_image"/></a>
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="name"/></a>
+                                    </h4>
+                                    <ul>
+                                        <li>Model: <field name="model"></field></li>
+                                        <li>Manufacturer: <field name="manufacturer"></field></li>
+                                        <li>Serial No: <field name="serial"></field></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+            
+        <record id="action_assets" model="ir.actions.act_window">
+            <field name="name">Assets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">asset.asset</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+            
+        <menuitem name="Assets"
+            action="action_assets"
+            id="menu_finance_assets_assets"
+            parent="menu_finance_assets"
+            sequence="100"/>
+    
+ 	</data>
+</openerp>
