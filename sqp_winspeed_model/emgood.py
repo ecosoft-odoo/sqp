@@ -112,7 +112,7 @@ class ws_emgood(osv.osv):
         cr.execute("""CREATE or REPLACE VIEW ws_emgood as (
 select  pp.id, pp.search_key as GoodCode,
     pu.name as maingoodunitcode,
-    left(replace(pt.name, '"', ''''), 255) as GoodName1,
+    left(replace(pt.name, '"', ''''), 245) as GoodName1,
     null as GoodName2,
     null as GoodNameEng1,
     null as GoodNameEng2,

@@ -127,7 +127,7 @@ class ws_sodt(osv.osv):
     '00000' as brchcode,
     so.name as DocuNo,
     pp.search_key as goodcode,
-    left(replace(sol.name, '"', ''''), 255) as GoodName,
+    left(replace(sol.name, '"', ''''), 245) as GoodName,
     sw.name as invecode,
     sl.name as locacode,  -- Can we use shop in ERP?
     pu.name as goodunitcode,

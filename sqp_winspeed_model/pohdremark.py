@@ -50,7 +50,7 @@ select po.id, po.date_order as date,
     rp.search_key as VendorCode,
     null as POID,
     1 as ListNo,
-    left(po.notes, 255) as Remark
+    left(po.notes, 245) as Remark
 from purchase_order po
 left outer join res_partner rp on rp.id = po.partner_id
 where po.state in ('confirmed', 'approved', 'done')

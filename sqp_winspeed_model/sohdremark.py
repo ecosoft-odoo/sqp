@@ -50,7 +50,7 @@ select so.id, so.date_order as date,
     rp.search_key as CustCode,
     null as SOID,
     1 as ListNo,
-    left(so.note, 255) as Remark
+    left(so.note, 245) as Remark
 from sale_order so
 left outer join res_partner rp on rp.id = so.partner_id
 where so.state in ('progress', 'manual', 'done')

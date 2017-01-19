@@ -129,7 +129,7 @@ select ail.id, ai.date_invoice as date,
     ru.search_key as EmpCode,
     ru.login as EmpName,
     pp.search_key as GoodCode,
-    left(replace(pp.name_template, '"', ''''), 255) as GoodName,
+    left(replace(pp.name_template, '"', ''''), 245) as GoodName,
     sw.name as InveCode,
     sl.name as LocaCode,
     pu.name as GoodUnitCode,
@@ -226,7 +226,8 @@ from account_invoice ai
                   ORDER BY name DESC LIMIT 1)
 
 where ai.type in ('out_invoice', 'out_refund') and (ail.is_deposit = false and ail.is_advance = false)
-    and ai.state not in ('draft', 'cancel') and ai.non_standard is not true
+    and ai.state not in ('draft', 'cancel')
+    -- and ai.non_standard is not true  -- comment out as it seem not being used
 order by ai.id desc
         )""")
 
