@@ -68,11 +68,11 @@ select ail.id, ai.date_invoice as date,
     ai.amount_beforetax as Sumgoodamnt,
     ai.amount_beforetax as TotalBaseAmnt,
     round((ai.amount_total - ai.amount_beforetax)
-        / ai.amount_beforetax * 100, 2) as VatRate,
+        / ai.amount_beforetax * 100, 0) as VatRate,
     (ai.amount_total - ai.amount_beforetax) as VatAmnt,
     ai.amount_total as Netamnt,
     case when round((ai.amount_total - ai.amount_beforetax)
-        / ai.amount_beforetax * 100, 2) = 7
+        / ai.amount_beforetax * 100, 0) = 7
         then 'PO-EX7' else 'NO' end as VatGroupCode,
     null as DepartmentCode,
     null as DepartmentName,

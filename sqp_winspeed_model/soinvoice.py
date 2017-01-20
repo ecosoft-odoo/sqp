@@ -154,12 +154,12 @@ select ail.id, ai.date_invoice as date,
         ai.amount_beforetax as aftradvnaamnt,
         case when ai.amount_beforetax = 0 then 0 else
             round((ai.amount_total - ai.amount_beforetax)
-                / ai.amount_beforetax * 100, 2) end as VatRate,
+                / ai.amount_beforetax * 100, 0) end as VatRate,
         ai.amount_tax as VatAmnt,
         ai.amount_total as Netamnt,
         case when (case when ai.amount_beforetax = 0 then 0 else
             round((ai.amount_total - ai.amount_beforetax)
-                / ai.amount_beforetax * 100, 2) end) = 7 then 'SO-EX7' else 'NO' end as VatGroupCode,
+                / ai.amount_beforetax * 100, 0) end) = 7 then 'SO-EX7' else 'NO' end as VatGroupCode,
     null as DepartmentCode,
     null as DepartmentName,
     null as JobCode,
@@ -193,7 +193,7 @@ select ail.id, ai.date_invoice as date,
     ai.amount_beforetax as BaseVat,
     case when ai.amount_beforetax = 0 then 0 else
         round((ai.amount_total - ai.amount_beforetax)
-            / ai.amount_beforetax * 100, 2) end as VatRate1,
+            / ai.amount_beforetax * 100, 0) end as VatRate1,
     ai.amount_tax as VatAmount
 
 from account_invoice ai

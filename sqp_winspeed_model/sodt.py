@@ -188,7 +188,7 @@ class ws_sodt(osv.osv):
     null as GoodCost,
     case when coalesce(nullif(so.amount_net, 0.0), 0.0) = 0 then 0
         else round((so.amount_total - so.amount_net)
-        / so.amount_net * 100, 2) end as VatRate,
+        / so.amount_net * 100, 0) end as VatRate,
     null as StockFlag,
     case when pt.type != 'service' then 'G' else 'S' end as GoodFlag,
     sol.product_uom_qty as RemaQty,

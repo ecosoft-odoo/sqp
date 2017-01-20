@@ -98,11 +98,11 @@ select ail.id, ai.date_invoice as date,
     ai.amount_beforetax as TotalBaseAmnt,
     case when coalesce(nullif(ai.amount_beforetax, 0.0), 0.0) = 0 then 0
     else round((ai.amount_total - ai.amount_beforetax)
-        / ai.amount_beforetax * 100, 2) end as VatRate,
+        / ai.amount_beforetax * 100, 0) end as VatRate,
     (ai.amount_total - ai.amount_beforetax) as VatAmnt,
     ai.amount_total as Netamnt,
     case when round((ai.amount_total - ai.amount_beforetax)
-        / ai.amount_beforetax * 100, 2) = 7
+        / ai.amount_beforetax * 100, 0) = 7
         then 'SO-EX7' else 'NO' end as VatGroupCode,
     null as SaleAreaCode,
     null as SaleAreaName,

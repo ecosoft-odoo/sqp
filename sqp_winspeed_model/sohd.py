@@ -163,10 +163,10 @@ class ws_sohd(osv.osv):
                 case when
                 (case when coalesce(nullif(so.amount_net, 0.0), 0.0) = 0 then 0
                 else round((so.amount_total - so.amount_net)
-                / so.amount_net * 100, 2) end) = 0 then -0.01
+                / so.amount_net * 100, 0) end) = 0 then -0.01
                 else (case when coalesce(nullif(so.amount_net, 0.0), 0.0) = 0 then 0
                 else round((so.amount_total - so.amount_net)
-                / so.amount_net * 100, 2) end) end as VATRate,
+                / so.amount_net * 100, 0) end) end as VATRate,
                 case when (so.amount_total - so.amount_net) = 0 then -0.01 else (so.amount_total - so.amount_net) end as VatAmnt,
                 so.amount_total as Netamnt,
                 case when pt.type = 'service' then 2 else 1 end as GoodType, -- In order_line, can mixed.

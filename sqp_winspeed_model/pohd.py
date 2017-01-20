@@ -144,10 +144,10 @@ select po.id, po.date_order as date,
     case when
     (case when coalesce(nullif(po.amount_net, 0.0), 0.0) = 0 then 0
     else round((po.amount_total - po.amount_net)
-    / po.amount_net * 100, 2) end) = 0 then -0.01
+    / po.amount_net * 100, 0) end) = 0 then -0.01
     else (case when coalesce(nullif(po.amount_net, 0.0), 0.0) = 0 then 0
     else round((po.amount_total - po.amount_net)
-    / po.amount_net * 100, 2) end) end as VATRate,
+    / po.amount_net * 100, 0) end) end as VATRate,
     case when (po.amount_total - po.amount_net) = 0 then -0.01 else (po.amount_total - po.amount_net) end as VatAmnt,
     po.amount_total as Netamnt,
     case when pt.type = 'service' then 2 else 1 end as GoodType, -- In order_line, can mixed.

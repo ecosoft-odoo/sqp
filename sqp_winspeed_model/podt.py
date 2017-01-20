@@ -166,7 +166,7 @@ select pol.id, po.date_order as date,
     null as StockFlag,
     round(case when coalesce(nullif(po.amount_net, 0.0), 0.0) = 0 then 0
     else round((po.amount_total - po.amount_net)
-    / po.amount_net * 100, 2) end, 2) as VATRate,
+    / po.amount_net * 100, 0) end, 0) as VATRate,
     null as QuotSelected,
     null as LotFlag,
     null as LotNo,
