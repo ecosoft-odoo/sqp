@@ -169,7 +169,8 @@ class ws_sohd(osv.osv):
                 / so.amount_net * 100, 0) end) end as VATRate,
                 case when (so.amount_total - so.amount_net) = 0 then -0.01 else (so.amount_total - so.amount_net) end as VatAmnt,
                 so.amount_total as Netamnt,
-                case when pt.type = 'service' then 2 else 1 end as GoodType, -- In order_line, can mixed.
+                -- case when pt.type = 'service' then 2 else 1 end as GoodType, -- In order_line, can mixed.
+                1 as GoodType, -- In order_line, can mixed.
                 null as Commission,
                 null as CommissionAmnt,
                 null as saleareacode,
