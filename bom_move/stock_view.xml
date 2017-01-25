@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Delivery Order, domain: is_bom_move = False -->
+    	  <record id="stock.action_picking_tree" model="ir.actions.act_window">
+            <field name="context">{'default_type': 'out', 'contact_display': 'partner_address', 'is_delivery_order': True, is_bom_move: False, 'fg_location_id': 16}</field>
+            <field name="domain">[('type','=','out'),('is_bom_move','=',False)]</field>
+        </record>
+
+        <!-- Picking Form -->
+		    <record id="stock.view_picking_form" model="ir.ui.view">
+            <field name="name">view.picking.form</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="model">stock.picking.out</field>
+            <field name="arch" type="xml">
+                <button name="draft_force_assign" position="attributes">
+                    <attribute name="states">draft,progress</attribute>
+                    <attribute name="groups">mrp.group_mrp_manager,stock.group_stock_manager</attribute>
+            	  </button>
+                <button name="draft_force_assign" position="before">
+                    <button name="draft_progress" string="In Progress" attrs="{'invisible':['|',('is_bom_move','=',False),('state','not in',('draft'))]}" type="object" class="oe_highlight" groups="base.group_user"/>
+				        </button>
+				        <field name="stock_journal_id" position="after">
+                    <field name="is_bom_move" attrs="{'invisible':[('is_bom_move','=',False)]}"/>
+                    <field name="ref_mo_id" attrs="{'invisible': [('is_bom_move', '=', False)]}"/>
+                    <field name="ref_sub_mo_ids" attrs="{'invisible': [('is_bom_move', '=', False)]}"/>
+                    <field name="department" attrs="{'invisible': [('is_bom_move', '=', False)]}"/>
+				        </field>
+				        <field name="min_date" position="attributes">
+					          <attribute name="readonly">False</attribute>
+			          </field>
+			      </field>
+        </record>
+
+        <!-- Picking Form Ext -->
+        <record id="stock_supply_list.view_picking_form_ext" model="ir.ui.view">
+            <field name="name">view.picking.form.ext</field>
+            <field name="inherit_id" ref="stock_supply_list.view_picking_form_ext" />
+            <field name="model">stock.picking.out</field>
+            <field name="arch" type="xml">
+                <button name="draft_validate" position="attributes">
+                  <attribute name="states">draft,progress</attribute>
+                  <attribute name="invisible">context.get('is_bom_move', False)</attribute>
+                  <attribute name="groups">mrp.group_mrp_manager,stock.group_stock_manager</attribute>
+                </button>
+                <field name="contact_name" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_bom_move', '=', True)]}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <!-- Picking Out Form -->
+        <record id="stock.view_picking_out_form" model="ir.ui.view">
+            <field name="name">view.picking.out.form.ext</field>
+            <field name="inherit_id" ref="stock.view_picking_out_form" />
+            <field name="model">stock.picking.out</field>
+            <field name="arch" type="xml">
+                <field name="origin" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_bom_move', '=', True)]}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <!-- Bom Move -->
+        <record id="action_picking_tree" model="ir.actions.act_window">
+            <field name="name">Bom Move</field>
+            <field name="res_model">stock.picking.out</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('type','=','out'),('is_bom_move','=',True)]</field>
+            <field name="context">{'default_type': 'out', 'contact_display': 'partner_address', 'is_bom_move': True, 'supply_location_id': 15}</field>
+            <field name="search_view_id" ref="stock.view_picking_out_search"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a bom move.
+                </p>
+                <p>
+                    This is the list of all bom move that have to be prepared manually.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="BOM Move" action="action_picking_tree" id="menu_action_bom_move_tree" parent="stock.menu_stock_warehouse_mgmt" sequence="5"/>
+    </data>
+</openerp>

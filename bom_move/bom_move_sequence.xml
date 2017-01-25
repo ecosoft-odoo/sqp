@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="seq_type_bom_move" model="ir.sequence.type">
+            <field name="name">Bom Move</field>
+            <field name="code">bom.move</field>
+        </record>
+
+        <record id="seq_bom_move" model="ir.sequence">
+            <field name="name">Bom Move (SQP)</field>
+            <field name="code">bom.move</field>
+            <field name="prefix">BM%(y)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+            <field name="implementation">no_gap</field>
+        </record>
+  </data>
+</openerp>
