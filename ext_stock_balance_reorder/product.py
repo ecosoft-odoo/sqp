@@ -26,16 +26,16 @@ import openerp.addons.decimal_precision as dp
 from lxml import etree
 
 class product_product(osv.osv):
-    
+
     # Overwrite method
     def get_product_safety(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
-        
+
         location_obj = self.pool.get('stock.location')
         warehouse_obj = self.pool.get('stock.warehouse')
         shop_obj = self.pool.get('sale.shop')
-        
+
         states = context.get('states',[])
         what = context.get('what',())
         if not ids:
@@ -73,7 +73,7 @@ class product_product(osv.osv):
         if context.get('compute_child',True):
             child_location_ids = location_obj.search(cr, uid, [('location_id', 'child_of', location_ids)])
             location_ids = child_location_ids or location_ids
-        
+
         # this will be a dictionary of the product UoM by product id
         product2uom = {}
         uom_ids = []
@@ -113,7 +113,7 @@ class product_product(osv.osv):
         if prodlot_id:
             prodlot_clause = ' and prodlot_id = %s '
             where += [prodlot_id]
-            
+
         # Calculate Safety
         if 'safety' in what:
             cr.execute(
@@ -132,7 +132,7 @@ class product_product(osv.osv):
                 'and location_dest_id IN %s '\
                 'and product_id IN %s '\
                 "and state in %s " + (date_str and "and "+date_str+" " or '') + " "\
-                + prodlot_clause + 
+                + prodlot_clause +
                 'group by product_id,product_uom',tuple(where))
             results_in = cr.fetchall()
         if 'out' in what:
@@ -143,7 +143,7 @@ class product_product(osv.osv):
                 'and location_dest_id NOT IN %s '\
                 'and product_id  IN %s '\
                 "and state in %s " + (date_str and "and "+date_str+" " or '') + " "\
-                + prodlot_clause + 
+                + prodlot_clause +
                 'group by product_id,product_uom',tuple(where))
             results_out = cr.fetchall()
         # Additional Column
@@ -155,8 +155,8 @@ class product_product(osv.osv):
                     "and mrp.state = 'confirmed' "\
                     'and sm.product_id IN %s '\
                     'group by sm.product_id, sm.product_uom', tuple([tuple(ids),]))
-            results_mo_resv = cr.fetchall()            
-            
+            results_mo_resv = cr.fetchall()
+
         # Get the missing UoM resources
         uom_obj = self.pool.get('product.uom')
         uoms = map(lambda x: x[2], results_safety) + map(lambda x: x[2], results_in) + \
@@ -168,7 +168,7 @@ class product_product(osv.osv):
             uoms = uom_obj.browse(cr, uid, list(set(uoms)), context=context)
             for o in uoms:
                 uoms_o[o.id] = o
-                
+
         #TOCHECK: before change uom of product, stock move line are in old uom.
         context.update({'raise-exception': False})
         # Count the safety quantities
@@ -191,9 +191,9 @@ class product_product(osv.osv):
             amount = uom_obj._compute_qty_obj(cr, uid, uoms_o[prod_uom], amount,
                     uoms_o[context.get('uom', False) or product2uom[prod_id]], context=context)
             res[prod_id] -= amount
-                          
+
         return res
-    
+
     # Overwrite method
     def _product_safety(self, cr, uid, ids, field_names=None, arg=False, context=None):
 
@@ -221,20 +221,40 @@ class product_product(osv.osv):
                 else:
                     res[id][f] = safety_stock.get(id, 0.0)
         return res
-    
+
     def _search_product_reorder(self, cr, uid, obj, name, args, context=None):
         for arg in args:
-            # domain = qty_reorder < 0
-            if arg[0] == 'qty_reorder' and arg[1] == '<' and arg[2] == 0:
+            if arg[0] == 'qty_reorder':
                 c = context.copy()
                 c.update({ 'states': ('confirmed','waiting','assigned','done'), 'what': ('in', 'out', 'safety', 'mo_resv') })
                 safety_stock = self.get_product_safety(cr, uid, ids=None, context=c)
-                res = []        
-                for id in safety_stock:
-                    if safety_stock.get(id, 0.0) < 0.0:
-                        res.append(id)
-                return [('id', 'in', res)]
-    
+                res = []
+                if arg[1] == '=':
+                    for id in safety_stock:
+                        if safety_stock.get(id, arg[2]) == arg[2]:
+                            res.append(id)
+                elif arg[1] == '!=':
+                    for id in safety_stock:
+                        if safety_stock.get(id, arg[2]) != arg[2]:
+                            res.append(id)
+                elif arg[1] == '>':
+                    for id in safety_stock:
+                        if safety_stock.get(id, arg[2]) > arg[2]:
+                            res.append(id)
+                elif arg[1] == '<':
+                    for id in safety_stock:
+                        if safety_stock.get(id, arg[2]) < arg[2]:
+                            res.append(id)
+                elif arg[1] == '>=':
+                    for id in safety_stock:
+                        if safety_stock.get(id, arg[2]) >= arg[2]:
+                            res.append(id)
+                elif arg[1] == '<=':
+                    for id in safety_stock:
+                        if safety_stock.get(id, arg[2]) <= arg[2]:
+                            res.append(id)
+        return [('id', 'in', res)]
+
     _inherit = "product.product"
     _columns = {
         'qty_safety': fields.function(_product_safety, multi='qty_safety',
@@ -249,7 +269,7 @@ class product_product(osv.osv):
         'qty_mo_resv': fields.function(_product_safety, multi='qty_safety',
             type='float',  digits_compute=dp.get_precision('Product Unit of Measure'),
             string='MO Out',
-            help="Quantity of product to be reserved for production (regardless of location)"),                   
+            help="Quantity of product to be reserved for production (regardless of location)"),
     }
 
 product_product()
