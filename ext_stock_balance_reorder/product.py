@@ -223,36 +223,23 @@ class product_product(osv.osv):
         return res
 
     def _search_product_reorder(self, cr, uid, obj, name, args, context=None):
-        for arg in args:
-            if arg[0] == 'qty_reorder':
-                c = context.copy()
-                c.update({ 'states': ('confirmed','waiting','assigned','done'), 'what': ('in', 'out', 'safety', 'mo_resv') })
-                safety_stock = self.get_product_safety(cr, uid, ids=None, context=c)
-                res = []
-                if arg[1] == '=':
-                    for id in safety_stock:
-                        if safety_stock.get(id, arg[2]) == arg[2]:
-                            res.append(id)
-                elif arg[1] == '!=':
-                    for id in safety_stock:
-                        if safety_stock.get(id, arg[2]) != arg[2]:
-                            res.append(id)
-                elif arg[1] == '>':
-                    for id in safety_stock:
-                        if safety_stock.get(id, arg[2]) > arg[2]:
-                            res.append(id)
-                elif arg[1] == '<':
-                    for id in safety_stock:
-                        if safety_stock.get(id, arg[2]) < arg[2]:
-                            res.append(id)
-                elif arg[1] == '>=':
-                    for id in safety_stock:
-                        if safety_stock.get(id, arg[2]) >= arg[2]:
-                            res.append(id)
-                elif arg[1] == '<=':
-                    for id in safety_stock:
-                        if safety_stock.get(id, arg[2]) <= arg[2]:
-                            res.append(id)
+        c = context.copy()
+        c.update({ 'states': ('confirmed','waiting','assigned','done'), 'what': ('in', 'out', 'safety', 'mo_resv') })
+        safety_stock = self.get_product_safety(cr, uid, ids=None, context=c)
+        res = []
+        arg = (arg for arg in args if arg[0] == 'qty_reorder').next()
+        if arg[1] == '=':
+            res = filter(lambda x:safety_stock[x] == arg[2], safety_stock.keys())
+        elif arg[1] == '!=':
+            res = filter(lambda x:safety_stock[x] != arg[2], safety_stock.keys())
+        elif arg[1] == '>':
+            res = filter(lambda x:safety_stock[x] > arg[2], safety_stock.keys())
+        elif arg[1] == '<':
+            res = filter(lambda x:safety_stock[x] < arg[2], safety_stock.keys())
+        elif arg[1] == '>=':
+            res = filter(lambda x:safety_stock[x] >= arg[2], safety_stock.keys())
+        elif arg[1] == '<=':
+            res = filter(lambda x:safety_stock[x] <= arg[2], safety_stock.keys())
         return [('id', 'in', res)]
 
     _inherit = "product.product"
