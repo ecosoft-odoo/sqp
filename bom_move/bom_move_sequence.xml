@@ -5,7 +5,6 @@
             <field name="name">Bom Move</field>
             <field name="code">bom.move</field>
         </record>
-
         <record id="seq_bom_move" model="ir.sequence">
             <field name="name">Bom Move (SQP)</field>
             <field name="code">bom.move</field>
@@ -14,5 +13,5 @@
             <field name="company_id" eval="False"/>
             <field name="implementation">no_gap</field>
         </record>
-  </data>
+    </data>
 </openerp>
