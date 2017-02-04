@@ -20,32 +20,30 @@
 ##############################################################################
 
 {
-    'name' : 'Bom Move (SQP)',
-    'version' : '1.0',
-    'author' : 'Ecosoft',
+    'name': 'Bom Move (SQP)',
+    'version': '1.0',
+    'author': 'Ecosoft',
     'summary': 'Bom Move (SQP)',
     'description': """
-This module reuse Delivery Order for Bom Move. Internally it is DO, marked with Product Category as 'Bom Move'
-New 'Bom Move' menu will load Bom Move window, auto marked category as Bom Move.
-All product created, must be in category Part (sqp_config.product_category_part).
-* Enchance #1035
-* *
-* * * Remove saleorder_id name field for reference info from Sale Order.
-* * * In the Supply List Form, show the Sale Order reference and hide Source Document when if supply list flag is true.
+
     """,
     'category': 'Warehouse Management',
-    'website' : 'http://www.ecosoft.co.th',
-    'images' : [],
-    'depends' : ['web_m2o_enhanced','product', 'ext_mrp', 'hr', 'stock_supply_list'],
-    'demo' : [],
-    'data' : [
-              'product_view.xml',
-              'stock_view.xml',
-              'stock_workflow.xml',
-              'mrp_view.xml',
-              'bom_move_sequence.xml',
+    'website': 'http://www.ecosoft.co.th',
+    'images': [],
+    'depends': [
+        'stock_supply_list',
+        'ext_stock',
+        'ext_mrp',
     ],
-    'test' : [
+    'demo': [],
+    'data': [
+        'stock_view.xml',
+        'stock_workflow.xml',
+        'bom_move_sequence.xml',
+        'mrp_view.xml',
+        'reports.xml',
+    ],
+    'test': [
     ],
     'auto_install': False,
     'application': True,
