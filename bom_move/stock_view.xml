@@ -1,75 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <!-- Delivery Order, domain: is_bom_move = False -->
-    	  <record id="stock.action_picking_tree" model="ir.actions.act_window">
-            <field name="context">{'default_type': 'out', 'contact_display': 'partner_address', 'is_delivery_order': True, is_bom_move: False, 'fg_location_id': 16}</field>
-            <field name="domain">[('type','=','out'),('is_bom_move','=',False)]</field>
-        </record>
 
-        <!-- Picking Form -->
-		    <record id="stock.view_picking_form" model="ir.ui.view">
-            <field name="name">view.picking.form</field>
-            <field name="inherit_id" ref="stock.view_picking_form" />
-            <field name="model">stock.picking.out</field>
-            <field name="arch" type="xml">
-                <button name="draft_force_assign" position="attributes">
-                    <attribute name="states">draft,progress</attribute>
-                    <attribute name="groups">mrp.group_mrp_manager,stock.group_stock_manager</attribute>
-            	  </button>
-                <button name="draft_force_assign" position="before">
-                    <button name="draft_progress" string="In Progress" attrs="{'invisible':['|',('is_bom_move','=',False),('state','not in',('draft'))]}" type="object" class="oe_highlight" groups="base.group_user"/>
-				        </button>
-				        <field name="stock_journal_id" position="after">
-                    <field name="is_bom_move" attrs="{'invisible':[('is_bom_move','=',False)]}"/>
-                    <field name="ref_mo_id" attrs="{'invisible': [('is_bom_move', '=', False)]}"/>
-                    <field name="ref_sub_mo_ids" attrs="{'invisible': [('is_bom_move', '=', False)]}"/>
-                    <field name="department" attrs="{'invisible': [('is_bom_move', '=', False)]}"/>
-				        </field>
-				        <field name="min_date" position="attributes">
-					          <attribute name="readonly">False</attribute>
-			          </field>
-			      </field>
-        </record>
-
-        <!-- Picking Form Ext -->
-        <record id="stock_supply_list.view_picking_form_ext" model="ir.ui.view">
-            <field name="name">view.picking.form.ext</field>
-            <field name="inherit_id" ref="stock_supply_list.view_picking_form_ext" />
-            <field name="model">stock.picking.out</field>
-            <field name="arch" type="xml">
-                <button name="draft_validate" position="attributes">
-                  <attribute name="states">draft,progress</attribute>
-                  <attribute name="invisible">context.get('is_bom_move', False)</attribute>
-                  <attribute name="groups">mrp.group_mrp_manager,stock.group_stock_manager</attribute>
-                </button>
-                <field name="contact_name" position="attributes">
-                    <attribute name="attrs">{'invisible': [('is_bom_move', '=', True)]}</attribute>
-                </field>
-            </field>
-        </record>
-
-        <!-- Picking Out Form -->
-        <record id="stock.view_picking_out_form" model="ir.ui.view">
-            <field name="name">view.picking.out.form.ext</field>
-            <field name="inherit_id" ref="stock.view_picking_out_form" />
-            <field name="model">stock.picking.out</field>
-            <field name="arch" type="xml">
-                <field name="origin" position="attributes">
-                    <attribute name="attrs">{'invisible': [('is_bom_move', '=', True)]}</attribute>
-                </field>
-            </field>
+        <!-- Delivery Order, domain: is_bmo_move = False -->
+        <record id="stock.action_picking_tree" model="ir.actions.act_window">
+            <field name="context">{'default_type': 'out', 'contact_display': 'partner_address', 'is_delivery_order': True}</field>
+            <field name="domain">[('type','=','out'),('is_supply_list','=',False),('is_bom_move','=',False)]</field>
         </record>
 
         <!-- Bom Move -->
-        <record id="action_picking_tree" model="ir.actions.act_window">
+        <record id="action_bom_move_tree" model="ir.actions.act_window">
             <field name="name">Bom Move</field>
             <field name="res_model">stock.picking.out</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form,calendar</field>
-            <field name="domain">[('type','=','out'),('is_bom_move','=',True)]</field>
-            <field name="context">{'default_type': 'out', 'contact_display': 'partner_address', 'is_bom_move': True, 'supply_location_id': 15}</field>
+            <field name="domain">[('type','=','out'), ('is_bom_move','=',True)]</field>
+            <field name="context">{'default_type': 'out', 'contact_display': 'partner_address', 'is_bom_move': True}</field>
             <field name="search_view_id" ref="stock.view_picking_out_search"/>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
@@ -81,6 +28,109 @@
             </field>
         </record>
 
-        <menuitem name="BOM Move" action="action_picking_tree" id="menu_action_bom_move_tree" parent="stock.menu_stock_warehouse_mgmt" sequence="5"/>
+        <menuitem name="BOM Move" action="action_bom_move_tree" id="menu_action_bom_move_tree" parent="stock.menu_stock_warehouse_mgmt" sequence="5"/>
+
+        <!-- picking form ext -->
+        <record id="view_picking_form_ext" model="ir.ui.view">
+            <field name="name">view.picking.form.ext</field>
+            <field name="inherit_id" ref="stock_supply_list.view_picking_form_ext"/>
+            <field name="model">stock.picking.out</field>
+            <field name="arch" type="xml">
+                <button name="draft_progress" position="attributes">
+                    <attribute name="attrs">{'invisible':['|',('is_supply_list','=',False),'|',('is_bom_move','=',False),('state','not in',('draft'))]}</attribute>
+                </button>
+                <field name="stock_journal_id" position="after">
+                    <field name="is_bom_move" attrs="{'invisible':[('is_bom_move','=',False)]}"/>
+                    <field name="ref_mo_id" attrs="{'invisible':[('is_bom_move','=',False)]}"/>
+                    <field name="ref_sub_mo_ids" attrs="{'invisible':[('is_bom_move','=',False)]}" widget="many2many_tags"/>
+                    <field name="department_id" attrs="{'invisible':[('is_bom_move','=',False)]}" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+                </field>
+                <field name="contact_name" position="attributes">
+                    <attribute name="attrs">{'invisible':[('is_bom_move','=',True)]}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <!-- picking out form ext -->
+        <record id="view_picking_out_form_ext" model="ir.ui.view">
+            <field name="name">stock.picking.out.form</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock_supply_list.view_picking_out_form_ext"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='draft_validate']" position="attributes">
+                    <attribute name="invisible">
+                        context.get('is_supply_list', False) or context.get('is_bom_move', False)
+                    </attribute>
+                </xpath>
+                <xpath expr="//field[@name='move_lines']" position="attributes">
+                    <attribute name="context">
+                        {'address_out_id': partner_id, 'picking_type': 'out', 'form_view_ref':'view_move_picking_form',
+                        'tree_view_ref':'view_move_picking_tree',
+                        'is_supply_list': context.get('is_supply_list', False),
+                        'supply_location_id': context.get('supply_location_id', False),
+                        'is_delivery_order': context.get('is_delivery_order', False),
+                        'fg_location_id': context.get('fg_location_id', False),
+                        'is_bom_move': context.get('is_bom_move', False)}
+                    </attribute>
+                </xpath>
+                <xpath expr="//field[@name='origin']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|',('is_supply_list','=',True),('is_bom_move','=',True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- move picking tree ext -->
+        <record id="view_move_picking_tree_ext" model="ir.ui.view">
+            <field name="name">view.move.picking.tree.ext</field>
+            <field name="inherit_id" ref="stock_supply_list.view_move_picking_tree_ext"/>
+            <field name="model">stock.move</field>
+            <field name="arch" type="xml">
+                <field name="order_qty" position="attributes">
+                    <attribute name="invisible">not context.get('is_supply_list', False) and not context.get('is_bom_move', False)</attribute>
+                </field>
+            </field>
+        </record>
+
+        <!-- move picking form -->
+        <!-- <record id="view_move_picking_form" model="ir.ui.view">
+            <field name="name">view.move.picking.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock_supply_list.view_move_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group/group/field[@name='product_id']" position="attributes">
+                    <attribute name="invisible">not context.get('is_supply_list', False) and not context.get('is_bom_move', False)</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- picking out tree -->
+        <record id="view_picking_out_tree" model="ir.ui.view">
+            <field name="name">view.picking.out.tree</field>
+            <field name="inherit_id" ref="stock.view_picking_out_tree"/>
+            <field name="model">stock.picking.out</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/tree/field[@name='invoice_state']" position="before">
+                        <field name="is_bom_move" invisible="0" />
+                        <field name="ref_mo_id" />
+                        <field name="department_id" />
+                    </xpath>
+                  </data>
+              </field>
+        </record>
+
+        <!-- picking out search -->
+        <!-- <record id="view_picking_out_search" model="ir.ui.view">
+            <field name="name">stock.picking.out.search</field>
+            <field name="inherit_id" ref="stock.view_picking_out_search"/>
+            <field name="model">stock.picking</field>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@string='Journal']" position="after">
+                    <filter string="Sales Order" domain="[]" context="{'group_by': 'ref_order_id'}"/>
+                    <filter string="Customer" domain="[]" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Department" domain="[]" context="{'group_by': 'department_id'}"/>
+                </xpath>
+            </field>
+        </record> -->
     </data>
 </openerp>
