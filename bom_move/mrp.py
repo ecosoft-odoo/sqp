@@ -20,36 +20,62 @@
 ##############################################################################
 
 from osv import osv, fields
-from collections import defaultdict
+
+LOCATION_FC_RM = 15
+LOCATION_PRODUCTION = 7
 
 
 class mrp_production(osv.osv):
 
     _inherit = 'mrp.production'
 
+    def _mrp_bom_move_exists(self, cursor, user, ids, name, arg, context=None):
+        res = {}
+        for production in self.browse(cursor, user, ids, context=context):
+            res[production.id] = False
+            cursor.execute("""
+                select count(1) from stock_picking
+                where ref_mo_id = %s""", (production.id,))
+            if cursor.fetchone()[0]:
+                res[production.id] = True
+        return res
+
+    _columns = {
+        'mrp_bom_move_exists': fields.function(
+            _mrp_bom_move_exists, string='MO Exists', type='boolean',
+            help="It indicates that MO has at least one child."),
+    }
+
     def action_confirm(self, cr, uid, ids, context=None):
+        uncompute_ids = filter(lambda x: x,
+                               [not x.product_lines and x.id or False
+                                for x in self.browse(cr, uid, ids,
+                                                     context=context)])
+        self.action_compute(cr, uid, uncompute_ids, context=context)
         res = super(mrp_production, self).action_confirm(cr, uid, ids, context)
         picking_id = False
         move_list = []
         for production in self.browse(cr, uid, ids):
             if production.parent_id:
                 continue
-            picking_id = self._create_picking(cr, uid, production, context)
-            production_ids = self.search(cr, uid, [('parent_id','=',ids[0])], context)
+            picking_id = self._create_bom_picking(cr, uid, production, context)
+            production_ids = self.search(
+                cr, uid, [('parent_id', '=', ids[0])], context)
             for production in self.browse(cr, uid, production_ids):
-                move_list = self._stock_move_list(cr, uid, production, picking_id, move_list, context)
+                move_list = self._stock_move_list(
+                    cr, uid, production, picking_id, move_list, context)
             move_list = self._sum(cr, uid, move_list, context)
             self._create_stock_move(cr, uid, move_list, context)
         return res
 
-    def _create_picking(self, cr, uid, production, context=None):
+    def _create_bom_picking(self, cr, uid, production, context=None):
         picking_obj = self.pool.get('stock.picking')
         picking_data = self._prepare_picking(cr, uid, production, context)
         picking_id = picking_obj.create(cr, uid, picking_data, context)
         return picking_id
 
     def _prepare_picking(self, cr, uid, production, context=None):
-        pick_name = self.pool.get('stock.picking').pool.get('ir.sequence').get(cr, uid, 'bom.move')
+        pick_name = self.pool.get('ir.sequence').get(cr, uid, 'bom.move')
         return {
             'name': pick_name,
             'origin': production.name,
@@ -64,14 +90,17 @@ class mrp_production(osv.osv):
             'is_printed': production.is_printed,
         }
 
-    def _stock_move_list(self, cr, uid, production, picking_id, move_list, context=None):
-        move_obj = self.pool.get('stock.move')
+    def _stock_move_list(self, cr, uid, production,
+                         picking_id, move_list, context=None):
         for move_line in production.move_lines:
-            move_data = self._prepare_stock_move(cr, uid, move_line, picking_id, production, context)
+            move_data = self._prepare_stock_move(cr, uid, move_line,
+                                                 picking_id, production,
+                                                 context)
             move_list.append(move_data)
         return move_list
 
-    def _prepare_stock_move(self, cr, uid, move_line, picking_id, production, context=None):
+    def _prepare_stock_move(self, cr, uid, move_line,
+                            picking_id, production, context=None):
         return {
             'picking_id': picking_id,
             'product_uom': move_line.product_uom.id,
@@ -79,8 +108,8 @@ class mrp_production(osv.osv):
             'product_id': move_line.product_id.id,
             # 'location_id': move_line.location_id.id,
             # 'location_dest_id': move_line.location_dest_id.id,
-            'location_id': production.location_src_id.id,
-            'location_dest_id': production.location_dest_id.id,
+            'location_id': LOCATION_FC_RM,
+            'location_dest_id': LOCATION_PRODUCTION,
             'product_qty': move_line.product_qty,
             'product_uos_qty': move_line.product_uos_qty,
             'product_uos': move_line.product_uos,
@@ -99,9 +128,23 @@ class mrp_production(osv.osv):
             product_qty = move_line['product_qty']
             product_uos_qty = move_line['product_uos_qty']
             product_uos = move_line['product_uos']
-            if product_dict.has_key(product_id):
+            if product_id in product_dict:
                 pos = product_dict[product_id]
-                result_list[pos] = {'picking_id': picking_id, 'product_uom': product_uom, 'name': name, 'product_id': product_id, 'location_id': location_id, 'location_dest_id': location_dest_id, 'product_qty': (result_list[pos]['product_qty']+product_qty), 'product_uos_qty': (result_list[pos]['product_uos_qty']+product_uos_qty), 'product_uos': product_uos}
+                result_list[pos] = {
+                    'picking_id': picking_id,
+                    'product_uom': product_uom,
+                    'name': name,
+                    'product_id': product_id,
+                    'location_id': location_id,
+                    'location_dest_id': location_dest_id,
+                    'qty_order': (result_list[pos]['qty_order'] +
+                                  product_qty),
+                    'product_qty': (result_list[pos]['product_qty'] +
+                                    product_qty),
+                    'product_uos_qty': (result_list[pos]['product_uos_qty'] +
+                                        product_uos_qty),
+                    'product_uos': product_uos,
+                    }
             else:
                 result_list.append(move_line)
                 product_dict[product_id] = len(result_list) - 1
@@ -115,15 +158,17 @@ class mrp_production(osv.osv):
 
     def action_view_sqp_bom_move(self, cr, uid, ids, context=None):
         '''
-        This function returns an action that display Bom Moves of given bom move ids. It can either be a in a list or in a form view
+        This function returns an action that display Bom Moves of given
+        bom move ids. It can either be a in a list or in a form view
         '''
         if context is None:
             context = {}
         mod_obj = self.pool.get('ir.model.data')
         act_obj = self.pool.get('ir.actions.act_window')
 
-        result = mod_obj.get_object_reference(cr, uid, 'bom_move', 'action_bom_move_tree')
-        id =  result and result[1] or False
+        result = mod_obj.get_object_reference(cr, uid, 'bom_move',
+                                              'action_bom_move_tree')
+        id = result and result[1] or False
         result = act_obj.read(cr, uid, [id], context=context)[0]
 
         # compute the number of bom moves to display
@@ -133,14 +178,24 @@ class mrp_production(osv.osv):
             if not production.parent_id:
                 mo_name = production.name
                 break
-        bom_move_ids = stock_picking.search(cr, uid, [('origin','=',mo_name),('is_bom_move','=',True),('type','=','out')])
+        bom_move_ids = stock_picking.search(cr, uid,
+                                            [('origin', '=', mo_name),
+                                             ('is_bom_move', '=', True),
+                                             ('type', '=', 'out')])
 
-        #choose the view_mode accordingly
-        res_tree = mod_obj.get_object_reference(cr, uid, 'stock', 'view_picking_out_tree')
-        res_form = mod_obj.get_object_reference(cr, uid, 'stock', 'view_picking_out_form')
-        res_calendar = mod_obj.get_object_reference(cr, uid, 'stock', 'stock_picking_out_calendar')
-        result['domain'] = "[('id','in',["+','.join(map(str, bom_move_ids))+"])]"
-        result['views'] = [(res_tree and res_tree[1] or False, 'tree'), (res_form and res_form[1] or False, 'form'), (res_calendar and res_calendar[1] or False, 'calendar')]
+        # choose the view_mode accordingly
+        res_tree = mod_obj.get_object_reference(
+            cr, uid, 'stock', 'view_picking_out_tree')
+        res_form = mod_obj.get_object_reference(
+            cr, uid, 'stock', 'view_picking_out_form')
+        res_calendar = mod_obj.get_object_reference(
+            cr, uid, 'stock', 'stock_picking_out_calendar')
+        result['domain'] = \
+            "[('id','in',["+','.join(map(str, bom_move_ids))+"])]"
+        result['views'] = \
+            [(res_tree and res_tree[1] or False, 'tree'),
+             (res_form and res_form[1] or False, 'form'),
+             (res_calendar and res_calendar[1] or False, 'calendar')]
         result['res_id'] = bom_move_ids and bom_move_ids[0] or False
         return result
 
