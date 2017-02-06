@@ -38,7 +38,6 @@
     'demo': [],
     'data': [
         'stock_view.xml',
-        'stock_workflow.xml',
         'bom_move_sequence.xml',
         'mrp_view.xml',
         'reports.xml',

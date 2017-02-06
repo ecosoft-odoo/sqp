@@ -7,8 +7,9 @@
 	          <field name="inherit_id" ref="ext_mrp.mrp_production_form_view_ext"/>
 	          <field name="arch" type="xml">
                 <button name="action_view_child_mrp_production" position="after">
+                    <field name="mrp_bom_move_exists" invisible="1"/>
                     <button name="action_view_sqp_bom_move" string="View Bom Moves" type="object" class="oe_highlight"
-                            attrs="{'invisible': ['|',('parent_id','=',True),('mrp_production_exists','=',False)]}"/>
+                            attrs="{'invisible': ['|',('parent_id','=',True), ('mrp_bom_move_exists','=',False)]}"/>
                 </button>
             </field>
         </record>
