@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Bom Move Line Tree -->
+        <record id="view_bom_move_line_tree" model="ir.ui.view">
+            <field eval="1" name="priority"/>
+            <field name="name">bom.move.report.tree</field>
+            <field name="model">bom.move.report</field>
+            <field name="arch" type="xml">
+                <tree string="BOM Move Line" create="false">
+                    <field name="id" invisible="1"/>
+                    <field name="ref_mo_id"/>
+                    <field name="ref_order_id"/>
+                    <field name="partner_id"/>
+                    <field name="product_id"/>
+                    <field name="name"/>
+                    <field name="product_qty"/>
+                    <field name="order_qty"/>
+                    <field name="product_uom"/>
+                    <field name="location_id"/>
+                    <field name="location_dest_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Bom Move Line Search -->
+        <record id="view_bom_move_line_search" model="ir.ui.view">
+            <field name="name">bom.move.report.search</field>
+            <field name="model">bom.move.report</field>
+            <field name="arch" type="xml">
+                <search string="BOM Move Line">
+                    <field name="ref_mo_id"/>
+                    <filter string="New" domain="[('state','=','draft')]"/>
+                    <filter string="Cancelled" domain="[('state','=','cancel')]"/>
+                    <filter string="Waiting Another Move" domain="[('state','=','waiting')]"/>
+                    <filter string="Waiting Availability" domain="[('state','=','confirmed')]"/>
+                    <filter string="Available" domain="[('state','=','assigned')]"/>
+                    <filter string="Done" domain="[('state','=','done')]"/>
+                    <field name="ref_order_id"/>
+                    <field name="partner_id"/>
+                    <field name="product_id"/>
+                    <field name="name"/>
+                    <field name="state"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Status" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_bom_move_line_tree" model="ir.actions.act_window">
+            <field name="name">Bom Move Line</field>
+            <field name="res_model">bom.move.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="search_view_id" ref="view_bom_move_line_search"/>
+            <field name="view_id" ref="view_bom_move_line_tree"/>
+        </record>
+        <menuitem name="BOM Move Line" action="action_bom_move_line_tree" id="menu_action_bom_move_line_tree" parent="stock.menu_stock_warehouse_mgmt" sequence="6"/>
+    </data>
+</openerp>

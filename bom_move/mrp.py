@@ -113,6 +113,7 @@ class mrp_production(osv.osv):
             'product_qty': move_line.product_qty,
             'product_uos_qty': move_line.product_uos_qty,
             'product_uos': move_line.product_uos,
+            'order_qty': move_line.order_qty,
         }
 
     def _sum(self, cr, uid, move_list, context):
@@ -128,6 +129,7 @@ class mrp_production(osv.osv):
             product_qty = move_line['product_qty']
             product_uos_qty = move_line['product_uos_qty']
             product_uos = move_line['product_uos']
+            order_qty = move_line['order_qty']
             if product_id in product_dict:
                 pos = product_dict[product_id]
                 result_list[pos] = {
@@ -137,8 +139,8 @@ class mrp_production(osv.osv):
                     'product_id': product_id,
                     'location_id': location_id,
                     'location_dest_id': location_dest_id,
-                    'qty_order': (result_list[pos]['qty_order'] +
-                                  product_qty),
+                    'order_qty': (result_list[pos]['order_qty'] +
+                            order_qty),
                     'product_qty': (result_list[pos]['product_qty'] +
                                     product_qty),
                     'product_uos_qty': (result_list[pos]['product_uos_qty'] +
@@ -198,5 +200,20 @@ class mrp_production(osv.osv):
              (res_calendar and res_calendar[1] or False, 'calendar')]
         result['res_id'] = bom_move_ids and bom_move_ids[0] or False
         return result
+
+    def action_cancel(self, cr, uid, ids, context=None):
+        res = super(mrp_production, self).action_cancel(cr, uid, ids, context)
+        picking_obj = self.pool.get('stock.picking')
+        cr.execute("select id from stock_picking where is_bom_move = true and type = 'out'")
+        bom_move = cr.fetchall()
+        if len(bom_move) == 1:
+            for production in self.browse(cr, uid, ids):
+                mo_name = production.name
+            picking = picking_obj.browse(cr, uid, bom_move[0][0])
+            ref_mo_name = picking.ref_mo_id.name
+            state = picking.state
+            if mo_name == ref_mo_name and state == 'draft':
+                picking_obj.write(cr, uid, bom_move[0][0], {'state': 'cancel'})
+        return res
 
 mrp_production()
