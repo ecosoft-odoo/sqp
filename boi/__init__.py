@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2013 Ecosoft Co., Ltd. (http://ecosoft.co.th).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,35 +19,4 @@
 #
 ##############################################################################
 
-{
-    'name': 'Bom Move (SQP)',
-    'version': '1.0',
-    'author': 'Ecosoft',
-    'summary': 'Bom Move (SQP)',
-    'description': """
-
-    """,
-    'category': 'Warehouse Management',
-    'website': 'http://www.ecosoft.co.th',
-    'images': [],
-    'depends': [
-        'stock_supply_list',
-        'ext_stock',
-        'ext_mrp',
-    ],
-    'demo': [],
-    'data': [
-        'stock_view.xml',
-        'bom_move_sequence.xml',
-        'mrp_view.xml',
-        'reports.xml',
-        'report_view/bom_move_report_view.xml',
-    ],
-    'test': [
-    ],
-    'auto_install': False,
-    'application': True,
-    'installable': True,
-}
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+from . import boi

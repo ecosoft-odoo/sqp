@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Boi Template Form -->
+        <record id="view_boi_template_form" model="ir.ui.view">
+            <field name="name">view.boi.template.form</field>
+            <field name="model">boi.template</field>
+            <field name="arch" type="xml">
+                <form string="Boi Template" version="7.0">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="boi"/>
+                                <field name="end_date"/>
+                            </group>
+                            <group>
+                                <field name="start_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Products">
+                                <field name="boi_lines">
+                                    <tree string="Products" editable="bottom">
+                                        <field name="product_id" on_change="onchange_product_id(product_id, context)"/>
+                                        <field name="categ_id"/>
+                                        <field name="uom_id"/>
+                                        <field name="quantity"/>
+                                        <field name="remark"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Boi Template Tree -->
+        <record id="view_boi_template_tree" model="ir.ui.view">
+            <field name="name">view.boi.template.tree</field>
+            <field name="model">boi.template</field>
+            <field name="arch" type="xml">
+                <tree string="Boi Template">
+                    <field name="boi"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_boi_template_tree" model="ir.actions.act_window">
+            <field name="name">Boi Template</field>
+            <field name="res_model">boi.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_boi_template_tree"/>
+        </record>
+        <menuitem name="Boi" id="base.menu_boi_root" sequence="61"/>
+
+        <!-- base.menu_boi_root parent -->
+        <menuitem name="Boi" id="menu_boi" parent="base.menu_boi_root" sequence="1"/>
+        <menuitem name="Boi Template" id="menu_boi_template" action="action_boi_template_tree" parent="menu_boi" sequence="1"/>
+    </data>
+</openerp>

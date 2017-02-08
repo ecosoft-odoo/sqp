@@ -20,28 +20,22 @@
 ##############################################################################
 
 {
-    'name': 'Bom Move (SQP)',
+    'name': 'Boi (SQP)',
     'version': '1.0',
     'author': 'Ecosoft',
-    'summary': 'Bom Move (SQP)',
+    'summary': 'Boi (SQP)',
     'description': """
 
     """,
-    'category': 'Warehouse Management',
+    'category': 'Boi',
     'website': 'http://www.ecosoft.co.th',
     'images': [],
     'depends': [
-        'stock_supply_list',
-        'ext_stock',
-        'ext_mrp',
+        'product',
     ],
     'demo': [],
     'data': [
-        'stock_view.xml',
-        'bom_move_sequence.xml',
-        'mrp_view.xml',
-        'reports.xml',
-        'report_view/bom_move_report_view.xml',
+        'boi_view.xml',
     ],
     'test': [
     ],
