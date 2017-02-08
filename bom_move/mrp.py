@@ -113,7 +113,8 @@ class mrp_production(osv.osv):
             'product_qty': move_line.product_qty,
             'product_uos_qty': move_line.product_uos_qty,
             'product_uos': move_line.product_uos,
-            'order_qty': move_line.order_qty,
+            # 'order_qty': move_line.order_qty,
+            'order_qty': move_line.product_qty,
         }
 
     def _sum(self, cr, uid, move_list, context):
@@ -139,8 +140,10 @@ class mrp_production(osv.osv):
                     'product_id': product_id,
                     'location_id': location_id,
                     'location_dest_id': location_dest_id,
-                    'order_qty': (result_list[pos]['order_qty'] +
-                            order_qty),
+                    # 'order_qty': (result_list[pos]['order_qty'] +
+                    #         order_qty),
+                    'order_qty': (result_list[pos]['product_qty'] +
+                            product_qty),                    
                     'product_qty': (result_list[pos]['product_qty'] +
                                     product_qty),
                     'product_uos_qty': (result_list[pos]['product_uos_qty'] +
