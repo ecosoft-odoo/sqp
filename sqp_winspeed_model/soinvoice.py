@@ -139,10 +139,11 @@ select ail.id, ai.date_invoice as date,
     round(ail.price_subtotal, 4) as GoodAmount,
     null as JobCodeDT,
     null as JobNameDT,
-        case when pu.uom_type = 'bigger' then round(1/factor, 2)
-        when pu.uom_type = 'smaller' then round(factor, 2)
-        else 1 end as GoodUnitRate,
-        case when ai.amount_tax > 0 then 1 else 3 end  as VatType,
+    case when pu.uom_type = 'bigger' then round(1/factor, 2)
+    when pu.uom_type = 'smaller' then round(factor, 2)
+    else 1 end as GoodUnitRate,
+    -- case when ai.amount_tax > 0 then 1 else 3 end  as VatType,
+    1 as VatType,
     null as GoodCompareUnitCode,
     null as GoodCompareqty,
     so.name RefeNo,
