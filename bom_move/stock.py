@@ -16,6 +16,14 @@ class stock_picking(osv.osv):
                                          readonly=False),
     }
 
+    def do_partial(self, cr, uid, ids, partial_datas, context=None):
+        res = super(stock_picking, self).do_partial(cr, uid, ids, partial_datas, context)
+        pickings = self.browse(cr, uid, ids)
+        if pickings[0].is_bom_move:
+            name = self.pool.get('ir.sequence').get(cr, uid, 'bom.move')
+            self.write(cr, uid, ids, {'name': name})
+        return res
+
 stock_picking()
 
 
