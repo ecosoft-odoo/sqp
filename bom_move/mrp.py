@@ -93,10 +93,11 @@ class mrp_production(osv.osv):
     def _stock_move_list(self, cr, uid, production,
                          picking_id, move_list, context=None):
         for move_line in production.move_lines:
-            move_data = self._prepare_stock_move(cr, uid, move_line,
-                                                 picking_id, production,
-                                                 context)
-            move_list.append(move_data)
+            if not move_line.product_id.main_material:
+                move_data = self._prepare_stock_move(cr, uid, move_line,
+                                                    picking_id, production,
+                                                    context)
+                move_list.append(move_data)
         return move_list
 
     def _prepare_stock_move(self, cr, uid, move_line,
@@ -143,7 +144,7 @@ class mrp_production(osv.osv):
                     # 'order_qty': (result_list[pos]['order_qty'] +
                     #         order_qty),
                     'order_qty': (result_list[pos]['product_qty'] +
-                            product_qty),                    
+                            product_qty),
                     'product_qty': (result_list[pos]['product_qty'] +
                                     product_qty),
                     'product_uos_qty': (result_list[pos]['product_uos_qty'] +
