@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2013 Ecosoft Co., Ltd. (http://ecosoft.co.th).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,36 +19,16 @@
 #
 ##############################################################################
 
-{
-    'name': 'BOI (SQP)',
-    'version': '1.0',
-    'author': 'Ecosoft',
-    'summary': 'BOI (SQP)',
-    'description': """""",
-    'category': 'BOI',
-    'website': 'http://www.ecosoft.co.th',
-    'images': [],
-    'depends': [
-        'account',
-        'create_invoice_line_percentage',
-        'ext_purchase',
-        'product_tag',
-        'product_bom_template',
-    ],
-    'demo': [],
-    'data': [
-        'boi_view.xml',
-        'sale_view.xml',
-        'account_invoice_view.xml',
-        'stock_view.xml',
-        'purchase_requisition_view.xml',
-        'purchase_view.xml',
-        'product_view.xml',
-    ],
-    'test': [],
-    'auto_install': False,
-    'application': True,
-    'installable': True,
-}
+from openerp.osv import osv, fields
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+class sale_order_line_make_invoice(osv.osv_memory):
+
+    _inherit = "sale.order.line.make.invoice"
+
+    def make_invoices(self, cr, uid, ids, context=None):
+        res = super(sale_order_line_make_invoice, self).make_invoices(cr, uid, ids, context=context)
+        order_obj = self.pool.get('sale.order')
+        invoice_obj = self.pool.get('account.invoice')
+        order = order_obj.browse(cr, uid, context['active_id'], context=context)
+        invoice_obj.write(cr, uid, res['res_id'], {'boi_type': order.boi_type, 'boi_number_id': order.boi_number_id.id}, context=context)
+        return res

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="product_normal_form_view" model="ir.ui.view">
+            <field name="name">product.normal.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="account.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="BOI">
+                        <group>
+                            <group>
+                                <field name="boi_lines">
+                                    <tree string="BOI" editable="bottom">
+                                        <field name="boi_serial_number" on_change="onchange_boi_serial_number(boi_serial_number, context)" options="{'create': false, 'create_edit': false}"/>
+                                        <field name="boi_name"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <field name="thick"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</openerp>

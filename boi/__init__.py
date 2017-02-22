@@ -20,3 +20,12 @@
 ##############################################################################
 
 from . import boi
+from . import sale
+from . import account_invoice
+from . import stock
+from . import stock_partial_picking
+from . import sale_line_invoice
+from . import purchase_requisition
+from . import purchase
+from . import product
+from . import stock_invoice_onshipping

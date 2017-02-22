@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2013 Ecosoft Co., Ltd. (http://ecosoft.co.th).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,36 +19,25 @@
 #
 ##############################################################################
 
-{
-    'name': 'BOI (SQP)',
-    'version': '1.0',
-    'author': 'Ecosoft',
-    'summary': 'BOI (SQP)',
-    'description': """""",
-    'category': 'BOI',
-    'website': 'http://www.ecosoft.co.th',
-    'images': [],
-    'depends': [
-        'account',
-        'create_invoice_line_percentage',
-        'ext_purchase',
-        'product_tag',
-        'product_bom_template',
-    ],
-    'demo': [],
-    'data': [
-        'boi_view.xml',
-        'sale_view.xml',
-        'account_invoice_view.xml',
-        'stock_view.xml',
-        'purchase_requisition_view.xml',
-        'purchase_view.xml',
-        'product_view.xml',
-    ],
-    'test': [],
-    'auto_install': False,
-    'application': True,
-    'installable': True,
-}
+from openerp.osv import fields, osv
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+class product_product(osv.osv):
+
+    _inherit = 'product.product'
+
+    _columns = {
+        'boi_lines': fields.one2many('boi.certificate.line', 'product_id', 'BOI Certificate'),
+        'thick': fields.selection([
+            ('thick25', 25),
+            ('thick42', 42),
+            ('thick50', 50),
+            ('thick75', 75),
+            ('thick100', 100),
+            ('thick125', 125),
+            ('thick150', 150),
+            ('thick200',200),
+            ], 'Thick', select=True,
+        ),
+    }
+
+product_product()

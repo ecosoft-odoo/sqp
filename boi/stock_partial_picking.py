@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2013 Ecosoft Co., Ltd. (http://ecosoft.co.th).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,36 +19,18 @@
 #
 ##############################################################################
 
-{
-    'name': 'BOI (SQP)',
-    'version': '1.0',
-    'author': 'Ecosoft',
-    'summary': 'BOI (SQP)',
-    'description': """""",
-    'category': 'BOI',
-    'website': 'http://www.ecosoft.co.th',
-    'images': [],
-    'depends': [
-        'account',
-        'create_invoice_line_percentage',
-        'ext_purchase',
-        'product_tag',
-        'product_bom_template',
-    ],
-    'demo': [],
-    'data': [
-        'boi_view.xml',
-        'sale_view.xml',
-        'account_invoice_view.xml',
-        'stock_view.xml',
-        'purchase_requisition_view.xml',
-        'purchase_view.xml',
-        'product_view.xml',
-    ],
-    'test': [],
-    'auto_install': False,
-    'application': True,
-    'installable': True,
-}
+from openerp.osv import fields, osv
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+class stock_partial_picking(osv.osv_memory):
+
+    _inherit = 'stock.partial.picking'
+
+    def do_partial(self, cr, uid, ids, context=None):
+        res = super(stock_partial_picking, self).do_partial(cr, uid, ids, context=context)
+        picking_obj = self.pool.get('stock.picking')
+        if res.get('context', False):
+            for picking in picking_obj.browse(cr, uid, res['context']['active_ids']):
+                if picking.boi_type:
+                    name = picking.boi_type + '-' + picking.name
+                    picking_obj.write(cr, uid, res['context']['active_ids'], {'name': name})
+        return res
