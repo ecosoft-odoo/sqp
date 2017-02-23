@@ -6,11 +6,9 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//form/sheet/group/group/field[@name='partner_id']" position="before">
-                    <field name="boi_type" attrs="{'readonly': [('state','not in',('draft'))]}" on_change="onchange_boi_type(boi_type, context)"/>
-                </xpath>
                 <xpath expr="//form/sheet/group/group/field[@name='date_order']" position="before">
-                    <field name="boi_number_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
+                    <field name="boi_number_id" attrs="{'invisible': [('is_boi','=',False)], 'required': [('is_boi','=',True)], 'readonly': [('state','not in',('draft'))]}"/>
+                    <field name="is_boi" invisible="1"/>
                 </xpath>
             </field>
         </record>
@@ -21,10 +19,7 @@
             <field name="inherit_id" ref="product_tag.view_order_form_ext"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='product_tag_id']" position="attributes">
-                    <attribute name="attrs">{'invisible': [('boi_type','=','BOI')], 'required': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)]}</attribute>
-                </xpath>
-                <xpath expr="//field[@name='product_tag_id']" position="attributes">
-                    <attribute name="domain">[('active' , '=', True),('name','!=','BOI')]</attribute>
+                    <attribute name="on_change">onchange_product_tag_id(product_tag_id, context)</attribute>
                 </xpath>
             </field>
         </record>

@@ -30,5 +30,9 @@ class sale_order_line_make_invoice(osv.osv_memory):
         order_obj = self.pool.get('sale.order')
         invoice_obj = self.pool.get('account.invoice')
         order = order_obj.browse(cr, uid, context['active_id'], context=context)
-        invoice_obj.write(cr, uid, res['res_id'], {'boi_type': order.boi_type, 'boi_number_id': order.boi_number_id.id}, context=context)
+        if order.product_tag_id.name == 'BOI':
+            boi_type = 'BOI'
+        else:
+            boi_type = 'NONBOI'
+        invoice_obj.write(cr, uid, res['res_id'], {'boi_type': boi_type, 'boi_number_id': order.boi_number_id.id}, context=context)
         return res

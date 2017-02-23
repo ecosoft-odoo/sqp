@@ -29,8 +29,8 @@ class boi_certificate(osv.osv):
 
     _columns = {
         'approve_date': fields.date('Approve Date', required=True),
-        'start_date': fields.date('Start Date', required=True),
-        'expire_date': fields.date('Expire Date', required=True),
+        'start_date': fields.date('Start Date'),
+        'expire_date': fields.date('Expire Date'),
         'boi_name': fields.char('BOI Name', required=True),
         'boi_serial_number': fields.char('BOI Serial No', required=True),
         'boi_cert_type': fields.char('BOI Cert. Type', required=True),

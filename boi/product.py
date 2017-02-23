@@ -27,17 +27,6 @@ class product_product(osv.osv):
 
     _columns = {
         'boi_lines': fields.one2many('boi.certificate.line', 'product_id', 'BOI Certificate'),
-        'thick': fields.selection([
-            ('thick25', 25),
-            ('thick42', 42),
-            ('thick50', 50),
-            ('thick75', 75),
-            ('thick100', 100),
-            ('thick125', 125),
-            ('thick150', 150),
-            ('thick200',200),
-            ], 'Thick', select=True,
-        ),
     }
 
 product_product()
