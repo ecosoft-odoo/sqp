@@ -54,13 +54,13 @@ class purchase_order(osv.osv):
                     else:
                         name = vals.get('boi_type') + '-' + order.name
                 else:
-                    if order.name.find('NONBOI') >=0 and vals.get('boi_type') == 'BOI':
+                    if order.name.find('NONBOI') >= 0 and vals.get('boi_type') == 'BOI':
                         name = order.name.replace('NONBOI', 'BOI')
                     else:
                         name = order.name
                 vals.update({'name': name})
         return super(purchase_order, self).write(cr, uid, ids, vals, context=context)
- 
+
     def action_picking_create(self, cr, uid, ids, context=None):
         res = super(purchase_order, self).action_picking_create(cr, uid, ids, context=context)
         picking_obj = self.pool.get('stock.picking')

@@ -19,23 +19,28 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields
+from openerp.osv import fields, osv
 
-class sale_order_line_make_invoice(osv.osv_memory):
+class procurement_order(osv.osv):
 
-    _inherit = "sale.order.line.make.invoice"
+    _inherit = 'procurement.order'
 
-    def make_invoices(self, cr, uid, ids, context=None):
+    def make_mo(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
-        res = super(sale_order_line_make_invoice, self).make_invoices(cr, uid, ids, context=context)
-        order_obj = self.pool.get('sale.order')
-        invoice_obj = self.pool.get('account.invoice')
-        if context.get('active_id', False):
-            order = order_obj.browse(cr, uid, context.get('active_id'), context=context)
-            if order.product_tag_id.name == 'BOI':
-                boi_type = 'BOI'
-            else:
-                boi_type = 'NONBOI'
-            invoice_obj.write(cr, uid, res.get('res_id'), {'boi_type': boi_type, 'boi_number_id': order.boi_number_id.id}, context=context)
+        res = super(procurement_order, self).make_mo(cr, uid, ids, context=context)
+        procurement_obj = self.pool.get('procurement.order')
+        production_obj = self.pool.get('mrp.production')
+        for procurement in procurement_obj.browse(cr, uid, ids, context=context):
+            if res.get(procurement.id, False):
+                production = production_obj.browse(cr, uid, res.get(procurement.id), context=context)
+                if production.order_id:
+                    if production.order_id.product_tag_id:
+                        if production.order_id.product_tag_id.name == 'BOI':
+                            boi_type = 'BOI'
+                        else:
+                            boi_type = 'NONBOI'
+                        production_obj.write(cr, uid, [res.get(procurement.id)], {'name': boi_type + '-' + production.name})
         return res
+
+procurement_order()

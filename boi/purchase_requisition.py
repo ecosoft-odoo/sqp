@@ -41,19 +41,19 @@ class purchase_requisition(osv.osv):
     def create(self, cr, uid, vals, context=None):
         if vals.get('name', '/') == '/':
             vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'purchase.order.requisition')
-        vals.update({'name': vals.get('boi_type', '') + '-' + vals.get('name', '')})
+        vals.update({'name': vals.get('boi_type') + '-' + vals.get('name')})
         return super(purchase_requisition, self).create(cr, uid, vals, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
         for requisition in self.browse(cr, uid, ids, context=context):
-            if 'boi_type' in vals:
-                if requisition.name.find(vals['boi_type']) < 0:
-                    if requisition.name.find('BOI') >= 0 and vals['boi_type'] == 'NONBOI':
+            if vals.get('boi_type', False):
+                if requisition.name.find(vals.get('boi_type')) < 0:
+                    if requisition.name.find('BOI') >= 0 and vals.get('boi_type') == 'NONBOI':
                         name = requisition.name.replace('BOI', 'NONBOI')
                     else:
-                        name = vals['boi_type'] + '-' + requisition.name
+                        name = vals.get('boi_type') + '-' + requisition.name
                 else:
-                    if requisition.name.find('NONBOI') >=0 and vals['boi_type'] == 'BOI':
+                    if requisition.name.find('NONBOI') >= 0 and vals.get('boi_type') == 'BOI':
                         name = requisition.name.replace('NONBOI', 'BOI')
                     else:
                         name = requisition.name
@@ -64,8 +64,8 @@ class purchase_requisition(osv.osv):
         res = super(purchase_requisition, self).make_purchase_order(cr, uid, ids, partner_id, context=context)
         order_obj = self.pool.get('purchase.order')
         for requisition in self.browse(cr, uid, ids, context=context):
-            if not isinstance(res.get(requisition.id, False), list):
-                order_ids = [res.get(requisition.id, False)]
+            if not isinstance(res.get(requisition.id), list):
+                order_ids = [res.get(requisition.id)]
             if order_ids:
                 order = order_obj.browse(cr, uid, order_ids, context=context)[0]
                 name = requisition.boi_type + '-' + order.name

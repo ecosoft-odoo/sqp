@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- <record id="view_product_rapid_create_form" model="ir.ui.view">
+            <field name="name">view.product.rapid.create.form</field>
+            <field name="model">product.rapid.create</field>
+            <field name="inherit_id" ref="product_bom_template.view_product_rapid_create_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='part_code']" position="after">
+                    <field name="product_name"/>
+                </xpath>
+            </field>
+        </record> -->
+        <!-- <record id="view_product_rapid_create_form" model="ir.ui.view">
+            <field name="name">view.product.rapid.create.form</field>
+            <field name="model">product.rapid.create</field>
+            <field name="inherit_id" ref="product_bom_template.view_product_rapid_create_form"/>
+            <field name="arch" type="xml">
+
+            </field>
+        </record> -->
+    </data>
+</openerp>

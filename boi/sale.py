@@ -32,31 +32,76 @@ class sale_order(osv.osv):
     }
 
     def create(self, cr, uid, vals, context=None):
+        if context is None:
+            context = {}
         if vals.get('name', '/') == '/':
             vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'sale.order') or '/'
-        tag_obj = self.pool.get('product.tag')
-        tag = tag_obj.browse(cr, uid, vals.get('product_tag_id'), context=context)
-        if tag.name == 'BOI':
-            boi_type = 'BOI'
-        else:
-            boi_type = 'NONBOI'
-        vals.update({'name': boi_type + '-' + vals.get('name')})
-        return super(sale_order, self).create(cr, uid, vals, context=context)
-
-    def write(self, cr, uid, ids, vals, context=None):
-        if not isinstance(ids, list):
-            ids = [ids]
-        tag_obj = self.pool.get('product.tag')
-        for order in self.browse(cr, uid, ids, context=context):
-            if vals.get('product_tag_id', False):
-                product_tag_id = vals.get('product_tag_id')
-            else:
-                product_tag_id = order.product_tag_id.id
-            tag = tag_obj.browse(cr, uid, product_tag_id, context=context)
+            tag_obj = self.pool.get('product.tag')
+            tag = tag_obj.browse(cr, uid, vals.get('product_tag_id'), context=context)
             if tag.name == 'BOI':
                 boi_type = 'BOI'
             else:
                 boi_type = 'NONBOI'
+            vals.update({'name': boi_type + '-' + vals.get('name')})
+        return super(sale_order, self).create(cr, uid, vals, context=context)
+
+    def copy(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        if context is None:
+            context = {}
+        res = super(sale_order, self).copy(cr, uid, id, default, context=context)
+        if res:
+            order = self.browse(cr, uid, res, context=context)
+            if order.product_tag_id:
+                if order.product_tag_id.name == 'BOI':
+                    boi_type = 'BOI'
+                else:
+                    boi_type = 'NONBOI'
+                name = boi_type + '-' + order.name
+                self.write(cr, uid, res, {'name': name}, context=context)
+        return res
+
+    def write(self, cr, uid, ids, vals, context=None):
+        if context is None:
+            context = {}
+        if not isinstance(ids, list):
+            ids = [ids]
+        if vals.get('name', '/') == '/':
+            tag_obj = self.pool.get('product.tag')
+            for order in self.browse(cr, uid, ids, context=context):
+                if vals.get('product_tag_id', False):
+                    product_tag_id = vals.get('product_tag_id')
+                else:
+                    product_tag_id = order.product_tag_id.id
+                tag = tag_obj.browse(cr, uid, product_tag_id, context=context)
+                if tag.name == 'BOI':
+                    boi_type = 'BOI'
+                else:
+                    boi_type = 'NONBOI'
+                if order.name.find(boi_type) < 0:
+                    if order.name.find('BOI') >= 0 and boi_type == 'NONBOI':
+                        name = order.name.replace('BOI', 'NONBOI')
+                    else:
+                        name = boi_type + '-' + order.name
+                else:
+                    if order.name.find('NONBOI') >= 0 and boi_type == 'BOI':
+                        name = order.name.replace('NONBOI', 'BOI')
+                    else:
+                        name = order.name
+                vals.update({'name': name})
+        return super(sale_order, self).write(cr, uid, ids, vals, context=context)
+
+    def action_button_confirm(self, cr, uid, ids, context=None):
+        if context is None:
+            context = {}
+        super(sale_order, self).action_button_confirm(cr, uid, ids, context=context)
+        order = self.browse(cr, uid, ids[0])
+        if order.product_tag_id.name == 'BOI':
+            boi_type = 'BOI'
+        else:
+            boi_type = 'NONBOI'
+        if boi_type:
             if order.name.find(boi_type) < 0:
                 if order.name.find('BOI') >= 0 and boi_type == 'NONBOI':
                     name = order.name.replace('BOI', 'NONBOI')
@@ -67,20 +112,23 @@ class sale_order(osv.osv):
                     name = order.name.replace('NONBOI', 'BOI')
                 else:
                     name = order.name
-            if 'name' not in vals:
-                vals.update({'name': name})
-        return super(sale_order, self).write(cr, uid, ids, vals, context=context)
+        self.write(cr, uid, ids[0], {'name': name}, context=context)
 
     def _prepare_order_picking(self, cr, uid, order, context=None):
+        if context is None:
+            context = {}
         res = super(sale_order, self)._prepare_order_picking(cr, uid, order, context=context)
-        if order.product_tag_id.name == 'BOI':
-            boi_type = 'BOI'
-        else:
-            boi_type = 'NONBOI'
-        res.update({'boi_type': boi_type, 'boi_number_id': order.boi_number_id.id, 'name': boi_type + '-' + res.get('name')})
+        if order.product_tag_id:
+            if order.product_tag_id.name == 'BOI':
+                boi_type = 'BOI'
+            else:
+                boi_type = 'NONBOI'
+            res.update({'boi_type': boi_type, 'boi_number_id': order.boi_number_id.id, 'name': boi_type + '-' + res.get('name')})
         return res
 
     def onchange_product_tag_id(self, cr, uid, ids, product_tag_id, context=None):
+        if context is None:
+            context = {}
         tag_obj = self.pool.get('product.tag')
         is_boi = False
         if product_tag_id:

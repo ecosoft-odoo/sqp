@@ -21,10 +21,10 @@
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group/group/field[@name='partner_id']" position="before">
-                    <field name="boi_type" on_change="onchange_boi_type(boi_type, context)" attrs="{'invisible': [('type','!=','in')], 'readonly': [('state','not in',('draft'))]}"/>
+                    <field name="boi_type" on_change="onchange_boi_type(boi_type, context)" attrs="{'invisible': [('type','!=','in')], 'readonly': [('state','not in',('draft','assigned'))]}"/>
                 </xpath>
                 <xpath expr="//form/sheet/group/group/field[@name='date']" position="before">
-                    <field name="boi_number_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
+                    <field name="boi_number_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft','assigned'))]}"/>
                 </xpath>
             </field>
         </record>

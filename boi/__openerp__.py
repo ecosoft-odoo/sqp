@@ -29,11 +29,14 @@
     'website': 'http://www.ecosoft.co.th',
     'images': [],
     'depends': [
-        'account',
+        'account_debitnote',
         'create_invoice_line_percentage',
         'ext_purchase',
         'product_tag',
         'product_bom_template',
+        'ext_mrp',
+        'bom_move',
+        'ext_sale',
     ],
     'demo': [],
     'data': [
@@ -44,6 +47,7 @@
         'purchase_requisition_view.xml',
         'purchase_view.xml',
         'product_view.xml',
+        'product_rapid_create_view.xml',
     ],
     'test': [],
     'auto_install': False,
