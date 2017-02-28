@@ -29,4 +29,18 @@ class product_product(osv.osv):
         'boi_lines': fields.one2many('boi.certificate.line', 'product_id', 'BOI Certificate'),
     }
 
+    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
+        args = args or {}
+        context = context or {}
+        if context.get('order_id', False):
+            order_obj = self.pool.get('sale.order')
+            order = order_obj.browse(cr, user, context.get('order_id'), context=context)
+            product_tag_id = order.product_tag_id.id
+            is_international = order.is_international
+            partner_id = order.partner_id.id
+            product_ids = self.search(cr, user, [('is_international','=',is_international),('tag_ids','in',product_tag_id),'|',('partner_id','=',False),('partner_id','=',partner_id)] + args, limit=limit, context=context)
+        else:
+            product_ids = self.search(cr, user, args, context=context)
+        return self.name_get(cr, user, product_ids, context=context)
+
 product_product()

@@ -145,3 +145,27 @@ class mrp_production(osv.osv):
         return res
 
 mrp_production()
+
+
+class bom_choice_insulation(osv.osv):
+
+    _inherit = 'bom.choice.insulation'
+
+    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
+        args = args or {}
+        context = context or {}
+        if context.get('order_id', False):
+            order_obj = self.pool.get('sale.order')
+            order = order_obj.browse(cr, user, context.get('order_id'), context=context)
+            if order.product_tag_id:
+                if order.product_tag_id.name == 'BOI':
+                    insulation_ids = self.search(cr, user, [('name', '=', 'PIR')] + args, limit=limit, context=context)
+                else:
+                    insulation_ids = self.search(cr, user, args, limit=limit, context=context)
+            else:
+                insulation_ids = self.search(cr, user, args, limit=limit, context=context)
+        else:
+            insulation_ids = self.search(cr, user, args, limit=limit, context=context)
+        return self.name_get(cr, user, insulation_ids, context=context)
+
+bom_choice_insulation()

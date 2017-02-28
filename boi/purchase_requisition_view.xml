@@ -7,10 +7,10 @@
             <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group/group/field[@name='user_id']" position="before">
-                    <field name="boi_type" on_change="onchange_boi_type(boi_type, context)"/>
+                    <field name="boi_type" attrs="{'readonly': [('state','not in',('draft'))]}" on_change="onchange_boi_type(boi_type, context)"/>
                 </xpath>
                 <xpath expr="//form/sheet/group/group/field[@name='date_start']" position="before">
-                    <field name="boi_number_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')]}"/>
+                    <field name="boi_number_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
                 </xpath>
             </field>
         </record>
