@@ -33,13 +33,13 @@
                 <xpath expr="//form/group/field[@name='window_lines']/tree/field[@name='part_code']" position="after">
                     <field name="product_name"/>
                 </xpath>
-                <xpath expr="//form/group/field[@name='panel_lines']/tree/field[@name='product_name']" position="attributes">
+                <xpath expr="//form/group/field[@name='panel_lines']/tree/field[@name='boi_name']" position="attributes">
                     <attribute name="context">{'order_id':order_id}</attribute>
                 </xpath>
-                <xpath expr="//form/group/field[@name='door_lines']/tree/field[@name='product_name']" position="attributes">
+                <xpath expr="//form/group/field[@name='door_lines']/tree/field[@name='boi_name']" position="attributes">
                     <attribute name="context">{'order_id':order_id}</attribute>
                 </xpath>
-                <xpath expr="//form/group/field[@name='window_lines']/tree/field[@name='product_name']" position="attributes">
+                <xpath expr="//form/group/field[@name='window_lines']/tree/field[@name='boi_name']" position="attributes">
                     <attribute name="context">{'order_id':order_id}</attribute>
                 </xpath>
             </field>

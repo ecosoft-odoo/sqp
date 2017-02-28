@@ -33,7 +33,7 @@ class product_rapid_create_line(osv.osv):
     _inherit = 'product.rapid.create.line'
 
     _columns = {
-        'product_name': fields.many2one('product.product', 'Product Name'),
+        'boi_name': fields.many2one('product.product', 'BOI Name'),
     }
 
 product_rapid_create_line()
