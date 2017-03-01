@@ -19,16 +19,23 @@
 #
 ##############################################################################
 
-from . import boi
-from . import sale
-from . import account_invoice
-from . import stock
-from . import stock_partial_picking
-from . import sale_line_invoice
-from . import purchase_requisition
-from . import purchase
-from . import product
-from . import stock_invoice_onshipping
-from . import mrp
-from . import procurement
-from . import product_rapid_create
+from openerp.osv import osv, fields
+
+class sale_order_line_make_invoice(osv.osv_memory):
+
+    _inherit = "sale.order.line.make.invoice"
+
+    def make_invoices(self, cr, uid, ids, context=None):
+        if context is None:
+            context = {}
+        res = super(sale_order_line_make_invoice, self).make_invoices(cr, uid, ids, context=context)
+        order_obj = self.pool.get('sale.order')
+        invoice_obj = self.pool.get('account.invoice')
+        if context.get('active_id', False):
+            order = order_obj.browse(cr, uid, context.get('active_id'), context=context)
+            if order.product_tag_id.name == 'BOI':
+                boi_type = 'BOI'
+            else:
+                boi_type = 'NONBOI'
+            invoice_obj.write(cr, uid, res.get('res_id'), {'boi_type': boi_type, 'boi_number_id': order.boi_number_id.id}, context=context)
+        return res

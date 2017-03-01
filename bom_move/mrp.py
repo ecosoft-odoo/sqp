@@ -55,17 +55,24 @@ class mrp_production(osv.osv):
         res = super(mrp_production, self).action_confirm(cr, uid, ids, context)
         picking_id = False
         move_list = []
+        flag = False
         for production in self.browse(cr, uid, ids):
             if production.parent_id:
                 continue
-            picking_id = self._create_bom_picking(cr, uid, production, context)
             production_ids = self.search(
                 cr, uid, [('parent_id', '=', ids[0])], context)
-            for production in self.browse(cr, uid, production_ids):
-                move_list = self._stock_move_list(
-                    cr, uid, production, picking_id, move_list, context)
-            move_list = self._sum(cr, uid, move_list, context)
-            self._create_stock_move(cr, uid, move_list, context)
+            for m_production in self.browse(cr, uid, production_ids):
+                for line in m_production.move_lines:
+                    if not line.product_id.main_material:
+                        flag = True
+                        break
+            if flag == True:
+                picking_id = self._create_bom_picking(cr, uid, production, context)
+                for production in self.browse(cr, uid, production_ids):
+                    move_list = self._stock_move_list(
+                        cr, uid, production, picking_id, move_list, context)
+                move_list = self._sum(cr, uid, move_list, context)
+                self._create_stock_move(cr, uid, move_list, context)
         return res
 
     def _create_bom_picking(self, cr, uid, production, context=None):
@@ -88,6 +95,7 @@ class mrp_production(osv.osv):
             'ref_order_id': production.order_id.id,
             'ref_project_name': production.product_id.name_template,
             'is_printed': production.is_printed,
+            'note': production.note,
         }
 
     def _stock_move_list(self, cr, uid, production,

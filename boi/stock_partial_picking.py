@@ -19,16 +19,18 @@
 #
 ##############################################################################
 
-from . import boi
-from . import sale
-from . import account_invoice
-from . import stock
-from . import stock_partial_picking
-from . import sale_line_invoice
-from . import purchase_requisition
-from . import purchase
-from . import product
-from . import stock_invoice_onshipping
-from . import mrp
-from . import procurement
-from . import product_rapid_create
+from openerp.osv import fields, osv
+
+class stock_partial_picking(osv.osv_memory):
+
+    _inherit = 'stock.partial.picking'
+
+    def do_partial(self, cr, uid, ids, context=None):
+        res = super(stock_partial_picking, self).do_partial(cr, uid, ids, context=context)
+        picking_obj = self.pool.get('stock.picking')
+        if res.get('context', False):
+            for picking in picking_obj.browse(cr, uid, res['context']['active_ids']):
+                if picking.boi_type:
+                    name = picking.boi_type + '-' + picking.name
+                    picking_obj.write(cr, uid, res['context']['active_ids'], {'name': name})
+        return res

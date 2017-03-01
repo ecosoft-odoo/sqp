@@ -1,64 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <!-- Boi Template Form -->
-        <record id="view_boi_template_form" model="ir.ui.view">
-            <field name="name">view.boi.template.form</field>
-            <field name="model">boi.template</field>
+        <record id="view_boi_certificate_form" model="ir.ui.view">
+            <field name="name">view.boi.certificate.form</field>
+            <field name="model">boi.certificate</field>
             <field name="arch" type="xml">
-                <form string="Boi Template" version="7.0">
+                <form string="BOI Certificate" version="7.0">
                     <sheet>
                         <group>
                             <group>
-                                <field name="boi"/>
-                                <field name="end_date"/>
+                                <field name="boi_serial_number"/>
+                                <field name="approve_date"/>
+                                <field name="expire_date"/>
+                                <field name="promotion_qty"/>
                             </group>
                             <group>
+                                <field name="boi_name"/>
                                 <field name="start_date"/>
+                                <field name="boi_cert_type"/>
+                                <field name="uom_id"/>
                             </group>
                         </group>
-                        <notebook>
-                            <page string="Products">
-                                <field name="boi_lines">
-                                    <tree string="Products" editable="bottom">
-                                        <field name="product_id" on_change="onchange_product_id(product_id, context)"/>
-                                        <field name="categ_id"/>
-                                        <field name="uom_id"/>
-                                        <field name="quantity"/>
-                                        <field name="remark"/>
-                                    </tree>
-                                </field>
-                            </page>
-                        </notebook>
                     </sheet>
                 </form>
             </field>
         </record>
 
-        <!-- Boi Template Tree -->
-        <record id="view_boi_template_tree" model="ir.ui.view">
-            <field name="name">view.boi.template.tree</field>
-            <field name="model">boi.template</field>
+        <record id="view_boi_certificate_tree" model="ir.ui.view">
+            <field name="name">view.boi.certificate.tree</field>
+            <field name="model">boi.certificate</field>
             <field name="arch" type="xml">
-                <tree string="Boi Template">
-                    <field name="boi"/>
+                <tree string="BOI Certificate">
+                    <field name="boi_serial_number"/>
+                    <field name="boi_name"/>
+                    <field name="approve_date"/>
                     <field name="start_date"/>
-                    <field name="end_date"/>
+                    <field name="expire_date"/>
+                    <field name="boi_cert_type"/>
+                    <field name="promotion_qty"/>
+                    <field name="uom_id"/>
                 </tree>
             </field>
         </record>
 
-        <record id="action_boi_template_tree" model="ir.actions.act_window">
-            <field name="name">Boi Template</field>
-            <field name="res_model">boi.template</field>
+        <record id="action_boi_certificate_tree" model="ir.actions.act_window">
+            <field name="name">BOI Certificate</field>
+            <field name="res_model">boi.certificate</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="view_boi_template_tree"/>
+            <field name="view_id" ref="view_boi_certificate_tree"/>
         </record>
-        <menuitem name="Boi" id="base.menu_boi_root" sequence="61"/>
-
-        <!-- base.menu_boi_root parent -->
-        <menuitem name="Boi" id="menu_boi" parent="base.menu_boi_root" sequence="1"/>
-        <menuitem name="Boi Template" id="menu_boi_template" action="action_boi_template_tree" parent="menu_boi" sequence="1"/>
+        <menuitem name="BOI" id="base.menu_boi_root" sequence="61"/>
+        <menuitem name="BOI" id="menu_boi" parent="base.menu_boi_root" sequence="1"/>
+        <menuitem name="BOI Certificate" id="menu_boi_certificate" action="action_boi_certificate_tree" parent="menu_boi" sequence="1"/>
     </data>
 </openerp>

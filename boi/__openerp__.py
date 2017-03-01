@@ -20,25 +20,36 @@
 ##############################################################################
 
 {
-    'name': 'Boi (SQP)',
+    'name': 'BOI (SQP)',
     'version': '1.0',
     'author': 'Ecosoft',
-    'summary': 'Boi (SQP)',
-    'description': """
-
-    """,
-    'category': 'Boi',
+    'summary': 'BOI (SQP)',
+    'description': """""",
+    'category': 'BOI',
     'website': 'http://www.ecosoft.co.th',
     'images': [],
     'depends': [
-        'product',
+        'account_debitnote',
+        'create_invoice_line_percentage',
+        'ext_purchase',
+        'product_tag',
+        'product_bom_template',
+        'ext_mrp',
+        'bom_move',
+        'ext_sale',
     ],
     'demo': [],
     'data': [
         'boi_view.xml',
+        'sale_view.xml',
+        'account_invoice_view.xml',
+        'stock_view.xml',
+        'purchase_requisition_view.xml',
+        'purchase_view.xml',
+        'product_view.xml',
+        'product_rapid_create_view.xml',
     ],
-    'test': [
-    ],
+    'test': [],
     'auto_install': False,
     'application': True,
     'installable': True,

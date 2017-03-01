@@ -22,37 +22,39 @@
 from openerp.osv import fields, osv
 
 
-class boi_template_line(osv.osv):
-    _name = 'boi.template.line'
+class boi_certificate(osv.osv):
+
+    _name = 'boi.certificate'
+    _rec_name = 'boi_serial_number'
 
     _columns = {
-        'boi_id': fields.many2one('boi.template', 'Boi'),
-        'product_id': fields.many2one('product.product', 'Product', required=True),
-        'categ_id': fields.many2one('product.category', 'Category', required=True),
-        'uom_id': fields.many2one('product.uom', 'UOM', required=True),
-        'quantity': fields.float('Quantity', required=True),
-        'remark': fields.char('Remark'),
+        'approve_date': fields.date('Approve Date', required=True),
+        'start_date': fields.date('Start Date'),
+        'expire_date': fields.date('Expire Date'),
+        'boi_name': fields.char('BOI Name', required=True),
+        'boi_serial_number': fields.char('BOI Serial No', required=True),
+        'boi_cert_type': fields.char('BOI Cert. Type', required=True),
+        'promotion_qty': fields.float('Promotion QTY', required=True),
+        'uom_id': fields.many2one('product.uom', 'Unit of Measure', required=True),
     }
 
-    def onchange_product_id(self, cr, uid, ids, product_id, context):
-        if not product_id:
-            return {'value': {'categ_id': False, 'uom_id': False}}
-        product = self.pool.get('product.product').browse(cr, uid, product_id, context)
-        val = {
-            'categ_id': product.categ_id.id,
-            'uom_id': product.uom_id.id,
-        }
-        return {'value': val}
+boi_certificate()
 
-boi_template_line()
 
-class boi_template(osv.osv):
-    _name = 'boi.template'
+class boi_certificate_line(osv.osv):
+
+    _name = 'boi.certificate.line'
 
     _columns = {
-        'boi': fields.char('Boi', size=64, required=True),
-        'start_date': fields.date('Start Date', required=True),
-        'end_date': fields.date('End Date', required=True),
-        'boi_lines': fields.one2many('boi.template.line', 'boi_id', 'Boi Line'),
+        'product_id': fields.many2one('product.product', 'Product'),
+        'boi_serial_number': fields.many2one('boi.certificate', 'BOI Serial No', required=True),
+        'boi_name': fields.char('BOI Name'),
     }
-boi_template()
+
+    def onchange_boi_serial_number(self, cr, uid, ids, boi_serial_number, context=None):
+        boi_obj = self.pool.get('boi.certificate')
+        if boi_serial_number:
+            boi = boi_obj.browse(cr, uid, boi_serial_number, context=context)
+        return {'value': {'boi_name': boi.boi_name}}
+
+boi_certificate_line()
