@@ -26,7 +26,7 @@ class product_product(osv.osv):
     _inherit = 'product.product'
 
     _columns = {
-        'boi_lines': fields.one2many('boi.certificate.line', 'product_id', 'BOI Certificate'),
+        'boi_lines': fields.one2many('product.product.boi.certificate', 'product_id', 'BOI Certificate'),
     }
 
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):

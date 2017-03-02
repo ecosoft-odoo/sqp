@@ -42,7 +42,7 @@ class purchase_order(osv.osv):
         if vals.get('name', '/') == '/':
             vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'purchase.order') or '/'
         if vals.get('boi_type', False) and vals.get('name', False):
-            vals.update({'name': vals.get('boi_type') + '-' + vals.get('name')})
+            vals.update({'name': '%s-%s'%(vals.get('boi_type'),vals.get('name'))})
         return super(purchase_order, self).create(cr, uid, vals, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
@@ -52,7 +52,7 @@ class purchase_order(osv.osv):
                     if order.name.find('BOI') >= 0 and vals.get('boi_type') == 'NONBOI':
                         name = order.name.replace('BOI', 'NONBOI')
                     else:
-                        name = vals.get('boi_type') + '-' + order.name
+                        name = '%s-%s'%(vals.get('boi_type'),order.name)
                 else:
                     if order.name.find('NONBOI') >= 0 and vals.get('boi_type') == 'BOI':
                         name = order.name.replace('NONBOI', 'BOI')
@@ -67,8 +67,9 @@ class purchase_order(osv.osv):
         if res:
             picking = picking_obj.browse(cr, uid, res, context=context)
             for order in self.browse(cr, uid, ids, context=context):
-                name = order.boi_type + '-' + picking.name
-                picking_obj.write(cr, uid, res, {'boi_type': order.boi_type, 'boi_number_id': order.boi_number_id.id, 'name': name})
+                name = '%s-%s'%(order.boi_type,picking.name)
+                boi_number_id = order.boi_number_id and order.boi_number_id.id or False
+                picking_obj.write(cr, uid, res, {'boi_type': order.boi_type, 'boi_number_id': boi_number_id, 'name': name})
         return res
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):

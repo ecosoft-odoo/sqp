@@ -10,7 +10,7 @@
                     <page string="BOI">
                         <field name="boi_lines">
                             <tree string="BOI" editable="bottom">
-                                <field name="boi_serial_number" on_change="onchange_boi_serial_number(boi_serial_number, context)" options="{'create': false, 'create_edit': false}"/>
+                                <field name="boi_cert_id" options="{'create': false, 'create_edit': false}"/>
                                 <field name="boi_name"/>
                             </tree>
                         </field>
