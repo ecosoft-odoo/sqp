@@ -28,19 +28,13 @@ class mrp_production(osv.osv):
     def _get_name(self, cr, uid, vals, context=None):
         product_obj = self.pool.get('product.product')
         order_obj = self.pool.get('sale.order')
-        if vals.get('active_id', False) and vals.get('active_ids', False):
+        name = '/'
+        if vals.get('active_ids', False):
             for product in product_obj.browse(cr, uid, vals.get('active_ids')):
                 if product.ref_order_id:
                     name = self.pool.get('ir.sequence').get(cr, uid, 'mrp.production')
-                    order = order_obj.browse(cr, uid, product.ref_order_id.id, context)
-                    if order.product_tag_id.name == 'BOI':
-                        name = 'BOI' + '-' + name
-                    else:
-                        name = 'NONBOI' + '-' + name
-                else:
-                    name = '/'
-        else:
-            name = '/'
+                    tag_name = product.ref_order_id.product_tag_id and product.ref_order_id.product_tag_id.name or False
+                    name = (tag_name == 'BOI') and ('%s-%s'%('BOI',name)) or ('%s-%s'%('NONBOI',name))
         return name
 
     _defaults = {
@@ -57,9 +51,9 @@ class mrp_production(osv.osv):
                 order = order_obj.browse(cr, uid, vals.get('order_id'), context=context)
                 if order.product_tag_id:
                     if order.product_tag_id.name == 'BOI':
-                        vals['name'] = 'BOI' + '-' + vals.get('name')
+                        vals['name'] = '%s-%s'%('BOI',vals.get('name'))
                     else:
-                        vals['name'] = 'NONBOI' + '-' + vals.get('name')
+                        vals['name'] = '%s-%s'%('NONBOI',vals.get('name'))
         return super(mrp_production, self).create(cr, uid, vals, context=context)
 
     def copy(self, cr, uid, id, default=None, context=None):
@@ -76,7 +70,7 @@ class mrp_production(osv.osv):
                         boi_type = 'BOI'
                     else:
                         boi_type = 'NONBOI'
-                    name = boi_type + '-' + production.name
+                    name = '%s-%s'%(boi_type,production.name)
                     self.write(cr, uid, [res], {'name': name}, context=context)
         return res
 
@@ -85,7 +79,7 @@ class mrp_production(osv.osv):
             context = {}
         if vals.get('name', '/') == '/':
             order_obj = self.pool.get('sale.order')
-            boi_type = ''
+            boi_type = False
             for production in self.browse(cr, uid, ids, context=context):
                 if vals.get('order_id', False):
                     order = order_obj.browse(cr, uid, vals.get('order_id'), context=context)
@@ -94,12 +88,12 @@ class mrp_production(osv.osv):
                             boi_type = 'BOI'
                         else:
                             boi_type = 'NONBOI'
-                if boi_type != '':
+                if boi_type:
                     if production.name.find(boi_type) < 0:
                         if production.name.find('BOI') >= 0 and boi_type == 'NONBOI':
                             name = production.name.replace('BOI', 'NONBOI')
                         else:
-                            name = boi_type + '-' + production.name
+                            name = '%s-%s'%(boi_type,production.name)
                     else:
                         if production.name.find('NONBOI') >=0 and boi_type == 'BOI':
                             name = production.name.replace('NONBOI', 'BOI')
@@ -122,7 +116,7 @@ class mrp_production(osv.osv):
                     else:
                         boi_type = 'NONBOI'
                     boi_number_id = production.order_id.boi_number_id.id
-                    name = boi_type + '-' + picking.name
+                    name = '%s-%s'%(boi_type,picking.name)
                     picking_obj.write(cr, uid, res, {'name': name, 'boi_type': boi_type, 'boi_number_id': boi_number_id}, context=context)
         return res
 
@@ -140,7 +134,7 @@ class mrp_production(osv.osv):
                     else:
                         boi_type = 'NONBOI'
                     boi_number_id = production.order_id.boi_number_id.id
-                    name = boi_type + '-' + picking.name
+                    name = '%s-%s'%(boi_type,picking.name)
                     picking_obj.write(cr, uid, res, {'name': name, 'boi_type': boi_type, 'boi_number_id': boi_number_id}, context=context)
         return res
 
@@ -152,20 +146,15 @@ class bom_choice_insulation(osv.osv):
     _inherit = 'bom.choice.insulation'
 
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
-        args = args or {}
-        context = context or {}
+        if context is None:
+            context = {}
+        insulation_ids = self.search(cr, user, args, limit=limit, context=context)
         if context.get('order_id', False):
             order_obj = self.pool.get('sale.order')
             order = order_obj.browse(cr, user, context.get('order_id'), context=context)
             if order.product_tag_id:
                 if order.product_tag_id.name == 'BOI':
                     insulation_ids = self.search(cr, user, [('name', '=', 'PIR')] + args, limit=limit, context=context)
-                else:
-                    insulation_ids = self.search(cr, user, args, limit=limit, context=context)
-            else:
-                insulation_ids = self.search(cr, user, args, limit=limit, context=context)
-        else:
-            insulation_ids = self.search(cr, user, args, limit=limit, context=context)
         return self.name_get(cr, user, insulation_ids, context=context)
 
 bom_choice_insulation()

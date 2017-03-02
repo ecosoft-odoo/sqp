@@ -40,7 +40,7 @@ class procurement_order(osv.osv):
                             boi_type = 'BOI'
                         else:
                             boi_type = 'NONBOI'
-                        production_obj.write(cr, uid, [res.get(procurement.id)], {'name': boi_type + '-' + production.name})
+                        production_obj.write(cr, uid, [res.get(procurement.id)], {'name': '%s-%s'%(boi_type,production.name)})
         return res
 
 procurement_order()

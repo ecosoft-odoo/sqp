@@ -71,10 +71,10 @@ class stock_picking_out(osv.osv):
             if context.get('is_delivery_order', False):
                 seq_obj_name =  self._name
                 old_name = self.pool.get('ir.sequence').get(cr, user, seq_obj_name)
-                vals['name'] = vals.get('boi_type') + '-' + old_name
+                vals['name'] = '%s-%s'%(vals.get('boi_type'),old_name)
             elif context.get('is_bom_move', False):
                 vals['name'] = self.pool.get('ir.sequence').get(cr, user, 'bom.move')
-                vals['name'] = vals.get('boi_type') + '-' + vals.get('name')
+                vals['name'] = '%s-%s'%(vals.get('boi_type'),vals.get('name'))
         return super(stock_picking_out, self).create(cr, user, vals, context=context)
 
     def copy(self, cr, uid, id, default=None, context=None):
@@ -82,19 +82,18 @@ class stock_picking_out(osv.osv):
             default = {}
         if context is None:
             context = {}
-        print context
         default = default.copy()
         if context.get('is_delivery_order', False):
             picking_obj = self.browse(cr, uid, id, context=context)
             seq_obj_name = 'stock.picking' + ('.' + picking_obj.type if picking_obj.type != 'internal' else '')
-            default['name'] = picking_obj.boi_type + '-' + self.pool.get('ir.sequence').get(cr, uid, seq_obj_name)
+            default['name'] = '%s-%s'%(picking_obj.boi_type,self.pool.get('ir.sequence').get(cr, uid, seq_obj_name))
             default.setdefault('origin', False)
             default.setdefault('backorder_id', False)
             res = super(stock_picking_out, self).copy(cr, uid, id, default, context)
         elif context.get('is_bom_move', False):
             res = super(stock_picking_out, self).copy(cr, uid, id, default, context)
             picking = self.browse(cr, uid, res, context=context)
-            name = picking.boi_type + '-' + picking.name
+            name = '%s-%s'%(picking.boi_type,picking.name)
             self.write(cr, uid, res, {'name': name}, context=context)
         else:
             res = super(stock_picking_out, self).copy(cr, uid, id, default, context)
@@ -110,7 +109,7 @@ class stock_picking_out(osv.osv):
                         if picking.name.find('BOI') >= 0 and vals.get('boi_type') == 'NONBOI':
                             name = picking.name.replace('BOI', 'NONBOI')
                         else:
-                            name = vals.get('boi_type') + '-' + picking.name
+                            name = '%s-%s'%(vals.get('boi_type'),picking.name)
                     else:
                         if picking.name.find('NONBOI') >= 0 and vals.get('boi_type') == 'BOI':
                             name = picking.name.replace('NONBOI', 'BOI')
@@ -120,8 +119,6 @@ class stock_picking_out(osv.osv):
         return super(stock_picking_out, self).write(cr, uid, ids, vals, context=context)
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):
-        if context is None:
-            context = {}
         return {'value': {'boi_number_id': False}}
 
 stock_picking_out()
@@ -150,7 +147,7 @@ class stock_picking_in(osv.osv):
         if vals.get('name', '/') == '/':
             seq_obj_name =  self._name
             vals['name'] = self.pool.get('ir.sequence').get(cr, user, seq_obj_name)
-            vals['name'] = vals.get('boi_type') + '-' + vals.get('name')
+            vals['name'] = '%s-%s'%(vals.get('boi_type'),vals.get('name'))
         return super(stock_picking_in, self).create(cr, user, vals, context=context)
 
     def copy(self, cr, uid, id, default=None, context=None):
@@ -158,13 +155,12 @@ class stock_picking_in(osv.osv):
             default = {}
         if context is None:
             context = {}
-        res = super(stock_picking_in, self).copy(cr, uid, id, default=default, context=context)
-        print res
+        res = super(stock_picking_in, self).copy(cr, uid, id, default=default, context=context) 
         if res:
             if context.get('default_type', '') == 'in':
                 picking_obj = self.pool.get('stock.picking')
                 picking = picking_obj.browse(cr, uid, res, context=context)
-                name = picking.boi_type + '-' + picking.name
+                name = '%s-%s'%(picking.boi_type,picking.name)
                 picking_obj.write(cr, uid, res, {'name': name}, context=context)
         return res
 
@@ -178,7 +174,7 @@ class stock_picking_in(osv.osv):
                         if picking.name.find('BOI') >= 0 and vals.get('boi_type') == 'NONBOI':
                             name = picking.name.replace('BOI', 'NONBOI')
                         else:
-                            name = vals.get('boi_type') + '-' + picking.name
+                            name = '%s-%s'%(vals.get('boi_type'),picking.name)
                     else:
                         if picking.name.find('NONBOI') >= 0 and vals.get('boi_type') == 'BOI':
                             name = picking.name.replace('NONBOI', 'BOI')
@@ -188,6 +184,4 @@ class stock_picking_in(osv.osv):
         return super(stock_picking_in, self).write(cr, uid, ids, vals, context=context)
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):
-        if context is None:
-            context = {}
         return {'value': {'boi_number_id': False}}
