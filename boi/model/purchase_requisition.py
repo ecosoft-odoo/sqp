@@ -41,7 +41,7 @@ class purchase_requisition(osv.osv):
     def create(self, cr, uid, vals, context=None):
         if vals.get('name', '/') == '/':
             vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'purchase.order.requisition')
-        vals.update({'name': vals.get('boi_type') + '-' + vals.get('name')})
+        vals.update({'name': '%s-%s'%(vals.get('boi_type'),vals.get('name'))})
         return super(purchase_requisition, self).create(cr, uid, vals, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
@@ -51,7 +51,7 @@ class purchase_requisition(osv.osv):
                     if requisition.name.find('BOI') >= 0 and vals.get('boi_type') == 'NONBOI':
                         name = requisition.name.replace('BOI', 'NONBOI')
                     else:
-                        name = vals.get('boi_type') + '-' + requisition.name
+                        name = '%s-%s'%(vals.get('boi_type'),requisition.name)
                 else:
                     if requisition.name.find('NONBOI') >= 0 and vals.get('boi_type') == 'BOI':
                         name = requisition.name.replace('NONBOI', 'BOI')
@@ -68,8 +68,9 @@ class purchase_requisition(osv.osv):
                 order_ids = [res.get(requisition.id)]
             if order_ids:
                 order = order_obj.browse(cr, uid, order_ids, context=context)[0]
-                name = requisition.boi_type + '-' + order.name
-                order_obj.write(cr, uid, order_ids, {'boi_type': requisition.boi_type, 'boi_number_id': requisition.boi_number_id.id, 'name': name}, context=context)
+                name = '%s-%s'%(requisition.boi_type,order.name)
+                boi_number_id = requisition.boi_number_id and requisition.boi_number_id.id or False
+                order_obj.write(cr, uid, order_ids, {'boi_type': requisition.boi_type, 'boi_number_id': boi_number_id, 'name': name}, context=context)
         return res
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):

@@ -42,7 +42,7 @@ class sale_order(osv.osv):
                 boi_type = 'BOI'
             else:
                 boi_type = 'NONBOI'
-            vals.update({'name': boi_type + '-' + vals.get('name')})
+            vals.update({'name': '%s-%s'%(boi_type, vals.get('name'))})
         return super(sale_order, self).create(cr, uid, vals, context=context)
 
     def copy(self, cr, uid, id, default=None, context=None):
@@ -58,7 +58,7 @@ class sale_order(osv.osv):
                     boi_type = 'BOI'
                 else:
                     boi_type = 'NONBOI'
-                name = boi_type + '-' + order.name
+                name = '%s-%s'%(boi_type,order.name)
                 self.write(cr, uid, res, {'name': name}, context=context)
         return res
 
@@ -83,7 +83,7 @@ class sale_order(osv.osv):
                     if order.name.find('BOI') >= 0 and boi_type == 'NONBOI':
                         name = order.name.replace('BOI', 'NONBOI')
                     else:
-                        name = boi_type + '-' + order.name
+                        name = '%s-%s'%(boi_type,order.name)
                 else:
                     if order.name.find('NONBOI') >= 0 and boi_type == 'BOI':
                         name = order.name.replace('NONBOI', 'BOI')
@@ -97,7 +97,7 @@ class sale_order(osv.osv):
             context = {}
         super(sale_order, self).action_button_confirm(cr, uid, ids, context=context)
         order = self.browse(cr, uid, ids[0])
-        if order.product_tag_id.name == 'BOI':
+        if order.product_tag_id and order.product_tag_id.name == 'BOI':
             boi_type = 'BOI'
         else:
             boi_type = 'NONBOI'
@@ -106,7 +106,7 @@ class sale_order(osv.osv):
                 if order.name.find('BOI') >= 0 and boi_type == 'NONBOI':
                     name = order.name.replace('BOI', 'NONBOI')
                 else:
-                    name = boi_type + '-' + order.name
+                    name = '%s-%s'%(boi_type,order.name)
             else:
                 if order.name.find('NONBOI') >= 0 and boi_type == 'BOI':
                     name = order.name.replace('NONBOI', 'BOI')
@@ -123,7 +123,8 @@ class sale_order(osv.osv):
                 boi_type = 'BOI'
             else:
                 boi_type = 'NONBOI'
-            res.update({'boi_type': boi_type, 'boi_number_id': order.boi_number_id.id, 'name': boi_type + '-' + res.get('name')})
+            boi_number_id = order.boi_number_id and order.boi_number_id.id or False
+            res.update({'boi_type': boi_type, 'boi_number_id': boi_number_id, 'name': '%s-%s'%(boi_type,res.get('name'))})
         return res
 
     def onchange_product_tag_id(self, cr, uid, ids, product_tag_id, context=None):

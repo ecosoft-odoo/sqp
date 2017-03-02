@@ -19,21 +19,16 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, osv
-
-class product_rapid_create(osv.osv):
-
-    _inherit = 'product.rapid.create'
-
-product_rapid_create()
-
-
-class product_rapid_create_line(osv.osv):
-
-    _inherit = 'product.rapid.create.line'
-
-    _columns = {
-        'boi_name': fields.many2one('product.product', 'BOI Name'),
-    }
-
-product_rapid_create_line()
+from . import boi
+from . import sale
+from . import account_invoice
+from . import stock
+from . import stock_partial_picking
+from . import sale_line_invoice
+from . import purchase_requisition
+from . import purchase
+from . import product
+from . import stock_invoice_onshipping
+from . import mrp
+from . import procurement
+from . import product_rapid_create
