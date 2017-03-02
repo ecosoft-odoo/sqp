@@ -41,20 +41,14 @@ class boi_certificate(osv.osv):
 boi_certificate()
 
 
-class boi_certificate_line(osv.osv):
+class product_product_boi_certificate(osv.osv):
 
-    _name = 'boi.certificate.line'
+    _name = 'product.product.boi.certificate'
 
     _columns = {
-        'product_id': fields.many2one('product.product', 'Product'),
-        'boi_serial_number': fields.many2one('boi.certificate', 'BOI Serial No', required=True),
-        'boi_name': fields.char('BOI Name'),
+        'product_id': fields.many2one('product.product', 'Product', ondelete='cascade'),
+        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Serial No', required=True),
+        'boi_name': fields.related('boi_cert_id', 'boi_name', string='BOI Name', type='char', readonly=True),
     }
 
-    def onchange_boi_serial_number(self, cr, uid, ids, boi_serial_number, context=None):
-        boi_obj = self.pool.get('boi.certificate')
-        if boi_serial_number:
-            boi = boi_obj.browse(cr, uid, boi_serial_number, context=context)
-        return {'value': {'boi_name': boi.boi_name}}
-
-boi_certificate_line()
+product_product_boi_certificate()

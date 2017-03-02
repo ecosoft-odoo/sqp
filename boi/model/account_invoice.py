@@ -44,37 +44,31 @@ class account_invoice(osv.osv):
             context = {}
         res = super(account_invoice, self).action_number(cr, uid, ids, context=context)
         for invoice in self.browse(cr, uid, ids, context=context):
-            self.write(cr, uid, invoice.id, {'number': invoice.boi_type + '-' + invoice.number}, context=context)
+            self.write(cr, uid, invoice.id, {'number': '%s-%s'%(invoice.boi_type,invoice.number)}, context=context)
         return res
 
     def refund(self, cr, uid, ids, date=None, period_id=None, description=None, journal_id=None, context=None):
-        date = date or {}
-        period_id = period_id or {}
-        description = description or {}
-        journal_id = journal_id or {}
-        context = context or {}
-        res = super(account_invoice, self).refund(cr, uid, ids, date, period_id, description, journal_id, context)
+        if context is None:
+            context = {}
+        res = super(account_invoice, self).refund(cr, uid, ids, date=date, period_id=period_id, description=description, journal_id=journal_id, context=context)
         invoice_obj = self.pool.get('account.invoice')
         if context.get('active_ids', False):
             for invoice in invoice_obj.browse(cr, uid, context.get('active_ids')):
-                invoice_obj.write(cr, uid, res, {'boi_type': invoice.boi_type, 'boi_number_id': invoice.boi_number_id.id}, context=context)
+                boi_number_id = invoice.boi_number_id and invoice.boi_number_id.id or False
+                invoice_obj.write(cr, uid, res, {'boi_type': invoice.boi_type, 'boi_number_id': boi_number_id}, context=context)
         return res
 
     def debitnote(self, cr, uid, ids, date=None, period_id=None, description=None, journal_id=None, context=None):
-        res = super(account_invoice, self).debitnote(cr, uid, ids, date=None, period_id=None, description=None, journal_id=None, context=None)
-        date = date or {}
-        period_id = period_id or {}
-        description = description or {}
-        journal_id = journal_id or {}
-        context = context or {}
+        if context is None:
+            context = {}        
+        res = super(account_invoice, self).debitnote(cr, uid, ids, date=date, period_id=period_id, description=description, journal_id=journal_id, context=context)
         if res and context.get('active_id', False):
             invoice = self.browse(cr, uid, context.get('active_id'), context=context)
-            self.write(cr, uid, res, {'boi_type': invoice.boi_type, 'boi_number_id': invoice.boi_number_id.id}, context=context)
+            boi_number_id = invoice.boi_number_id and invoice.boi_number_id.id or False
+            self.write(cr, uid, res, {'boi_type': invoice.boi_type, 'boi_number_id': boi_number_id}, context=context)
         return res
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):
-        if context is None:
-            context = {}
         return {'value': {'boi_number_id': False}}
 
 account_invoice()

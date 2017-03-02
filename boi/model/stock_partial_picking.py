@@ -31,6 +31,6 @@ class stock_partial_picking(osv.osv_memory):
         if res.get('context', False):
             for picking in picking_obj.browse(cr, uid, res['context']['active_ids']):
                 if picking.boi_type:
-                    name = picking.boi_type + '-' + picking.name
+                    name = '%s-%s'%(picking.boi_type,picking.name)
                     picking_obj.write(cr, uid, res['context']['active_ids'], {'name': name})
         return res

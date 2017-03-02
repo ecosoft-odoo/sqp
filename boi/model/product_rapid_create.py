@@ -21,15 +21,19 @@
 
 from openerp.osv import fields, osv
 
-class stock_invoice_onshipping(osv.osv_memory):
+class product_rapid_create(osv.osv):
 
-    _inherit = 'stock.invoice.onshipping'
+    _inherit = 'product.rapid.create'
 
-    def create_invoice(self, cr, uid, ids, context=None):
-        res = super(stock_invoice_onshipping, self).create_invoice(cr, uid, ids, context=context)
-        picking_obj = self.pool.get('stock.picking')
-        invoice_obj = self.pool.get('account.invoice')
-        for picking in picking_obj.browse(cr, uid, context.get('active_ids'), context=context):
-            if res.get(picking.id, False):
-                invoice_obj.write(cr, uid, res.get(picking.id), {'boi_type': picking.boi_type, 'boi_number_id': picking.boi_number_id.id}, context=context)
-        return res
+product_rapid_create()
+
+
+class product_rapid_create_line(osv.osv):
+
+    _inherit = 'product.rapid.create.line'
+
+    _columns = {
+        'product_id': fields.many2one('product.product', 'BOI Name'),
+    }
+
+product_rapid_create_line()

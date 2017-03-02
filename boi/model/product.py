@@ -21,26 +21,26 @@
 
 from openerp.osv import fields, osv
 
-class procurement_order(osv.osv):
+class product_product(osv.osv):
 
-    _inherit = 'procurement.order'
+    _inherit = 'product.product'
 
-    def make_mo(self, cr, uid, ids, context=None):
+    _columns = {
+        'boi_lines': fields.one2many('product.product.boi.certificate', 'product_id', 'BOI Certificate'),
+    }
+
+    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
         if context is None:
             context = {}
-        res = super(procurement_order, self).make_mo(cr, uid, ids, context=context)
-        procurement_obj = self.pool.get('procurement.order')
-        production_obj = self.pool.get('mrp.production')
-        for procurement in procurement_obj.browse(cr, uid, ids, context=context):
-            if res.get(procurement.id, False):
-                production = production_obj.browse(cr, uid, res.get(procurement.id), context=context)
-                if production.order_id:
-                    if production.order_id.product_tag_id:
-                        if production.order_id.product_tag_id.name == 'BOI':
-                            boi_type = 'BOI'
-                        else:
-                            boi_type = 'NONBOI'
-                        production_obj.write(cr, uid, [res.get(procurement.id)], {'name': boi_type + '-' + production.name})
-        return res
+        if context.get('order_id', False):
+            order_obj = self.pool.get('sale.order')
+            order = order_obj.browse(cr, user, context.get('order_id'), context=context)
+            product_tag_id = order.product_tag_id.id
+            is_international = order.is_international
+            partner_id = order.partner_id.id
+            product_ids = self.search(cr, user, [('is_international','=',is_international),('tag_ids','in',product_tag_id),'|',('partner_id','=',False),('partner_id','=',partner_id)] + args, limit=limit, context=context)
+        else:
+            product_ids = self.search(cr, user, args, context=context)
+        return self.name_get(cr, user, product_ids, context=context)
 
-procurement_order()
+product_product()

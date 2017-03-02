@@ -19,4 +19,18 @@
 #
 ##############################################################################
 
-from . import model
+from openerp.osv import fields, osv
+
+class stock_invoice_onshipping(osv.osv_memory):
+
+    _inherit = 'stock.invoice.onshipping'
+
+    def create_invoice(self, cr, uid, ids, context=None):
+        res = super(stock_invoice_onshipping, self).create_invoice(cr, uid, ids, context=context)
+        picking_obj = self.pool.get('stock.picking')
+        invoice_obj = self.pool.get('account.invoice')
+        for picking in picking_obj.browse(cr, uid, context.get('active_ids'), context=context):
+            if res.get(picking.id, False):
+                boi_number_id = picking.boi_number_id and picking.boi_number_id.id or False
+                invoice_obj.write(cr, uid, res.get(picking.id), {'boi_type': picking.boi_type, 'boi_number_id': boi_number_id}, context=context)
+        return res
