@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bom_move_pdf" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="17"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;move_lines&quot;]"/>
 	<style name="style1">
 		<box leftPadding="3"/>
@@ -71,6 +71,9 @@
 	<field name="department" class="java.lang.String">
 		<fieldDescription><![CDATA[department_id/name]]></fieldDescription>
 	</field>
+	<field name="note" class="java.lang.String">
+		<fieldDescription><![CDATA[note]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -101,7 +104,7 @@ Square Panel System Co., Ltd]]></text>
 					<font fontName="Monospaced" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[PD-F-69 Rev.-3
-วันที่บังคับใช้ : 20/02/17]]></text>
+วันที่บังคับใช้ : 6/03/17]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
 				<reportElement style="style1" mode="Transparent" x="631" y="112" width="206" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
@@ -322,4 +325,22 @@ Square Panel System Co., Ltd]]></text>
 			</staticText>
 		</band>
 	</lastPageFooter>
+	<summary>
+		<band height="30">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="34" y="5" width="944" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Monospaced" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{note}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="style1" mode="Transparent" x="0" y="5" width="34" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Monospaced" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Note:]]></text>
+			</staticText>
+		</band>
+	</summary>
 </jasperReport>

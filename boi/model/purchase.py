@@ -73,6 +73,10 @@ class purchase_order(osv.osv):
         return res
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):
-        return {'value': {'boi_number_id': False}}
+        warehouse_obj = self.pool.get('stock.warehouse')
+        name = boi_type == 'BOI' and 'FC_RM_BOI' or 'OF_RM'
+        warehouse_ids = warehouse_obj.search(cr, uid, [('name','=',name)], context=context)
+        res = warehouse_ids and {'boi_number_id': False, 'warehouse_id': warehouse_ids[0]} or {'boi_number_id': False}
+        return {'value': res}
 
 purchase_order()

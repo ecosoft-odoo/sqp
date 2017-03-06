@@ -38,6 +38,12 @@ class boi_certificate(osv.osv):
         'uom_id': fields.many2one('product.uom', 'Unit of Measure', required=True),
     }
 
+    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
+        if context is None:
+            context = {}
+        certificate_ids = self.search(cr, user, [('start_date','!=',False)] + args, limit=limit, context=context)
+        return self.name_get(cr, user, certificate_ids, context=context)
+
 boi_certificate()
 
 

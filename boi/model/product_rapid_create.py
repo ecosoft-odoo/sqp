@@ -25,6 +25,24 @@ class product_rapid_create(osv.osv):
 
     _inherit = 'product.rapid.create'
 
+    def create_product(self, cr, uid, ids, context=None):
+        result = super(product_rapid_create, self).create_product(cr, uid, ids, context=context)
+        product_obj = self.pool.get('product.product')
+        object =  self.browse(cr, uid, ids[0], context=context)
+        lines = object.panel_lines + object.door_lines + object.window_lines
+        if not len(lines):
+            return False
+        if result.get('domain', False):
+            for domain in result.get('domain'):
+                new_product_ids = domain[2]
+        index = 0
+        for line in lines:
+            boi_product_name = line.product_id.name_template
+            boi_default_code = line.product_id.default_code
+            product_obj.write(cr, uid, [new_product_ids[index]], {'boi_product_name': boi_product_name, 'boi_default_code': boi_default_code}, context=context)
+            index = index + 1
+        return result
+
 product_rapid_create()
 
 
