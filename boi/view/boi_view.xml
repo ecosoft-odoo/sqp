@@ -11,7 +11,7 @@
                             <group>
                                 <field name="boi_serial_number"/>
                                 <field name="approve_date"/>
-                                <field name="expire_date"/>
+                                <field name="expire_date" attrs="{'invisible': [('start_date','=',False)], 'required': [('start_date','!=',False)]}"/>
                                 <field name="promotion_qty"/>
                             </group>
                             <group>

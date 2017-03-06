@@ -70,7 +70,7 @@ class bom_move_report(osv.osv):
                     stock_picking sp
                       inner join stock_move sm on (sp.id = sm.picking_id)
                 where
-                    sp.is_bom_move = True and sp.type = 'out'
+                    sp.is_bom_move = True and sp.type = 'internal'
             )
         """)
 bom_move_report()

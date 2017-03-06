@@ -11,6 +11,9 @@
                     <button name="action_view_sqp_bom_move" string="View Bom Moves" type="object" class="oe_highlight"
                             attrs="{'invisible': ['|',('parent_id','=',True), ('mrp_bom_move_exists','=',False)]}"/>
                 </button>
+                <field name="short_note" position="after">
+                    <field name="approved" attrs="{'readonly': ['|',('parent_id','!=',False),('state','=','draft')]}"/>  
+                </field>
             </field>
         </record>
     </data>

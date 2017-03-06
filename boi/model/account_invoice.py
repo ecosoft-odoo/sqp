@@ -60,7 +60,7 @@ class account_invoice(osv.osv):
 
     def debitnote(self, cr, uid, ids, date=None, period_id=None, description=None, journal_id=None, context=None):
         if context is None:
-            context = {}        
+            context = {}
         res = super(account_invoice, self).debitnote(cr, uid, ids, date=date, period_id=period_id, description=description, journal_id=journal_id, context=context)
         if res and context.get('active_id', False):
             invoice = self.browse(cr, uid, context.get('active_id'), context=context)

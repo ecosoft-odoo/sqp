@@ -30,19 +30,21 @@
             <field name="model">bom.move.report</field>
             <field name="arch" type="xml">
                 <search string="BOM Move Line">
+                    <field name="product_id"/>
                     <field name="ref_mo_id"/>
+                    <field name="ref_order_id"/>
                     <filter string="New" domain="[('state','=','draft')]"/>
                     <filter string="Cancelled" domain="[('state','=','cancel')]"/>
                     <filter string="Waiting Another Move" domain="[('state','=','waiting')]"/>
                     <filter string="Waiting Availability" domain="[('state','=','confirmed')]"/>
                     <filter string="Available" domain="[('state','=','assigned')]"/>
                     <filter string="Done" domain="[('state','=','done')]"/>
-                    <field name="ref_order_id"/>
-                    <field name="partner_id"/>
-                    <field name="product_id"/>
-                    <field name="name"/>
-                    <field name="state"/>
                     <group expand="0" string="Group By...">
+                        <filter string="Ref MO" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'ref_mo_id'}"/>
+                        <filter string="Ref Sales Order" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'ref_order_id'}"/>
+                        <filter string="Product" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'product_id'}"/>
+                        <filter string="Source Location" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'location_id'}"/>
+                        <filter string="Destination Location" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'location_dest_id'}"/>
                         <filter string="Status" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'state'}"/>
                     </group>
                 </search>

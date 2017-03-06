@@ -44,7 +44,15 @@ class mrp_production(osv.osv):
         'mrp_bom_move_exists': fields.function(
             _mrp_bom_move_exists, string='MO Exists', type='boolean',
             help="It indicates that MO has at least one child."),
+        'approved': fields.boolean('Approved'),
     }
+
+    def write(self, cr, uid, ids, vals, context=None):
+        for production in self.browse(cr, uid, ids, context=context):
+            if not production.parent_id:
+                production_ids = self.search(cr, uid, [('parent_id','=',production.id)], context=context)
+                self.write(cr, uid, production_ids, {'approved': vals.get('approved', production.approved)}, context=context)
+        return super(mrp_production, self).write(cr, uid, ids, vals, context=context)
 
     def action_confirm(self, cr, uid, ids, context=None):
         uncompute_ids = filter(lambda x: x,
@@ -86,7 +94,7 @@ class mrp_production(osv.osv):
         return {
             'name': pick_name,
             'origin': production.name,
-            'type': 'out',
+            'type': 'internal',
             'state': 'draft',
             'partner_id': production.partner_id.id,
             'note': production.note,
@@ -195,7 +203,7 @@ class mrp_production(osv.osv):
         bom_move_ids = stock_picking.search(cr, uid,
                                             [('origin', '=', mo_name),
                                              ('is_bom_move', '=', True),
-                                             ('type', '=', 'out')])
+                                             ('type', '=', 'internal')])
 
         # choose the view_mode accordingly
         res_tree = mod_obj.get_object_reference(
@@ -216,7 +224,7 @@ class mrp_production(osv.osv):
     def action_cancel(self, cr, uid, ids, context=None):
         res = super(mrp_production, self).action_cancel(cr, uid, ids, context)
         picking_obj = self.pool.get('stock.picking')
-        cr.execute("select id from stock_picking where is_bom_move = true and type = 'out'")
+        cr.execute("select id from stock_picking where is_bom_move = true and type = 'internal'")
         bom_move = cr.fetchall()
         if len(bom_move) == 1:
             for production in self.browse(cr, uid, ids):

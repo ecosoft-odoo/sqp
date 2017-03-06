@@ -27,6 +27,8 @@ class product_product(osv.osv):
 
     _columns = {
         'boi_lines': fields.one2many('product.product.boi.certificate', 'product_id', 'BOI Certificate'),
+        'boi_product_name': fields.char('BOI Product Name'),
+        'boi_default_code': fields.char('BOI Default Code'),
     }
 
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
@@ -38,8 +40,13 @@ class product_product(osv.osv):
             product_tag_id = order.product_tag_id.id
             is_international = order.is_international
             partner_id = order.partner_id.id
-            product_ids = self.search(cr, user, [('is_international','=',is_international),('tag_ids','in',product_tag_id),'|',('partner_id','=',False),('partner_id','=',partner_id)] + args, limit=limit, context=context)
+            if order.product_tag_id and order.product_tag_id.name == 'BOI':
+                product_ids = self.search(cr, user, [('is_international','=',is_international),('tag_ids','in',product_tag_id),'|',('partner_id','=',False),('partner_id','=',partner_id)] + args, limit=limit, context=context)
+            else:
+                return False
         else:
+            if context.get('order_id', True) == False:
+                return False
             product_ids = self.search(cr, user, args, context=context)
         return self.name_get(cr, user, product_ids, context=context)
 
