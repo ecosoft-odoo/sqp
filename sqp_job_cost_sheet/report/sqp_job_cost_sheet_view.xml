@@ -30,6 +30,7 @@
                     <field name="comm_install_invoice_list_amount" string="Install/Exp Export" sum="Install/Exp Export"/>
                     <field name="expense_list_amount" string="Expense" sum="Expense"/>
                     <field name="electric_amount" string="Electric" sum="Transport"/>
+                    <field name="overhead_amount"/>
                     <field name="profit_amount" string="Total Profit" sum="Total Profit"/>
                     <field name="state"/>
                 </tree>
