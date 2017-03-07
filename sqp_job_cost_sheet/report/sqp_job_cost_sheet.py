@@ -105,15 +105,19 @@ class sqp_job_cost_sheet(osv.osv):
             for cwl in self.pool.get('commission.worksheet.line').read(cr, uid, cwl_ids, ['commission_amt']):
                 res[order.id]['commission_amount'] = cwl['commission_amt']
                 break
+            # Overhead
+            res[order.id]['overhead_amount'] = order.amount_net * order.sale_percent_overhead / 100
             # Finalize
             res[order.id]['total_cost_amount'] = res[order.id]['commission_amount'] + res[order.id]['mrp_main_rm_amount'] + res[order.id]['mrp_rm_amount'] \
                 + res[order.id]['labor_amount'] + res[order.id]['transport_amount'] + res[order.id]['electric_amount'] \
                 + res[order.id]['supply_list_amount'] + res[order.id]['subcontract_amount'] \
                 + res[order.id]['expense_list_amount'] + res[order.id]['plane_ticket_invoice_list_amount'] \
-                + res[order.id]['comm_install_invoice_list_amount'] + res[order.id]['other_invoice_list_amount']
+                + res[order.id]['comm_install_invoice_list_amount'] + res[order.id]['other_invoice_list_amount'] \
+                + res[order.id]['overhead_amount']
             res[order.id]['profit_amount'] = order.amount_net - res[order.id]['total_cost_amount']
             res[order.id]['profit_percent'] = order.amount_net and (res[order.id]['profit_amount'] / order.amount_net) * 100 or 100
             res[order.id]['total_cost_percent'] = order.amount_net and (res[order.id]['total_cost_amount'] / order.amount_net) * 100 or 100
+
         return res
 
     def _search_amount(self, cr, uid, obj, name, args, query, context):
@@ -344,6 +348,7 @@ class sqp_job_cost_sheet(osv.osv):
                                    ('10', 'October'), ('11', 'November'), ('12', 'December')], 'Month', readonly=True),
         'add_disc': fields.float('Final Discount (%)', readonly=True),
         'amount_net': fields.float('Final Order Amount', readonly=True),
+        'sale_percent_overhead': fields.float('Overhead (%)', readonly=True),
         'mrp_main_rm_amount': fields.function(_amount_all, string='Material', multi="sums", fnct_search=_search_mrp_main_rm_amount),
         'mrp_rm_amount': fields.function(_amount_all, string='Supply', multi="sums", fnct_search=_search_mrp_rm_amount),
         'labor_amount': fields.function(_amount_all, string='Labor', multi="sums", fnct_search=_search_labor_amount),
@@ -360,6 +365,7 @@ class sqp_job_cost_sheet(osv.osv):
         'total_cost_percent': fields.function(_amount_all, string='Percent Total Cost', multi="sums", fnct_search=_search_total_cost_percent),
         'profit_amount': fields.function(_amount_all, string='Profit Amount', multi="sums", fnct_search=_search_profit_amount),
         'profit_percent': fields.function(_amount_all, string='Percent Profit', multi="sums", fnct_search=_search_profit_percent),
+        'overhead_amount': fields.function(_amount_all, string='Overhead', multi="sums"),
         # Tabs
         'order_line': fields.one2many('sqp.job.cost.sheet.order.line', 'order_id', 'Order Lines', readonly=True),
         'mrp_main_rm_list': fields.one2many('sqp.job.cost.sheet.mrp.rm.list', 'order_id', 'Main Material', domain=[('product_id.main_material', '=', 'True')], readonly=True),
@@ -386,7 +392,8 @@ class sqp_job_cost_sheet(osv.osv):
             sub.user_id, sub.partner_id, sub.date, sub.year, sub.month, sub.day, sub.add_disc,
             case when curr.type_ref_base = 'smaller' then
                 sub.amount_net / cr.rate_sell else sub.amount_net * cr.rate_sell
-            end AS amount_net
+            end AS amount_net,
+            sale_percent_overhead
             from
             (select so.id as id,
                 so.id as order_id,
@@ -402,7 +409,8 @@ class sqp_job_cost_sheet(osv.osv):
                 to_char(so.date_order::timestamp with time zone, 'MM'::text) AS month,
                 to_char(so.date_order::timestamp with time zone, 'YYYY-MM-DD'::text) AS day,
                 so.add_disc,
-                case when coalesce(so.amount_final, 0) = 0 then so.amount_net else so.amount_final end as amount_net
+                case when coalesce(so.amount_final, 0) = 0 then so.amount_net else so.amount_final end as amount_net,
+                so.sale_percent_overhead
             from
             sale_order so join product_pricelist price on so.pricelist_id = price.id
             where so.state not in ('draft', 'cancel')) sub

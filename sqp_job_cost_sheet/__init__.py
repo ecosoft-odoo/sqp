@@ -23,5 +23,6 @@ import sqp_job_book
 import product
 import sale
 import report
+import res_company
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

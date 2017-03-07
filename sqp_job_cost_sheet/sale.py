@@ -32,11 +32,19 @@ class sale_order(osv.osv):
             ('comm_install', 'Commission / Installation'), ],
             'Job Cost Type',
             help="Project assigned Cost Type here, will be show as cost in Job Cost Sheet Report for its specified type",),
-        'area_so': fields.float('Area')
+        'area_so': fields.float('Area'),
+        'sale_percent_overhead': fields.float('Job Cost Overhead (%)'),
     }
     _defaults = {
         'main_material': False
     }
+
+    def action_button_confirm(self, cr, uid, ids, context=None):
+        assert len(ids) == 1, 'This option should only be used for a single id at a time.'
+        res_users_obj = self.pool.get('res.users')
+        company = res_users_obj.browse(cr, uid, uid, context=context).company_id
+        self.write(cr, uid, ids, {'sale_percent_overhead': company.sale_percent_overhead})
+        super(sale_order, self).action_button_confirm(cr, uid, ids, context=context)
 
 sale_order()
 
