@@ -138,6 +138,21 @@ class mrp_production(osv.osv):
                     picking_obj.write(cr, uid, res, {'name': name, 'boi_type': boi_type, 'boi_number_id': boi_number_id}, context=context)
         return res
 
+    def _prepare_stock_move(self, cr, uid, move_line, picking_id, production, context=None):
+        if context is None:
+            context = {}
+        location_obj = self.pool.get('stock.location')
+        location_ids = location_obj.search(cr, uid, [('name','=','FC_RM_BOI')], context=context)
+        result = super(mrp_production, self)._prepare_stock_move(cr, uid, move_line, picking_id, production, context=context)
+        if result:
+            production_parent = self.browse(cr, uid, production.parent_id.id, context=context)
+            if production_parent.order_id:
+                if production_parent.order_id.product_tag_id:
+                    if production_parent.order_id.product_tag_id.name == 'BOI':
+                        if len(location_ids) > 0:
+                            result.update({'location_id': location_ids[0]})
+        return result
+
 mrp_production()
 
 
