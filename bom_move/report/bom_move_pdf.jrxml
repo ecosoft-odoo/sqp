@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bom_move_pdf" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="14"/>
+	<property name="ireport.y" value="0"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;move_lines&quot;]"/>
 	<style name="style1">
 		<box leftPadding="3"/>
@@ -88,7 +88,7 @@ Square Panel System Co., Ltd]]></text>
 					<font fontName="Monospaced" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[PD-F-69 Rev.-3
-วันที่บังคับใช้ : 6/03/17]]></text>
+วันที่บังคับใช้ : 15/03/17]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="0" y="70" width="802" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
