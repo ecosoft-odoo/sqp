@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice Form" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.layers" value="##Fri Aug 06 11:09:44 ICT 2010\nlayer.1.name=Invoice BG\nlayer.1.visible=true\nlayer.1.id=1\nlayer.0.name=Background\nlayer.0.visible=true\nlayer.0.id=0"/>
-	<property name="ireport.zoom" value="1.9487171000000154"/>
-	<property name="ireport.x" value="440"/>
-	<property name="ireport.y" value="1193"/>
+	<property name="ireport.zoom" value="1.0000000000000075"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;invoice_line&quot;]"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String">
 		<defaultValueExpression><![CDATA["/home/kittiu/workspace/openerp_sqp/sqp_addons/jrxml_reports/sale/"]]></defaultValueExpression>
@@ -224,9 +224,9 @@
 	<pageHeader>
 		<band height="250" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement x="490" y="140" width="82" height="15"/>
+				<reportElement x="490" y="140" width="220" height="15"/>
 				<textElement>
-					<font fontName="SansSerif" size="10" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					<font fontName="SansSerif" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Number-number}]]></textFieldExpression>
 			</textField>
