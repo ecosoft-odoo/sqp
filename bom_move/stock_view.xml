@@ -4,8 +4,11 @@
 
         <!-- Delivery Order, domain: is_bmo_move = False -->
         <record id="stock.action_picking_tree" model="ir.actions.act_window">
-            <field name="context">{'default_type': 'internal', 'contact_display': 'partner_address', 'is_delivery_order': True}</field>
-            <field name="domain">[('type','=','internal'),('is_supply_list','=',False),('is_bom_move','=',False)]</field>
+            <field name="domain">[('type','=','out'),('is_supply_list','=',False),('is_bom_move','=',False)]</field>
+        </record>
+
+        <record id="stock.action_picking_tree6" model="ir.actions.act_window">
+            <field name="domain">[('type','=','internal'),('is_supply_list','=',False),('is_bom_move','=',False)]</field>  
         </record>
 
         <!-- Bom Move -->
@@ -16,7 +19,7 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form,calendar</field>
             <field name="domain">[('type','=','internal'), ('is_bom_move','=',True)]</field>
-            <field name="context">{'default_type': 'internal', 'contact_display': 'partner_address', 'is_bom_move': True}</field>
+            <field name="context">{'default_type': 'internal', 'contact_display': 'partner_address', 'is_bom_move': True, 'supply_location_id': 15}</field>
             <field name="search_view_id" ref="stock.view_picking_out_search"/>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
@@ -104,7 +107,7 @@
         </record>
 
         <!-- picking out tree -->
-        <record id="view_picking_out_tree" model="ir.ui.view">
+        <!-- <record id="view_picking_out_tree" model="ir.ui.view">
             <field name="name">view.picking.out.tree</field>
             <field name="inherit_id" ref="stock.view_picking_out_tree"/>
             <field name="model">stock.picking.out</field>
@@ -117,7 +120,7 @@
                     </xpath>
                   </data>
               </field>
-        </record>
+        </record> -->
 
         <!-- picking out search -->
         <!-- <record id="view_picking_out_search" model="ir.ui.view">
