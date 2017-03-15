@@ -48,6 +48,7 @@
         'view/purchase_view.xml',
         'view/product_view.xml',
         'view/product_rapid_create_view.xml',
+        'report/boi_report_view.xml',
         'security/ir.model.access.csv',
     ],
     'test': [],

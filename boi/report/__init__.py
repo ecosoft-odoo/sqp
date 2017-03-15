@@ -19,5 +19,4 @@
 #
 ##############################################################################
 
-from . import model
-from . import report
+from . import boi_report

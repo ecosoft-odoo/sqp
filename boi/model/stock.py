@@ -21,6 +21,7 @@
 
 from openerp.osv import fields, osv
 from openerp.tools.translate import _
+from openerp.tools import float_compare
 
 class stock_picking(osv.osv):
 
@@ -144,7 +145,8 @@ class stock_picking_out(osv.osv):
             available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
             if available_product_detail.values():
                 available_product_quantity = available_product_detail.values()[0]
-            if available_product_quantity - move.product_qty < 0:
+            compare = float_compare(available_product_quantity, move.product_qty, 3)
+            if compare == -1:
                 flag = True
                 break
         if flag:
@@ -155,12 +157,12 @@ class stock_picking_out(osv.osv):
             else:
                 for move in move_obj.browse(cr, uid, move_ids, context=context):
                     internal_move_ids = move_obj.search(cr, uid, [('picking_id','=',internal_ids[0]),('product_id','=',move.product_id.id)], context=context)
-                    print internal_move_ids
                     product_id = move.product_id.id
                     available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
                     if available_product_detail.values():
                         available_product_quantity = available_product_detail.values()[0]
-                    if available_product_quantity - move.product_qty < 0:
+                    compare = float_compare(available_product_quantity, move.product_qty, 3)
+                    if compare == -1:
                         move_obj.write(cr, uid, internal_move_ids, {'product_qty': move.product_qty - available_product_quantity}, context=context)
         else:
             raise osv.except_osv(_('Warning!'), _('Enough products quantity in FC_RM_BOI'))
@@ -211,7 +213,8 @@ class stock_picking_out(osv.osv):
             available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
             if available_product_detail.values():
                 available_product_quantity = available_product_detail.values()[0]
-            if available_product_quantity - move.product_qty < 0:
+            compare = float_compare(available_product_quantity, move.product_qty, 3)
+            if compare == -1:
                 prepare_stock_move = {
                     'product_id': move.product_id.id,
                     'product_qty': move.product_qty - available_product_quantity,
@@ -358,6 +361,7 @@ class stock_move(osv.osv):
             available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
             if available_product_detail.values():
                 available_product_quantity = available_product_detail.values()[0]
-            if available_product_quantity - move.product_qty < 0:
+            compare = float_compare(available_product_quantity, move.product_qty, 3)
+            if compare == -1:
                 raise osv.except_osv(_('Warning!'), _('Create Extra Move for BOI'))
         return result

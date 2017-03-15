@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_boi_monthly_report_tree" model="ir.ui.view">
+            <field eval="1" name="priority"/>
+            <field name="name">boi.monthly.report.tree</field>
+            <field name="model">boi.monthly.report</field>
+            <field name="arch" type="xml">
+                <tree string="BOI Monthly Report" create="false">
+                    <field name="id" invisible="1"/>
+                    <field name="do_no"/>
+                    <field name="mo_id"/>
+                    <field name="so_id"/>
+                    <field name="inv_id"/>
+                    <field name="part_no"/>
+                    <field name="product_name"/>
+                    <field name="qty"/>
+                    <field name="date_done"/>
+                    <field name="year" invisible="1"/>
+                    <field name="month" invisible="1"/>
+                    <field name="day" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_boi_monthly_report_search" model="ir.ui.view">
+            <field name="name">boi.monthly.report.tree</field>
+            <field name="model">boi.monthly.report</field>
+            <field name="arch" type="xml">
+                <search string="BOI Monthly Report">
+                    <field name="do_no"/>
+                    <field name="mo_id"/>
+                    <field name="so_id"/>
+                    <field name="inv_id"/>
+                    <field name="part_no"/>
+                    <field name="product_name"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="DO No." icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'do_no'}"/>
+                        <filter string="MO No." icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'mo_id'}"/>
+                        <filter string="SO No." icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'so_id'}"/>
+                        <filter string="INV No." icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'inv_id'}"/>
+                        <filter string="Part no./Model" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'part_no'}"/>
+                        <filter string="Product Name" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'product_name'}"/>
+                        <filter string="Year" icon="terp-go-year" domain="[]" context="{'group_by':'year'}"/>
+                        <filter string="Month" icon="terp-go-month" domain="[]" context="{'group_by':'month'}"/>
+                        <filter string="Day" icon="terp-go-today" domain="[]" context="{'group_by':'day'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_boi_monthly_report_tree" model="ir.actions.act_window">
+            <field name="name">BOI Monthly Report</field>
+            <field name="res_model">boi.monthly.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="search_view_id" ref="view_boi_monthly_report_search"/>
+            <field name="view_id" ref="view_boi_monthly_report_tree"/>
+        </record>
+        <menuitem name="Reports" id="menu_reports" parent="base.menu_boi_root" sequence="2"/>
+        <menuitem name="BOI Monthly Report" action="action_boi_monthly_report_tree" id="menu_boi_monthly_report" parent="menu_reports" sequence="1"/>
+    </data>
+</openerp>

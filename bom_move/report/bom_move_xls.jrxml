@@ -104,7 +104,7 @@ Square Panel System Co., Ltd]]></text>
 					<font fontName="Monospaced" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[PD-F-69 Rev.-3
-วันที่บังคับใช้ : 6/03/17]]></text>
+วันที่บังคับใช้ : 9/03/17]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
 				<reportElement style="style1" mode="Transparent" x="631" y="112" width="206" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
