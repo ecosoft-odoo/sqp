@@ -28,7 +28,7 @@ _logger = logging.getLogger(__name__)
 class stock_partial_move(osv.osv_memory):
 
     _inherit = 'stock.partial.picking'
-    
+
     def _check_qty_remaining(self, cr, uid, ids, product_id, product_qty, context=None, lock=False):
         """
         Attempt to find a quantity ``product_qty`` (in the product's default uom or the uom passed in ``context``) of product ``product_id``
@@ -90,7 +90,7 @@ class stock_partial_move(osv.osv_memory):
                         _logger.warning("Failed attempt to reserve %s x product %s, likely due to another transaction already in progress. Next attempt is likely to work. Detailed error available at DEBUG level.", product_qty, product_id)
                         _logger.debug("Trace of the failed product reservation attempt: ", exc_info=True)
                         return False
-    
+
                 # XXX TODO: rewrite this with one single query, possibly even the quantity conversion
                 cr.execute("""SELECT product_uom, sum(product_qty) AS product_qty
                               FROM stock_move
@@ -119,10 +119,10 @@ class stock_partial_move(osv.osv_memory):
                     results2 += amount
                     total += amount
                 total_after_move = total - product_qty
-                if total_after_move < 0.0:
+                if round(total_after_move) < 0.0:
                     raise osv.except_osv(_('Error!'), _('The inventory of %s is not enough!, only %s left in stock.') % (product.name, total,))
 
-# 
+#
 #             amount = results2
 #             compare_qty = float_compare(amount, 0, precision_rounding=uom_rounding)
 #             if compare_qty == 1:
@@ -135,10 +135,10 @@ class stock_partial_move(osv.osv_memory):
 #                     return result
 #                 if total <= 0.0:
 #                     continue
-        return False    
+        return False
 
     def do_partial(self, cr, uid, ids, context=None):
-        
+
         # no call to super!
         assert len(ids) == 1, 'Partial move processing may only be done one form at a time.'
         partial = self.browse(cr, uid, ids[0], context=context)
