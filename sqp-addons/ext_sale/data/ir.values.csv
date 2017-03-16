@@ -1,0 +1,7 @@
+id,name,model,key,key2,user_id,value
+ir_value_sale_order_note,note,sale.order,Default,,,"S'Customer PO No. :\nTerm of Payment :\nDelivery :\nValidity :\nRemark :\n\nWe look forward to receive your early instructions.\nVery truly yours,\n\n\n\nVisak Thunyavan\nManaging Director.'
+p0
+."
+ir_value_sale_order_header_msg,header_msg,sale.order,Default,,,"S'<div><b>Heat Insulation Sandwich Panel</b><br><b>Product of Square Panel System Co., Ltd.</b><br><b><u>Specification :</u></b><ul><li>Density : 38~40 kg/m3</li><li>Core material &nbsp;: Polyurethane Foam ( PU )</li><li>Surface material : Color steel sheet (T) 0.45 mm.</li><li>Color Steel Sheet - Outside : Off white</li><li>Color Steel Sheet - Inside : Off white</li><li>Panel Thickness : ______ mm. (External)</li><li>Joint : Slip Joint</li></ul></div>'
+p0
+."

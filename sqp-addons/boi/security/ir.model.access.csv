@@ -1,0 +1,4 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_boi_certificate,boi.certificate,model_boi_certificate,base.group_user,1,1,1,1
+access_boi_report,boi.report,model_boi_report,base.group_user,1,1,1,1
+access_product_product_boi_certificate,product.product.boi.certificate,model_product_product_boi_certificate,base.group_user,1,1,1,1

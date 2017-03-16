@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+    	<record id="mrp_production_product_form_view_ext" model="ir.ui.view">
+            <field name="name">mrp.production.product.form.view</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="inherit_id" ref="mrp.mrp_production_product_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+	                <field name="product_id" position="after">
+	                	<field name="is_special" invisible="context.get('parent_mo', False)"/>
+	                </field>
+                </data>
+            </field>
+        </record>
+    	<record id="mrp_production_product_tree_view_ext" model="ir.ui.view">
+            <field name="name">mrp.production.product.tree.view.ext</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="inherit_id" ref="mrp.mrp_production_product_tree_view"/>
+            <field name="arch" type="xml">
+                <data>
+	                <field name="product_id" position="after"> 
+                        <button name="toggle_special_product" attrs="{'invisible': [('is_special', '=', True)]}" invisible="context.get('parent_mo', False)"
+                        	icon="gtk-no" string="Toggle Special Product" type="object" help="Toggle for special calculation of injection"/>	   
+                        <button name="toggle_special_product" attrs="{'invisible': [('is_special', '!=', True)]}" invisible="context.get('parent_mo', False)"
+                        	icon="gtk-yes" string="Toggle Special Product" type="object" help="Toggle back to normal"/>	                  	
+	                	<field name="is_special" invisible="1"/>
+	                </field>
+                </data>
+            </field>
+        </record>		
+	    
+    </data>
+    
+</openerp>

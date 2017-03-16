@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sqp_progress_work_subcon_subreport1" language="groovy" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.9487171000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select count(*) num_invoiced, (sum(ai.amount_net) / avg(po.amount_net) * 100) percent, sum(ai.amount_net) total_invoiced from
+account_invoice ai
+join purchase_invoice_rel pir on ai.id = pir.invoice_id
+join purchase_order po on po.id = pir.purchase_id
+where ai.state in ('open','paid')
+and pir.purchase_id = $P{id};]]>
+	</queryString>
+	<field name="num_invoiced" class="java.lang.Number"/>
+	<field name="percent" class="java.lang.Number"/>
+	<field name="total_invoiced" class="java.lang.Number"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="15" splitType="Stretch">
+			<textField pattern="###0">
+				<reportElement x="11" y="0" width="92" height="15"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{num_invoiced} == null ? 0 : $F{num_invoiced}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="301" y="0" width="92" height="15"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{total_invoiced} == null ? 0.0 : $F{total_invoiced}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="170" y="0" width="165" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="9" isBold="false" isUnderline="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[จำนวนเงินทั้งสิ้น :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="103" height="15"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="9" isBold="false" isUnderline="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[ที่อนุมัติแล้ว :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="405" y="0" width="55" height="15"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="9" isBold="false" isUnderline="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[บาท]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="115" y="0" width="55" height="15"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="9" isBold="false" isUnderline="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[ครั้ง]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="131" y="0" width="92" height="15"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{percent} == null ? 0.0 : $F{percent}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="225" y="0" width="55" height="15"/>
+				<textElement verticalAlignment="Top" lineSpacing="Single">
+					<font fontName="Monospaced" size="9" isBold="false" isUnderline="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>
