@@ -403,7 +403,7 @@
 					</staticText>
 					<image>
 						<reportElement x="323" y="24" width="11" height="10"/>
-						<imageExpression class="java.lang.String"><![CDATA[$F{approved} == null || $F{approved} == false ? $P{SUBREPORT_DIR} + "uncheckbox.png" : $P{SUBREPORT_DIR} + "checkbox.png" ]]></imageExpression>
+						<imageExpression class="java.lang.String"><![CDATA[$F{approved} == null || $F{approved} == false ? $P{SUBREPORT_DIR} + "uncheckbox.png" : $P{SUBREPORT_DIR} + "checkbox.png"]]></imageExpression>
 					</image>
 				</frame>
 				<staticText>
@@ -783,9 +783,9 @@ Code]]></text>
 					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[
- PD-F-01  Rev.3
+ PD-F-01  Rev.4
 
- วันที่บังคับใช้ : 24/02/57]]></text>
+ วันที่บังคับใช้ : 15/03/2560]]></text>
 			</staticText>
 			<image>
 				<reportElement x="2" y="4" width="46" height="44"/>
