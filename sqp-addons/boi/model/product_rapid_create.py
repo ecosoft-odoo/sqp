@@ -25,23 +25,26 @@ class product_rapid_create(osv.osv):
 
     _inherit = 'product.rapid.create'
 
-    def create_product(self, cr, uid, ids, context=None):
-        result = super(product_rapid_create, self).create_product(cr, uid, ids, context=context)
-        product_obj = self.pool.get('product.product')
-        object =  self.browse(cr, uid, ids[0], context=context)
-        lines = object.panel_lines + object.door_lines + object.window_lines
-        if not len(lines):
-            return False
-        if result.get('domain', False):
-            for domain in result.get('domain'):
-                new_product_ids = domain[2]
-        index = 0
-        for line in lines:
-            boi_product_name = line.product_id.name_template
-            boi_default_code = line.product_id.default_code
-            product_obj.write(cr, uid, [new_product_ids[index]], {'boi_product_name': boi_product_name, 'boi_default_code': boi_default_code}, context=context)
-            index = index + 1
+    _columns = {
+        'is_boi': fields.boolean('IS BOI', default=False)
+    }
+
+    def _prepare_product(self, cr, uid, ids, new_product_name, line, object, context=None):
+        result = super(product_rapid_create, self)._prepare_product(cr, uid, ids, new_product_name, line, object, context=context)
+        boi_product_name = line.product_id and line.product_id.name_template or False
+        boi_default_code = line.product_id and line.product_id.default_code or False
+        result.update({'boi_product_name': boi_product_name, 'boi_default_code': boi_default_code})
         return result
+
+    def onchange_order_id(self, cr, uid, ids, order_id, context=None):
+        order_obj = self.pool.get('sale.order')
+        is_boi = False
+        if order_id:
+            order = order_obj.browse(cr, uid, order_id, context=context)
+            boi_type = (order.product_tag_id and order.product_tag_id.name == 'BOI') \
+                            and 'BOI' or 'NONBOI'
+            is_boi = boi_type == 'BOI' and True or False
+        return {'value': {'is_boi': is_boi}}
 
 product_rapid_create()
 
@@ -51,13 +54,16 @@ class product_rapid_create_line(osv.osv):
     _inherit = 'product.rapid.create.line'
 
     _columns = {
-        'product_id': fields.many2one('product.product', 'BOI Name'),
+        'product_id': fields.many2one('product.product', 'BOI Name', ondelete="restrict"),
+        # 'is_boi': fields.boolean('IS_BOI', default=False)
     }
 
     def onchange_product_id(self, cr, uid, ids, product_id, context=None):
         product_obj = self.pool.get('product.product')
-        product = product_obj.browse(cr, uid, product_id, context=context)
-        thick = product.T and product.T.id or False
+        thick = False
+        if product_id:
+            product = product_obj.browse(cr, uid, product_id, context=context)
+            thick = product.T and product.T.id or False
         return {'value': {'T': thick}}
 
 product_rapid_create_line()

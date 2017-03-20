@@ -10,7 +10,7 @@
                     <field name="boi_type" attrs="{'invisible': [('type','!=','out_invoice'),('type','!=','out_refund')], 'readonly': [('state','not in',('draft'))]}" on_change="onchange_boi_type(boi_type, context)"/>
                 </xpath>
                 <xpath expr="//form/sheet/group/group/field[@name='date_invoice']" position="before">
-                    <field name="boi_number_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
+                    <field name="boi_cert_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
                 </xpath>
             </field>
         </record>
@@ -24,7 +24,7 @@
                     <field name="boi_type" attrs="{'invisible': [('type','!=','in_invoice'),('type','!=','in_refund')], 'readonly': [('state','not in',('draft'))]}" on_change="onchange_boi_type(boi_type, context)"/>
                 </xpath>
                 <xpath expr="//form/sheet/group/group/field[@name='date_invoice']" position="before">
-                    <field name="boi_number_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
+                    <field name="boi_cert_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
                 </xpath>
             </field>
         </record>

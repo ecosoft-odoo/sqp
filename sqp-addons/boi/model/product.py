@@ -34,20 +34,17 @@ class product_product(osv.osv):
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
         if context is None:
             context = {}
-        if context.get('order_id', False):
+        product_ids = []
+        if not context.get('order_id', False):
+            return super(product_product, self).name_search(cr, user, name, args=args, operator=operator, context=context, limit=limit)
+        else:
             order_obj = self.pool.get('sale.order')
             order = order_obj.browse(cr, user, context.get('order_id'), context=context)
-            product_tag_id = order.product_tag_id.id
             is_international = order.is_international
-            partner_id = order.partner_id.id
+            product_tag_id = order.product_tag_id and order.product_tag_id.id or False
+            partner_id = order.partner_id and order.partner_id.id or False
             if order.product_tag_id and order.product_tag_id.name == 'BOI' and context.get('bom_template_id', False):
                 product_ids = self.search(cr, user, [('is_international','=',is_international),('tag_ids','in',product_tag_id),'|',('partner_id','=',False),('partner_id','=',partner_id)] + args, limit=limit, context=context)
-            else:
-                return False
-        else:
-            if context.get('order_id', True) == False:
-                return False
-            product_ids = self.search(cr, user, args, context=context)
         return self.name_get(cr, user, product_ids, context=context)
 
 product_product()

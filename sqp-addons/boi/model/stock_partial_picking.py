@@ -37,7 +37,7 @@ class stock_partial_picking(osv.osv_memory):
             return res
         assert active_model in ('stock.picking', 'stock.picking.in', 'stock.picking.out'), 'Bad context propagation'
         for picking in picking_obj.browse(cr, uid, picking_ids, context=context):
-            if picking.is_bom_move:
+            if picking.is_bom_move and picking.boi_type == 'BOI':
                 move_ids = res.get('move_ids', [])
                 move_ids = [move_id for move_id in move_ids if move_id != {}]
                 res.update(move_ids=move_ids)
@@ -52,7 +52,6 @@ class stock_partial_picking(osv.osv_memory):
                 if picking.boi_type:
                     name = '%s-%s'%(picking.boi_type,picking.name)
                     picking_obj.write(cr, uid, res['context']['active_ids'], {'name': name})
-
                 if picking.is_bom_move:
                     picking_obj.write(cr, uid, res['context']['active_ids'], {'state': 'draft'})
                     move_ids = move_obj.search(cr, uid, [('picking_id','=',picking.id)], context=context)
@@ -62,6 +61,7 @@ class stock_partial_picking(osv.osv_memory):
     def _partial_move_for(self, cr, uid, move, context=None):
         if context is None:
             context = {}
+        prepare_partial_move = super(stock_partial_picking, self)._partial_move_for(cr, uid, move, context=context)
         picking_obj = self.pool.get('stock.picking')
         location_obj = self.pool.get('stock.location')
         product_obj = self.pool.get('product.product')
@@ -73,26 +73,23 @@ class stock_partial_picking(osv.osv_memory):
             'location': boi_location
         })
         available_product_quantity = 0.0
-        available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
-        if available_product_detail.values():
-            available_product_quantity = available_product_detail.values()[0]
-        if context.get('active_ids', False):
-            picking_ids = context.get('active_ids')
-            prepare_partial_move = super(stock_partial_picking, self)._partial_move_for(cr, uid, move, context=context)
-            for picking in picking_obj.browse(cr, uid, picking_ids, context=context):
-                if not picking.is_bom_move:
-                    return super(stock_partial_picking, self)._partial_move_for(cr, uid, move, context=context)
-                else:
-                    if available_product_quantity == 0:
-                        return {}
-                    compare = float_compare(move.product_qty, available_product_quantity, 3)
-                    if compare >= 0:
-                        product_qty = available_product_quantity
-                    elif compare < 0:
-                        product_qty = move.product_qty
-                    prepare_partial_move = self._prepare_partial_move(cr, uid, move, product_qty, context=context)
-                    if move.picking_id.type == 'in' and move.product_id.cost_method == 'average':
-                        prepare_partial_move.update(update_cost=True, **self._product_cost_for_average_update(cr, uid, move))
+        product_qty = 0.0
+        if product_id:
+            available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
+            if available_product_detail.values():
+                available_product_quantity = available_product_detail.values()[0]
+        picking_ids = context.get('active_ids', [])
+        for picking in picking_obj.browse(cr, uid, picking_ids, context=context):
+            if not picking.is_bom_move or picking.boi_type != 'BOI':
+                return prepare_partial_move
+            if available_product_quantity == 0:
+                return {}
+            compare = float_compare(move.product_qty, available_product_quantity, 3)
+            if compare >= 0:
+                product_qty = available_product_quantity
+            else:
+                product_qty = move.product_qty
+            prepare_partial_move = self._prepare_partial_move(cr, uid, move, product_qty, context=context)
         return prepare_partial_move
 
     def _prepare_partial_move(self, cr, uid, move, product_qty, context=None):

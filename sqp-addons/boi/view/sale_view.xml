@@ -7,8 +7,8 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group/group/field[@name='date_order']" position="before">
-                    <field name="boi_number_id" attrs="{'invisible': [('is_boi','=',False)], 'required': [('is_boi','=',True)], 'readonly': [('state','not in',('draft'))]}"/>
-                    <field name="ref_quotation_id" attrs="{'invisible': [('is_boi','=',True)]}" context="{'ref_product_tag': 'BOI'}"/>
+                    <field name="boi_cert_id" attrs="{'invisible': [('is_boi','=',False)], 'required': [('is_boi','=',True)], 'readonly': [('state','not in',('draft'))]}"/>
+                    <field name="ref_order_id" attrs="{'invisible': [('is_boi','=',True)], 'readonly': [('state','not in',('draft'))]}" context="{'ref_product_tag': 'BOI'}"/>
                     <field name="is_boi" invisible="1"/>
                 </xpath>
             </field>
@@ -33,6 +33,17 @@
                 <xpath expr="//field[@name='product_tag_id']" position="attributes">
                     <attribute name="on_change">onchange_product_tag_id(product_tag_id, context)</attribute>
                 </xpath>
+            </field>
+        </record>
+
+        <record id="view_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.sale.stock</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="attributes">
+                    <attribute name="context">{'product_tag_id':parent.product_tag_id, 'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'shop':parent.shop_id, 'uom':product_uom}</attribute>
+                </field>
             </field>
         </record>
     </data>

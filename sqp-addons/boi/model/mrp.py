@@ -42,115 +42,78 @@ class mrp_production(osv.osv):
     }
 
     def create(self, cr, uid, vals, context=None):
-        if context is None:
-            context = {}
         if vals.get('name', '/') == '/':
-            vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'mrp.production')
+            vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'mrp.production') or '/'
             order_obj = self.pool.get('sale.order')
-            if vals.get('order_id', False):
-                order = order_obj.browse(cr, uid, vals.get('order_id'), context=context)
-                if order.product_tag_id:
-                    if order.product_tag_id.name == 'BOI':
-                        vals['name'] = '%s-%s'%('BOI',vals.get('name'))
-                    else:
-                        vals['name'] = '%s-%s'%('NONBOI',vals.get('name'))
+            order_id = vals.get('order_id',False)
+            if order_id:
+                order = order_obj.browse(cr, uid, order_id, context=context)
+                boi_type = (order.product_tag_id and order.product_tag_id.name == 'BOI') \
+                                and 'BOI' or 'NONBOI'
+                vals.update({'name': '%s-%s'%(boi_type, vals.get('name', '/'))})
         return super(mrp_production, self).create(cr, uid, vals, context=context)
 
     def copy(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        if context is None:
-            context = {}
-        res = super(mrp_production, self).copy(cr, uid, id, default=default, context=context)
-        if res:
-            production = self.browse(cr, uid, res, context=context)
-            if production.order_id:
-                if production.order_id.product_tag_id:
-                    if production.order_id.product_tag_id.name == 'BOI':
-                        boi_type = 'BOI'
-                    else:
-                        boi_type = 'NONBOI'
-                    name = '%s-%s'%(boi_type,production.name)
-                    self.write(cr, uid, [res], {'name': name}, context=context)
-        return res
+        production_id = super(mrp_production, self).copy(cr, uid, id, default=default, context=context)
+        production = self.browse(cr, uid, production_id, context=context)
+        boi_type = (production.order_id and production.order_id.product_tag_id and production.order_id.product_tag_id.name == 'BOI') \
+                        and 'BOI' or 'NONBOI'
+        name = '%s-%s'%(boi_type,production.name)
+        self.write(cr, uid, [production_id], {'name': name}, context=context)
+        return production_id
 
     def write(self, cr, uid, ids, vals, context=None):
-        if context is None:
-            context = {}
-        if vals.get('name', '/') == '/':
+        if not isinstance(ids, list):
+            ids = [ids]
+        order_id = vals.get('order_id', False)
+        if order_id:
             order_obj = self.pool.get('sale.order')
-            boi_type = False
+            order = order_obj.browse(cr, uid, order_id, context=context)
+            boi_type = (order.product_tag_id and order.product_tag_id.name == 'BOI') \
+                            and 'BOI' or 'NONBOI'
             for production in self.browse(cr, uid, ids, context=context):
-                if vals.get('order_id', False):
-                    order = order_obj.browse(cr, uid, vals.get('order_id'), context=context)
-                    if order.product_tag_id:
-                        if order.product_tag_id.name == 'BOI':
-                            boi_type = 'BOI'
-                        else:
-                            boi_type = 'NONBOI'
-                if boi_type:
-                    if production.name.find(boi_type) < 0:
-                        if production.name.find('BOI') >= 0 and boi_type == 'NONBOI':
-                            name = production.name.replace('BOI', 'NONBOI')
-                        else:
-                            name = '%s-%s'%(boi_type,production.name)
-                    else:
-                        if production.name.find('NONBOI') >=0 and boi_type == 'BOI':
-                            name = production.name.replace('NONBOI', 'BOI')
-                        else:
-                            name = production.name
-                    vals.update({'name': name})
+                vals['name'] = production.name
+                vals['name'] = (vals['name'].find('BOI') >= 0 and vals['name'].find('NONBOI') < 0 and boi_type == 'NONBOI') \
+                                    and vals['name'].replace('BOI','NONBOI') \
+                                    or (vals['name'].find('NONBOI') >= 0 and boi_type == 'BOI') \
+                                    and vals['name'].replace('NONBOI','BOI')  \
+                                    or vals['name']
         return super(mrp_production, self).write(cr, uid, ids, vals, context=context)
 
     def _create_picking(self, cr, uid, production, production_lines, picking_id=False, context=None):
-        if context is None:
-            context = {}
-        res = super(mrp_production, self)._create_picking(cr, uid, production, production_lines, picking_id=picking_id, context=context)
-        if res:
+        picking_id = super(mrp_production, self)._create_picking(cr, uid, production, production_lines, picking_id=picking_id, context=context)
+        if picking_id:
             picking_obj = self.pool.get('stock.picking')
-            picking = picking_obj.browse(cr, uid, res, context=context)
-            if production.order_id:
-                if production.order_id.product_tag_id:
-                    if production.order_id.product_tag_id.name == 'BOI':
-                        boi_type = 'BOI'
-                    else:
-                        boi_type = 'NONBOI'
-                    boi_number_id = production.order_id.boi_number_id.id
-                    name = '%s-%s'%(boi_type,picking.name)
-                    picking_obj.write(cr, uid, res, {'name': name, 'boi_type': boi_type, 'boi_number_id': boi_number_id}, context=context)
-        return res
+            picking = picking_obj.browse(cr, uid, picking_id, context=context)
+            boi_type = (production.order_id and production.order_id.product_tag_id and production.order_id.product_tag_id.name == 'BOI') \
+                            and 'BOI' or 'NONBOI'
+            boi_cert_id = (production.order_id and production.order_id.boi_cert_id) \
+                                and production.order_id.boi_cert_id.id or False
+            name = '%s-%s'%(boi_type,picking.name)
+            picking_obj.write(cr, uid, picking_id, {'name': name, 'boi_type': boi_type, 'boi_cert_id': boi_cert_id}, context=context)
+            return picking_id
 
     def _create_bom_picking(self, cr, uid, production, context=None):
-        if context is None:
-            context = {}
-        res = super(mrp_production, self)._create_bom_picking(cr, uid, production, context=context)
-        if res:
+        picking_id = super(mrp_production, self)._create_bom_picking(cr, uid, production, context=context)
+        if picking_id:
             picking_obj = self.pool.get('stock.picking')
-            picking = picking_obj.browse(cr, uid, res, context=context)
-            if production.order_id:
-                if production.order_id.product_tag_id:
-                    if production.order_id.product_tag_id.name == 'BOI':
-                        boi_type = 'BOI'
-                    else:
-                        boi_type = 'NONBOI'
-                    boi_number_id = production.order_id.boi_number_id.id
-                    name = '%s-%s'%(boi_type,picking.name)
-                    picking_obj.write(cr, uid, res, {'name': name, 'boi_type': boi_type, 'boi_number_id': boi_number_id}, context=context)
-        return res
+            picking = picking_obj.browse(cr, uid, picking_id, context=context)
+            boi_type = (production.order_id and production.order_id.product_tag_id and production.order_id.product_tag_id.name == 'BOI') \
+                            and 'BOI' or 'NONBOI'
+            boi_cert_id = (production.order_id and production.order_id.boi_cert_id) \
+                                and production.order_id.boi_cert_id.id or False
+            name = '%s-%s'%(boi_type,picking.name)
+            picking_obj.write(cr, uid, picking_id, {'name': name, 'boi_type': boi_type, 'boi_cert_id': boi_cert_id}, context=context)
+        return picking_id
 
     def _prepare_stock_move(self, cr, uid, move_line, picking_id, production, context=None):
-        if context is None:
-            context = {}
         location_obj = self.pool.get('stock.location')
         location_ids = location_obj.search(cr, uid, [('name','=','FC_RM_BOI')], context=context)
         result = super(mrp_production, self)._prepare_stock_move(cr, uid, move_line, picking_id, production, context=context)
         if result:
             production_parent = self.browse(cr, uid, production.parent_id.id, context=context)
-            if production_parent.order_id:
-                if production_parent.order_id.product_tag_id:
-                    if production_parent.order_id.product_tag_id.name == 'BOI':
-                        if len(location_ids) > 0:
-                            result.update({'location_id': location_ids[0]})
+            if production_parent.order_id and production_parent.order_id.product_tag_id and production_parent.order_id.product_tag_id.name == 'BOI' and len(location_ids) > 0:
+                result.update({'location_id': location_ids[0]})
         return result
 
 mrp_production()
@@ -167,12 +130,11 @@ class bom_choice_insulation(osv.osv):
         if context.get('order_id', False):
             order_obj = self.pool.get('sale.order')
             order = order_obj.browse(cr, user, context.get('order_id'), context=context)
-            if order.product_tag_id:
-                if order.product_tag_id.name == 'BOI':
-                    insulation_ids = self.search(cr, user, [('name', '=', 'PIR')] + args, limit=limit, context=context)
-                else:
-                    if context.get('object', 'not door') == 'door':
-                        insulation_ids = self.search(cr, user, [('name', '!=', 'PIR')] + args, limit=limit, context=context)
+            if order.product_tag_id and order.product_tag_id.name == 'BOI':
+                insulation_ids = self.search(cr, user, [('name', '=', 'PIR')] + args, limit=limit, context=context)
+            else:
+                if context.get('object', 'not door') == 'door':
+                    insulation_ids = self.search(cr, user, [('name', '!=', 'PIR')] + args, limit=limit, context=context)
         return self.name_get(cr, user, insulation_ids, context=context)
 
 bom_choice_insulation()

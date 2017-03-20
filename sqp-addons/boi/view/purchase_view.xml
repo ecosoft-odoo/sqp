@@ -10,7 +10,7 @@
                     <field name="boi_type" attrs="{'invisible': [('is_subcontract','=',True)], 'readonly': [('state','not in',('draft'))]}" on_change="onchange_boi_type(boi_type, context)"/>
                 </xpath>
                 <xpath expr="//form/sheet/group/group/field[@name='date_order']" position="before">
-                    <field name="boi_number_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
+                    <field name="boi_cert_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
                 </xpath>
             </field>
         </record>

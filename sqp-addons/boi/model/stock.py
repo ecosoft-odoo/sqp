@@ -33,7 +33,7 @@ class stock_picking(osv.osv):
             ('BOI', 'BOI'),
             ], 'BOI Type', required=True, select=True,
         ),
-        'boi_number_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict"),
+        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict"),
     }
 
     _defaults = {
@@ -59,69 +59,56 @@ class stock_picking_out(osv.osv):
             ('BOI', 'BOI'),
             ], 'BOI Type', required=True, select=True,
         ),
-        'boi_number_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict"),
+        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict"),
     }
 
     _defaults = {
         'boi_type': 'NONBOI',
     }
 
-    def create(self, cr, user, vals, context=None):
-        if context is None:
-            context = {}
+    def create(self, cr, uid, vals, context=None):
         if vals.get('name', '/') == '/':
-            if context.get('is_delivery_order', False):
-                seq_obj_name =  self._name
-                old_name = self.pool.get('ir.sequence').get(cr, user, seq_obj_name)
-                vals['name'] = '%s-%s'%(vals.get('boi_type'),old_name)
-            elif context.get('is_bom_move', False):
-                vals['name'] = self.pool.get('ir.sequence').get(cr, user, 'bom.move')
-                vals['name'] = '%s-%s'%(vals.get('boi_type'),vals.get('name'))
-        return super(stock_picking_out, self).create(cr, user, vals, context=context)
+            if context.get('is_delivery_order', False) or context.get('is_bom_move', False):
+                if context.get('is_delivery_order', False):
+                    seq_obj_name =  self._name
+                    vals['name'] = self.pool.get('ir.sequence').get(cr, uid, seq_obj_name)
+                else:
+                    vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'bom.move')
+                boi_type = vals.get('boi_type', False)
+                if boi_type:
+                    boi_type = boi_type == 'BOI' and 'BOI' or 'NONBOI'
+                    vals.update({'name': '%s-%s'%(boi_type,vals.get('name'))})
+        return super(stock_picking_out, self).create(cr, uid, vals, context=context)
 
     def copy(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        if context is None:
-            context = {}
-        default = default.copy()
-        if context.get('is_delivery_order', False):
-            picking_obj = self.browse(cr, uid, id, context=context)
-            seq_obj_name = 'stock.picking' + ('.' + picking_obj.type if picking_obj.type != 'internal' else '')
-            default['name'] = '%s-%s'%(picking_obj.boi_type,self.pool.get('ir.sequence').get(cr, uid, seq_obj_name))
-            default.setdefault('origin', False)
-            default.setdefault('backorder_id', False)
-            res = super(stock_picking_out, self).copy(cr, uid, id, default, context)
-        elif context.get('is_bom_move', False):
-            res = super(stock_picking_out, self).copy(cr, uid, id, default, context)
-            picking = self.browse(cr, uid, res, context=context)
-            name = '%s-%s'%(picking.boi_type,picking.name)
-            self.write(cr, uid, res, {'name': name}, context=context)
-        else:
-            res = super(stock_picking_out, self).copy(cr, uid, id, default, context)
-        return res
+        picking_id = super(stock_picking_out, self).copy(cr, uid, id, default=default, context=context)
+        if picking_id:
+            if context.get('is_delivery_order', False) or context.get('is_bom_move', False):
+                picking_obj = self.pool.get('stock.picking')
+                picking = picking_obj.browse(cr, uid, picking_id, context=context)
+                boi_type = picking.boi_type == 'BOI' and 'BOI' or 'NONBOI'
+                name = '%s-%s'%(boi_type,picking.name)
+                picking_obj.write(cr, uid, picking_id, {'name': name}, context=context)
+        return picking_id
 
     def write(self, cr, uid, ids, vals, context=None):
-        if context is None:
-            context = {}
-        if vals.get('name', '/') == '/':
-            for picking in self.browse(cr, uid, ids, context=context):
-                if 'boi_type' in vals:
-                    if picking.name.find(vals.get('boi_type')) < 0:
-                        if picking.name.find('BOI') >= 0 and vals.get('boi_type') == 'NONBOI':
-                            name = picking.name.replace('BOI', 'NONBOI')
-                        else:
-                            name = '%s-%s'%(vals.get('boi_type'),picking.name)
-                    else:
-                        if picking.name.find('NONBOI') >= 0 and vals.get('boi_type') == 'BOI':
-                            name = picking.name.replace('NONBOI', 'BOI')
-                        else:
-                            name = picking.name
-                    vals.update({'name': name})
+        if not isinstance(ids, list):
+            ids = [ids]
+        boi_type = vals.get('boi_type', False)
+        if boi_type and (context.get('is_delivery_order', False) or context.get('is_bom_move', False)):
+            boi_type = boi_type == 'BOI' and 'BOI' or 'NONBOI'
+            picking_obj = self.pool.get('stock.picking')
+            for picking in picking_obj.browse(cr, uid, ids, context=context):
+                vals['name'] = picking.name
+                vals['name'] = (vals['name'].find('BOI') >= 0 and vals['name'].find('NONBOI') < 0 and boi_type == 'NONBOI') \
+                                    and vals['name'].replace('BOI','NONBOI') \
+                                    or (vals['name'].find('NONBOI') >= 0 and boi_type == 'BOI') \
+                                    and vals['name'].replace('NONBOI','BOI')  \
+                                    or vals['name']
         return super(stock_picking_out, self).write(cr, uid, ids, vals, context=context)
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):
-        return {'value': {'boi_number_id': False}}
+        return {'value': {'boi_cert_id': False}}
 
     def create_extra_move(self, cr, uid, ids, context=None):
         if context is None:
@@ -130,31 +117,40 @@ class stock_picking_out(osv.osv):
         location_obj = self.pool.get('stock.location')
         product_obj = self.pool.get('product.product')
         picking_obj = self.pool.get('stock.picking')
-        picking = picking_obj.browse(cr, uid, ids[0], context=context)
         rm_boi_location = location_obj.search(cr, uid, [('name','=','FC_RM_BOI')], context=context)[0]
         rm_location = location_obj.search(cr, uid, [('name','=','FC_RM')], context=context)[0]
-        location_id = picking.boi_type == 'BOI' and rm_boi_location or False
+        location_id = False
+        move_ids = []
+        boi_type = 'NONBOI'
         context.update({
             'states': ['done'],
             'what': ['in','out']
         })
-        move_ids = move_obj.search(cr, uid, [('picking_id','=',ids[0])], context=context)
+        if len(ids) > 0:
+            picking = picking_obj.browse(cr, uid, ids[0], context=context)
+            boi_type = picking.boi_type
+            location_id = picking.boi_type == 'BOI' and rm_boi_location or rm_location
+            move_ids = move_obj.search(cr, uid, [('picking_id','=',ids[0])], context=context)
         for move in move_obj.browse(cr, uid, move_ids, context=context):
             available_rm_product_quantity = 0.0
             available_rm_boi_product_quantity = 0.0
             product_id = move.product_id and move.product_id.id or False
+            # Check product qty in FC_RM
             context.update({
                 'location': rm_location
             })
-            available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
-            if available_product_detail.values():
-                available_rm_product_quantity = available_product_detail.values()[0]
+            if product_id:
+                available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
+                if available_product_detail.values():
+                    available_rm_product_quantity = available_product_detail.values()[0]
+            # Check product qty in FC_RM_BOI
             context.update({
                 'location': location_id
             })
-            available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
-            if available_product_detail.values():
-                available_rm_boi_product_quantity = available_product_detail.values()[0]
+            if product_id:
+                available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
+                if available_product_detail.values():
+                    available_rm_boi_product_quantity = available_product_detail.values()[0]
             compare = float_compare(available_rm_boi_product_quantity, move.product_qty, 3)
             if compare >= 0 or available_rm_product_quantity <= 0.0:
                 not_create_extra_move = True
@@ -163,26 +159,37 @@ class stock_picking_out(osv.osv):
                 break
         if not_create_extra_move:
             raise osv.except_osv(_('Warning!'), _('Not Create Extra Move'))
-        picking_ids = picking_obj.search(cr, uid, [('picking_id_ref','=',ids[0]),('state','!=','done')], context=context)
+        picking_ids = []
+        pick_name = ''
+        if len(ids) > 0:
+            picking_ids = picking_obj.search(cr, uid, [('picking_id_ref','=',ids[0]),('state','!=','done')], context=context)
         for picking in picking_obj.browse(cr, uid, picking_ids, context=context):
             cr.execute('select name from stock_picking where id = %s',(picking.id,))
             pick_name = cr.fetchone()[0]
+            pick_name = (pick_name.find('BOI') >= 0 and pick_name.find('NONBOI') < 0 and boi_type == 'NONBOI') \
+                                and pick_name.replace('BOI','NONBOI') \
+                                or (pick_name.find('NONBOI') >= 0 and boi_type == 'BOI') \
+                                and pick_name.replace('NONBOI','BOI')  \
+                                or pick_name
             cr.execute('delete from stock_move where picking_id = %s',(picking.id,))
             cr.execute('delete from stock_picking where id = %s',(picking.id,))
         if len(picking_ids) == 0:
             pick_name = self.pool.get('ir.sequence').get(cr, uid, 'stock.picking')
-        picking_id = self._create_stock_picking(cr, uid, ids, pick_name, context=context)
-        self._create_stock_moves(cr, uid, ids, picking_id, context=context)
+            pick_name = '%s-%s'%(boi_type,pick_name)
+        if len(ids) > 0:
+            picking_id = self._create_stock_picking(cr, uid, ids, pick_name, context=context)
+            if picking_id:
+                self._create_stock_moves(cr, uid, ids, picking_id, context=context)
         result = self._view_stock_picking(cr, uid, ids, context=context)
         return result
 
     def _create_stock_picking(self, cr, uid, ids, pick_name, context=None):
-        if context is None:
-            context = {}
         picking_obj = self.pool.get('stock.picking')
-        picking = picking_obj.browse(cr, uid, ids[0], context=context)
-        prepare_stock_picking = self._prepare_stock_picking(cr, uid, ids, picking, pick_name, context=context)
-        new_picking_id = picking_obj.create(cr, uid, prepare_stock_picking, context=context)
+        new_picking_id = False
+        if len(ids) > 0:
+            picking = picking_obj.browse(cr, uid, ids[0], context=context)
+            prepare_stock_picking = self._prepare_stock_picking(cr, uid, ids, picking, pick_name, context=context)
+            new_picking_id = picking_obj.create(cr, uid, prepare_stock_picking, context=context)
         return new_picking_id
 
     def _prepare_stock_picking(self, cr, uid, ids, picking, pick_name, context=None):
@@ -226,15 +233,18 @@ class stock_picking_out(osv.osv):
         location_obj = self.pool.get('stock.location')
         product_obj = self.pool.get('product.product')
         picking_obj = self.pool.get('stock.picking')
-        picking = picking_obj.browse(cr, uid, ids[0], context=context)
         rm_boi_location = location_obj.search(cr, uid, [('name','=','FC_RM_BOI')], context=context)[0]
         rm_location = location_obj.search(cr, uid, [('name','=','FC_RM')], context=context)[0]
-        location_id = picking.boi_type == 'BOI' and rm_boi_location or False
+        location_id = False
+        move_ids = []
         context.update({
             'states': ['done'],
             'what': ['in','out']
         })
-        move_ids = move_obj.search(cr, uid, [('picking_id','=',ids[0])], context=context)
+        if len(ids) > 0:
+            picking = picking_obj.browse(cr, uid, ids[0], context=context)
+            location_id = picking.boi_type == 'BOI' and rm_boi_location or False
+            move_ids = move_obj.search(cr, uid, [('picking_id','=',ids[0])], context=context)
         result = []
         for move in move_obj.browse(cr, uid, move_ids, context=context):
             available_rm_product_quantity = 0.0
@@ -244,28 +254,27 @@ class stock_picking_out(osv.osv):
             context.update({
                 'location': rm_location
             })
-            available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
-            if available_product_detail.values():
-                available_rm_product_quantity = available_product_detail.values()[0]
+            if product_id:
+                available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
+                if available_product_detail.values():
+                    available_rm_product_quantity = available_product_detail.values()[0]
             if available_rm_product_quantity <= 0.0:
                 continue
             # FC_RM_BOI location
             context.update({
                 'location': location_id
             })
-            available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
-            if available_product_detail.values():
-                available_rm_boi_product_quantity = available_product_detail.values()[0]
+            if product_id:
+                available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
+                if available_product_detail.values():
+                    available_rm_boi_product_quantity = available_product_detail.values()[0]
             compare = float_compare(available_rm_boi_product_quantity, move.product_qty, 3)
             if compare == -1:
                 compare = float_compare(move.product_qty - available_rm_boi_product_quantity, available_rm_product_quantity, 3)
                 if compare >= 0:
-                    # product_qty = available_rm_product_quantity - 0.001
                     product_qty = available_rm_product_quantity
                 else:
                     product_qty = move.product_qty - available_rm_boi_product_quantity
-                    # if round(product_qty, 3) < move.product_qty - available_rm_boi_product_quantity:
-                    #     product_qty = round(product_qty, 3) + 0.001
                 prepare_stock_move = self._prepare_stock_move(cr, uid, picking_id, move, picking, rm_location, rm_boi_location, product_qty, context=context)
                 move_id = move_obj.create(cr, uid, prepare_stock_move, context=context)
                 result.append(move_id)
@@ -349,57 +358,50 @@ class stock_picking_in(osv.osv):
             ('BOI', 'BOI'),
             ], 'BOI Type', required=True, select=True,
         ),
-        'boi_number_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict"),
+        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict"),
     }
 
     _defaults = {
         'boi_type': 'NONBOI',
     }
 
-    def create(self, cr, user, vals, context=None):
-        if context is None:
-            context = {}
+    def create(self, cr, uid, vals, context=None):
         if vals.get('name', '/') == '/':
             seq_obj_name =  self._name
-            vals['name'] = self.pool.get('ir.sequence').get(cr, user, seq_obj_name)
-            vals['name'] = '%s-%s'%(vals.get('boi_type'),vals.get('name'))
-        return super(stock_picking_in, self).create(cr, user, vals, context=context)
+            vals['name'] = self.pool.get('ir.sequence').get(cr, uid, seq_obj_name) or '/'
+            if vals.get('boi_type', False) and context.get('default_type', '') == 'in':
+                boi_type = vals.get('boi_type','') == 'BOI' and 'BOI' or 'NONBOI'
+                vals.update({'name': '%s-%s'%(boi_type, vals.get('name', '/'))})
+        return super(stock_picking_in, self).create(cr, uid, vals, context=context)
 
     def copy(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        if context is None:
-            context = {}
-        res = super(stock_picking_in, self).copy(cr, uid, id, default=default, context=context)
-        if res:
-            if context.get('default_type', '') == 'in':
-                picking_obj = self.pool.get('stock.picking')
-                picking = picking_obj.browse(cr, uid, res, context=context)
-                name = '%s-%s'%(picking.boi_type,picking.name)
-                picking_obj.write(cr, uid, res, {'name': name}, context=context)
-        return res
+        picking_id = super(stock_picking_in, self).copy(cr, uid, id, default=default, context=context)
+        picking_obj = self.pool.get('stock.picking')
+        if picking_id and context.get('default_type','') == 'in':
+            picking = picking_obj.browse(cr, uid, picking_id, context=context)
+            boi_type = picking.boi_type == 'BOI' and 'BOI' or 'NONBOI'
+            name = '%s-%s'%(boi_type,picking.name)
+            picking_obj.write(cr, uid, [picking_id], {'name': name}, context=context)
+        return picking_id
 
     def write(self, cr, uid, ids, vals, context=None):
-        if context is None:
-            context = {}
-        if vals.get('name', '/') == '/':
-            for picking in self.browse(cr, uid, ids, context=context):
-                if vals.get('boi_type', False):
-                    if picking.name.find(vals.get('boi_type')) < 0:
-                        if picking.name.find('BOI') >= 0 and vals.get('boi_type') == 'NONBOI':
-                            name = picking.name.replace('BOI', 'NONBOI')
-                        else:
-                            name = '%s-%s'%(vals.get('boi_type'),picking.name)
-                    else:
-                        if picking.name.find('NONBOI') >= 0 and vals.get('boi_type') == 'BOI':
-                            name = picking.name.replace('NONBOI', 'BOI')
-                        else:
-                            name = picking.name
-                    vals.update({'name': name})
+        if not isinstance(ids, list):
+            ids = [ids]
+        boi_type = vals.get('boi_type', False)
+        picking_obj = self.pool.get('stock.picking')
+        if boi_type and context.get('default_type','') == 'in':
+            boi_type = boi_type == 'BOI' and 'BOI' or 'NONBOI'
+            for picking in picking_obj.browse(cr, uid, ids, context=context):
+                vals['name'] = picking.name
+                vals['name'] = (vals['name'].find('BOI') >= 0 and vals['name'].find('NONBOI') < 0 and boi_type == 'NONBOI') \
+                                    and vals['name'].replace('BOI','NONBOI') \
+                                    or (vals['name'].find('NONBOI') >= 0 and boi_type == 'BOI') \
+                                    and vals['name'].replace('NONBOI','BOI')  \
+                                    or vals['name']
         return super(stock_picking_in, self).write(cr, uid, ids, vals, context=context)
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):
-        return {'value': {'boi_number_id': False}}
+        return {'value': {'boi_cert_id': False}}
 
 stock_picking_in()
 
@@ -416,43 +418,50 @@ class stock_move(osv.osv):
         picking_obj = self.pool.get('stock.picking')
         location_obj = self.pool.get('stock.location')
         product_obj = self.pool.get('product.product')
-        move = move_obj.browse(cr, uid, ids[0], context=context)
-        picking_id = move.picking_id and move.picking_id.id or False
-        picking = picking_obj.browse(cr, uid, picking_id, context=context)
-        if not picking_id or not picking.is_bom_move or len(ids) == 0:
-            return result
         rm_boi_location = location_obj.search(cr, uid, [('name','=','FC_RM_BOI')], context=context)[0]
         rm_location = location_obj.search(cr, uid, [('name','=','FC_RM')], context=context)[0]
-        location_id = picking.boi_type == 'BOI' and rm_boi_location or rm_location
+        location_id = False
+        picking = False
+        if len(ids) > 0:
+            move = move_obj.browse(cr, uid, ids[0], context=context)
+            picking_id = move.picking_id and move.picking_id.id or False
+            if picking_id:
+                picking = picking_obj.browse(cr, uid, picking_id, context=context)
+                # If not bom move, let return result
+                if not picking.is_bom_move:
+                    return result
+                location_id = picking.boi_type == 'BOI' and rm_boi_location or rm_location
         context.update({
             'states': ['done'],
             'what': ['in','out']
         })
+        # Check Stock
         not_product_in_stock = False
         for move in self.browse(cr, uid, ids, context=context):
             available_rm_product_quantity = 0.0
             available_source_product_quantity = 0.0
             product_id = move.product_id and move.product_id.id or False
+            # Check product qty in FC_RM
             context.update({
                 'location': rm_location
             })
-            available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
-            if available_product_detail.values():
-                available_rm_product_quantity = available_product_detail.values()[0]
+            if product_id:
+                available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
+                if available_product_detail.values():
+                    available_rm_product_quantity = available_product_detail.values()[0]
+            # Check product qty follow boi_type, if boi_type = 'BOI' check in FC_RM_BOI else check in FC_RM
             context.update({
                 'location': location_id
             })
-            available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
-            if available_product_detail.values():
-                available_source_product_quantity = available_product_detail.values()[0]
+            if product_id:
+                available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
+                if available_product_detail.values():
+                    available_source_product_quantity = available_product_detail.values()[0]
             compare = float_compare(available_source_product_quantity, move.product_qty, 3)
-            if compare == -1 and picking.boi_type == 'BOI' and available_rm_product_quantity > 0.0:
+            if compare == -1 and picking and picking.boi_type == 'BOI' and available_rm_product_quantity > 0.0:
                 raise osv.except_osv(_('Warning!'), _('Create Extra Move for BOI'))
-            if picking.boi_type == 'BOI' and available_rm_product_quantity <= 0.0 and available_source_product_quantity <= 0.0:
+            if picking and picking.boi_type == 'BOI' and available_rm_product_quantity <= 0.0 and available_source_product_quantity <= 0.0:
                 not_product_in_stock = True
-            elif picking.boi_type == 'BOI' and available_source_product_quantity > 0.0 and available_rm_product_quantity <= 0.0:
-                not_product_in_stock = False
-                break
             else:
                 not_product_in_stock = False
                 break

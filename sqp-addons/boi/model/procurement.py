@@ -26,21 +26,15 @@ class procurement_order(osv.osv):
     _inherit = 'procurement.order'
 
     def make_mo(self, cr, uid, ids, context=None):
-        if context is None:
-            context = {}
-        res = super(procurement_order, self).make_mo(cr, uid, ids, context=context)
+        result = super(procurement_order, self).make_mo(cr, uid, ids, context=context)
         procurement_obj = self.pool.get('procurement.order')
         production_obj = self.pool.get('mrp.production')
         for procurement in procurement_obj.browse(cr, uid, ids, context=context):
-            if res.get(procurement.id, False):
-                production = production_obj.browse(cr, uid, res.get(procurement.id), context=context)
-                if production.order_id:
-                    if production.order_id.product_tag_id:
-                        if production.order_id.product_tag_id.name == 'BOI':
-                            boi_type = 'BOI'
-                        else:
-                            boi_type = 'NONBOI'
-                        production_obj.write(cr, uid, [res.get(procurement.id)], {'name': '%s-%s'%(boi_type,production.name)})
-        return res
+            if result.get(procurement.id, False):
+                production = production_obj.browse(cr, uid, result.get(procurement.id), context=context)
+                boi_type = (production.order_id and production.order_id.product_tag_id and production.order_id.product_tag_id.name == 'BOI') \
+                                and 'BOI' or 'NONBOI'
+                production_obj.write(cr, uid, [result.get(procurement.id)], {'name': '%s-%s'%(boi_type,production.name)})
+        return result
 
 procurement_order()
