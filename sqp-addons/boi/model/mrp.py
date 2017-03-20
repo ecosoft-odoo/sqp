@@ -55,11 +55,12 @@ class mrp_production(osv.osv):
 
     def copy(self, cr, uid, id, default=None, context=None):
         production_id = super(mrp_production, self).copy(cr, uid, id, default=default, context=context)
-        production = self.browse(cr, uid, production_id, context=context)
-        boi_type = (production.order_id and production.order_id.product_tag_id and production.order_id.product_tag_id.name == 'BOI') \
-                        and 'BOI' or 'NONBOI'
-        name = '%s-%s'%(boi_type,production.name)
-        self.write(cr, uid, [production_id], {'name': name}, context=context)
+        if production_id:
+            production = self.browse(cr, uid, production_id, context=context)
+            boi_type = (production.order_id and production.order_id.product_tag_id and production.order_id.product_tag_id.name == 'BOI') \
+                            and 'BOI' or 'NONBOI'
+            name = '%s-%s'%(boi_type,production.name)
+            self.write(cr, uid, [production_id], {'name': name}, context=context)
         return production_id
 
     def write(self, cr, uid, ids, vals, context=None):
@@ -91,7 +92,7 @@ class mrp_production(osv.osv):
                                 and production.order_id.boi_cert_id.id or False
             name = '%s-%s'%(boi_type,picking.name)
             picking_obj.write(cr, uid, picking_id, {'name': name, 'boi_type': boi_type, 'boi_cert_id': boi_cert_id}, context=context)
-            return picking_id
+        return picking_id
 
     def _create_bom_picking(self, cr, uid, production, context=None):
         picking_id = super(mrp_production, self)._create_bom_picking(cr, uid, production, context=context)

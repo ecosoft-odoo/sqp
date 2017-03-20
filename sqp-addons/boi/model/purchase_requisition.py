@@ -80,7 +80,6 @@ class purchase_requisition(osv.osv):
                 boi_cert_id = requisition.boi_cert_id and requisition.boi_cert_id.id \
                                 or False
                 name = '%s-%s'%(boi_type,order.name)
-                print name
                 order_obj.write(cr, uid, [order_id], {'name': name, 'boi_type': boi_type, 'boi_cert_id': boi_cert_id}, context=context)
         return result
 

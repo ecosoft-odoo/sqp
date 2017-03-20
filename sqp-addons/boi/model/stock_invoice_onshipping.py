@@ -36,3 +36,5 @@ class stock_invoice_onshipping(osv.osv_memory):
                 boi_cert_id = picking.boi_cert_id and picking.boi_cert_id.id or False
                 invoice_obj.write(cr, uid, [invoice_id], {'boi_type': boi_type, 'boi_cert_id': boi_cert_id})
         return result
+
+stock_invoice_onshipping()
