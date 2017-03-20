@@ -21,123 +21,117 @@
 
 from openerp.osv import fields, osv
 from openerp.tools.translate import _
+from . import constant
 
 class sale_order(osv.osv):
 
     _inherit = 'sale.order'
 
     _columns = {
-        'boi_number_id': fields.many2one('boi.certificate', 'BOI Number'),
+        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict"),
         'is_boi': fields.boolean('BOI', default=False),
+        'ref_order_id': fields.many2one('sale.order', 'Ref BOI Quotation', ondelete="restrict"),
     }
 
     def create(self, cr, uid, vals, context=None):
-        if context is None:
-            context = {}
-        if vals.get('name', '/') == '/':
-            vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'sale.order') or '/'
+        order_id = super(sale_order, self).create(cr, uid, vals, context=context)
+        if order_id:
             tag_obj = self.pool.get('product.tag')
-            tag = tag_obj.browse(cr, uid, vals.get('product_tag_id'), context=context)
-            if tag.name == 'BOI':
-                boi_type = 'BOI'
-            else:
-                boi_type = 'NONBOI'
-            vals.update({'name': '%s-%s'%(boi_type, vals.get('name'))})
-        return super(sale_order, self).create(cr, uid, vals, context=context)
+            order = self.browse(cr, uid, order_id, context=context)
+            product_tag_id = vals.get('product_tag_id', False)
+            boi_type = False
+            if product_tag_id:
+                tag = tag_obj.browse(cr, uid, product_tag_id, context=context)
+                boi_type = tag.name == 'BOI' and 'BOI' or 'NONBOI'
+            name = '%s-%s'%(boi_type,order.name)
+            self.write(cr, uid, order_id, {'name': name}, context=context)
+        return order_id
 
     def copy(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        if context is None:
-            context = {}
-        res = super(sale_order, self).copy(cr, uid, id, default, context=context)
-        if res:
-            order = self.browse(cr, uid, res, context=context)
-            if order.product_tag_id:
-                if order.product_tag_id.name == 'BOI':
-                    boi_type = 'BOI'
-                else:
-                    boi_type = 'NONBOI'
-                name = '%s-%s'%(boi_type,order.name)
-                self.write(cr, uid, res, {'name': name}, context=context)
-        return res
+        order_id = super(sale_order, self).copy(cr, uid, id, default=default, context=context)
+        if order_id:
+            order = self.browse(cr, uid, order_id, context=context)
+            name = order.name
+            boi_type = (order.product_tag_id and order.product_tag_id.name == 'BOI') \
+                            and 'BOI' or 'NONBOI'
+            name = (name.find('BOI') >= 0 and name.find('NONBOI') < 0 and boi_type == 'NONBOI') \
+                        and name.replace('BOI','NONBOI') \
+                        or (name.find('NONBOI') >= 0 and boi_type == 'BOI') \
+                        and name.replace('NONBOI','BOI')  \
+                        or name
+            self.write(cr, uid, [order_id], {'name': name}, context=context)
+        return order_id
 
     def write(self, cr, uid, ids, vals, context=None):
-        if context is None:
-            context = {}
         if not isinstance(ids, list):
             ids = [ids]
-        if vals.get('name', '/') == '/':
+        product_tag_id = vals.get('product_tag_id', False)
+        if product_tag_id:
             tag_obj = self.pool.get('product.tag')
+            line_obj = self.pool.get('sale.order.line')
+            product_obj = self.pool.get('product.product')
+            tag = tag_obj.browse(cr, uid, product_tag_id, context=context)
+            boi_type = (tag.id and tag.name == 'BOI') and 'BOI' or 'NONBOI'
             for order in self.browse(cr, uid, ids, context=context):
-                if vals.get('product_tag_id', False):
-                    product_tag_id = vals.get('product_tag_id')
+                vals['name'] = order.name
+                vals['name'] = (vals['name'].find('BOI') >= 0 and vals['name'].find('NONBOI') < 0 and boi_type == 'NONBOI') \
+                                    and vals['name'].replace('BOI','NONBOI') \
+                                    or (vals['name'].find('NONBOI') >= 0 and boi_type == 'BOI') \
+                                    and vals['name'].replace('NONBOI','BOI')  \
+                                    or vals['name']
+                if len(vals.get('order_line', [])) == 0:
+                    line_ids = line_obj.search(cr, uid, [('order_id','=',order.id)], context=context)
+                    for line in line_obj.browse(cr, uid, line_ids, context=context):
+                        for tag in line.product_id.tag_ids:
+                            if boi_type == 'NONBOI' and tag.name == 'BOI':
+                                raise osv.except_osv(_('Error!'), _('Tag of [%s] %s is BOI, but you choose Quotation type is NONBOI')%(line.product_id.default_code,line.product_id.name))
                 else:
-                    product_tag_id = order.product_tag_id.id
-                tag = tag_obj.browse(cr, uid, product_tag_id, context=context)
-                if tag.name == 'BOI':
-                    boi_type = 'BOI'
-                else:
-                    boi_type = 'NONBOI'
-                if order.name.find(boi_type) < 0:
-                    if order.name.find('BOI') >= 0 and boi_type == 'NONBOI':
-                        name = order.name.replace('BOI', 'NONBOI')
-                    else:
-                        name = '%s-%s'%(boi_type,order.name)
-                else:
-                    if order.name.find('NONBOI') >= 0 and boi_type == 'BOI':
-                        name = order.name.replace('NONBOI', 'BOI')
-                    else:
-                        name = order.name
-                vals.update({'name': name})
+                    for line in vals.get('order_line', []):
+                        if line[0] == 4:
+                            line_id = line[1]
+                            line = line_obj.browse(cr, uid, line_id, context=context)
+                            for tag in line.product_id.tag_ids:
+                                if boi_type == 'NONBOI' and tag.name == 'BOI':
+                                    raise osv.except_osv(_('Error!'), _('Tag of [%s] %s is BOI, but you choose Quotation type is NONBOI')%(line.product_id.default_code,line.product_id.name))
         return super(sale_order, self).write(cr, uid, ids, vals, context=context)
 
-    def action_button_confirm(self, cr, uid, ids, context=None):
-        if context is None:
-            context = {}
-        super(sale_order, self).action_button_confirm(cr, uid, ids, context=context)
-        order = self.browse(cr, uid, ids[0])
-        if order.product_tag_id and order.product_tag_id.name == 'BOI':
-            boi_type = 'BOI'
-        else:
-            boi_type = 'NONBOI'
-        if boi_type:
-            if order.name.find(boi_type) < 0:
-                if order.name.find('BOI') >= 0 and boi_type == 'NONBOI':
-                    name = order.name.replace('BOI', 'NONBOI')
-                else:
-                    name = '%s-%s'%(boi_type,order.name)
-            else:
-                if order.name.find('NONBOI') >= 0 and boi_type == 'BOI':
-                    name = order.name.replace('NONBOI', 'BOI')
-                else:
-                    name = order.name
-        self.write(cr, uid, ids[0], {'name': name}, context=context)
-
-    def _prepare_order_picking(self, cr, uid, order, context=None):
-        if context is None:
-            context = {}
-        res = super(sale_order, self)._prepare_order_picking(cr, uid, order, context=context)
-        if order.product_tag_id:
-            if order.product_tag_id.name == 'BOI':
-                boi_type = 'BOI'
-            else:
-                boi_type = 'NONBOI'
-            boi_number_id = order.boi_number_id and order.boi_number_id.id or False
-            res.update({'boi_type': boi_type, 'boi_number_id': boi_number_id, 'name': '%s-%s'%(boi_type,res.get('name'))})
-        return res
+    def action_wait(self, cr, uid, ids, context=None):
+        for order in self.browse(cr, uid, ids, context=context):
+            boi_type = (order.product_tag_id and order.product_tag_id.name == 'BOI') \
+                            and 'BOI' or 'NONBOI'
+            name = '%s-%s'%(boi_type,order.name)
+            self.write(cr, uid, [order.id], {'name': name}, context=context)
+        return super(sale_order, self).action_wait(cr, uid, ids, context=context)
 
     def onchange_product_tag_id(self, cr, uid, ids, product_tag_id, context=None):
-        if context is None:
-            context = {}
-        tag_obj = self.pool.get('product.tag')
         is_boi = False
+        header_msg = False
+        tag_obj = self.pool.get('product.tag')
         if product_tag_id:
             tag = tag_obj.browse(cr, uid, product_tag_id, context=context)
-            if tag.name == 'BOI':
-                is_boi = True
-            else:
-                is_boi = False
-        return {'value': {'is_boi': is_boi, 'boi_number_id': False}}
+            is_boi = tag.name == 'BOI' and True or False
+            header_msg = tag.name == 'BOI' and constant.boi_header_msg or constant.nonboi_header_msg
+        return {'value': {'is_boi': is_boi, 'boi_cert_id': False, 'header_msg': header_msg}}
+
+    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
+        if context is None:
+            context = {}
+        order_ids = self.search(cr, user, args, limit=limit, context=context)
+        if context.get('ref_product_tag', False):
+            tag_obj = self.pool.get('product.tag')
+            tag_ids = tag_obj.search(cr, user, [('name','=',context.get('ref_product_tag'))], context=context)
+            order_ids = self.search(cr, user, [('product_tag_id','in',tag_ids),('state','=','draft')] + args, limit=limit, context=context)
+        return self.name_get(cr, user, order_ids, context=context)
+
+    def _prepare_order_picking(self, cr, uid, order, context=None):
+        result = super(sale_order, self)._prepare_order_picking(cr, uid, order, context=context)
+        boi_type = (order.product_tag_id and order.product_tag_id.name == 'BOI') \
+                        and 'BOI' or 'NONBOI'
+        boi_cert_id = order.boi_cert_id and order.boi_cert_id.id or False
+        name = ''
+        if result.get('name', False):
+            name = '%s-%s'%(boi_type,result.get('name'))
+        result.update({'boi_type': boi_type, 'boi_cert_id': boi_cert_id, 'name': name})
+        return result
 
 sale_order()

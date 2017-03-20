@@ -9,10 +9,11 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="boi_serial_number"/>
+                                <field name="name"/>
                                 <field name="approve_date"/>
                                 <field name="expire_date" attrs="{'invisible': [('start_date','=',False)], 'required': [('start_date','!=',False)]}"/>
                                 <field name="promotion_qty"/>
+                                <field name="active"/>
                             </group>
                             <group>
                                 <field name="boi_name"/>
@@ -31,7 +32,7 @@
             <field name="model">boi.certificate</field>
             <field name="arch" type="xml">
                 <tree string="BOI Certificate">
-                    <field name="boi_serial_number"/>
+                    <field name="name"/>
                     <field name="boi_name"/>
                     <field name="approve_date"/>
                     <field name="start_date"/>
@@ -39,6 +40,7 @@
                     <field name="boi_cert_type"/>
                     <field name="promotion_qty"/>
                     <field name="uom_id"/>
+                    <field name="active"/>
                 </tree>
             </field>
         </record>

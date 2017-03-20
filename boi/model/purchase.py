@@ -31,7 +31,7 @@ class purchase_order(osv.osv):
             ('BOI', 'BOI'),
             ], 'BOI Type', required=True, select=True,
         ),
-        'boi_number_id': fields.many2one('boi.certificate', 'BOI Number'),
+        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict"),
     }
 
     _defaults = {
@@ -41,42 +41,50 @@ class purchase_order(osv.osv):
     def create(self, cr, uid, vals, context=None):
         if vals.get('name', '/') == '/':
             vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'purchase.order') or '/'
-        if vals.get('boi_type', False) and vals.get('name', False):
-            vals.update({'name': '%s-%s'%(vals.get('boi_type'),vals.get('name'))})
+            boi_type = (vals.get('boi_type','') == 'BOI') and 'BOI' or 'NONBOI'
+            vals.update({'name': '%s-%s'%(boi_type, vals.get('name', '/'))})
         return super(purchase_order, self).create(cr, uid, vals, context=context)
 
+    def copy(self, cr, uid, id, default=None, context=None):
+        order_id = super(purchase_order, self).copy(cr, uid, id, default=default, context=context)
+        if order_id:
+            order = self.browse(cr, uid, order_id, context=context)
+            boi_type = order.boi_type == 'BOI' and 'BOI' or 'NONBOI'
+            name = '%s-%s'%(boi_type,order.name)
+            self.write(cr, uid, [order_id], {'name': name}, context=context)
+        return order_id
+
     def write(self, cr, uid, ids, vals, context=None):
-        for order in self.browse(cr, uid, ids, context=context):
-            if vals.get('boi_type', False):
-                if order.name.find(vals.get('boi_type')) < 0:
-                    if order.name.find('BOI') >= 0 and vals.get('boi_type') == 'NONBOI':
-                        name = order.name.replace('BOI', 'NONBOI')
-                    else:
-                        name = '%s-%s'%(vals.get('boi_type'),order.name)
-                else:
-                    if order.name.find('NONBOI') >= 0 and vals.get('boi_type') == 'BOI':
-                        name = order.name.replace('NONBOI', 'BOI')
-                    else:
-                        name = order.name
-                vals.update({'name': name})
+        if not isinstance(ids, list):
+            ids = [ids]
+        boi_type = vals.get('boi_type', False)
+        if boi_type:
+            for order in self.browse(cr, uid, ids, context=context):
+                vals['name'] = order.name
+                vals['name'] = (vals['name'].find('BOI') >= 0 and vals['name'].find('NONBOI') < 0 and boi_type == 'NONBOI') \
+                                    and vals['name'].replace('BOI','NONBOI') \
+                                    or (vals['name'].find('NONBOI') >= 0 and boi_type == 'BOI') \
+                                    and vals['name'].replace('NONBOI','BOI')  \
+                                    or vals['name']
         return super(purchase_order, self).write(cr, uid, ids, vals, context=context)
 
     def action_picking_create(self, cr, uid, ids, context=None):
-        res = super(purchase_order, self).action_picking_create(cr, uid, ids, context=context)
+        picking_id = super(purchase_order, self).action_picking_create(cr, uid, ids, context=context)
         picking_obj = self.pool.get('stock.picking')
-        if res:
-            picking = picking_obj.browse(cr, uid, res, context=context)
+        if picking_id:
+            picking = picking_obj.browse(cr, uid, picking_id, context=context)
             for order in self.browse(cr, uid, ids, context=context):
                 name = '%s-%s'%(order.boi_type,picking.name)
-                boi_number_id = order.boi_number_id and order.boi_number_id.id or False
-                picking_obj.write(cr, uid, res, {'boi_type': order.boi_type, 'boi_number_id': boi_number_id, 'name': name})
-        return res
+                boi_type = order.boi_type
+                boi_cert_id = order.boi_cert_id and order.boi_cert_id.id or False
+                picking_obj.write(cr, uid, picking_id, {'boi_type': boi_type, 'boi_cert_id': boi_cert_id, 'name': name})
+        return picking_id
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):
         warehouse_obj = self.pool.get('stock.warehouse')
-        name = boi_type == 'BOI' and 'FC_RM_BOI' or 'OF_RM'
-        warehouse_ids = warehouse_obj.search(cr, uid, [('name','=',name)], context=context)
-        res = warehouse_ids and {'boi_number_id': False, 'warehouse_id': warehouse_ids[0]} or {'boi_number_id': False}
-        return {'value': res}
+        warehouse_name = boi_type == 'BOI' and 'FC_RM_BOI' or 'OF_RM'
+        warehouse_ids = warehouse_obj.search(cr, uid, [('name','=',warehouse_name)], context=context)
+        warehouse_id = len(warehouse_ids) > 0 and warehouse_ids[0] or False
+        return {'value': {'boi_cert_id': False, 'warehouse_id': warehouse_id}}
 
 purchase_order()

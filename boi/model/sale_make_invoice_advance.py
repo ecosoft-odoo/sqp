@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -19,24 +18,22 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields
+from openerp.osv import fields, osv
 
-class sale_order_line_make_invoice(osv.osv_memory):
+class sale_advance_payment_inv(osv.osv_memory):
 
-    _inherit = "sale.order.line.make.invoice"
+    _inherit = "sale.advance.payment.inv"
 
-    def make_invoices(self, cr, uid, ids, context=None):
+    def create_invoices(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
-        res = super(sale_order_line_make_invoice, self).make_invoices(cr, uid, ids, context=context)
-        order_obj = self.pool.get('sale.order')
-        invoice_obj = self.pool.get('account.invoice')
-        if context.get('active_id', False):
-            order = order_obj.browse(cr, uid, context.get('active_id'), context=context)
-            if order.product_tag_id and order.product_tag_id.name == 'BOI':
-                boi_type = 'BOI'
-            else:
-                boi_type = 'NONBOI'
-            boi_number_id = order.boi_number_id and order.boi_number_id.id or False
-            invoice_obj.write(cr, uid, res.get('res_id'), {'boi_type': boi_type, 'boi_number_id': boi_number_id}, context=context)
+        res = super(sale_advance_payment_inv, self).create_invoices(cr, uid, ids, context=context)
+        if context.get('active_id', False) and res.get('res_id', False):
+            order_obj = self.pool.get('sale.order')
+            invoice_obj = self.pool.get('account.invoice')
+            order = order_obj.browse(cr, uid, context.get('active_id', False), context=context)
+            boi_type = (order.id and order.product_tag_id and order.product_tag_id.name == 'BOI') \
+                            and 'BOI' or 'NONBOI'
+            boi_cert_id = (order.id and order.boi_cert_id) and order.boi_cert_id.id or False
+            invoice_obj.write(cr, uid, res.get('res_id'), {'boi_type': boi_type, 'boi_cert_id': boi_cert_id}, context=context)
         return res

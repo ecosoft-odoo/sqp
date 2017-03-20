@@ -7,10 +7,22 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group/group/field[@name='date_order']" position="before">
-                    <field name="boi_number_id" attrs="{'invisible': [('is_boi','=',False)], 'required': [('is_boi','=',True)], 'readonly': [('state','not in',('draft'))]}"/>
+                    <field name="boi_cert_id" attrs="{'invisible': [('is_boi','=',False)], 'required': [('is_boi','=',True)], 'readonly': [('state','not in',('draft'))]}"/>
+                    <field name="ref_order_id" attrs="{'invisible': [('is_boi','=',True)], 'readonly': [('state','not in',('draft'))]}" context="{'ref_product_tag': 'BOI'}"/>
                     <field name="is_boi" invisible="1"/>
                 </xpath>
             </field>
+        </record>
+
+        <record id="view_split_order_form" model="ir.ui.view">
+            <field name="name">view.split.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="split_quotation_ab.view_order_form_ext"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='split_quotation_ab']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('split_ab_ref','!=',False),'|',('state','!=','draft'),('is_boi','=',True)]}</attribute>
+                </xpath>
+           </field>
         </record>
 
         <record id="view_order_form_ext" model="ir.ui.view">
