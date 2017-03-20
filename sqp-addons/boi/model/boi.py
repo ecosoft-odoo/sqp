@@ -26,17 +26,16 @@ from openerp.tools.translate import _
 class boi_certificate(osv.osv):
 
     _name = 'boi.certificate'
-    _rec_name = 'boi_serial_number'
 
     _columns = {
+        'name': fields.char('BOI Serial No', required=True),
+        'boi_name': fields.char('BOI Name', required=True),
         'approve_date': fields.date('Approve Date', required=True),
         'start_date': fields.date('Start Date'),
         'expire_date': fields.date('Expire Date'),
-        'boi_name': fields.char('BOI Name', required=True),
-        'boi_serial_number': fields.char('BOI Serial No', required=True),
         'boi_cert_type': fields.char('BOI Cert. Type', required=True),
         'promotion_qty': fields.float('Promotion QTY', required=True),
-        'uom_id': fields.many2one('product.uom', 'Unit of Measure', required=True),
+        'uom_id': fields.many2one('product.uom', 'Unit of Measure', required=True, ondelete="restrict"),
         'active': fields.boolean('Active'),
     }
 
@@ -45,26 +44,24 @@ class boi_certificate(osv.osv):
     }
 
     def create(self, cr, uid, vals, context=None):
-        if context is None:
-            context = {}
-        if vals.get('boi_serial_number', False):
-            certificate_ids = self.search(cr, uid, [('boi_serial_number','=',vals.get('boi_serial_number'))], context=context)
-            if len(certificate_ids) > 0:
-                raise osv.except_osv(_('Warning!'), _('BOI Serial No duplicate in BOI Certificate'))
+        self.func_show_error(cr, uid, vals, context=context)
         return super(boi_certificate, self).create(cr, uid, vals, context=context)
 
+    def copy(self, cr, uid, ids, default=None, context=None):
+        return super(boi_certificate, self).copy(cr, uid, ids, default=default, context=context)
+
     def write(self, cr, uid, ids, vals, context=None):
-        if context is None:
-            context = {}
-        if vals.get('boi_serial_number', False):
-            certificate_ids = self.search(cr, uid, [('boi_serial_number','=',vals.get('boi_serial_number'))], context=context)
-            if len(certificate_ids) > 0:
-                raise osv.except_osv(_('Warning!'), _('BOI Serial No duplicate in BOI Certificate'))
+        self.func_show_error(cr, uid, vals, context=context)
         return super(boi_certificate, self).write(cr, uid, ids, vals, context=context)
 
+    def func_show_error(self, cr, uid, vals, context=None):
+        if vals.get('name', False):
+            certificate_ids = self.search(cr, uid, [('name','=',vals.get('name'))], context=context)
+            if len(certificate_ids) > 0:
+                raise osv.except_osv(_('Error!'), _('Must not duplicate BOI Serial No'))
+        return True
+
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
-        if context is None:
-            context = {}
         certificate_ids = self.search(cr, user, [('start_date','!=',False),('active','!=',False)] + args, limit=limit, context=context)
         return self.name_get(cr, user, certificate_ids, context=context)
 

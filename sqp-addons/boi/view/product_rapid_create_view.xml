@@ -6,14 +6,18 @@
             <field name="model">product.rapid.create</field>
             <field name="inherit_id" ref="product_bom_template.view_product_rapid_create_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_id']" position="before">
+                    <field name="is_boi" invisible="1"/>
+                </xpath>
                 <xpath expr="//field[@name='panel_lines']" position="attributes">
-                    <attribute name="context">{'bom_product_type': 'panel','order_id':order_id}</attribute>
+                    <attribute name="context">{'bom_product_type': 'panel','order_id':order_id, 'is_boi': is_boi, 'default_is_boi': is_boi}</attribute>
+                    <attribute name="options">{"always_reload": True}</attribute>
                 </xpath>
                 <xpath expr="//field[@name='door_lines']" position="attributes">
-                    <attribute name="context">{'bom_product_type': 'door','order_id':order_id}</attribute>
+                    <attribute name="context">{'bom_product_type': 'door','order_id':order_id, 'is_boi': is_boi}</attribute>
                 </xpath>
                 <xpath expr="//field[@name='window_lines']" position="attributes">
-                    <attribute name="context">{'bom_product_type': 'window','order_id':order_id}</attribute>
+                    <attribute name="context">{'bom_product_type': 'window','order_id':order_id, 'is_boi': is_boi}</attribute>
                 </xpath>
                 <xpath expr="//form/group/field[@name='panel_lines']/tree/field[@name='mat_insulation_choices']" position="attributes">
                     <attribute name="context">{'order_id':order_id}</attribute>
@@ -25,22 +29,33 @@
                     <attribute name="context">{'order_id':order_id}</attribute>
                 </xpath>
                 <xpath expr="//form/group/field[@name='panel_lines']/tree/field[@name='part_code']" position="after">
-                    <field name="product_id" options="{'limit': 10, 'create': false, 'create_edit': false}" on_change="onchange_product_id(product_id)"/>
+                    <field name="product_id" required="context.get('order_id', False)" options="{'limit': 10, 'create': false, 'create_edit': false}" on_change="onchange_product_id(product_id, context)"/>
                 </xpath>
                 <xpath expr="//form/group/field[@name='door_lines']/tree/field[@name='part_code']" position="after">
-                    <field name="product_id" options="{'limit': 10, 'create': false, 'create_edit': false}" on_change="onchange_product_id(product_id)"/>
+                    <field name="product_id" options="{'limit': 10, 'create': false, 'create_edit': false}" on_change="onchange_product_id(product_id, context)"/>
                 </xpath>
                 <xpath expr="//form/group/field[@name='window_lines']/tree/field[@name='part_code']" position="after">
-                    <field name="product_id" options="{'limit': 10, 'create': false, 'create_edit': false}" on_change="onchange_product_id(product_id)"/>
+                    <field name="product_id" options="{'limit': 10, 'create': false, 'create_edit': false}" on_change="onchange_product_id(product_id, context)"/>
                 </xpath>
                 <xpath expr="//form/group/field[@name='panel_lines']/tree/field[@name='product_id']" position="attributes">
-                    <attribute name="context">{'order_id':order_id, 'bom_template_id':bom_template_id}</attribute>
+                    <attribute name="context">{'order_id':order_id, 'bom_template_id':bom_template_id, 'is_boi': is_boi}</attribute>
                 </xpath>
                 <xpath expr="//form/group/field[@name='door_lines']/tree/field[@name='product_id']" position="attributes">
-                    <attribute name="context">{'order_id':order_id, 'bom_template_id':bom_template_id}</attribute>
+                    <attribute name="context">{'order_id':order_id, 'bom_template_id':bom_template_id, 'is_boi': is_boi}</attribute>
                 </xpath>
                 <xpath expr="//form/group/field[@name='window_lines']/tree/field[@name='product_id']" position="attributes">
-                    <attribute name="context">{'order_id':order_id, 'bom_template_id':bom_template_id}</attribute>
+                    <attribute name="context">{'order_id':order_id, 'bom_template_id':bom_template_id, 'is_boi': is_boi}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_product_rapid_create_form_ext" model="ir.ui.view">
+  	        <field name="name">view.product.rapid.create.form.ext</field>
+  	        <field name="model">product.rapid.create</field>
+  	        <field name="inherit_id" ref="tmp_case_no_order.view_product_rapid_create_form_ext"/>
+  	        <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_id']" position="attributes">
+                    <attribute name="on_change">onchange_order_id(order_id, context)</attribute>
                 </xpath>
             </field>
         </record>

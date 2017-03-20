@@ -42,12 +42,12 @@ class product_rapid_create_line(osv.osv):
                     }
 
         return {}
-    
+
     def _get_bom_product_type(self, cr, uid, context=None):
         if context is None:
             context = {}
         return context.get('bom_product_type', False)
-    
+
     _name = 'product.rapid.create.line'
     _rec_name = 'part_name'
     _order = 'id desc'
@@ -89,23 +89,23 @@ class product_rapid_create_line(osv.osv):
     _defaults = {
         'bom_product_type': _get_bom_product_type,
     }
-    
-    
-    
+
+
+
 product_rapid_create_line()
 
 class product_rapid_create(osv.osv):
     """
     Rapid Create Part
-    """   
+    """
     _name = 'product.rapid.create'
-    _rec_name = 'order_id'    
-    
+    _rec_name = 'order_id'
+
     def _get_type(self, cr, uid, context=None):
         if context is None:
             context = {}
         return context.get('type', False)
-        
+
     _columns = {
         'state': fields.selection([
             ('draft', 'Draft'),
@@ -116,8 +116,8 @@ class product_rapid_create(osv.osv):
         'user_id':fields.many2one('res.users', 'User', readonly=True),
         'is_one_time_use': fields.boolean('One-Time Use', required=False, help="One time used product are those product created from Rapid Product Creation wizard as they are linked to specific SO"),
         'sale_ok': fields.boolean('Can be Sold'),
-        'tag_ids': fields.many2many('product.tag', string='Tags', help="Tagged products are products to be shown in Sales Order."),   
-        'product_categ_id': fields.many2one('product.category', 'Category', required=True, readonly=False),        
+        'tag_ids': fields.many2many('product.tag', string='Tags', help="Tagged products are products to be shown in Sales Order."),
+        'product_categ_id': fields.many2one('product.category', 'Category', required=True, readonly=False),
         'type': fields.selection([('product','Stockable Product'),('consu', 'Consumable'),('service','Service')], 'Product Type', required=True, help="Consumable: Will not imply stock management for this product. \nStockable product: Will imply stock management for this product."),
         'procure_method': fields.selection([('make_to_stock','Make to Stock'),('make_to_order','Make to Order')], 'Procurement Method', required=True, help="Make to Stock: When needed, the product is taken from the stock or we wait for replenishment. \nMake to Order: When needed, the product is purchased or produced."),
         'cost_method': fields.selection([('standard','Standard Price'), ('average','Average Price')], 'Costing Method', required=True,
@@ -148,54 +148,84 @@ class product_rapid_create(osv.osv):
         'supply_method': 'produce',
         'valuation': 'manual_periodic',
     }
-    
+
     def copy_lines(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
-        
+
         num_lines = context.get('num_lines', False)
         if not num_lines:
             return False
-        
+
         rapid_create = self.browse(cr, uid, ids[0])
-        line_obj = self.pool.get('product.rapid.create.line')        
+        line_obj = self.pool.get('product.rapid.create.line')
         cr.execute("select max(id) as id \
                         from product_rapid_create_line \
                         where wizard_id = %s \
                         and bom_product_type = %s",
-                       (ids[0], context.get('bom_product_type', False)))        
+                       (ids[0], context.get('bom_product_type', False)))
         line_id = cr.fetchone()[0] or False
-        
+
         if line_id:
             default = {}
             rs = line_obj.copy_data(cr, uid, line_id, default, context=context)
             i = 0
             while i < num_lines:
-                line_obj.create(cr, uid, rs, context=context)           
-                i += 1         
+                line_obj.create(cr, uid, rs, context=context)
+                i += 1
         else:
             return False
-        
+
         return {
                 'type': 'ir.actions.client',
                 'tag': 'reload'
-                }       
-           
+                }
+
+    def _prepare_product(self, cr, uid, ids, new_product_name, line, object, context=None):
+        prepare_product = {
+            'name': new_product_name,
+            'sequence': line.sequence,
+            'default_code': line.part_code,
+            'sale_ok': object.sale_ok,
+            'purchase_ok': False,
+            'ref_order_id': object.order_id.id,
+            'tag_ids': [(6, 0, [x.id for x in object.tag_ids])],
+            'is_one_time_use': object.is_one_time_use,
+            'categ_id': object.product_categ_id.id,
+            'type': object.type,
+            'procure_method': object.procure_method,
+            'cost_method': object.cost_method,
+            'supply_method': object.supply_method,
+            'valuation': object.valuation,
+            'bom_product_type': line.bom_template_id.bom_product_type,
+            'W': line.W,
+            'L': line.L,
+            'T': line.T.id,
+            'mat_inside_skin_choices': line.mat_inside_skin_choices.id,
+            'mat_outside_skin_choices': line.mat_outside_skin_choices.id,
+            'mat_insulation_choices': line.mat_insulation_choices.id,
+            'cut_area': line.cut_area,
+            'remark': line.remark,
+            'partner_id': line.partner_id and line.partner_id.id,
+            'list_price': line.list_price
+        }
+        return prepare_product
+
     def create_product(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
-            
+
         # Get the selected BOM Template
         object =  self.browse(cr, uid, ids[0], context=context)
         lines = object.panel_lines + object.door_lines + object.window_lines
-        
+
         result = []
-        
+
         if not len(lines):
             return False
-        
+
         new_id, old_id = 0, 0
-        
+
         for line in lines:
             bom_template = line.bom_template_id
             # If template, then continue, else, stop
@@ -205,64 +235,38 @@ class product_rapid_create(osv.osv):
                 # Create new object by copy the existing one, then change name using predefined format
                 product_template = product_obj.browse(cr, uid, bom_template.product_id.id)
                 new_product_name = eval(bom_template.new_name_format, {'object':object, 'line':line})
-                res = {
-                    'name': new_product_name,
-                    'sequence': line.sequence,
-                    'default_code': line.part_code,
-                    'sale_ok': object.sale_ok,
-                    'purchase_ok': False,
-                    'ref_order_id': object.order_id.id,
-                    'tag_ids': [(6, 0, [x.id for x in object.tag_ids])],
-                    'is_one_time_use': object.is_one_time_use,
-                    'categ_id': object.product_categ_id.id,
-                    'type': object.type,
-                    'procure_method': object.procure_method,
-                    'cost_method': object.cost_method,
-                    'supply_method': object.supply_method,
-                    'valuation': object.valuation,     
-                    'bom_product_type': line.bom_template_id.bom_product_type,         
-                    'W': line.W,
-                    'L': line.L,
-                    'T': line.T.id,
-                    'mat_inside_skin_choices': line.mat_inside_skin_choices.id,
-                    'mat_outside_skin_choices': line.mat_outside_skin_choices.id,
-                    'mat_insulation_choices': line.mat_insulation_choices.id,
-                    'cut_area': line.cut_area,
-                    'remark': line.remark,
-                    'partner_id': line.partner_id and line.partner_id.id,
-                    'list_price': line.list_price
-                }
+                res = self._prepare_product(cr, uid, ids, new_product_name, line, object, context=context)
                 new_product_id = product_obj.copy(cr, uid, product_template.id, default = {}, context=context)
                 result.append(new_product_id)
                 product_obj.write(cr, uid, new_product_id, res)
-                
+
                 # Copy Bill of Material
                 res = {
                     'name': new_product_name,
                     'product_id':new_product_id,
                     'is_bom_template': False,
                     'bom_template_type': None
-                }                
-                
+                }
+
                 # Performance Tuning
                 new_id = bom_template.id
                 if new_id != old_id:
                     context.update({'bom_data': False})
                 new_bom_id, bom_data = bom_obj.copy_bom_formula(cr, uid, bom_template.id,
                                           object, line,
-                                          default = {}, 
+                                          default = {},
                                           context=context)
                 old_id = bom_template.id
                 context.update({'bom_data': bom_data})
                 # --
                 bom_obj.write(cr, uid, new_bom_id, res)
-                
+
         # Return
         data_obj = self.pool.get('ir.model.data')
         if result and len(result):
-            
+
             self.write(cr, uid, ids[0], {'state': 'done'})
-            
+
             #res_id = result[0]
             form_view_id = data_obj._get_id(cr, uid, 'product', 'product_normal_form_view')
             form_view = data_obj.read(cr, uid, form_view_id, ['res_id'])
@@ -282,7 +286,7 @@ class product_rapid_create(osv.osv):
                 'type': 'ir.actions.act_window',
                 'search_view_id': search_view['res_id'],
                 'nodestroy': True
-        }                
+        }
         return False
 
 product_rapid_create()
