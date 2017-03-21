@@ -29,6 +29,8 @@ class product_stock_card(osv.osv):
     _columns = {
         'ref_order_id': fields.many2one('sale.order', 'Sales Order', readonly=True),
         'ref_project_name': fields.char('Project Name', size=128, readonly=False),
+        'department_id': fields.many2one('hr.department', 'Department', readonly=True),
+        'note': fields.char('Remark', readonly=True),
     }
 
     def init(self, cr):
@@ -61,7 +63,9 @@ class product_stock_card(osv.osv):
                               pt.uom_id as default_uom,
                               sm.product_uom as move_uom,
                               sp.ref_order_id as ref_order_id,
-                              sp.ref_project_name as ref_project_name
+                              sp.ref_project_name as ref_project_name,
+                              sp.department_id as department_id,
+                              sp.note as note
                          FROM stock_move AS sm
                               LEFT OUTER JOIN res_partner AS pa ON pa.id = sm.partner_id
                               LEFT OUTER JOIN stock_picking AS sp ON sp.id = sm.picking_id
