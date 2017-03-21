@@ -122,6 +122,7 @@ class stock_picking_out(osv.osv):
         location_id = False
         move_ids = []
         boi_type = 'NONBOI'
+        not_create_extra_move = False
         context.update({
             'states': ['done'],
             'what': ['in','out']

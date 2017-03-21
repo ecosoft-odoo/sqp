@@ -50,7 +50,7 @@ class account_invoice(osv.osv):
         if context is None:
             context = {}
         invoice_ids = super(account_invoice, self).refund(cr, uid, ids, date=date, period_id=period_id, description=description, journal_id=journal_id, context=context)
-        if context.get('active_ids', False):
+        if context.get('active_ids', False) and len(invoice_ids) > 0:
             for invoice in self.browse(cr, uid, context.get('active_ids')):
                 boi_type = invoice.boi_type
                 boi_cert_id = invoice.boi_cert_id and invoice.boi_cert_id.id or False
@@ -61,11 +61,11 @@ class account_invoice(osv.osv):
         if context is None:
             context = {}
         invoice_ids = super(account_invoice, self).debitnote(cr, uid, ids, date=date, period_id=period_id, description=description, journal_id=journal_id, context=context)
-        if context.get('active_ids', False):
+        if context.get('active_ids', False) and len(invoice_ids) > 0:
             for invoice in self.browse(cr, uid, context.get('active_ids'), context=context):
                 boi_type = invoice.boi_type
                 boi_cert_id = invoice.boi_cert_id and invoice.boi_cert_id.id or False
-            self.write(cr, uid, invoice_ids, {'boi_type': boi_type, 'boi_cert_id': boi_cert_id}, context=context)
+                self.write(cr, uid, invoice_ids, {'boi_type': boi_type, 'boi_cert_id': boi_cert_id}, context=context)
         return invoice_ids
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):

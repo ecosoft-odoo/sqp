@@ -89,10 +89,11 @@ class sale_order(osv.osv):
                     for line in vals.get('order_line', []):
                         if line[0] == 4:
                             line_id = line[1]
-                            line = line_obj.browse(cr, uid, line_id, context=context)
-                            for tag in line.product_id.tag_ids:
-                                if boi_type == 'NONBOI' and tag.name == 'BOI':
-                                    raise osv.except_osv(_('Error!'), _('Tag of [%s] %s is BOI, but you choose Quotation type is NONBOI')%(line.product_id.default_code,line.product_id.name))
+                            if line_id:
+                                line = line_obj.browse(cr, uid, line_id, context=context)
+                                for tag in line.product_id.tag_ids:
+                                    if boi_type == 'NONBOI' and tag.name == 'BOI':
+                                        raise osv.except_osv(_('Error!'), _('Tag of [%s] %s is BOI, but you choose Quotation type is NONBOI')%(line.product_id.default_code,line.product_id.name))
         return super(sale_order, self).write(cr, uid, ids, vals, context=context)
 
     def action_wait(self, cr, uid, ids, context=None):
