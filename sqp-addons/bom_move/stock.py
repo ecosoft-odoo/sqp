@@ -21,10 +21,11 @@ class stock_picking(osv.osv):
         if len(ids) > 1:
             raise osv.except_osv(_('Error!'), _('Not multiple value!!!'))
         res = super(stock_picking, self).do_partial(cr, uid, ids, partial_datas, context)
-        pickings = self.browse(cr, uid, ids)
-        if pickings[0].is_bom_move:
-            name = self.pool.get('ir.sequence').get(cr, uid, 'bom.move')
-            self.write(cr, uid, ids, {'name': name})
+        if len(ids) > 0:
+            pickings = self.browse(cr, uid, ids)
+            if pickings[0].is_bom_move and pickings[0].state != 'done':
+                name = self.pool.get('ir.sequence').get(cr, uid, 'bom.move')
+                self.write(cr, uid, ids, {'name': name})
         return res
 
 stock_picking()

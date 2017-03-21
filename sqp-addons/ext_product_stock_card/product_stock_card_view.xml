@@ -7,10 +7,12 @@
 	        <field name="inherit_id" ref="product_stock_card.view_product_stock_card_tree"/>
 	        <field name="arch" type="xml">
 	            <xpath expr="/tree/field[@name='name']" position="after">
-					<field name="partner_id"/>
+					<!-- <field name="partner_id"/> -->
+                  <field name="department_id"/>
+                  <field name="note"/>
 					<field name="ref_order_id"/>
 					<field name="ref_project_name"/>
-	            </xpath>	        
+	            </xpath>
 			</field>
 	    </record>
 	</data>

@@ -117,8 +117,12 @@ class stock_picking_out(osv.osv):
         location_obj = self.pool.get('stock.location')
         product_obj = self.pool.get('product.product')
         picking_obj = self.pool.get('stock.picking')
-        rm_boi_location = location_obj.search(cr, uid, [('name','=','FC_RM_BOI')], context=context)[0]
-        rm_location = location_obj.search(cr, uid, [('name','=','FC_RM')], context=context)[0]
+        rm_boi_location = location_obj.search(cr, uid, [('name','=','FC_RM_BOI')], context=context)
+        rm_location = location_obj.search(cr, uid, [('name','=','FC_RM')], context=context)
+        if len(rm_boi_location) > 0:
+            rm_boi_location = rm_boi_location[0]
+        if len(rm_location) > 0:
+            rm_location = rm_location[0]
         location_id = False
         move_ids = []
         boi_type = 'NONBOI'
@@ -234,8 +238,12 @@ class stock_picking_out(osv.osv):
         location_obj = self.pool.get('stock.location')
         product_obj = self.pool.get('product.product')
         picking_obj = self.pool.get('stock.picking')
-        rm_boi_location = location_obj.search(cr, uid, [('name','=','FC_RM_BOI')], context=context)[0]
-        rm_location = location_obj.search(cr, uid, [('name','=','FC_RM')], context=context)[0]
+        rm_boi_location = location_obj.search(cr, uid, [('name','=','FC_RM_BOI')], context=context)
+        rm_location = location_obj.search(cr, uid, [('name','=','FC_RM')], context=context)
+        if len(rm_boi_location) > 0:
+            rm_boi_location = rm_boi_location[0]
+        if len(rm_location) > 0:
+            rm_location = rm_location[0]
         location_id = False
         move_ids = []
         context.update({
@@ -419,8 +427,12 @@ class stock_move(osv.osv):
         picking_obj = self.pool.get('stock.picking')
         location_obj = self.pool.get('stock.location')
         product_obj = self.pool.get('product.product')
-        rm_boi_location = location_obj.search(cr, uid, [('name','=','FC_RM_BOI')], context=context)[0]
-        rm_location = location_obj.search(cr, uid, [('name','=','FC_RM')], context=context)[0]
+        rm_boi_location = location_obj.search(cr, uid, [('name','=','FC_RM_BOI')], context=context)
+        rm_location = location_obj.search(cr, uid, [('name','=','FC_RM')], context=context)
+        if len(rm_boi_location) > 0:
+            rm_boi_location = rm_boi_location[0]
+        if len(rm_location) > 0:
+            rm_location = rm_location[0]
         location_id = False
         picking = False
         if len(ids) > 0:
