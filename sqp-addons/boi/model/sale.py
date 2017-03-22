@@ -84,7 +84,9 @@ class sale_order(osv.osv):
                     for line in line_obj.browse(cr, uid, line_ids, context=context):
                         for tag in line.product_id.tag_ids:
                             if boi_type == 'NONBOI' and tag.name == 'BOI':
-                                raise osv.except_osv(_('Error!'), _('Tag of [%s] %s is BOI, but you choose Quotation type is NONBOI')%(line.product_id.default_code,line.product_id.name))
+                                raise osv.except_osv(_('Error!'), _('Tag of %s is BOI, but you choose Quotation type is NONBOI')%(line.product_id.name))
+                            elif boi_type == 'BOI' and tag.name != 'BOI':
+                                raise osv.except_osv(_('Error!'), _('Tag of %s is NONBOI, but you choose Quotation type is BOI')%(line.product_id.name))
                 else:
                     for line in vals.get('order_line', []):
                         if line[0] == 4:
@@ -93,7 +95,19 @@ class sale_order(osv.osv):
                                 line = line_obj.browse(cr, uid, line_id, context=context)
                                 for tag in line.product_id.tag_ids:
                                     if boi_type == 'NONBOI' and tag.name == 'BOI':
-                                        raise osv.except_osv(_('Error!'), _('Tag of [%s] %s is BOI, but you choose Quotation type is NONBOI')%(line.product_id.default_code,line.product_id.name))
+                                        raise osv.except_osv(_('Error!'), _('Tag of %s is BOI, but you choose Quotation type is NONBOI')%(line.product_id.name))
+                                    elif boi_type == 'BOI' and tag.name != 'BOI':
+                                        raise osv.except_osv(_('Error!'), _('Tag of %s is NONBOI, but you choose Quotation type is BOI')%(line.product_id.name))
+                        elif line[0] == 0:
+                            line = line[2]
+                            product_id = line.get('product_id', False)
+                            if product_id:
+                                product = product_obj.browse(cr, uid, product_id, context=context)
+                                for tag in product.tag_ids:
+                                    if boi_type == 'NONBOI' and tag.name == 'BOI':
+                                        raise osv.except_osv(_('Error!'), _('Tag of %s is BOI, but you choose Quotation type is NONBOI')%(product.name))
+                                    elif boi_type == 'BOI' and tag.name != 'BOI':
+                                        raise osv.except_osv(_('Error!'), _('Tag of %s is NONBOI, but you choose Quotation type is BOI')%(product.name))
         return super(sale_order, self).write(cr, uid, ids, vals, context=context)
 
     def action_wait(self, cr, uid, ids, context=None):
