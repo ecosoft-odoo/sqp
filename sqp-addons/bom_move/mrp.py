@@ -175,6 +175,8 @@ class mrp_production(osv.osv):
     def _create_stock_move(self, cr, uid, move_list, context):
         move_obj = self.pool.get('stock.move')
         for move_line in move_list:
+            move_line['product_qty'] = round(move_line.get('product_qty', 0.0), 2)
+            move_line['order_qty'] = round(move_line.get('order_qty', 0.0), 2)
             move_obj.create(cr, uid, move_line, context)
         return True
 
