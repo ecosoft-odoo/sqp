@@ -50,13 +50,20 @@ class stock_partial_picking(osv.osv_memory):
         partial = self.browse(cr, uid, ids[0], context=context)
         picking_id = partial.picking_id and partial.picking_id.id or False
         if picking_id:
+            is_supply_list = partial.picking_id.is_supply_list
+            type = partial.picking_id.type
             boi_type = partial.picking_id.boi_type
             is_bom_move = partial.picking_id.is_bom_move
-            if boi_type:
+            state = partial.picking_id.state
+            location_id = partial.picking_id.location_id.id
+            location_dest_id = partial.picking_id.location_dest_id.id
+            if is_supply_list or (type == 'internal' and location_id != False and location_dest_id != False) or (type == 'internal' and boi_type != 'BOI'):
+                return result
+            if boi_type and (type == 'in' or type == 'out' or type == 'internal' or is_bom_move == True) and state != 'done':
                 name = partial.picking_id.name
                 name = '%s-%s'%(boi_type,name)
                 picking_obj.write(cr, uid, [picking_id], {'name': name}, context=context)
-            if is_bom_move:
+            if is_bom_move and state != 'done':
                 picking_obj.write(cr, uid, [picking_id], {'state': 'draft'}, context=context)
                 move_ids = move_obj.search(cr, uid, [('picking_id','=',picking_id)], context=context)
                 move_obj.write(cr, uid, move_ids, {'state': 'draft'}, context=context)
@@ -81,7 +88,7 @@ class stock_partial_picking(osv.osv_memory):
             available_product_detail = product_obj.get_product_available(cr, uid, [product_id], context=context)
             if available_product_detail.values():
                 available_product_quantity = available_product_detail.values()[0]
-        picking_ids = context.get('active_ids', [])
+        picking_ids = move.picking_id and [move.picking_id.id] or []
         for picking in picking_obj.browse(cr, uid, picking_ids):
             if not picking.is_bom_move or picking.boi_type != 'BOI':
                 return prepare_partial_move
@@ -89,9 +96,9 @@ class stock_partial_picking(osv.osv_memory):
                 return {}
             compare = float_compare(move.product_qty, available_product_quantity, 3)
             if compare >= 0:
-                product_qty = available_product_quantity
+                product_qty = round(available_product_quantity, 2)
             else:
-                product_qty = move.product_qty
+                product_qty = round(move.product_qty, 2)
             prepare_partial_move = self._prepare_partial_move(cr, uid, move, product_qty)
         return prepare_partial_move
 

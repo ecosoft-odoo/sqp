@@ -157,13 +157,16 @@ class stock_picking_out(osv.osv):
                 if available_product_detail.values():
                     available_rm_boi_product_quantity = available_product_detail.values()[0]
             compare = float_compare(available_rm_boi_product_quantity, move.product_qty, 3)
-            if compare >= 0 or available_rm_product_quantity <= 0.0:
+            if compare >= 0:
                 not_create_extra_move = True
-            else:
-                not_create_extra_move = False
-                break
-        if not_create_extra_move:
-            raise osv.except_osv(_('Warning!'), _('Not Create Extra Move'))
+                continue
+            # elif compare < 0 and available_rm_product_quantity <= 0:
+
+            not_create_extra_move = False
+            break
+        # if not_create_extra_move:
+        #     raise osv.except_osv(_('Error!'), _('Enough products quantity in stock FC_RM_BOI'))
+        # elif n
         picking_ids = []
         pick_name = ''
         if len(ids) > 0:
@@ -227,7 +230,9 @@ class stock_picking_out(osv.osv):
             'ref_partner_id': picking.ref_partner_id and picking.ref_partner_id.id or False,
             'ref_mo_id': picking.ref_mo_id and picking.ref_mo_id.id or False,
             'department_id': picking.department_id and picking.department_id.id or False,
-            'is_bom_move': False
+            'is_bom_move': False,
+            'boi_type': picking.boi_type,
+            'boi_cert_id': picking.boi_cert_id and picking.boi_cert_id.id or False
         }
         return prepare_stock_picking
 
@@ -281,9 +286,9 @@ class stock_picking_out(osv.osv):
             if compare == -1:
                 compare = float_compare(move.product_qty - available_rm_boi_product_quantity, available_rm_product_quantity, 3)
                 if compare >= 0:
-                    product_qty = available_rm_product_quantity
+                    product_qty = round(available_rm_product_quantity, 2)
                 else:
-                    product_qty = move.product_qty - available_rm_boi_product_quantity
+                    product_qty = round(move.product_qty - available_rm_boi_product_quantity, 2)
                 prepare_stock_move = self._prepare_stock_move(cr, uid, picking_id, move, picking, rm_location, rm_boi_location, product_qty, context=context)
                 move_id = move_obj.create(cr, uid, prepare_stock_move, context=context)
                 result.append(move_id)
@@ -450,6 +455,7 @@ class stock_move(osv.osv):
         })
         # Check Stock
         not_product_in_stock = False
+        not_product_in_boi = False
         for move in self.browse(cr, uid, ids, context=context):
             available_rm_product_quantity = 0.0
             available_source_product_quantity = 0.0
@@ -471,13 +477,17 @@ class stock_move(osv.osv):
                 if available_product_detail.values():
                     available_source_product_quantity = available_product_detail.values()[0]
             compare = float_compare(available_source_product_quantity, move.product_qty, 3)
-            if compare == -1 and picking and picking.boi_type == 'BOI' and available_rm_product_quantity > 0.0:
-                raise osv.except_osv(_('Warning!'), _('Create Extra Move for BOI'))
-            if picking and picking.boi_type == 'BOI' and available_rm_product_quantity <= 0.0 and available_source_product_quantity <= 0.0:
+            if picking and picking.boi_type == 'BOI' and available_source_product_quantity <= 0.0:
+                if available_rm_product_quantity > 0.0:
+                    not_product_in_boi = True
+                    continue
                 not_product_in_stock = True
             else:
                 not_product_in_stock = False
+                not_product_in_boi = False
                 break
-        if not_product_in_stock:
-            raise osv.except_osv(_('Warning!'), _('No have product quantity in stock FC_RM_BOI and FC_RM'))
+        if not not_product_in_boi and not_product_in_stock:
+            raise osv.except_osv(_('Error!'), _('No have product quantity in stock FC_RM_BOI and FC_RM'))
+        elif not_product_in_boi:
+            raise osv.except_osv(_('Error!'), _('Create Extra Move for BOI'))
         return result

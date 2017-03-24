@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Supper Mo" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.126972201352381"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="240"/>
+	<property name="ireport.y" value="48"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;product_lines&quot;]"/>
 	<import value="org.apache.commons.codec.binary.Base64"/>
 	<style name="table" lineSpacing="Single">
@@ -206,7 +206,7 @@
 		<variableExpression><![CDATA[$F{Cut Area}]]></variableExpression>
 	</variable>
 	<variable name="boi_name" class="java.lang.String">
-		<variableExpression><![CDATA[$F{boi_default_code} != null && $F{boi_product_name} != null ? '[' + $F{boi_default_code} + ']' + ' ' + $F{boi_product_name} : null]]></variableExpression>
+		<variableExpression><![CDATA[$F{boi_default_code}.toString() != '' && $F{boi_product_name}.toString() != '' ? '[' + $F{boi_default_code} + ']' + ' ' + $F{boi_product_name} : '']]></variableExpression>
 	</variable>
 	<group name="Mo Group" isReprintHeaderOnEachPage="true" footerPosition="ForceAtBottom">
 		<groupExpression><![CDATA[$F{id}]]></groupExpression>

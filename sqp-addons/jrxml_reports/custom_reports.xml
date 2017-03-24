@@ -180,23 +180,6 @@
 
 	<!-- END -->
 
-	<!-- BOI Report -->
-	<report string="BOI Report"
-			model="mrp.production"
-			auto="False"
-			name="boi.sqp"
-			rml="jrxml_reports/custom_reports/sqp_boi_form.jrxml"
-			id="report_sqp_boi_form"
-			menu="True"
-			header="False"
-		attachment=""
-			groups=""
-	/>
-	<record id="report_sqp_boi_form" model="ir.actions.report.xml">
-			<field name="jasper_report">True</field>
-			<field name="jasper_output">pdf</field>
-	</record>
-
     <report string="Manufacturing Order (A)"
         model="mrp.production"
         auto="False"
@@ -230,6 +213,23 @@
     </record>
 
 	<!-- END -->
+
+	<!-- BOI Report -->
+		<report string="Manufacturing Order (BOI)"
+				model="mrp.production"
+				auto="False"
+				name="boi.sqp"
+				rml="jrxml_reports/custom_reports/sqp_boi_form.jrxml"
+				id="report_sqp_boi_form"
+				menu="True"
+				header="False"
+				attachment=""
+				groups=""
+				/>
+		<record id="report_sqp_boi_form" model="ir.actions.report.xml">
+				<field name="jasper_report">True</field>
+				<field name="jasper_output">pdf</field>
+		</record>
 
      <report string="Supply List Form (SQP)"
         model="stock.picking.out"

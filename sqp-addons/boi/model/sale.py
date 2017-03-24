@@ -27,11 +27,26 @@ class sale_order(osv.osv):
 
     _inherit = 'sale.order'
 
+    def _check_product_name(self, cr, uid, ids):
+        line_obj = self.pool.get('sale.order.line')
+        order_list = self.browse(cr, uid, ids)
+        for order in order_list:
+            quotation_type = order.product_tag_id and order.product_tag_id.name or False
+            boi_type = quotation_type == 'BOI' and 'BOI' or 'NONBOI'
+            line_ids = line_obj.search(cr, uid, [('order_id','=',order.id)])
+            for line in line_obj.browse(cr, uid, line_ids):
+                for tag in line.product_id.tag_ids:
+                    if (boi_type == 'BOI' and tag.name != 'BOI') or (boi_type == 'NONBOI' and tag.name == 'BOI'):
+                        return False
+        return True
+
     _columns = {
         'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict"),
         'is_boi': fields.boolean('BOI', default=False),
         'ref_order_id': fields.many2one('sale.order', 'Ref BOI Quotation', ondelete="restrict"),
     }
+
+    _constraints = [(_check_product_name, 'Please specific the correct product !', ['Product'])]
 
     def create(self, cr, uid, vals, context=None):
         order_id = super(sale_order, self).create(cr, uid, vals, context=context)
@@ -79,35 +94,6 @@ class sale_order(osv.osv):
                                     or (vals['name'].find('NONBOI') >= 0 and boi_type == 'BOI') \
                                     and vals['name'].replace('NONBOI','BOI')  \
                                     or vals['name']
-                if len(vals.get('order_line', [])) == 0:
-                    line_ids = line_obj.search(cr, uid, [('order_id','=',order.id)], context=context)
-                    for line in line_obj.browse(cr, uid, line_ids, context=context):
-                        for tag in line.product_id.tag_ids:
-                            if boi_type == 'NONBOI' and tag.name == 'BOI':
-                                raise osv.except_osv(_('Error!'), _('Tag of %s is BOI, but you choose Quotation type is NONBOI')%(line.product_id.name))
-                            elif boi_type == 'BOI' and tag.name != 'BOI':
-                                raise osv.except_osv(_('Error!'), _('Tag of %s is NONBOI, but you choose Quotation type is BOI')%(line.product_id.name))
-                else:
-                    for line in vals.get('order_line', []):
-                        if line[0] == 4:
-                            line_id = line[1]
-                            if line_id:
-                                line = line_obj.browse(cr, uid, line_id, context=context)
-                                for tag in line.product_id.tag_ids:
-                                    if boi_type == 'NONBOI' and tag.name == 'BOI':
-                                        raise osv.except_osv(_('Error!'), _('Tag of %s is BOI, but you choose Quotation type is NONBOI')%(line.product_id.name))
-                                    elif boi_type == 'BOI' and tag.name != 'BOI':
-                                        raise osv.except_osv(_('Error!'), _('Tag of %s is NONBOI, but you choose Quotation type is BOI')%(line.product_id.name))
-                        elif line[0] == 0:
-                            line = line[2]
-                            product_id = line.get('product_id', False)
-                            if product_id:
-                                product = product_obj.browse(cr, uid, product_id, context=context)
-                                for tag in product.tag_ids:
-                                    if boi_type == 'NONBOI' and tag.name == 'BOI':
-                                        raise osv.except_osv(_('Error!'), _('Tag of %s is BOI, but you choose Quotation type is NONBOI')%(product.name))
-                                    elif boi_type == 'BOI' and tag.name != 'BOI':
-                                        raise osv.except_osv(_('Error!'), _('Tag of %s is NONBOI, but you choose Quotation type is BOI')%(product.name))
         return super(sale_order, self).write(cr, uid, ids, vals, context=context)
 
     def action_wait(self, cr, uid, ids, context=None):
