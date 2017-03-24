@@ -28,6 +28,11 @@ class stock_picking(osv.osv):
                 self.write(cr, uid, ids, {'name': name})
         return res
 
+    def copy(self, cr, uid, id, default=None, context=None):
+        default.update({'name': '/'})
+        res = super(stock_picking, self).copy(cr, uid, id, default=default, context=context)
+        return res
+
 stock_picking()
 
 
@@ -49,18 +54,24 @@ class stock_picking_out(osv.osv):
         'is_bom_move': lambda s, cr, uid, c: c.get('is_bom_move', False),
     }
 
+    # def copy(self, cr, uid, id, default=None, context=None):
+    #     if default is None:
+    #         default = {}
+    #     default = default.copy()
+    #     picking_obj = self.browse(cr, uid, id, context=context)
+    #     if ('name' not in default) or (picking_obj.name == '/'):
+    #         # For BOM Move
+    #         if picking_obj.is_bom_move:
+    #             default['name'] = \
+    #                 self.pool.get('ir.sequence').get(cr, uid, 'bom.move')
+    #     res = super(stock_picking_out, self).copy(cr, uid, id, default=default,
+    #                                               context=context)
+    #     return res
+
+
     def copy(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        default = default.copy()
-        picking_obj = self.browse(cr, uid, id, context=context)
-        if ('name' not in default) or (picking_obj.name == '/'):
-            # For BOM Move
-            if picking_obj.is_bom_move:
-                default['name'] = \
-                    self.pool.get('ir.sequence').get(cr, uid, 'bom.move')
-        res = super(stock_picking_out, self).copy(cr, uid, id, default=default,
-                                                  context=context)
+        default.update({'name': '/'})
+        res = super(stock_picking_out, self).copy(cr, uid, id, default=default, context=context)
         return res
 
     def create(self, cr, user, vals, context=None):
@@ -74,4 +85,13 @@ class stock_picking_out(osv.osv):
         new_id = super(stock_picking_out, self).create(cr, user, vals, context)
         return new_id
 
+class stock_picking_in(osv.osv):
+    _inherit = 'stock.picking.in'
+
+    def copy(self, cr, uid, id, default=None, context=None):
+        default.update({'name': '/'})
+        res = super(stock_picking_in, self).copy(cr, uid, id, default=default, context=context)
+        return res
+
+stock_picking_in()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
