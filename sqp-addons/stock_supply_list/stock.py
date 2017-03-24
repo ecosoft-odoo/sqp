@@ -24,9 +24,9 @@ from osv import osv, fields
 from tools.translate import _
 
 class stock_picking_out(osv.osv):
-    
+
     _inherit = 'stock.picking.out'
-    
+
     _columns = {
         'contact_name': fields.char('Contact Person', size=64, readonly=False),
         'is_supply_list': fields.boolean('Supply List', readonly=False),
@@ -55,7 +55,7 @@ class stock_picking_out(osv.osv):
         'is_supply_list': lambda s, cr, uid, c: c.get('is_supply_list', False),
         'is_printed': False
     }
-    
+
     def draft_progress(self, cr, uid, ids, *args):
         wf_service = netsvc.LocalService("workflow")
         for pick in self.browse(cr, uid, ids):
@@ -100,13 +100,22 @@ class stock_picking(osv.osv):
             * Cancelled: has been cancelled, can't be confirmed anymore"""
         ),
         'is_printed': fields.boolean('Printed'),#1473
-        
+
     }
 
     def action_progress(self, cr, uid, ids, context=None):
         self.write(cr, uid, ids, {'state': 'progress'})
         return True
-    
+
+    # kittiu: A HOOK function
+    def _get_seq_obj_name(self, cr, uid, pick, context=None):
+        if pick.is_supply_list:
+            return 'stock.picking.supplylist'
+        elif pick.type == 'internal':
+            return 'stock.picking'
+        else:
+            return 'stock.picking.%s' % (pick.type)
+
     # kittiu: A complete overwrite method, stock.do_partial() of ecosoft patch
     # FIXME: needs refactoring, this code is partially duplicated in stock_move.do_partial()!
     def do_partial(self, cr, uid, ids, partial_datas, context=None):
@@ -196,12 +205,15 @@ class stock_picking(osv.osv):
                 if not new_picking:
                     new_picking_name = pick.name
                     # kittiu:
-#                     self.write(cr, uid, [pick.id], 
+#                     self.write(cr, uid, [pick.id],
 #                                {'name': sequence_obj.get(cr, uid,
 #                                             'stock.picking.%s'%(pick.type)),
-#                                })                    
-                    seq_obj_name =  pick.is_supply_list and 'stock.picking.supplylist' or 'stock.picking.%s'%(pick.type)
-                    self.write(cr, uid, [pick.id], 
+#                                })
+
+                    # seq_obj_name =  pick.is_supply_list and 'stock.picking.supplylist' or 'stock.picking.%s'%(pick.type)
+                    seq_obj_name = self._get_seq_obj_name(cr, uid, pick, context=context)
+
+                    self.write(cr, uid, [pick.id],
                                {'name': sequence_obj.get(cr, uid, seq_obj_name),
                                })
                     # --
@@ -217,7 +229,7 @@ class stock_picking(osv.osv):
                             # ecosoft
                             #'product_uos_qty': product_qty, #TODO: put correct uos_qty
                             'product_uos_qty': product_qty * (product.uos_id and product.uos_coeff or 1), #TODO: put correct uos_qty
-                            # -- ecosoft                           
+                            # -- ecosoft
                             'picking_id' : new_picking,
                             'state': 'assigned',
                             'move_dest_id': False,
