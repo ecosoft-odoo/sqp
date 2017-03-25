@@ -274,7 +274,6 @@ class stock_picking_out(osv.osv):
         return prepare_stock_move
 
     def _view_stock_picking(self, cr, uid, ids, context=None):
-        print context
         if context is None:
             context = {}
         mod_obj = self.pool.get('ir.model.data')
