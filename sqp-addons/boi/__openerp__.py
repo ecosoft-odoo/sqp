@@ -38,7 +38,8 @@
         'purchase_requisition',
         'product_bom_template',
         'procurement',
-        'bom_move'
+        'bom_move',
+        'stock_simplified_move',
     ],
     'demo': [],
     'data': [

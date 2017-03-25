@@ -28,10 +28,10 @@ class stock_picking(osv.osv):
                 self.write(cr, uid, ids, {'name': name})
         return res
 
-    def copy(self, cr, uid, id, default=None, context=None):
-        default.update({'name': '/'})
-        res = super(stock_picking, self).copy(cr, uid, id, default=default, context=context)
-        return res
+    # def copy(self, cr, uid, id, default=None, context=None):
+    #     default.update({'name': '/'})
+    #     res = super(stock_picking, self).copy(cr, uid, id, default=default, context=context)
+    #     return res
 
 stock_picking()
 
