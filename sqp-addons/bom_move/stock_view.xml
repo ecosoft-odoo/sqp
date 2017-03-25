@@ -106,6 +106,17 @@
             </field>
         </record>
 
+        <record id="view_picking_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="ext_stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ref_order_id']" position="after">
+                    <field name="ref_mo_id" domain="['|',('state','=','confirmed'),'|',('state','=','ready'),('state','=','in_production')]"/>
+                </xpath>
+            </field>
+        </record>
+
         <!-- picking out tree -->
         <!-- <record id="view_picking_out_tree" model="ir.ui.view">
             <field name="name">view.picking.out.tree</field>

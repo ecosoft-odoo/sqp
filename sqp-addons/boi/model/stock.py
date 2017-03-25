@@ -59,9 +59,10 @@ class stock_picking(osv.osv):
                 vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'stock.picking.supplylist')
             else:
                 vals['name'] = self.pool.get('ir.sequence').get(cr, uid, seq_model)
-            # BOI
-            boi_type = vals.get('boi_type', False)
-            if boi_type:
+        # BOI
+        boi_type = vals.get('boi_type', False)
+        if boi_type:
+            if vals.get('name').find('BOI') < 0:
                 boi_type = boi_type == 'BOI' and 'BOI' or 'NONBOI'
                 vals.update({'name': '%s-%s'%(boi_type,vals.get('name'))})
         return vals
@@ -273,6 +274,7 @@ class stock_picking_out(osv.osv):
         return prepare_stock_move
 
     def _view_stock_picking(self, cr, uid, ids, context=None):
+        print context
         if context is None:
             context = {}
         mod_obj = self.pool.get('ir.model.data')
@@ -300,7 +302,7 @@ class stock_picking_out(osv.osv):
              (res_calendar and res_calendar[1] or False, 'calendar')]
         result['res_id'] = picking_ids and picking_ids[0] or False
         result['context'] = {}
-        result['context'].update({'contact_display': 'partner_address', 'search_default_available': 0})
+        result['context'].update({'contact_display': 'partner_address', 'search_default_available': 0, 'search_default_product_id': 0})
         return result
 
 stock_picking_out()

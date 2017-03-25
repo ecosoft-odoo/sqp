@@ -40,7 +40,11 @@ class purchase_order(osv.osv):
 
     def create(self, cr, uid, vals, context=None):
         if vals.get('name', '/') == '/':
-            vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'purchase.order') or '/'
+            sequence_obj = self.pool.get('ir.sequence')
+            if vals.get('is_subcontract', False):
+                vals['name'] = sequence_obj.get(cr, uid, 'purchase.order.subcontract') or '/'
+            else:
+                vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'purchase.order') or '/'
             boi_type = (vals.get('boi_type','') == 'BOI') and 'BOI' or 'NONBOI'
             vals.update({'name': '%s-%s'%(boi_type, vals.get('name', '/'))})
         return super(purchase_order, self).create(cr, uid, vals, context=context)

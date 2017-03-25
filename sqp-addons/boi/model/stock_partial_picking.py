@@ -55,7 +55,12 @@ class stock_partial_picking(osv.osv_memory):
             boi_type = partial.picking_id and partial.picking_id.boi_type or False
             name = partial.picking_id and partial.picking_id.name or False
             if boi_type and name and picking_id:
-                name = '%s-%s'%(boi_type,name)
+                if boi_type == 'BOI' and name.find('NONBOI') == 0:
+                    name = name.replace('NONBOI', 'BOI')
+                elif boi_type == 'NONBOI' and name.find('BOI') == 0:
+                    name = name.replace('BOI', 'NONBOI')
+                elif name.find('BOI') != 0 and name.find('NONBOI') != 0:
+                    name = '%s-%s'%(boi_type,name)
                 picking_obj.write(cr, uid, [picking_id], {'name': name}, context=context)
         return result
 
