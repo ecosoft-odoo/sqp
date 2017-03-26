@@ -127,15 +127,14 @@ class bom_choice_insulation(osv.osv):
     def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
         if context is None:
             context = {}
-        insulation_ids = self.search(cr, user, args, limit=limit, context=context)
         if context.get('order_id', False):
             order_obj = self.pool.get('sale.order')
             order = order_obj.browse(cr, user, context.get('order_id'), context=context)
             if order.product_tag_id and order.product_tag_id.name == 'BOI':
-                insulation_ids = self.search(cr, user, [('name', '=', 'PIR')] + args, limit=limit, context=context)
+                args = [('name', '=', 'PIR')] + args
             else:
                 if context.get('object', 'not door') == 'door':
-                    insulation_ids = self.search(cr, user, [('name', '!=', 'PIR')] + args, limit=limit, context=context)
-        return self.name_get(cr, user, insulation_ids, context=context)
+                    args = [('name', '!=', 'PIR')] + args
+        return super(bom_choice_insulation, self).name_search(cr, user, name, args=args, operator=operator, context=context, limit=limit)
 
 bom_choice_insulation()

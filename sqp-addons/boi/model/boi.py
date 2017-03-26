@@ -61,10 +61,6 @@ class boi_certificate(osv.osv):
                 raise osv.except_osv(_('Error!'), _('Must not duplicate BOI Serial No'))
         return True
 
-    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
-        certificate_ids = self.search(cr, user, [('start_date','!=',False),('active','!=',False)] + args, limit=limit, context=context)
-        return self.name_get(cr, user, certificate_ids, context=context)
-
 boi_certificate()
 
 
@@ -74,7 +70,7 @@ class product_product_boi_certificate(osv.osv):
 
     _columns = {
         'product_id': fields.many2one('product.product', 'Product', ondelete='cascade'),
-        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Serial No', required=True, ondelete="restrict"),
+        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Serial No', required=True, ondelete="restrict", domain="[('start_date','!=',False),('active','!=',False)]" ),
         'boi_name': fields.related('boi_cert_id', 'boi_name', string='BOI Name', type='char', readonly=True),
     }
 
