@@ -20,14 +20,31 @@
 ##############################################################################
 
 from openerp.osv import fields, osv
+from openerp.tools.translate import _
 
 class product_rapid_create(osv.osv):
 
     _inherit = 'product.rapid.create'
 
+    def _check_boi_name(self,cr,uid,ids):
+        line_obj = self.pool.get('product.rapid.create.line')
+        product_rapid_create = self.browse(cr, uid, ids)
+        for create in product_rapid_create:
+            quotation_type = (create.order_id and create.order_id.product_tag_id) \
+                                and create.order_id.product_tag_id.name or False
+            boi_type = quotation_type == 'BOI' and 'BOI' or 'NONBOI'
+            if boi_type == 'BOI':
+                line_ids = line_obj.search(cr, uid, [('wizard_id','=',create.id)])
+                for line in line_obj.browse(cr, uid, line_ids):
+                    if not line.product_id:
+                        return False
+        return True
+
     _columns = {
         'is_boi': fields.boolean('IS BOI', default=False)
     }
+
+    _constraints = [(_check_boi_name, 'Please specific BOI Name !', ['BOI Name'])]
 
     def _prepare_product(self, cr, uid, ids, new_product_name, line, object, context=None):
         result = super(product_rapid_create, self)._prepare_product(cr, uid, ids, new_product_name, line, object, context=context)

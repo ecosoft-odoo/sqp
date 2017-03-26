@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group/group/field[@name='partner_id']" position="before">
-                    <field name="boi_type" on_change="onchange_boi_type(boi_type, context)" attrs="{'invisible': [('is_supply_list','=',True)], 'readonly': [('state','not in',('draft'))]}"/>
+                    <field name="boi_type" on_change="onchange_boi_type(boi_type, context)" attrs="{'readonly': [('state','not in',('draft'))]}"/>
                 </xpath>
                 <xpath expr="//form/sheet/group/group/field[@name='date']" position="before">
                     <field name="boi_cert_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
@@ -21,7 +21,7 @@
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='draft_force_assign']" position="after">
-                    <button name="create_extra_move" string="Create Extra Move for BOI" type="object" class="oe_highlight" groups="base.group_user" attrs="{'invisible': ['|',('is_bom_move','!=',True),'|',('state','!=','draft'),('boi_type','=','NONBOI')]}"/>
+                    <button name="create_extra_move" string="Create Extra Move for BOI" type="object" class="oe_highlight" groups="base.group_user" attrs="{'invisible': ['|',('is_bom_move','!=',True),'|',('state','=','done'),('boi_type','=','NONBOI')]}"/>
                 </xpath>
             </field>
         </record>
@@ -35,6 +35,34 @@
                     <field name="boi_type" on_change="onchange_boi_type(boi_type, context)" attrs="{'invisible': [('type','!=','in')], 'readonly': [('state','not in',('draft'))]}"/>
                 </xpath>
                 <xpath expr="//form/sheet/group/group/field[@name='date']" position="before">
+                    <field name="boi_cert_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_simplified_move_form" model="ir.ui.view">
+            <field name="name">view.simplified.move.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock_simplified_move.view_simplified_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location_id']" position="before">
+                    <field name="boi_type" on_change="onchange_boi_type(boi_type, context)" attrs="{'invisible': ['|',('type','!=','internal'),'|',('location_id','=',True),('location_dest_id','=',True)], 'readonly': [('state','not in',('draft'))]}"/>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="before">
+                    <field name="boi_cert_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_picking_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="boi_type" on_change="onchange_boi_type(boi_type, context)" attrs="{'invisible': [('type','!=','internal')], 'readonly': [('state','not in',('draft'))]}"/>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="before">
                     <field name="boi_cert_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
                 </xpath>
             </field>

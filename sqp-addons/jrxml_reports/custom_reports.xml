@@ -1,32 +1,32 @@
 <?xml version="1.0"?>
 <openerp>
-<data>    
+<data>
 	<report string="Quote / Sale Order (SQP)"
         model="sale.order"
         auto="False"
         name="sale.order.sqp"
         rml="jrxml_reports/custom_reports/sqp_sale_order.jrxml"
-        id="report_sale_order_sqp" 
+        id="report_sale_order_sqp"
         menu="True"
         header="False"
     	attachment="object.state=='draft' and ('Quote_'+object.name+'_R'+str(object.doc_version)+'_'+(object.partner_id.name)+(object.ref_project_name and '_'+object.ref_project_name or '')+'.pdf') or (object.name+'_'+(object.partner_id.name)+(object.ref_project_name and '_'+object.ref_project_name or '')+'.pdf')"
-        groups="base.group_sale_salesman" 
-    />       
+        groups="base.group_sale_salesman"
+    />
     <record id="report_sale_order_sqp" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
     </record>
-    
+
 	<report string="Test"
         model="sale.order"
         auto="False"
         name="test"
         rml="jrxml_reports/custom_reports/test.jrxml"
-        id="report_test_sqp" 
+        id="report_test_sqp"
         menu="True"
         header="False"
-        groups="base.group_sale_salesman" 
-    />       
+        groups="base.group_sale_salesman"
+    />
     <record id="report_test_sqp" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
@@ -37,17 +37,17 @@
         auto="False"
         name="sale.order.sqp.nodiscount.col"
         rml="jrxml_reports/custom_reports/sqp_sale_order_nodiscount_col.jrxml"
-        id="report_sale_order_nodiscount_col_sqp" 
+        id="report_sale_order_nodiscount_col_sqp"
         menu="True"
         header="False"
     	attachment="object.state=='draft' and ('Quote_'+object.name+'_R'+str(object.doc_version)+'_'+(object.partner_id.name)+(object.ref_project_name and '_'+object.ref_project_name or '')+'.pdf') or (object.name+'_'+(object.partner_id.name)+(object.ref_project_name and '_'+object.ref_project_name or '')+'.pdf')"
-        groups="base.group_sale_salesman" 
-    />       
+        groups="base.group_sale_salesman"
+    />
     <record id="report_sale_order_nodiscount_col_sqp" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
-    </record>    
-    
+    </record>
+
 	<!-- END -->
 
 	<report string="Tax Invoice (SQP)"
@@ -55,19 +55,19 @@
         auto="False"
         name="tax.invoice.sqp"
         rml="jrxml_reports/custom_reports/sqp_tax_invoice.jrxml"
-        id="report_tax_invoice_sqp" 
+        id="report_tax_invoice_sqp"
         menu="True"
         header="False"
     	attachment=""
-        groups="" 	
-	/> 
+        groups=""
+	/>
     <record id="report_tax_invoice_sqp" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
 	    <field eval="[(6,0,[ref('account.invoice_form')])]" name="views_id"/>
 	    <field name="invisible">context.get('type',False)&lt;&gt;'out_invoice'</field>
     </record>
-    
+
 	<!-- END -->
 
 	<report string="Billing (SQP)"
@@ -75,20 +75,20 @@
         auto="False"
         name="account.billing.sqp"
         rml="jrxml_reports/custom_reports/sqp_billing.jrxml"
-        id="report_account_billing_sqp" 
+        id="report_account_billing_sqp"
         menu="True"
         header="False"
     	attachment=""
         groups=""
-    />     
+    />
     <record id="report_account_billing_sqp" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
         <field name="invisible">context.get('type',False)&lt;&gt;'receipt'</field>
-    </record>  	
+    </record>
 
 	<!-- END -->
-    
+
 	<report string="Customer Receipt (SQP)"
         model="account.voucher"
         auto="False"
@@ -99,14 +99,14 @@
         header="False"
     	attachment=""
         groups=""
-    />       
+    />
     <record id="report_customer_receipt_sqp" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
         <field name="invisible">context.get('type',False)!='receipt'</field>
 	    <field eval="[(6,0,[ref('account_voucher.view_vendor_receipt_form')])]" name="views_id"/>
-    </record>    
-   
+    </record>
+
     <report string="Order Progress (SQP)"
         model="sale.order"
         auto="False"
@@ -117,11 +117,11 @@
         header="False"
     	attachment=""
         groups=""
-    />      
+    />
     <record id="report_sqp_order_progress" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
-    </record> 
+    </record>
 
 	<!-- END -->
 
@@ -134,12 +134,12 @@
         menu="True"
         header="False"
     	attachment=""
-        groups="" 
-    />  
+        groups=""
+    />
     <record id="report_sqp_purchase_order" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
-    </record> 
+    </record>
 
 	<!-- END -->
 
@@ -152,12 +152,12 @@
         menu="True"
         header="False"
     	attachment=""
-        groups="" 
-    />       
+        groups=""
+    />
     <record id="report_sqp_purchase_requisition" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
-    </record> 
+    </record>
 
 	<!-- END -->
 
@@ -169,14 +169,14 @@
         id="report_sqp_payment_voucher"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
+    	attachment=""
+        groups=""
     />
     <record id="report_sqp_payment_voucher" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
 	    <field eval="[(6,0,[ref('account_voucher.view_vendor_payment_form')])]" name="views_id"/>
-    </record> 
+    </record>
 
 	<!-- END -->
 
@@ -188,14 +188,14 @@
         id="report_sqp_super_mo_form"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    />  
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_super_mo_form" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
-    </record> 
-    
+    </record>
+
     <report string="Manufacturing Order (B)"
         model="mrp.production"
         auto="False"
@@ -204,15 +204,32 @@
         id="report_sqp_super_mo_form_2"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    />  
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_super_mo_form_2" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
-    </record>     
+    </record>
 
 	<!-- END -->
+
+	<!-- BOI Report -->
+		<report string="Manufacturing Order (BOI)"
+				model="mrp.production"
+				auto="False"
+				name="boi.sqp"
+				rml="jrxml_reports/custom_reports/sqp_boi_form.jrxml"
+				id="report_sqp_boi_form"
+				menu="True"
+				header="False"
+				attachment=""
+				groups=""
+				/>
+		<record id="report_sqp_boi_form" model="ir.actions.report.xml">
+				<field name="jasper_report">True</field>
+				<field name="jasper_output">pdf</field>
+		</record>
 
      <report string="Supply List Form (SQP)"
         model="stock.picking.out"
@@ -222,14 +239,14 @@
         id="report_sqp_supply_list_form"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    /> 
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_supply_list_form" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
         <field name="invisible">not context.get('is_supply_list',False)</field>
-    </record> 
+    </record>
 
 	<!-- END -->
 
@@ -241,16 +258,16 @@
         id="report_sqp_shipment_panel_form"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    /> 
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_shipment_panel_form" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
         <field name="invisible">context.get('is_supply_list',False)</field>
-    </record> 
- 
- 	<!-- 
+    </record>
+
+ 	<!--
     <report string="Shipment Panel Form (Merged)"
         model="stock.picking.out"
         auto="False"
@@ -259,17 +276,17 @@
         id="report_sqp_shipment_panel_merged"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    /> 
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_shipment_panel_merged" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
         <field name="multi">True</field>
         <field name="invisible">context.get('is_supply_list',False)</field>
-    </record> 
+    </record>
  	-->
- 
+
 	<!-- END -->
 
     <report string="Work Progression (SQP)"
@@ -281,13 +298,13 @@
         menu="True"
         header="False"
     	attachment=""
-        groups="" 
-    />    
+        groups=""
+    />
     <record id="report_sqp_progress_work_subcon" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
-        <field name="invisible">not context.get('is_subcontract',False)</field>        
-    </record>  
+        <field name="invisible">not context.get('is_subcontract',False)</field>
+    </record>
 
 	<!-- END -->
 
@@ -299,12 +316,12 @@
         id="report_sqp_internal_move_form"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    /> 
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_internal_move_form" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
-        <field name="jasper_output">pdf</field>        
+        <field name="jasper_output">pdf</field>
          <field name="invisible">not context.get('simplified_move',False)</field>
     </record>
 
@@ -318,14 +335,14 @@
         id="report_sqp_label_product_delivery"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    /> 
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_label_product_delivery" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">xls</field>
         <field name="invisible">context.get('is_supply_list',False)</field>
-    </record> 
+    </record>
 
 
 	<!-- END -->
@@ -338,15 +355,15 @@
         id="report_sqp_excel_product_delivery"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    /> 
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_excel_product_delivery" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">xls</field>
         <field name="invisible">context.get('is_supply_list',False)</field>
-    </record> 
-    
+    </record>
+
 
 	<report string="Excel Data (B)"
         model="stock.picking.out"
@@ -356,14 +373,14 @@
         id="report_sqp_excel_product_delivery2"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    /> 
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_excel_product_delivery2" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">xls</field>
         <field name="invisible">context.get('is_supply_list',False)</field>
-    </record> 
+    </record>
 	<!-- END -->
 
  	<report string="MO Usage (SQP)"
@@ -374,14 +391,14 @@
         id="report_sqp_mo_usage_material"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    />  
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_mo_usage_material" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
-    </record> 
-    
+    </record>
+
     <!-- END -->
 
 	<report string="MO Usage Summary (SQP)"
@@ -392,16 +409,16 @@
         id="report_sqp_mo_usage_material_summary"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    />  
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_mo_usage_material_summary" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
-    </record> 
-    
+    </record>
+
     <!-- END -->
-    
+
  	<report string="WIP Transfer (SQP)"
         model="mrp.production"
         auto="False"
@@ -410,17 +427,17 @@
         id="report_sqp_wip_transfer_form"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    />  
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_wip_transfer_form" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
-    </record> 
+    </record>
 
 
     <!-- END -->
-    
+
  	<report string="Credit Note (SQP)"
         model="account.invoice"
         auto="False"
@@ -429,18 +446,18 @@
         id="report_sqp_creditnote_form"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    />   
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_creditnote_form" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
         <field name="invisible">context.get('type',False)&lt;&gt;'out_refund'</field>
-    </record> 
+    </record>
 
     <!-- END -->
 
-    
+
     <report string="Debit Note (SQP)"
         model="account.invoice"
         auto="False"
@@ -449,15 +466,15 @@
         id="report_sqp_debitnote_form"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    />   
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_debitnote_form" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
         <field name="invisible">context.get('type',False)&lt;&gt;'out_invoice'</field>
-    </record> 
-    
+    </record>
+
     <!-- QA Sampling -->
     <report string="Sampling in Process"
         model="mrp.production"
@@ -467,13 +484,13 @@
         id="report_sqp_qa_sampling"
         menu="True"
         header="False"
-    	attachment="" 
-        groups="" 
-    />  
+    	attachment=""
+        groups=""
+    />
     <record id="report_sqp_qa_sampling" model="ir.actions.report.xml">
         <field name="jasper_report">True</field>
         <field name="jasper_output">pdf</field>
-    </record> 
-    
+    </record>
+
 </data>
 </openerp>

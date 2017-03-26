@@ -50,18 +50,13 @@ class stock_picking_out(osv.osv):
     }
 
     def copy(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        default = default.copy()
-        picking_obj = self.browse(cr, uid, id, context=context)
-        if ('name' not in default) or (picking_obj.name == '/'):
-            # For BOM Move
-            if picking_obj.is_bom_move:
-                default['name'] = \
-                    self.pool.get('ir.sequence').get(cr, uid, 'bom.move')
-        res = super(stock_picking_out, self).copy(cr, uid, id, default=default,
-                                                  context=context)
-        return res
+        if default.get('name', '/') == '/':
+            picking_obj = self.pool.get('stock.picking')
+            picking = picking_obj.browse(cr, uid, id, context=context)
+            if picking.id and picking.is_bom_move:
+                name = self.pool.get('ir.sequence').get(cr, uid, 'bom.move')
+                default.update(name=name)
+        return super(stock_picking_out, self).copy(cr, uid, id, default=default, context=context)
 
     def create(self, cr, user, vals, context=None):
         if ('name' not in vals) or (vals.get('name') == '/'):
@@ -74,4 +69,5 @@ class stock_picking_out(osv.osv):
         new_id = super(stock_picking_out, self).create(cr, user, vals, context)
         return new_id
 
+stock_picking_out
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

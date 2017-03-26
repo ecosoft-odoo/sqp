@@ -40,7 +40,7 @@
             <field name="search_view_id" ref="view_simplified_picking_internal_search"/>
             <field name="help" type="html">
               <p class="oe_view_nocontent_create">
-                Click to create a simplified internal move request. 
+                Click to create a simplified internal move request.
               </p><p>
                 Most operations are prepared automatically by OpenERP according
                 to your preconfigured logistics rules, but you can also record
@@ -91,14 +91,14 @@
                         <field name="name" class="oe_inline" attrs="{'invisible': [('name','=','/')]}" readonly="1"/>
 	                    <div class="oe_right oe_button_box">
 	                        <button name="%(stock_fill_internal_move_line_by_origin.action_view_stock_fill_move)d" string="Fill Move Lines" states="draft" type="action" context="{'move_type':'out','location_id': location_id, 'location_dest_id': location_dest_id}"/>
-	                    </div>                    
+	                    </div>
                     </h1>
                     <group>
                         <group>
                             <field name="location_id" required="True" domain="[('usage','!=','view')]"  options="{'limit': 10, 'create': false, 'create_edit': false}"/>
                             <field name="location_dest_id" required="True" domain="[('usage','!=','view')]" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
                             <field name="product_categ_id" />
-                            <field name="backorder_id" readonly="1" attrs="{'invisible': [('backorder_id','=',False)]}" invisible="True"/>
+                            <field name="backorder_id" readonly="1" attrs="{'invisible': [('backorder_id','=',False)]}"/>
                             <field name="invoice_state" string="Invoice Control" groups="account.group_account_invoice" attrs="{'invisible':[('invoice_state', '=', 'none')]}"/>
                             <field name="stock_journal_id" widget="selection" groups="account.group_account_user" invisible="True"/>
                         </group>
@@ -152,14 +152,14 @@
             <field name="inherit_id" ref="stock.view_move_form" />
             <field name="model">stock.move</field>
             <field name="arch" type="xml">
-                <data>     
+                <data>
 					<xpath expr="/form/sheet/group/group[@name='origin_grp']/field[@name='type']" position="attributes">
                     	<attribute name="on_change">onchange_move_type(type, context)</attribute>
 					</xpath>
                 </data>
             </field>
         </record>
-        
+
         <record id="view_move_picking_tree_ext" model="ir.ui.view">
             <field name="name">view.move.picking.tree.ext</field>
             <field name="inherit_id" ref="stock.view_move_picking_tree" />

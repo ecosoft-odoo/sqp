@@ -8,7 +8,7 @@
         </record>
 
         <record id="stock.action_picking_tree6" model="ir.actions.act_window">
-            <field name="domain">[('type','=','internal'),('is_supply_list','=',False),('is_bom_move','=',False)]</field>  
+            <field name="domain">[('type','=','internal'),('is_supply_list','=',False),('is_bom_move','=',False)]</field>
         </record>
 
         <!-- Bom Move -->
@@ -102,6 +102,17 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='order_qty']" position="attributes">
                     <attribute name="invisible">not context.get('is_supply_list', False) and not context.get('is_bom_move', False)</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_picking_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="ext_stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ref_order_id']" position="after">
+                    <field name="ref_mo_id" domain="['|',('state','=','confirmed'),'|',('state','=','ready'),('state','=','in_production')]"/>
                 </xpath>
             </field>
         </record>
