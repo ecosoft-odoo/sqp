@@ -11,7 +11,7 @@
             <field name="prefix">BM%(fy)s/</field>
             <field name="padding">4</field>
             <field name="company_id" eval="False"/>
-            <field name="implementation">no_gap</field>
+            <field name="implementation">standard</field>
         </record>
     </data>
 </openerp>
