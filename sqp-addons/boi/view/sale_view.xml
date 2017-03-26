@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group/group/field[@name='date_order']" position="before">
                     <field name="boi_cert_id" attrs="{'invisible': [('is_boi','=',False)], 'required': [('is_boi','=',True)], 'readonly': [('state','not in',('draft'))]}"/>
-                    <field name="ref_order_id" attrs="{'invisible': [('is_boi','=',True)], 'readonly': [('state','not in',('draft'))]}" context="{'ref_product_tag': 'BOI'}"/>
+                    <field name="ref_order_id" attrs="{'invisible': [('is_boi','=',True)], 'readonly': [('state','not in',('draft'))]}"/>
                     <field name="is_boi" invisible="1"/>
                 </xpath>
             </field>

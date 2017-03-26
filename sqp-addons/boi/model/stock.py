@@ -33,7 +33,7 @@ class stock_picking(osv.osv):
             ('BOI', 'BOI'),
             ], 'BOI Type', required=True, select=True,
         ),
-        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict"),
+        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict", domain="[('start_date','!=',False),('active','!=',False)]"),
     }
 
     _defaults = {
@@ -94,7 +94,7 @@ class stock_picking_out(osv.osv):
             ('BOI', 'BOI'),
             ], 'BOI Type', required=True, select=True,
         ),
-        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict"),
+        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict", domain="[('start_date','!=',False),('active','!=',False)]"),
     }
 
     _defaults = {
@@ -317,7 +317,7 @@ class stock_picking_in(osv.osv):
             ('BOI', 'BOI'),
             ], 'BOI Type', required=True, select=True,
         ),
-        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict"),
+        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict", domain="[('start_date','!=',False),('active','!=',False)]"),
     }
 
     _defaults = {

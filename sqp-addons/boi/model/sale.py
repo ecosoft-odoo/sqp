@@ -41,9 +41,9 @@ class sale_order(osv.osv):
         return True
 
     _columns = {
-        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict"),
+        'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict", domain="[('start_date','!=',False),('active','!=',False)]"),
         'is_boi': fields.boolean('BOI', default=False),
-        'ref_order_id': fields.many2one('sale.order', 'Ref BOI Quotation', ondelete="restrict"),
+        'ref_order_id': fields.many2one('sale.order', 'Ref BOI Quotation', ondelete="restrict", domain="[('product_tag_id.name','=','BOI'), ('state','=','draft')]"),
     }
 
     _constraints = [(_check_product_name, 'Please specific the correct product !', ['Product'])]
@@ -113,16 +113,6 @@ class sale_order(osv.osv):
             is_boi = tag.name == 'BOI' and True or False
             header_msg = tag.name == 'BOI' and constant.boi_header_msg or constant.nonboi_header_msg
         return {'value': {'is_boi': is_boi, 'boi_cert_id': False, 'header_msg': header_msg}}
-
-    def name_search(self, cr, user, name, args=None, operator='ilike', context=None, limit=100):
-        if context is None:
-            context = {}
-        order_ids = self.search(cr, user, args, limit=limit, context=context)
-        if context.get('ref_product_tag', False):
-            tag_obj = self.pool.get('product.tag')
-            tag_ids = tag_obj.search(cr, user, [('name','=',context.get('ref_product_tag'))], context=context)
-            order_ids = self.search(cr, user, [('product_tag_id','in',tag_ids),('state','=','draft')] + args, limit=limit, context=context)
-        return self.name_get(cr, user, order_ids, context=context)
 
     def _prepare_order_picking(self, cr, uid, order, context=None):
         result = super(sale_order, self)._prepare_order_picking(cr, uid, order, context=context)
