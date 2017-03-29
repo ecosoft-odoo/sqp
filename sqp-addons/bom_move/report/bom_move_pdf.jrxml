@@ -56,6 +56,7 @@
 	<field name="note" class="java.lang.String">
 		<fieldDescription><![CDATA[note]]></fieldDescription>
 	</field>
+	<sortField name="code"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>

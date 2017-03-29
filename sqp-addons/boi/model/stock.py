@@ -42,39 +42,37 @@ class stock_picking(osv.osv):
 
     def _change_boi_type(self, cr, uid, ids, vals, context=None):
         boi_type = vals.get('boi_type', False)
-        if boi_type:
-            for picking in self.pool.get('stock.picking').browse(cr, uid, ids, context=context):
-                if boi_type == 'BOI' and picking.name.find('NONBOI') == 0:
-                    self.pool.get('stock.picking').write(cr, uid, [picking.id],
-                                                            {'name': picking.name.replace('NONBOI','BOI')})
-                if boi_type == 'NONBOI' and picking.name.find('BOI') == 0:
-                    self.pool.get('stock.picking').write(cr, uid, [picking.id],
-                                                            {'name': picking.name.replace('BOI','NONBOI')})
+        boi_cert_id = vals.get('boi_cert_id', False)
+        if boi_type or boi_cert_id:
+            cert_obj = self.pool.get('boi.certificate')
 
-    def _calc_create_boi_vals(self, cr, uid, vals, seq_model, context=None):
-        if vals.get('name', '/') == '/':
-            if context.get('is_bom_move', False):
-                vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'bom.move')
-            elif context.get('is_supply_list', False):
-                vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'stock.picking.supplylist')
-            else:
-                vals['name'] = self.pool.get('ir.sequence').get(cr, uid, seq_model)
-        # BOI
-        boi_type = vals.get('boi_type', False)
-        if boi_type:
-            if vals.get('name').find('BOI') < 0:
-                boi_type = boi_type == 'BOI' and 'BOI' or 'NONBOI'
-                vals.update({'name': '%s-%s'%(boi_type,vals.get('name'))})
+            cert = cert_obj.browse(cr, uid, boi_cert_id, context=context)
+
+            # Update name
+            for picking in self.browse(cr, uid, ids, context=context):
+                vals['name'] = boi_type == 'BOI' and '%s-%s'%(cert.name, picking.name[picking.name.find('-') + 1:]) \
+                                or boi_type == 'NONBOI' and picking.name[picking.name.find('-') + 1:] \
+                                or (not boi_type and cert.id) and '%s-%s'%(cert.name, picking.name[picking.name.find('-') + 1:]) \
+                                or picking.name
         return vals
 
+    def _calc_create_boi_vals(self, cr, uid, picking_id, context=None):
+        if picking_id:
+            picking = self.browse(cr, uid, picking_id, context=context)
+
+            # Update name
+            if picking.boi_type == 'BOI':
+                boi_cert_name = picking.boi_cert_id and picking.boi_cert_id.name or 'BOI'
+                name = '%s-%s'%(boi_cert_name, picking.name[picking.name.find('-') + 1:])
+                self.write(cr, uid, [picking_id], {'name': name}, context=context)
+
     def create(self, cr, uid, vals, context=None):
-        vals = self.pool.get('stock.picking')._calc_create_boi_vals(cr, uid, vals, self._name, context=context)
-        return super(stock_picking, self).create(cr, uid, vals, context=context)
+        picking_id = super(stock_picking, self).create(cr, uid, vals, context=context)
+        self._calc_create_boi_vals(cr, uid, picking_id, context=context)
+        return picking_id
 
     def write(self, cr, uid, ids, vals, context=None):
-        if not isinstance(ids, list):
-            ids = [ids]
-        self.pool.get('stock.picking')._change_boi_type(cr, uid, ids, vals, context=context)
+        vals = self._change_boi_type(cr, uid, ids, vals, context=context)
         return super(stock_picking, self).write(cr, uid, ids, vals, context=context)
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):
@@ -102,13 +100,12 @@ class stock_picking_out(osv.osv):
     }
 
     def create(self, cr, uid, vals, context=None):
-        vals = self.pool.get('stock.picking')._calc_create_boi_vals(cr, uid, vals, self._name, context=context)
-        return super(stock_picking_out, self).create(cr, uid, vals, context=context)
+        picking_id = super(stock_picking_out, self).create(cr, uid, vals, context=context)
+        self.pool.get('stock.picking')._calc_create_boi_vals(cr, uid, picking_id, context=context)
+        return picking_id
 
     def write(self, cr, uid, ids, vals, context=None):
-        if not isinstance(ids, list):
-            ids = [ids]
-        self.pool.get('stock.picking')._change_boi_type(cr, uid, ids, vals, context=context)
+        vals = self.pool.get('stock.picking')._change_boi_type(cr, uid, ids, vals, context=context)
         return super(stock_picking_out, self).write(cr, uid, ids, vals, context=context)
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):\
@@ -325,13 +322,12 @@ class stock_picking_in(osv.osv):
     }
 
     def create(self, cr, uid, vals, context=None):
-        vals = self.pool.get('stock.picking')._calc_create_boi_vals(cr, uid, vals, self._name, context=context)
-        return super(stock_picking_in, self).create(cr, uid, vals, context=context)
+        picking_id = super(stock_picking_in, self).create(cr, uid, vals, context=context)
+        self.pool.get('stock.picking')._calc_create_boi_vals(cr, uid, picking_id, context=context)
+        return picking_id
 
     def write(self, cr, uid, ids, vals, context=None):
-        if not isinstance(ids, list):
-            ids = [ids]
-        self.pool.get('stock.picking')._change_boi_type(cr, uid, ids, vals, context=context)
+        vals = self.pool.get('stock.picking')._change_boi_type(cr, uid, ids, vals, context=context)
         return super(stock_picking_in, self).write(cr, uid, ids, vals, context=context)
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):

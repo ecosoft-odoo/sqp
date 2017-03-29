@@ -54,14 +54,14 @@ class stock_partial_picking(osv.osv_memory):
             picking_id = partial.picking_id and partial.picking_id.id or False
             boi_type = partial.picking_id and partial.picking_id.boi_type or False
             name = partial.picking_id and partial.picking_id.name or False
+            boi_cert_name = (partial.picking_id and partial.picking_id.boi_cert_id) \
+                                and partial.picking_id.boi_cert_id.name \
+                                or 'BOI'
             if boi_type and name and picking_id:
-                if boi_type == 'BOI' and name.find('NONBOI') == 0:
-                    name = name.replace('NONBOI', 'BOI')
-                elif boi_type == 'NONBOI' and name.find('BOI') == 0:
-                    name = name.replace('BOI', 'NONBOI')
-                elif name.find('BOI') != 0 and name.find('NONBOI') != 0:
-                    name = '%s-%s'%(boi_type,name)
-                picking_obj.write(cr, uid, [picking_id], {'name': name}, context=context)
+                name = boi_type == 'BOI' and '%s-%s'%(boi_cert_name, name[name.find('-') + 1:]) \
+                            or boi_type == 'NONBOI' and name[name.find('-') + 1:] \
+                            or name
+            picking_obj.write(cr, uid, [picking_id], {'name': name}, context=context)
         return result
 
     def _partial_move_for(self, cr, uid, move):
@@ -73,7 +73,7 @@ class stock_partial_picking(osv.osv_memory):
         prepare_partial_move = super(stock_partial_picking, self)._partial_move_for(cr, uid, move)
 
         # If not bom move or not BOI
-        if move.picking_id and not move.picking_id.is_bom_move or move.picking_id.boi_type != 'BOI':
+        if (move.picking_id and not move.picking_id.is_bom_move) or move.picking_id.boi_type != 'BOI':
             return prepare_partial_move
 
         # Check bol location > 0

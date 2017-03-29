@@ -24,11 +24,10 @@ from . import sale
 from . import account_invoice
 from . import purchase_requisition
 from . import purchase
-from . import stock_invoice_onshipping
 from . import stock
 from . import product
 from . import product_rapid_create
 from . import mrp
-from . import procurement
 from . import stock_partial_picking
 from . import sale_make_invoice_advance
+from . import stock_invoice_onshipping
