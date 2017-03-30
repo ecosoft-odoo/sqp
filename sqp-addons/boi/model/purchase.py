@@ -39,37 +39,31 @@ class purchase_order(osv.osv):
     }
 
     def create(self, cr, uid, vals, context=None):
-        if vals.get('name', '/') == '/':
-            sequence_obj = self.pool.get('ir.sequence')
-            if vals.get('is_subcontract', False):
-                vals['name'] = sequence_obj.get(cr, uid, 'purchase.order.subcontract') or '/'
-            else:
-                vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'purchase.order') or '/'
-            boi_type = (vals.get('boi_type','') == 'BOI') and 'BOI' or 'NONBOI'
-            vals.update({'name': '%s-%s'%(boi_type, vals.get('name', '/'))})
-        return super(purchase_order, self).create(cr, uid, vals, context=context)
-
-    def copy(self, cr, uid, id, default=None, context=None):
-        order_id = super(purchase_order, self).copy(cr, uid, id, default=default, context=context)
+        order_id = super(purchase_order, self).create(cr, uid, vals, context=context)
         if order_id:
             order = self.browse(cr, uid, order_id, context=context)
-            boi_type = order.boi_type == 'BOI' and 'BOI' or 'NONBOI'
-            name = '%s-%s'%(boi_type,order.name)
-            self.write(cr, uid, [order_id], {'name': name}, context=context)
+
+            # Update name
+            if order.boi_type == 'BOI':
+                boi_cert_name = order.boi_cert_id and order.boi_cert_id.name or 'BOI'
+                name = '%s-%s'%(boi_cert_name, order.name[order.name.find('-') + 1:])
+                self.write(cr, uid, [order_id], {'name': name}, context=context)
         return order_id
 
     def write(self, cr, uid, ids, vals, context=None):
-        if not isinstance(ids, list):
-            ids = [ids]
         boi_type = vals.get('boi_type', False)
-        if boi_type:
+        boi_cert_id = vals.get('boi_cert_id', False)
+        if boi_type or boi_cert_id:
+            cert_obj = self.pool.get('boi.certificate')
+
+            cert = cert_obj.browse(cr, uid, boi_cert_id, context=context)
+
+            # Update name
             for order in self.browse(cr, uid, ids, context=context):
-                vals['name'] = order.name
-                vals['name'] = (vals['name'].find('BOI') >= 0 and vals['name'].find('NONBOI') < 0 and boi_type == 'NONBOI') \
-                                    and vals['name'].replace('BOI','NONBOI') \
-                                    or (vals['name'].find('NONBOI') >= 0 and boi_type == 'BOI') \
-                                    and vals['name'].replace('NONBOI','BOI')  \
-                                    or vals['name']
+                vals['name'] = boi_type == 'BOI' and '%s-%s'%(cert.name, order.name[order.name.find('-') + 1:]) \
+                                or boi_type == 'NONBOI' and order.name[order.name.find('-') + 1:] \
+                                or (not boi_type and cert.id) and '%s-%s'%(cert.name, order.name[order.name.find('-') + 1:]) \
+                                or order.name
         return super(purchase_order, self).write(cr, uid, ids, vals, context=context)
 
     def action_picking_create(self, cr, uid, ids, context=None):
@@ -77,11 +71,16 @@ class purchase_order(osv.osv):
         picking_obj = self.pool.get('stock.picking')
         if picking_id:
             picking = picking_obj.browse(cr, uid, picking_id, context=context)
+            name = picking.name
+
             for order in self.browse(cr, uid, ids, context=context):
-                name = '%s-%s'%(order.boi_type,picking.name)
-                boi_type = order.boi_type
                 boi_cert_id = order.boi_cert_id and order.boi_cert_id.id or False
-                picking_obj.write(cr, uid, picking_id, {'boi_type': boi_type, 'boi_cert_id': boi_cert_id, 'name': name})
+
+                # Update name
+                if order.boi_type == 'BOI':
+                    boi_cert_name = order.boi_cert_id and order.boi_cert_id.name or 'BOI'
+                    name = '%s-%s'%(boi_cert_name, name[name.find('-') + 1:])
+                picking_obj.write(cr, uid, [picking_id], {'name': name, 'boi_type': order.boi_type, 'boi_cert_id': boi_cert_id}, context=context)
         return picking_id
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):

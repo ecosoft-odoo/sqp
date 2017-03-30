@@ -18,23 +18,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 from openerp.osv import fields, osv
 
-class procurement_order(osv.osv):
+class stock_location_product(osv.osv_memory):
 
-    _inherit = 'procurement.order'
+    _inherit = "stock.location.product"
 
-    def make_mo(self, cr, uid, ids, context=None):
-        result = super(procurement_order, self).make_mo(cr, uid, ids, context=context)
-        procurement_obj = self.pool.get('procurement.order')
-        production_obj = self.pool.get('mrp.production')
-        for procurement in procurement_obj.browse(cr, uid, ids, context=context):
-            if result.get(procurement.id, False):
-                production = production_obj.browse(cr, uid, result.get(procurement.id), context=context)
-                boi_type = (production.order_id and production.order_id.product_tag_id and production.order_id.product_tag_id.name == 'BOI') \
-                                and 'BOI' or 'NONBOI'
-                production_obj.write(cr, uid, [result.get(procurement.id)], {'name': '%s-%s'%(boi_type,production.name)})
-        return result
+    def action_open_window(self, cr, uid, ids, context=None):
+        res = super(stock_location_product, self).action_open_window(cr, uid, ids, context=context)
+        ctx = res.get('context', {})
+        ctx.update({'model_bg': context.get('active_model', False)})
+        res.update({'context': ctx})
+        return res
 
-procurement_order()
+stock_location_product()

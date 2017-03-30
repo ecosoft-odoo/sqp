@@ -51,57 +51,39 @@ class sale_order(osv.osv):
     def create(self, cr, uid, vals, context=None):
         order_id = super(sale_order, self).create(cr, uid, vals, context=context)
         if order_id:
-            tag_obj = self.pool.get('product.tag')
             order = self.browse(cr, uid, order_id, context=context)
-            product_tag_id = vals.get('product_tag_id', False)
-            boi_type = False
-            if product_tag_id:
-                tag = tag_obj.browse(cr, uid, product_tag_id, context=context)
-                boi_type = tag.name == 'BOI' and 'BOI' or 'NONBOI'
-            name = '%s-%s'%(boi_type,order.name)
-            self.write(cr, uid, order_id, {'name': name}, context=context)
-        return order_id
 
-    def copy(self, cr, uid, id, default=None, context=None):
-        order_id = super(sale_order, self).copy(cr, uid, id, default=default, context=context)
-        if order_id:
-            order = self.browse(cr, uid, order_id, context=context)
-            name = order.name
-            boi_type = (order.product_tag_id and order.product_tag_id.name == 'BOI') \
-                            and 'BOI' or 'NONBOI'
-            name = (name.find('BOI') >= 0 and name.find('NONBOI') < 0 and boi_type == 'NONBOI') \
-                        and name.replace('BOI','NONBOI') \
-                        or (name.find('NONBOI') >= 0 and boi_type == 'BOI') \
-                        and name.replace('NONBOI','BOI')  \
-                        or name
-            self.write(cr, uid, [order_id], {'name': name}, context=context)
+            # Update name
+            if order.product_tag_id and order.product_tag_id.name == 'BOI':
+                boi_cert_name = order.boi_cert_id and order.boi_cert_id.name or 'BOI'
+                name = '%s-%s'%(boi_cert_name, order.name[order.name.find('-') + 1:])
+                self.write(cr, uid, [order_id], {'name': name}, context=context)
         return order_id
 
     def write(self, cr, uid, ids, vals, context=None):
-        if not isinstance(ids, list):
-            ids = [ids]
         product_tag_id = vals.get('product_tag_id', False)
-        if product_tag_id:
+        boi_cert_id = vals.get('boi_cert_id', False)
+        if product_tag_id or boi_cert_id:
             tag_obj = self.pool.get('product.tag')
-            line_obj = self.pool.get('sale.order.line')
-            product_obj = self.pool.get('product.product')
+            cert_obj = self.pool.get('boi.certificate')
+
             tag = tag_obj.browse(cr, uid, product_tag_id, context=context)
-            boi_type = (tag.id and tag.name == 'BOI') and 'BOI' or 'NONBOI'
+            cert = cert_obj.browse(cr, uid, boi_cert_id, context=context)
+
+            # Update name
             for order in self.browse(cr, uid, ids, context=context):
-                vals['name'] = order.name
-                vals['name'] = (vals['name'].find('BOI') >= 0 and vals['name'].find('NONBOI') < 0 and boi_type == 'NONBOI') \
-                                    and vals['name'].replace('BOI','NONBOI') \
-                                    or (vals['name'].find('NONBOI') >= 0 and boi_type == 'BOI') \
-                                    and vals['name'].replace('NONBOI','BOI')  \
-                                    or vals['name']
+                vals['name'] = (tag.id and tag.name == 'BOI') and '%s-%s'%(cert.name, order.name[order.name.find('-') + 1:]) \
+                                    or (tag.id and tag.name != 'BOI') and order.name[order.name.find('-') + 1:] \
+                                    or (not tag.id and cert.id) and '%s-%s'%(cert.name, order.name[order.name.find('-') + 1:]) \
+                                    or order.name
         return super(sale_order, self).write(cr, uid, ids, vals, context=context)
 
     def action_wait(self, cr, uid, ids, context=None):
         for order in self.browse(cr, uid, ids, context=context):
-            boi_type = (order.product_tag_id and order.product_tag_id.name == 'BOI') \
-                            and 'BOI' or 'NONBOI'
-            name = '%s-%s'%(boi_type,order.name)
-            self.write(cr, uid, [order.id], {'name': name}, context=context)
+            if order.product_tag_id and order.product_tag_id.name == 'BOI':
+                boi_cert_name = order.boi_cert_id and order.boi_cert_id.name or 'BOI'
+                name = '%s-%s'%(boi_cert_name, order.name[order.name.find('-') + 1:])
+                self.write(cr, uid, [order.id], {'name': name}, context=context)
         return super(sale_order, self).action_wait(cr, uid, ids, context=context)
 
     def onchange_product_tag_id(self, cr, uid, ids, product_tag_id, context=None):
@@ -116,12 +98,20 @@ class sale_order(osv.osv):
 
     def _prepare_order_picking(self, cr, uid, order, context=None):
         result = super(sale_order, self)._prepare_order_picking(cr, uid, order, context=context)
+        boi_cert_id = False
+        boi_cert_name = False
         boi_type = (order.product_tag_id and order.product_tag_id.name == 'BOI') \
                         and 'BOI' or 'NONBOI'
-        boi_cert_id = order.boi_cert_id and order.boi_cert_id.id or False
-        name = ''
-        if result.get('name', False):
-            name = '%s-%s'%(boi_type,result.get('name'))
+
+        # Set BOI Number
+        if order.boi_cert_id:
+            boi_cert_id = order.boi_cert_id.id
+            boi_cert_name = order.boi_cert_id.name
+
+        # Update name
+        name = result.get('name', False)
+        if name:
+            name = boi_type == 'BOI' and '%s-%s'%(boi_cert_name, name[name.find('-') + 1:]) or name
         result.update({'boi_type': boi_type, 'boi_cert_id': boi_cert_id, 'name': name})
         return result
 

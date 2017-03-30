@@ -39,34 +39,31 @@ class purchase_requisition(osv.osv):
     }
 
     def create(self, cr, uid, vals, context=None):
-        if vals.get('name', '/') == '/':
-            vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'purchase.order.requisition') or '/'
-            boi_type = vals.get('boi_type','') == 'BOI' and 'BOI' or 'NONBOI'
-            vals.update({'name': '%s-%s'%(boi_type, vals.get('name', '/'))})
-        return super(purchase_requisition, self).create(cr, uid, vals, context=context)
-
-    def copy(self, cr, uid, id, default=None, context=None):
-        requisition_id = super(purchase_requisition, self).copy(cr, uid, id, default=default, context=context)
+        requisition_id = super(purchase_requisition, self).create(cr, uid, vals, context=context)
         if requisition_id:
             requisition = self.browse(cr, uid, requisition_id, context=context)
-            boi_type = requisition.boi_type == 'BOI' and 'BOI' or 'NONBOI'
-            name = '%s-%s'%(boi_type,requisition.name)
-            self.write(cr, uid, [requisition_id], {'name': name}, context=context)
+
+            # Update name
+            if requisition.boi_type == 'BOI':
+                boi_cert_name = requisition.boi_cert_id and requisition.boi_cert_id.name or 'BOI'
+                name = '%s-%s'%(boi_cert_name, requisition.name[requisition.name.find('-') + 1:])
+                self.write(cr, uid, [requisition_id], {'name': name}, context=context)
         return requisition_id
 
     def write(self, cr, uid, ids, vals, context=None):
-        if not isinstance(ids, list):
-            ids = [ids]
         boi_type = vals.get('boi_type', False)
-        if boi_type:
-            boi_type = boi_type == 'BOI' and 'BOI' or 'NONBOI'
+        boi_cert_id = vals.get('boi_cert_id', False)
+        if boi_type or boi_cert_id:
+            cert_obj = self.pool.get('boi.certificate')
+
+            cert = cert_obj.browse(cr, uid, boi_cert_id, context=context)
+
+            # Update name
             for requisition in self.browse(cr, uid, ids, context=context):
-                vals['name'] = requisition.name
-                vals['name'] = (vals['name'].find('BOI') >= 0 and vals['name'].find('NONBOI') < 0 and boi_type == 'NONBOI') \
-                                    and vals['name'].replace('BOI','NONBOI') \
-                                    or (vals['name'].find('NONBOI') >= 0 and boi_type == 'BOI') \
-                                    and vals['name'].replace('NONBOI','BOI')  \
-                                    or vals['name']
+                vals['name'] = boi_type == 'BOI' and '%s-%s'%(cert.name, requisition.name[requisition.name.find('-') + 1:]) \
+                                or boi_type == 'NONBOI' and requisition.name[requisition.name.find('-') + 1:] \
+                                or (not boi_type and cert.id) and '%s-%s'%(cert.name, requisition.name[requisition.name.find('-') + 1:]) \
+                                or requisition.name
         return super(purchase_requisition, self).write(cr, uid, ids, vals, context=context)
 
     def make_purchase_order(self, cr, uid, ids, partner_id, context=None):
@@ -76,11 +73,14 @@ class purchase_requisition(osv.osv):
             order_id = result.get(requisition.id, False)
             if order_id:
                 order = order_obj.browse(cr, uid, order_id, context=context)
-                boi_type = requisition.boi_type
-                boi_cert_id = requisition.boi_cert_id and requisition.boi_cert_id.id \
-                                or False
-                name = '%s-%s'%(boi_type,order.name)
-                order_obj.write(cr, uid, [order_id], {'name': name, 'boi_type': boi_type, 'boi_cert_id': boi_cert_id}, context=context)
+                name = order.name
+                boi_cert_id = requisition.boi_cert_id and requisition.boi_cert_id.id or False
+
+                # Update name
+                if requisition.boi_type == 'BOI':
+                    boi_cert_name = requisition.boi_cert_id and requisition.boi_cert_id.name or 'BOI'
+                    name = '%s-%s'%(boi_cert_name, name[name.find('-') + 1:])
+                order_obj.write(cr, uid, [order_id], {'name': name, 'boi_type': requisition.boi_type, 'boi_cert_id': boi_cert_id}, context=context)
         return result
 
     def onchange_boi_type(self, cr, uid, ids, boi_type, context=None):

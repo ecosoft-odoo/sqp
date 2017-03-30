@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="product_product_tree_view_ext2" model="ir.ui.view">
+            <field name="name">product.product.tree.view.ext2</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="ext_stock_balance_reorder.product_product_tree_view_ext2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='qty_mo_resv']" position="attributes">
+                    <attribute name="invisible">not context.get('is_safety',False) and context.get('model_bg', False) != 'mrp.production'</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

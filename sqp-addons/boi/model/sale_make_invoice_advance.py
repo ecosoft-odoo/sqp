@@ -35,5 +35,5 @@ class sale_advance_payment_inv(osv.osv_memory):
             boi_type = (order.id and order.product_tag_id and order.product_tag_id.name == 'BOI') \
                             and 'BOI' or 'NONBOI'
             boi_cert_id = (order.id and order.boi_cert_id) and order.boi_cert_id.id or False
-            invoice_obj.write(cr, uid, res.get('res_id'), {'boi_type': boi_type, 'boi_cert_id': boi_cert_id}, context=context)
+            invoice_obj.write(cr, uid, [res.get('res_id')], {'boi_type': boi_type, 'boi_cert_id': boi_cert_id}, context=context)
         return res
