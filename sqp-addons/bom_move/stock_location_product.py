@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2013 Ecosoft Co., Ltd. (http://ecosoft.co.th).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,39 +18,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp.osv import fields, osv
 
-{
-    'name': 'Bom Move (SQP)',
-    'version': '1.0',
-    'author': 'Ecosoft',
-    'summary': 'Bom Move (SQP)',
-    'description': """
+class stock_location_product(osv.osv_memory):
 
-    """,
-    'category': 'Warehouse Management',
-    'website': 'http://www.ecosoft.co.th',
-    'images': [],
-    'depends': [
-        'stock_supply_list',
-        'ext_stock',
-        'ext_mrp',
-        'ext_stock_balance_reorder',
-    ],
-    'demo': [],
-    'data': [
-        'stock_view.xml',
-        'bom_move_sequence.xml',
-        'mrp_view.xml',
-        'product_view.xml',
-        'reports.xml',
-        'report_view/bom_move_report_view.xml',
-        'security/ir.model.access.csv',
-    ],
-    'test': [
-    ],
-    'auto_install': False,
-    'application': True,
-    'installable': True,
-}
+    _inherit = "stock.location.product"
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    def action_open_window(self, cr, uid, ids, context=None):
+        res = super(stock_location_product, self).action_open_window(cr, uid, ids, context=context)
+        ctx = res.get('context', {})
+        ctx.update({'model_bg': context.get('active_model', False)})
+        res.update({'context': ctx})
+        return res
+
+stock_location_product()
