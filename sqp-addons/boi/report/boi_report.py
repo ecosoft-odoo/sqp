@@ -29,7 +29,7 @@ class boi_report(osv.osv):
     _columns = {
         'id': fields.integer('Id', readonly=True),
         'do_no': fields.char('DO No.', readonly=True),
-        'mo_id': fields.many2one('mrp.production', 'MO No.', readonly=True),
+        'mo_no': fields.char('MO No.', readonly=True),
         'so_id': fields.many2one('sale.order', 'SO No.', readonly=True),
         'inv_id': fields.many2one('account.invoice', 'INV No.', readonly=True),
         'part_no': fields.char('Part no./Model', readonly=True),
@@ -48,9 +48,9 @@ class boi_report(osv.osv):
         cr.execute("""
             create or replace view boi_report as (
                 select
-                    sm.id as id,
+                    row_number() over (order by sp.id) as id,
                     sp.name as do_no,
-                    mp.id as mo_id,
+                    (case when sp.origin like '%MO%' then sp.origin else '' end) as mo_no,
                     so.id as so_id,
                     ai.id as inv_id,
                     pp.boi_default_code as part_no,
@@ -63,7 +63,6 @@ class boi_report(osv.osv):
                 from stock_picking sp
                 left join sale_order so on sp.ref_order_id = so.id
                 left join account_invoice ai on so.name = ai.origin
-                left join mrp_production mp on sp.id = mp.target_picking_id
                 left join stock_move sm on sp.id = sm.picking_id
                 left join product_product pp on sm.product_id = pp.id
                 where sp.type = 'out' and (sp.is_supply_list = False or sp.is_supply_list is null) and (sp.is_bom_move = False or sp.is_bom_move is null) and sp.state = 'done' and sp.boi_type = 'BOI'
