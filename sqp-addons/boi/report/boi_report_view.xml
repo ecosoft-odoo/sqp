@@ -10,8 +10,9 @@
                     <field name="id" invisible="1"/>
                     <field name="do_no"/>
                     <field name="mo_no"/>
-                    <field name="so_id"/>
-                    <field name="inv_id"/>
+                    <field name="so_no"/>
+                    <field name="inv_no"/>
+                    <field name="cust_ref"/>
                     <field name="part_no"/>
                     <field name="product_name"/>
                     <field name="qty"/>
@@ -30,15 +31,17 @@
                 <search string="BOI Report">
                     <field name="do_no"/>
                     <field name="mo_no"/>
-                    <field name="so_id"/>
-                    <field name="inv_id"/>
+                    <field name="so_no"/>
+                    <field name="inv_no"/>
+                    <field name="cust_ref"/>
                     <field name="part_no"/>
                     <field name="product_name"/>
                     <group expand="0" string="Group By...">
                         <filter string="DO No." icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'do_no'}"/>
                         <filter string="MO No." icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'mo_no'}"/>
-                        <filter string="SO No." icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'so_id'}"/>
-                        <filter string="INV No." icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'inv_id'}"/>
+                        <filter string="SO No." icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'so_no'}"/>
+                        <filter string="INV No." icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'inv_no'}"/>
+                        <filter string="Customer Reference" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'cust_ref'}"/>
                         <filter string="Part no./Model" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'part_no'}"/>
                         <filter string="Product Name" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'product_name'}"/>
                         <filter string="Year" icon="terp-go-year" domain="[]" context="{'group_by':'year'}"/>
