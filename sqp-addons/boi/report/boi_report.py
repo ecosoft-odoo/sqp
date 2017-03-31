@@ -31,7 +31,7 @@ class boi_report(osv.osv):
         'do_no': fields.char('DO No.', readonly=True),
         'mo_no': fields.char('MO No.', readonly=True),
         'so_no': fields.char('SO No.', readonly=True),
-        'inv_no': fields.many2one('INV No.', readonly=True),
+        'inv_no': fields.char('INV No.', readonly=True),
         'cust_ref': fields.char('Customer Reference', readonly=True),
         'part_no': fields.char('Part no./Model', readonly=True),
         'product_name': fields.char('Product Name', readonly=True),
