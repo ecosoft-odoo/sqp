@@ -298,8 +298,7 @@ where a.dept = $P{dept}]]>
     $F{line_number} == "L2" ? "Line 2" : (
         $F{line_number} == "L3" ? "Line 3" : (
             $F{line_number} == "L4" ? "Line 4" : (
-		            $F{line_number} == "L5" ? "Line 5" : (
-                	$F{line_number} == "L6" ? "Line 6" : ""))))))]]></textFieldExpression>
+                $F{line_number} == "L5" ? "Line 5" : ""))))))]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
