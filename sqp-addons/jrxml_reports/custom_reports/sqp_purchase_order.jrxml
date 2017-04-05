@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Purchase Order" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.1566298682886007"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.y" value="0"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;order_line&quot;]"/>
 	<style name="table" lineSpacing="Single">
 		<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
@@ -399,7 +399,7 @@
 				<text><![CDATA[PURCHASE ORDER]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="398" y="61" width="70" height="15"/>
+				<reportElement x="389" y="61" width="70" height="15"/>
 				<textElement textAlignment="Right" lineSpacing="Single">
 					<font fontName="Monospaced" size="11" isBold="true" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -413,7 +413,7 @@
 				<text><![CDATA[ADDRESS :]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="474" y="55" width="80" height="24"/>
+				<reportElement x="465" y="55" width="106" height="24"/>
 				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="11" isBold="true" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
@@ -472,7 +472,7 @@
 						<font fontName="Monospaced" size="8" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{dest_warehouse} == "FC_RM" ? "Factory Prachin (RM)" :
-($F{dest_warehouse} == "OF_RM" ? "Office Bangna" : "")]]></textFieldExpression>
+($F{dest_warehouse} == "OF_RM" ? "Office Bangna" : $F{dest_warehouse} == "FC_RM_BOI" ? "Factory Prachin (RM_BOI)" : "")]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="2" y="11" width="78" height="15"/>
