@@ -122,6 +122,22 @@ class sale_order_line(osv.osv):
 
     _inherit = 'sale.order.line'
 
+    def _get_default_product_tag_name(self, cr, uid, context=None):
+        product_tag_name = False
+        if context.get('product_tag_id', False):
+            tag_obj = self.pool.get('product.tag')
+            tag = tag_obj.browse(cr, uid, context.get('product_tag_id'), context=context)
+            product_tag_name = tag.name
+        return product_tag_name
+
+    _columns = {
+        'product_tag_name': fields.char('Quotation Type', invisible="1")
+    }
+
+    _defaults = {
+        'product_tag_name': _get_default_product_tag_name
+    }
+
     def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
             uom=False, qty_uos=0, uos=False, name='', partner_id=False,
             lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, flag=False, context=None):
