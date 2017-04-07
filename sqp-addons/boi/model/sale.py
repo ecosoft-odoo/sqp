@@ -47,13 +47,13 @@ class sale_order(osv.osv):
         for order in order_list:
             quotation_type = order.product_tag_id and order.product_tag_id.name or False
             if quotation_type == 'Standard Product' or quotation_type == 'BOI':
-                product_ids = [product.id for product in order.product_tag_id.product_ids if product.is_international == order.is_international]
+                # product_ids = [product.id for product in order.product_tag_id.product_ids if product.is_international == order.is_international]
                 line_ids = line_obj.search(cr, uid, [('order_id','=',order.id)])
                 for line in line_obj.browse(cr, uid, line_ids):
-                    if line.product_id.id in product_ids:
-                        product = product_obj.browse(cr, uid, line.product_id.id)
-                        if line.product_uom.id != product.uom_id.id:
-                            raise osv.except_osv(_('Error!'), _('Unit of Measure of product %s must be %s'%(line.product_id.name_template, product.uom_id.name)))
+                    # if line.product_id.id in product_ids:
+                    product = product_obj.browse(cr, uid, line.product_id.id)
+                    if line.product_uom.id != product.uom_id.id:
+                        raise osv.except_osv(_('Error!'), _('Unit of Measure of product %s must be %s'%(line.product_id.name_template, product.uom_id.name)))
         return True
 
     _columns = {
