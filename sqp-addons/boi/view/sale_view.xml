@@ -11,15 +11,6 @@
                     <field name="ref_order_id" attrs="{'invisible': [('is_boi','=',True)], 'readonly': [('state','not in',('draft'))]}"/>
                     <field name="is_boi" invisible="1"/>
                 </xpath>
-                <xpath expr="//field[@name='order_line']" position="attributes">
-                    <attribute name="context">{'product_tag_id': product_tag_id}</attribute>
-                </xpath>
-                <xpath expr="//field[@name='product_uom']" position="before">
-                    <field name="product_tag_name"/>
-                </xpath>
-                <xpath expr="//field[@name='product_uom']" position="attributes">
-                    <attribute name="attrs">{'readonly': ['|',('state','not in', ('draft')),'|',('product_tag_name','=','BOI'),('product_tag_name','=','Standard Product')], 'required': True}</attribute>
-                </xpath>
             </field>
         </record>
 
