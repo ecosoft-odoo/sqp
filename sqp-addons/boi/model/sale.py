@@ -45,10 +45,10 @@ class sale_order(osv.osv):
         product_obj = self.pool.get('product.product')
         order_list = self.browse(cr, uid, ids)
         for order in order_list:
-            product_ids = [product.id for product in order.product_tag_id.product_ids if product.is_international == order.is_international]
-            line_ids = line_obj.search(cr, uid, [('order_id','=',order.id)])
             quotation_type = order.product_tag_id and order.product_tag_id.name or False
             if quotation_type == 'Standard Product' or quotation_type == 'BOI':
+                product_ids = [product.id for product in order.product_tag_id.product_ids if product.is_international == order.is_international]
+                line_ids = line_obj.search(cr, uid, [('order_id','=',order.id)])
                 for line in line_obj.browse(cr, uid, line_ids):
                     if line.product_id.id in product_ids:
                         product = product_obj.browse(cr, uid, line.product_id.id)
