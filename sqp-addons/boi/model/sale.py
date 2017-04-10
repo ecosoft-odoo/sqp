@@ -40,22 +40,6 @@ class sale_order(osv.osv):
                         return False
         return True
 
-    def _check_uom(self, cr, uid, ids):
-        line_obj = self.pool.get('sale.order.line')
-        product_obj = self.pool.get('product.product')
-        order_list = self.browse(cr, uid, ids)
-        for order in order_list:
-            quotation_type = order.product_tag_id and order.product_tag_id.name or False
-            if quotation_type == 'Standard Product' or quotation_type == 'BOI':
-                # product_ids = [product.id for product in order.product_tag_id.product_ids if product.is_international == order.is_international]
-                line_ids = line_obj.search(cr, uid, [('order_id','=',order.id)])
-                for line in line_obj.browse(cr, uid, line_ids):
-                    # if line.product_id.id in product_ids:
-                    product = product_obj.browse(cr, uid, line.product_id.id)
-                    if line.product_uom.id != product.uom_id.id:
-                        raise osv.except_osv(_('Error!'), _('Unit of Measure of product %s must be %s'%(line.product_id.name_template, product.uom_id.name)))
-        return True
-
     _columns = {
         'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict", domain="[('start_date','!=',False),('active','!=',False)]"),
         'is_boi': fields.boolean('BOI', default=False),
@@ -63,8 +47,7 @@ class sale_order(osv.osv):
     }
 
     _constraints = [
-        (_check_product_name, 'Please specific the correct product !', ['Product']),
-        (_check_uom, 'Please specific the correct uom !', ['UOM'])
+        (_check_product_name, 'Please specific the correct product !', ['product_id']),
     ]
 
     def create(self, cr, uid, vals, context=None):
@@ -140,6 +123,22 @@ sale_order()
 class sale_order_line(osv.osv):
 
     _inherit = 'sale.order.line'
+
+    def _check_uom(self, cr, uid, ids, context=None):
+        order_obj = self.pool.get('sale.order')
+        product_obj = self.pool.get('product.product')
+        for line in self.browse(cr, uid, ids):
+            order_id = line.order_id.id
+            order = order_obj.browse(cr, uid, order_id)
+            if order.product_tag_id and (order.product_tag_id.name == 'Standard Product' or order.product_tag_id.name == 'BOI'):
+                product = product_obj.browse(cr, uid, line.product_id.id)
+                if line.product_uom.id != product.uom_id.id:
+                    return False
+        return True
+
+    _constraints = [
+        (_check_uom, 'Please specific the correct Unit of Measure !', ['product_id', 'product_uom']),
+    ]
 
     def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
             uom=False, qty_uos=0, uos=False, name='', partner_id=False,
