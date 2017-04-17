@@ -95,7 +95,9 @@ left outer join product_uom pu on pu.id = sm.product_uom
 where sp.type = 'internal'
 and sm.state = 'done'
 and not (src.name = 'FC_RM' and dst.name = 'Production')
+and not (src.name = 'FC_RM_BOI' and dst.name = 'Production')
 and not (src.name = 'Production' and dst.name = 'FC_RM')
+and not (src.name = 'Production' and dst.name = 'FC_RM_BOI')
 and not (src.name = 'Production' and dst.name = 'FC_FG')
 and not (src.name = 'FC_FG' and dst.name = 'Production')
 and not (src.name = dst.name)

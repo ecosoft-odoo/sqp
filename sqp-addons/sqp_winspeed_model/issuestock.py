@@ -75,8 +75,8 @@ select sm.id, sp.date as date,
     ru.login as receempname,
     pp.search_key as goodcode,
     replace(pp.name_template, '"', '''') as goodname,
-    'FC_RM' as inventory,
-    'FC_RM' as location,
+    src.name as inventory,
+    src.name as location,
     pu.name as goodunit,
     --(case when src.name = 'RM' then sm.product_qty else -sm.product_qty end) as goodqty, -- No negative
     sm.product_qty as goodqty,
@@ -98,7 +98,10 @@ left outer join product_template pt on pt.id = pp.product_tmpl_id
 left outer join product_uom pu on pu.id = sm.product_uom
 where sp.type = 'internal'
 and sm.state = 'done'
-and ((src.name = 'FC_RM' and dst.name = 'Production') or (src.name = 'Production' and dst.name = 'FC_RM'))
+and ((src.name = 'FC_RM' and dst.name = 'Production') or
+     (src.name = 'Production' and dst.name = 'FC_RM') or
+     (src.name = 'FC_RM_BOI' and dst.name = 'Production') or
+     (src.name = 'Production' and dst.name = 'FC_RM_BOI'))
 order by sp.date desc
         )""")
 
