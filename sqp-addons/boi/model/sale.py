@@ -29,14 +29,12 @@ class sale_order(osv.osv):
 
     def _check_product_name(self, cr, uid, ids):
         line_obj = self.pool.get('sale.order.line')
-        order_list = self.browse(cr, uid, ids)
-        for order in order_list:
-            quotation_type = order.product_tag_id and order.product_tag_id.name or False
-            boi_type = quotation_type == 'BOI' and 'BOI' or 'NONBOI'
-            line_ids = line_obj.search(cr, uid, [('order_id','=',order.id)])
+        for order in self.browse(cr, uid, ids):
+            product_tag_name = order.product_tag_id and order.product_tag_id.name or False
+            line_ids = line_obj.search(cr, uid, [('order_id', '=', order.id)])
             for line in line_obj.browse(cr, uid, line_ids):
                 for tag in line.product_id.tag_ids:
-                    if (boi_type == 'BOI' and tag.name != 'BOI') or (boi_type == 'NONBOI' and tag.name == 'BOI'):
+                    if product_tag_name and ((product_tag_name == 'BOI' and tag.name != 'BOI') or (product_tag_name != 'BOI' and tag.name == 'BOI')):
                         return False
         return True
 
@@ -47,7 +45,7 @@ class sale_order(osv.osv):
     }
 
     _constraints = [
-        (_check_product_name, 'Please specific the correct product !', ['product_id']),
+        (_check_product_name, 'Please specific the correct product !', ['product_tag_id']),
     ]
 
     def create(self, cr, uid, vals, context=None):
@@ -124,22 +122,6 @@ class sale_order_line(osv.osv):
 
     _inherit = 'sale.order.line'
 
-    def _check_uom(self, cr, uid, ids, context=None):
-        order_obj = self.pool.get('sale.order')
-        product_obj = self.pool.get('product.product')
-        for line in self.browse(cr, uid, ids):
-            order_id = line.order_id.id
-            order = order_obj.browse(cr, uid, order_id)
-            if order.product_tag_id and (order.product_tag_id.name == 'Standard Product' or order.product_tag_id.name == 'BOI'):
-                product = product_obj.browse(cr, uid, line.product_id.id)
-                if line.product_uom.id != product.uom_id.id:
-                    return False
-        return True
-
-    _constraints = [
-        (_check_uom, 'Please specific the correct Unit of Measure !', ['product_id', 'product_uom']),
-    ]
-
     def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
             uom=False, qty_uos=0, uos=False, name='', partner_id=False,
             lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, flag=False, context=None):
@@ -155,3 +137,15 @@ class sale_order_line(osv.osv):
                 product_uom = product.uom_id and product.uom_id.id or False
                 result['value'].update({'product_uom': product_uom})
         return result
+
+    def button_confirm(self, cr, uid, ids, context=None):
+        order_obj = self.pool.get('sale.order')
+        product_obj = self.pool.get('product.product')
+        for line in self.browse(cr, uid, ids, context=context):
+            order_id = line.order_id.id
+            order = order_obj.browse(cr, uid, order_id, context=context)
+            if order.product_tag_id and (order.product_tag_id.name == 'Standard Product' or order.product_tag_id.name == 'BOI'):
+                product = product_obj.browse(cr, uid, line.product_id.id, context=context)
+                if line.product_uom.id != product.uom_id.id:
+                    raise osv.except_osv(_('Error!'), _('Unit of Measure of product %s must be %s'%(line.product_id.name_template, product.uom_id.name)))
+        return super(sale_order_line, self).button_confirm(cr, uid, ids, context=context)
