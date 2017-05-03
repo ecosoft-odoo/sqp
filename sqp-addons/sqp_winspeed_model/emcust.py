@@ -61,7 +61,7 @@ class ws_emcust(osv.osv):
 select  rp.id, rp.search_key as custcode,
     null as custitle,
     rp.name as custname,
-    null as custnameeng,
+    rp.name as custnameeng,
     case when rp.is_company = true then 1 else 2 end as custtype,
     null as creditdays, -- Payment term is property field, can't get easily.
     rp.credit_limit as creditamnt,
