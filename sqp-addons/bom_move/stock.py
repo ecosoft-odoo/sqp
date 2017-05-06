@@ -70,4 +70,25 @@ class stock_picking_out(osv.osv):
         return new_id
 
 stock_picking_out
+
+
+class stock_move(osv.osv):
+    _inherit = 'stock.move'
+
+    _order = 'default_code, name_template, date_expected desc, id'
+
+    _columns = {
+        'default_code': fields.related('product_id', 'default_code',
+                                       type='char',
+                                       string='Internal Reference',
+                                       readonly=False,
+                                       store=True, ),
+        'name_template': fields.related('product_id', 'name_template',
+                                        type='char',
+                                        string='Template Name',
+                                        readonly=False,
+                                        store=True, ),
+    }
+
+stock_move()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
