@@ -81,11 +81,13 @@ class stock_move(osv.osv):
         'default_code': fields.related('product_id', 'default_code',
                                        type='char',
                                        string='Internal Reference',
-                                       readonly=False, ),
+                                       readonly=False,
+                                       store=True, ),
         'name_template': fields.related('product_id', 'name_template',
                                         type='char',
                                         string='Template Name',
-                                        readonly=False, ),
+                                        readonly=False,
+                                        store=True, ),
     }
 
 stock_move()
