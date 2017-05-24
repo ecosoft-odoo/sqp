@@ -107,7 +107,7 @@
 		<fieldDescription><![CDATA[ref_order_id/partner_id/name]]></fieldDescription>
 	</field>
 	<sortField name="product_code"/>
-	<sortField name="project_name"/>
+	<sortField name="product_name"/>
 	<variable name="item_no" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{move_line_id}]]></variableExpression>
 	</variable>
@@ -126,9 +126,9 @@
 	</variable>
 	<pageHeader>
 		<band height="167" splitType="Stretch">
-			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="526" y="55" width="69" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="526" y="35" width="69" height="40" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{supply_list_no}]]></textFieldExpression>
