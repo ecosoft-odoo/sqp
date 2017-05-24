@@ -106,6 +106,8 @@
 	<field name="so_cust_name" class="java.lang.String">
 		<fieldDescription><![CDATA[ref_order_id/partner_id/name]]></fieldDescription>
 	</field>
+	<sortField name="product_code"/>
+	<sortField name="project_name"/>
 	<variable name="item_no" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{move_line_id}]]></variableExpression>
 	</variable>
