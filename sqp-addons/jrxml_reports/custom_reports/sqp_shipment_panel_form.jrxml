@@ -106,6 +106,11 @@
 	<field name="so_cust_name" class="java.lang.String">
 		<fieldDescription><![CDATA[ref_order_id/partner_id/name]]></fieldDescription>
 	</field>
+	<field name="sequence" class="java.lang.Integer">
+		<fieldDescription><![CDATA[move_lines/product_id/sequence]]></fieldDescription>
+	</field>
+	<sortField name="bom_product_type"/>
+	<sortField name="sequence"/>
 	<sortField name="product_code"/>
 	<sortField name="product_name"/>
 	<variable name="item_no" class="java.lang.Integer" calculation="Count">
