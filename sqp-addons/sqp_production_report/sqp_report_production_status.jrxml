@@ -83,11 +83,15 @@ from (select *,
 					-- Only MO that DO's qty delivered not equal to that in MO
 					where a.qty >  (select coalesce(sum(product_qty),0) from stock_picking p
 							join stock_move m on m.picking_id = p.id
-							where p.ref_order_id = a.order_id and position(a.mo_name in p.origin) > 0 and m.state = 'done')
+							where p.ref_order_id = a.order_id
+							and p.is_bom_move = false  -- Exclude BOM MOve
+							and position(a.mo_name in p.origin) > 0 and m.state = 'done')
 					-- Only MO that DO's qty with some unsent / uncancelled > 0
 					and (select coalesce(sum(product_qty),0) from stock_picking p
 							join stock_move m on m.picking_id = p.id
-							where p.ref_order_id = a.order_id and position(a.mo_name in p.origin) > 0
+							where p.ref_order_id = a.order_id
+							and p.is_bom_move = false  -- Exclude BOM MOve
+							and position(a.mo_name in p.origin) > 0
 							and p.state in ('draft', 'progress', 'auto', 'confirmed')) > 0)
 		) a
 	group by mo_id, short_note, order_id, picking_id, order_type, mo_date, do_date, mo, so, cust, project, thick
