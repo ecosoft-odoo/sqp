@@ -73,6 +73,7 @@ MO
     'depends' : ['mrp','mrp_sale_rel','ext_sale','mrp_change_rm','mrp_quick_bom'],
     'demo' : [],
     'data' : [
+        'security/ext_mrp_security.xml',
         'sale_view.xml',
         'mrp_view.xml',
     ],
