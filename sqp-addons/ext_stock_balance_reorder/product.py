@@ -36,8 +36,15 @@ class product_product(osv.osv):
         warehouse_obj = self.pool.get('stock.warehouse')
         shop_obj = self.pool.get('sale.shop')
 
-        states = context.get('states',[])
+        states = ''
+        if context.get('field', False) == 'sqp_virtual_available' or context.get('field', False) == 'sqp_qty_reorder':
+            # Find Quantity On Hand when state = done
+            states = 'done'
+        else:
+            states = context.get('states', [])
+
         what = context.get('what',())
+
         if not ids:
             ids = self.search(cr, uid, [])
         res = {}.fromkeys(ids, 0.0)
@@ -89,16 +96,23 @@ class product_product(osv.osv):
         results_in = []
         results_out = []
         results_mo_resv = []
+        results_sqp_in = []
+        results_sqp_out = []
 
         from_date = context.get('from_date',False)
         to_date = context.get('to_date',False)
         date_str = False
         date_values = False
         where = [tuple(location_ids),tuple(location_ids),tuple(ids),tuple(states)]
+        sqp_where = [tuple(location_ids),tuple(location_ids),tuple(ids),tuple(context.get('states',[]))]
         if from_date and to_date:
             date_str = "date>=%s and date<=%s"
             where.append(tuple([from_date]))
             where.append(tuple([to_date]))
+
+            # For specific SQP
+            sqp_where.append(tuple([from_date]))
+            sqp_where.append(tuple([to_date]))
         elif from_date:
             date_str = "date>=%s"
             date_values = [from_date]
@@ -108,11 +122,17 @@ class product_product(osv.osv):
         if date_values:
             where.append(tuple(date_values))
 
+            # For specific SQP
+            sqp_where.append(tuple(date_values))
+
         prodlot_id = context.get('prodlot_id', False)
         prodlot_clause = ''
         if prodlot_id:
             prodlot_clause = ' and prodlot_id = %s '
             where += [prodlot_id]
+
+            # For specific SQP
+            sqp_where += [prodlot_id]
 
         # Calculate Safety
         if 'safety' in what:
@@ -146,6 +166,11 @@ class product_product(osv.osv):
                 + prodlot_clause +
                 'group by product_id,product_uom',tuple(where))
             results_out = cr.fetchall()
+
+        if context.get('field', False) == 'sqp_virtual_available' or context.get('field', False) == 'sqp_qty_reorder':
+            # Update state in where
+            where = sqp_where
+
         # Additional Column
         if 'mo_resv' in what:
             cr.execute(
@@ -156,11 +181,35 @@ class product_product(osv.osv):
                     'and sm.product_id IN %s '\
                     'group by sm.product_id, sm.product_uom', tuple([tuple(ids),]))
             results_mo_resv = cr.fetchall()
+        if 'sqp_in' in what:
+            cr.execute(
+                'select sum(product_qty), product_id, product_uom '\
+                'from stock_move '\
+                'where location_id NOT IN %s '\
+                'and location_dest_id IN %s '\
+                'and product_id IN %s '\
+                "and state in %s " + (date_str and "and "+date_str+" " or '') + " "\
+                + prodlot_clause +
+                'group by product_id,product_uom', tuple(where))
+            results_sqp_in = cr.fetchall()
+        if 'sqp_out' in what:
+            cr.execute(
+                'select sum(sm.product_qty), sm.product_id, sm.product_uom '\
+                'from stock_move sm '\
+                'join stock_picking sp on sm.picking_id = sp.id '\
+                'where sm.location_id IN %s '\
+                'and sm.location_dest_id NOT IN %s '\
+                'and sm.product_id IN %s '\
+                "and sp.is_supply_list = True and sm.state in %s " + (date_str and "and " + date_str + " " or '') + " "\
+                + prodlot_clause +
+                'group by sm.product_id, sm.product_uom', tuple(where))
+            results_sqp_out = cr.fetchall()
 
         # Get the missing UoM resources
         uom_obj = self.pool.get('product.uom')
         uoms = map(lambda x: x[2], results_safety) + map(lambda x: x[2], results_in) + \
-                map(lambda x: x[2], results_out) + map(lambda x: x[2], results_mo_resv)
+                map(lambda x: x[2], results_out) + map(lambda x: x[2], results_mo_resv) + \
+                map(lambda x: x[2], results_sqp_in) + map(lambda x: x[2], results_sqp_out)
         if context.get('uom', False):
             uoms += [context['uom']]
         uoms = filter(lambda x: x not in uoms_o.keys(), uoms)
@@ -191,6 +240,16 @@ class product_product(osv.osv):
             amount = uom_obj._compute_qty_obj(cr, uid, uoms_o[prod_uom], amount,
                     uoms_o[context.get('uom', False) or product2uom[prod_id]], context=context)
             res[prod_id] -= amount
+        # Count the sqp incoming quantities
+        for amount, prod_id, prod_uom in results_sqp_in:
+            amount = uom_obj._compute_qty_obj(cr, uid, uoms_o[prod_uom], amount,
+                     uoms_o[context.get('uom', False) or product2uom[prod_id]], context=context)
+            res[prod_id] += amount
+        # Count the sqp outgoing quantities
+        for amount, prod_id, prod_uom in results_sqp_out:
+            amount = uom_obj._compute_qty_obj(cr, uid, uoms_o[prod_uom], amount,
+                    uoms_o[context.get('uom', False) or product2uom[prod_id]], context=context)
+            res[prod_id] -= amount
 
         return res
 
@@ -213,6 +272,13 @@ class product_product(osv.osv):
             # Additional Column
             if f == 'qty_mo_resv':
                 c.update({ 'what': ('mo_resv') })
+            if f == 'sqp_outgoing_qty':
+                c.update({ 'states': ('confirmed','waiting','assigned'), 'what': ('sqp_out',) })
+            if f == 'sqp_virtual_available':
+                c.update({ 'states': ('confirmed','waiting','assigned'), 'what': ('in', 'out', 'sqp_in', 'sqp_out', 'mo_resv'), 'field': 'sqp_virtual_available' })
+            if f == 'sqp_qty_reorder':
+                c.update({ 'states': ('confirmed','waiting','assigned'), 'what': ('in', 'out', 'sqp_in', 'sqp_out' ,'mo_resv', 'safety'), 'field': 'sqp_qty_reorder' })
+
             # --
             safety_stock = self.get_product_safety(cr, uid, ids, context=c)
             for id in ids:
@@ -257,7 +323,92 @@ class product_product(osv.osv):
             type='float',  digits_compute=dp.get_precision('Product Unit of Measure'),
             string='MO Out',
             help="Quantity of product to be reserved for production (regardless of location)"),
+        'sqp_outgoing_qty': fields.function(
+            _product_safety,
+            multi='qty_safety',
+            type='float',
+            digits_compute=dp.get_precision('Product Unit of Measure'),
+            string='SPS Outgoing',
+        ),
+        'sqp_virtual_available': fields.function(
+            _product_safety,
+            multi='qty_safety',
+            type='float',
+            digits_compute=dp.get_precision('Product Unit of Measure'),
+            string='SPS Forecasted Quantity',
+        ),
+        'sqp_qty_reorder': fields.function(
+            _product_safety,
+            multi='qty_safety',
+            type='float',
+            digits_compute=dp.get_precision('Product Unit of Measure'),
+            string='SPS Reorder',
+        )
     }
+
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
+                        context=None, toolbar=False, submenu=False):
+        res = super(product_product, self).fields_view_get(
+            cr, uid, view_id=view_id, view_type=view_type,
+            context=context, toolbar=toolbar, submenu=submenu)
+        if not context:
+            context = {}
+        model_bg = context.get('model_bg', False)
+        model_bg_ids = context.get('model_bg_ids', [])
+        is_supply_list = False
+        is_bom_move = False
+        if model_bg == 'stock.picking.out' and model_bg_ids:
+            for picking in self.pool.get('stock.picking.out').browse(cr, uid, model_bg_ids):
+                if picking.is_supply_list:
+                    is_supply_list = True
+                elif picking.is_bom_move:
+                    is_bom_move = True
+
+        # Location is mo, bom move and supply list
+        if model_bg == 'mrp.production' or is_supply_list or is_bom_move:
+            doc = etree.XML(res['arch'])
+            nodes = doc.xpath("//tree/field[@name='sqp_virtual_available']") + \
+                doc.xpath("//tree/field[@name='qty_available']") + \
+                doc.xpath("//tree/field[@name='incoming_qty']") + \
+                doc.xpath("//tree/field[@name='sqp_outgoing_qty']") + \
+                doc.xpath("//tree/field[@name='qty_mo_resv']") + \
+                doc.xpath("//tree/field[@name='qty_safety']") + \
+                doc.xpath("//tree/field[@name='sqp_qty_reorder']")
+
+            for node in nodes:
+                node.set('invisible', 'false')
+                node.set('modifiers', '{"readonly": true, "tree_invisible": false}')
+            res['arch'] = etree.tostring(doc)
+
+        # change string sqp_virtual_available follow location info
+        if ('location' in context) and context['location']:
+            location_info = self.pool.get('stock.location').browse(cr, uid, context['location'])
+            fields = res.get('fields', {})
+            if fields:
+                if location_info.usage == 'supplier':
+                    if fields.get('sqp_virtual_available'):
+                        res['fields']['sqp_virtual_available']['string'] = _('SPS Future Receptions')
+
+                if location_info.usage == 'internal':
+                    if fields.get('sqp_virtual_available'):
+                        res['fields']['sqp_virtual_available']['string'] = _('SPS Future Stock')
+
+                if location_info.usage == 'customer':
+                    if fields.get('sqp_virtual_available'):
+                        res['fields']['sqp_virtual_available']['string'] = _('SPS Future Deliveries')
+
+                if location_info.usage == 'inventory':
+                    if fields.get('sqp_virtual_available'):
+                        res['fields']['sqp_virtual_available']['string'] = _('SPS Future P&L')
+
+                if location_info.usage == 'procurement':
+                    if fields.get('sqp_virtual_available'):
+                        res['fields']['sqp_virtual_available']['string'] = _('SPS Future Qty')
+
+                if location_info.usage == 'production':
+                    if fields.get('sqp_virtual_available'):
+                        res['fields']['sqp_virtual_available']['string'] = _('SPS Future Productions')
+        return res
 
 product_product()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
