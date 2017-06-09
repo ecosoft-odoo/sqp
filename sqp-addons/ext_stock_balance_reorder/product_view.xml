@@ -15,7 +15,7 @@
 	                <field name="qty_safety" invisible="not context.get('is_safety',False)"/>
 	                <field name="qty_mo_resv" invisible="not context.get('is_safety',False)"/>
 				</xpath>
-                <xpath expr="/tree//field[@name='qty_reorder']" position="after">>
+                <xpath expr="/tree//field[@name='qty_reorder']" position="after">
                     <field name="sqp_qty_reorder"  invisible="not context.get('is_safety',False)"/>
                 </xpath>
             </field>
