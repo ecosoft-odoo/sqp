@@ -27,7 +27,7 @@ class stock_location_product(osv.osv_memory):
     def action_open_window(self, cr, uid, ids, context=None):
         res = super(stock_location_product, self).action_open_window(cr, uid, ids, context=context)
         ctx = res.get('context', {})
-        ctx.update({'model_bg': context.get('active_model', False)})
+        ctx.update({'model_bg': context.get('active_model', False), 'model_bg_ids': context.get('active_ids')})
         res.update({'context': ctx})
         return res
 
