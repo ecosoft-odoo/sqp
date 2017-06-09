@@ -36,15 +36,8 @@ class product_product(osv.osv):
         warehouse_obj = self.pool.get('stock.warehouse')
         shop_obj = self.pool.get('sale.shop')
 
-        states = ''
-        if context.get('field', False) == 'sqp_virtual_available' or context.get('field', False) == 'sqp_qty_reorder':
-            # Find Quantity On Hand when state = done
-            states = 'done'
-        else:
-            states = context.get('states', [])
-
-        what = context.get('what',())
-
+        states = context.get('states', [])
+        what = context.get('what', ())
         if not ids:
             ids = self.search(cr, uid, [])
         res = {}.fromkeys(ids, 0.0)
@@ -96,7 +89,6 @@ class product_product(osv.osv):
         results_in = []
         results_out = []
         results_mo_resv = []
-        results_sqp_in = []
         results_sqp_out = []
 
         from_date = context.get('from_date',False)
@@ -104,15 +96,10 @@ class product_product(osv.osv):
         date_str = False
         date_values = False
         where = [tuple(location_ids),tuple(location_ids),tuple(ids),tuple(states)]
-        sqp_where = [tuple(location_ids),tuple(location_ids),tuple(ids),tuple(context.get('states',[]))]
         if from_date and to_date:
             date_str = "date>=%s and date<=%s"
             where.append(tuple([from_date]))
             where.append(tuple([to_date]))
-
-            # For specific SQP
-            sqp_where.append(tuple([from_date]))
-            sqp_where.append(tuple([to_date]))
         elif from_date:
             date_str = "date>=%s"
             date_values = [from_date]
@@ -122,17 +109,11 @@ class product_product(osv.osv):
         if date_values:
             where.append(tuple(date_values))
 
-            # For specific SQP
-            sqp_where.append(tuple(date_values))
-
         prodlot_id = context.get('prodlot_id', False)
         prodlot_clause = ''
         if prodlot_id:
             prodlot_clause = ' and prodlot_id = %s '
             where += [prodlot_id]
-
-            # For specific SQP
-            sqp_where += [prodlot_id]
 
         # Calculate Safety
         if 'safety' in what:
@@ -155,6 +136,14 @@ class product_product(osv.osv):
                 + prodlot_clause +
                 'group by product_id,product_uom',tuple(where))
             results_in = cr.fetchall()
+
+        # Change state in where is done
+        states2 = []
+        if context.get('field', False) == 'sqp_virtual_available' or context.get('field', False) == 'sqp_qty_reorder':
+            index_state = where.index(tuple(states))
+            states2 = filter(lambda x: x == 'done', states)
+            where[index_state] = tuple(states2)
+
         if 'out' in what:
             cr.execute(
                 'select sum(product_qty), product_id, product_uom '\
@@ -166,11 +155,6 @@ class product_product(osv.osv):
                 + prodlot_clause +
                 'group by product_id,product_uom',tuple(where))
             results_out = cr.fetchall()
-
-        if context.get('field', False) == 'sqp_virtual_available' or context.get('field', False) == 'sqp_qty_reorder':
-            # Update state in where
-            where = sqp_where
-
         # Additional Column
         if 'mo_resv' in what:
             cr.execute(
@@ -181,17 +165,12 @@ class product_product(osv.osv):
                     'and sm.product_id IN %s '\
                     'group by sm.product_id, sm.product_uom', tuple([tuple(ids),]))
             results_mo_resv = cr.fetchall()
-        if 'sqp_in' in what:
-            cr.execute(
-                'select sum(product_qty), product_id, product_uom '\
-                'from stock_move '\
-                'where location_id NOT IN %s '\
-                'and location_dest_id IN %s '\
-                'and product_id IN %s '\
-                "and state in %s " + (date_str and "and "+date_str+" " or '') + " "\
-                + prodlot_clause +
-                'group by product_id,product_uom', tuple(where))
-            results_sqp_in = cr.fetchall()
+
+        # Change state in where is not done
+        if context.get('field', False) == 'sqp_virtual_available' or context.get('field', False) == 'sqp_qty_reorder':
+            index_state = where.index(tuple(states2))
+            where[index_state] = tuple(filter(lambda x: x != 'done', states))
+
         if 'sqp_out' in what:
             cr.execute(
                 'select sum(sm.product_qty), sm.product_id, sm.product_uom '\
@@ -209,7 +188,7 @@ class product_product(osv.osv):
         uom_obj = self.pool.get('product.uom')
         uoms = map(lambda x: x[2], results_safety) + map(lambda x: x[2], results_in) + \
                 map(lambda x: x[2], results_out) + map(lambda x: x[2], results_mo_resv) + \
-                map(lambda x: x[2], results_sqp_in) + map(lambda x: x[2], results_sqp_out)
+                map(lambda x: x[2], results_sqp_out)
         if context.get('uom', False):
             uoms += [context['uom']]
         uoms = filter(lambda x: x not in uoms_o.keys(), uoms)
@@ -240,11 +219,6 @@ class product_product(osv.osv):
             amount = uom_obj._compute_qty_obj(cr, uid, uoms_o[prod_uom], amount,
                     uoms_o[context.get('uom', False) or product2uom[prod_id]], context=context)
             res[prod_id] -= amount
-        # Count the sqp incoming quantities
-        for amount, prod_id, prod_uom in results_sqp_in:
-            amount = uom_obj._compute_qty_obj(cr, uid, uoms_o[prod_uom], amount,
-                     uoms_o[context.get('uom', False) or product2uom[prod_id]], context=context)
-            res[prod_id] += amount
         # Count the sqp outgoing quantities
         for amount, prod_id, prod_uom in results_sqp_out:
             amount = uom_obj._compute_qty_obj(cr, uid, uoms_o[prod_uom], amount,
@@ -275,9 +249,9 @@ class product_product(osv.osv):
             if f == 'sqp_outgoing_qty':
                 c.update({ 'states': ('confirmed','waiting','assigned'), 'what': ('sqp_out',) })
             if f == 'sqp_virtual_available':
-                c.update({ 'states': ('confirmed','waiting','assigned'), 'what': ('in', 'out', 'sqp_in', 'sqp_out', 'mo_resv'), 'field': 'sqp_virtual_available' })
+                c.update({ 'states': ('confirmed','waiting','assigned', 'done'), 'what': ('in', 'out', 'sqp_out', 'mo_resv'), 'field': 'sqp_virtual_available' })
             if f == 'sqp_qty_reorder':
-                c.update({ 'states': ('confirmed','waiting','assigned'), 'what': ('in', 'out', 'sqp_in', 'sqp_out' ,'mo_resv', 'safety'), 'field': 'sqp_qty_reorder' })
+                c.update({ 'states': ('confirmed','waiting','assigned', 'done'), 'what': ('in', 'out', 'sqp_out' ,'mo_resv', 'safety'), 'field': 'sqp_qty_reorder' })
 
             # --
             safety_stock = self.get_product_safety(cr, uid, ids, context=c)
