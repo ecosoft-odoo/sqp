@@ -43,7 +43,7 @@ from (select *,
 	(quantity - steel) steel_bal,
 	(select coalesce(sum(product_qty),0) from stock_picking p
 	join stock_move m on m.picking_id = p.id
-	where m.state = 'done' and p.ref_order_id = b.order_id and position(b.mo in p.origin) > 0) delivered_qty
+	where m.state = 'done' and p.ref_order_id = b.order_id and p.is_bom_move = false and position(b.mo in p.origin) > 0) delivered_qty
 	from (
 		select mo_id, short_note, order_id, picking_id, order_type, mo_date, do_date, mo, so, cust, project, thick,
 		coalesce(sum(quantity),0) quantity,
