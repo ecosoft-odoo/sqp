@@ -513,7 +513,7 @@ class sqp_job_cost_sheet_mrp_rm_list(osv.osv):
                             union
                             (select sm.id, sp.ref_order_id order_id, product_id, product_uom, 0 as planned_qty, product_qty actual_qty
                             from stock_picking sp
-                            join stock_move sm on sm.picking_id = sp.id
+                            join stock_move sm on sm.picking_id = sp.id and sp.is_bom_move = true
                             where sp.type = 'internal' and sp.state = 'done' and sp.ref_order_id is not null)) a
                           join product_uom uom on uom.id = a.product_uom
                           join product_product pp on pp.id = a.product_id
