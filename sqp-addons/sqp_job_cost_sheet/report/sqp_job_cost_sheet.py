@@ -516,7 +516,9 @@ class sqp_job_cost_sheet_mrp_rm_list(osv.osv):
                             join stock_move sm on sm.picking_id = sp.id
                             join product_product pp on pp.id = sm.product_id
                                 -- For non-main material, only use from bom_move
-                                and ((sp.is_bom_move = true and pp.main_material = false) or pp.main_material = true)
+                                and ((sp.is_bom_move = true and pp.main_material = false) or
+                                    pp.main_material = true or
+                                    (sp.type = 'internal' and sp.origin is null)) -- Include internal, but only the one created in simplified move
                             where sp.type = 'internal' and sp.state = 'done' and sp.ref_order_id is not null)) a
                           join product_uom uom on uom.id = a.product_uom
                           join product_product pp on pp.id = a.product_id
@@ -688,9 +690,17 @@ class sqp_job_cost_sheet_inovice_list(osv.osv):
                FROM res_currency_rate cr2
               WHERE cr2.currency_id = sub.currency_id AND (sub.date_invoice IS NOT NULL AND cr2.name <= sub.date_invoice OR  sub.date_invoice IS NULL AND cr2.name <= now())
               ORDER BY name DESC LIMIT 1)
-              -- also exclude those in Supply List
-              ) a where a.product_id not in (select product_id from sqp_job_cost_sheet_supply_list b where b.product_id = a.product_id and b.order_id = a.order_id)
+              -- also exclude those in Supply List, Simplified Move, BOM Move
+              ) a where a.product_id not in (
+                select product_id from sqp_job_cost_sheet_supply_list b
+                where b.product_id = a.product_id and b.order_id = a.order_id
+            ) and a.product_id not in (
+              select product_id from stock_move sm join stock_picking sp on sp.id = sm.picking_id
+              where sm.product_id = a.product_id and sp.ref_order_id = a.order_id
+              and sp.is_bom_move = true or (sp.type = 'internal' and sp.origin is null)
+          )
         )""" % (self._table,))
+
 
 sqp_job_cost_sheet_inovice_list()
 
