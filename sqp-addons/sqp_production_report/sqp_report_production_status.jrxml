@@ -92,7 +92,7 @@ from (select *,
 							where p.ref_order_id = a.order_id
 							and p.is_bom_move = false  -- Exclude BOM MOve
 							and position(a.mo_name in p.origin) > 0
-							and p.state in ('draft', 'progress', 'auto', 'confirmed')) > 0)
+							and p.state in ('draft', 'progress', 'auto', 'confirmed', 'assigned')) > 0)
 		) a
 	group by mo_id, short_note, order_id, picking_id, order_type, mo_date, do_date, mo, so, cust, project, thick
 	) b
