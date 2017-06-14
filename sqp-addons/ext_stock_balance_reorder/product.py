@@ -90,6 +90,7 @@ class product_product(osv.osv):
         results_out = []
         results_mo_resv = []
         results_sqp_out = []
+        results_sqp_mo_resv = []
 
         from_date = context.get('from_date',False)
         to_date = context.get('to_date',False)
@@ -184,11 +185,24 @@ class product_product(osv.osv):
                 'group by sm.product_id, sm.product_uom', tuple(where))
             results_sqp_out = cr.fetchall()
 
+        if 'sqp_mo_resv' in what:
+            cr.execute(
+                'select sum(sm.product_qty), sm.product_id, sm.product_uom '\
+                'from stock_move sm '\
+                'join stock_picking sp on sm.picking_id = sp.id '\
+                'where sm.location_id IN %s '\
+                'and sm.location_dest_id NOT IN %s '\
+                'and sm.product_id IN %s '\
+                "and sp.is_bom_move = True and sm.state in %s " + (date_str and "and " + date_str + " " or '') + " "\
+                + prodlot_clause +
+                'group by sm.product_id, sm.product_uom', tuple(where))
+            results_sqp_mo_resv = cr.fetchall()
+
         # Get the missing UoM resources
         uom_obj = self.pool.get('product.uom')
         uoms = map(lambda x: x[2], results_safety) + map(lambda x: x[2], results_in) + \
                 map(lambda x: x[2], results_out) + map(lambda x: x[2], results_mo_resv) + \
-                map(lambda x: x[2], results_sqp_out)
+                map(lambda x: x[2], results_sqp_out) + map(lambda x: x[2], results_sqp_mo_resv)
         if context.get('uom', False):
             uoms += [context['uom']]
         uoms = filter(lambda x: x not in uoms_o.keys(), uoms)
@@ -224,6 +238,11 @@ class product_product(osv.osv):
             amount = uom_obj._compute_qty_obj(cr, uid, uoms_o[prod_uom], amount,
                     uoms_o[context.get('uom', False) or product2uom[prod_id]], context=context)
             res[prod_id] -= amount
+        # Count the sqp mo out
+        for amount, prod_id, prod_uom in results_sqp_mo_resv:
+            amount = uom_obj._compute_qty_obj(cr, uid, uoms_o[prod_uom], amount,
+                    uoms_o[context.get('uom', False) or product2uom[prod_id]], context=context)
+            res[prod_id] -= amount
 
         return res
 
@@ -248,10 +267,12 @@ class product_product(osv.osv):
                 c.update({ 'what': ('mo_resv') })
             if f == 'sqp_outgoing_qty':
                 c.update({ 'states': ('confirmed','waiting','assigned'), 'what': ('sqp_out',) })
+            if f == 'sqp_qty_mo_resv':
+                c.update({ 'states': ('confirmed','waiting','assigned'), 'what': ('sqp_mo_resv',) })
             if f == 'sqp_virtual_available':
-                c.update({ 'states': ('confirmed','waiting','assigned', 'done'), 'what': ('in', 'out', 'sqp_out', 'mo_resv'), 'field': 'sqp_virtual_available' })
+                c.update({ 'states': ('confirmed','waiting','assigned', 'done'), 'what': ('in', 'out', 'sqp_out', 'sqp_mo_resv'), 'field': 'sqp_virtual_available' })
             if f == 'sqp_qty_reorder':
-                c.update({ 'states': ('confirmed','waiting','assigned', 'done'), 'what': ('in', 'out', 'sqp_out' ,'mo_resv', 'safety'), 'field': 'sqp_qty_reorder' })
+                c.update({ 'states': ('confirmed','waiting','assigned', 'done'), 'what': ('in', 'out', 'sqp_out' ,'sqp_mo_resv', 'safety'), 'field': 'sqp_qty_reorder' })
 
             # --
             safety_stock = self.get_product_safety(cr, uid, ids, context=c)
@@ -317,6 +338,13 @@ class product_product(osv.osv):
             type='float',
             digits_compute=dp.get_precision('Product Unit of Measure'),
             string='SPS Reorder',
+        ),
+        'sqp_qty_mo_resv': fields.function(
+            _product_safety,
+            multi='qty_safety',
+            type='float',
+            digits_compute=dp.get_precision('Product Unit of Measure'),
+            string='SPS MO Out',
         )
     }
 
@@ -345,7 +373,7 @@ class product_product(osv.osv):
                 doc.xpath("//tree/field[@name='qty_available']") + \
                 doc.xpath("//tree/field[@name='incoming_qty']") + \
                 doc.xpath("//tree/field[@name='sqp_outgoing_qty']") + \
-                doc.xpath("//tree/field[@name='qty_mo_resv']") + \
+                doc.xpath("//tree/field[@name='sqp_qty_mo_resv']") + \
                 doc.xpath("//tree/field[@name='qty_safety']") + \
                 doc.xpath("//tree/field[@name='sqp_qty_reorder']")
 
