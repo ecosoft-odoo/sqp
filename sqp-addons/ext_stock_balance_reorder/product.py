@@ -265,14 +265,18 @@ class product_product(osv.osv):
             # Additional Column
             if f == 'qty_mo_resv':
                 c.update({ 'what': ('mo_resv') })
+
+            # Additional sqp
+            if f == 'sqp_incoming_qty':
+                c.update({ 'states': ('draft','confirmed','waiting','assigned'), 'what': ('in',) })
             if f == 'sqp_outgoing_qty':
-                c.update({ 'states': ('confirmed','waiting','assigned'), 'what': ('sqp_out',) })
+                c.update({ 'states': ('draft','confirmed','waiting','assigned'), 'what': ('sqp_out',) })
             if f == 'sqp_qty_mo_resv':
-                c.update({ 'states': ('confirmed','waiting','assigned'), 'what': ('sqp_mo_resv',) })
+                c.update({ 'states': ('draft','confirmed','waiting','assigned'), 'what': ('sqp_mo_resv',) })
             if f == 'sqp_virtual_available':
-                c.update({ 'states': ('confirmed','waiting','assigned', 'done'), 'what': ('in', 'out', 'sqp_out', 'sqp_mo_resv'), 'field': 'sqp_virtual_available' })
+                c.update({ 'states': ('draft','confirmed','waiting','assigned', 'done'), 'what': ('in', 'out', 'sqp_out', 'sqp_mo_resv'), 'field': 'sqp_virtual_available' })
             if f == 'sqp_qty_reorder':
-                c.update({ 'states': ('confirmed','waiting','assigned', 'done'), 'what': ('in', 'out', 'sqp_out' ,'sqp_mo_resv', 'safety'), 'field': 'sqp_qty_reorder' })
+                c.update({ 'states': ('draft','confirmed','waiting','assigned', 'done'), 'what': ('in', 'out', 'sqp_out' ,'sqp_mo_resv', 'safety'), 'field': 'sqp_qty_reorder' })
 
             # --
             safety_stock = self.get_product_safety(cr, uid, ids, context=c)
@@ -318,12 +322,26 @@ class product_product(osv.osv):
             type='float',  digits_compute=dp.get_precision('Product Unit of Measure'),
             string='MO Out',
             help="Quantity of product to be reserved for production (regardless of location)"),
+        'sqp_incoming_qty': fields.function(
+            _product_safety,
+            multi='qty_safety',
+            type='float',
+            digits_compute=dp.get_precision('Product Unit of Measure'),
+            string='SPS Incoming',
+        ),
         'sqp_outgoing_qty': fields.function(
             _product_safety,
             multi='qty_safety',
             type='float',
             digits_compute=dp.get_precision('Product Unit of Measure'),
             string='SPS Outgoing',
+        ),
+        'sqp_qty_mo_resv': fields.function(
+            _product_safety,
+            multi='qty_safety',
+            type='float',
+            digits_compute=dp.get_precision('Product Unit of Measure'),
+            string='SPS MO Out',
         ),
         'sqp_virtual_available': fields.function(
             _product_safety,
@@ -338,13 +356,6 @@ class product_product(osv.osv):
             type='float',
             digits_compute=dp.get_precision('Product Unit of Measure'),
             string='SPS Reorder',
-        ),
-        'sqp_qty_mo_resv': fields.function(
-            _product_safety,
-            multi='qty_safety',
-            type='float',
-            digits_compute=dp.get_precision('Product Unit of Measure'),
-            string='SPS MO Out',
         )
     }
 
@@ -371,7 +382,7 @@ class product_product(osv.osv):
             doc = etree.XML(res['arch'])
             nodes = doc.xpath("//tree/field[@name='sqp_virtual_available']") + \
                 doc.xpath("//tree/field[@name='qty_available']") + \
-                doc.xpath("//tree/field[@name='incoming_qty']") + \
+                doc.xpath("//tree/field[@name='sqp_incoming_qty']") + \
                 doc.xpath("//tree/field[@name='sqp_outgoing_qty']") + \
                 doc.xpath("//tree/field[@name='sqp_qty_mo_resv']") + \
                 doc.xpath("//tree/field[@name='qty_safety']") + \

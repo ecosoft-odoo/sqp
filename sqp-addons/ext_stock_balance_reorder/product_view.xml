@@ -7,7 +7,20 @@
             <field name="inherit_id" ref="stock_balance_reorder.product_product_tree_view_ext"/>
             <field eval="8" name="priority"/>
             <field name="arch" type="xml">
+                <!-- Invisible field -->
+                <field name="incoming_qty" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="outgoing_qty" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="qty_reorder" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+
+                <!-- Add field -->
                 <xpath expr="/tree/field[@name='outgoing_qty']" position="after">
+                    <field name="sqp_incoming_qty" invisible="not context.get('is_inout',False)"/>
                     <field name="sqp_outgoing_qty" invisible="not context.get('is_inout',False)"/>
                 </xpath>
             	<xpath expr="/tree//field[@name='qty_safety']" position="replace">
@@ -19,6 +32,17 @@
                 <xpath expr="/tree//field[@name='qty_reorder']" position="after">
                     <field name="sqp_qty_reorder"  invisible="not context.get('is_safety',False)"/>
                 </xpath>
+            </field>
+        </record>
+
+        <record id="product_product_tree_view" model="ir.ui.view">
+            <field name="name">product.product.tree</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="virtual_available" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
             </field>
         </record>
     </data>
