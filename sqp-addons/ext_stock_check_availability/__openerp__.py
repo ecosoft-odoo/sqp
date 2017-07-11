@@ -38,6 +38,7 @@ Features
                  'stock_check_availability'],
     'demo': [],
     'data': [
+              'wizard/stock_location_product_view.xml',
               'action_view.xml'
     ],
     'test': [
