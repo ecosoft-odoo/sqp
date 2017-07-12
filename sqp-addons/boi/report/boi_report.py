@@ -65,7 +65,8 @@ class boi_report(osv.osv):
                 from stock_picking sp
                 left join sale_order so on sp.ref_order_id = so.id
                 left join account_invoice ai on so.name = ai.origin
-                left join stock_move sm on sp.id = sm.picking_id
+                join account_stock_rel rel on ai.id = rel.invoice_id and sp.id = rel.picking_id
+                left join stock_move sm on rel.picking_id = sm.picking_id
                 left join product_product pp on sm.product_id = pp.id
                 where sp.type = 'out' and (sp.is_supply_list = False or sp.is_supply_list is null) and (sp.is_bom_move = False or sp.is_bom_move is null) and sp.state = 'done' and sp.boi_type = 'BOI'
             )

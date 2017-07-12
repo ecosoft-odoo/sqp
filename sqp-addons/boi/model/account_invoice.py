@@ -33,6 +33,7 @@ class account_invoice(osv.osv):
             ], 'BOI Type', required=True, select=True,
         ),
         'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict", domain="[('start_date','!=',False),('active','!=',False)]"),
+        'boi_picking_ids': fields.many2many('stock.picking.out', 'account_stock_rel', 'invoice_id', 'picking_id', string="BOI's Picking"),
     }
 
     _defaults = {
