@@ -13,7 +13,7 @@
                     <field name="boi_cert_id" attrs="{'invisible': ['|',('boi_type','=','NONBOI'),('boi_type','=',False)], 'required': [('boi_type','=','BOI')], 'readonly': [('state','not in',('draft'))]}"/>
                 </xpath>
                 <xpath expr="//form/sheet/group/group" position="inside">
-                    <field name="boi_picking_ids" widget="many2many_tags" options="{'create':false,'create_edit':false}" domain="[('type','=','out'),('is_supply_list','=',False),('is_bom_move','=',False),('boi_type','=','BOI')]" attrs="{'invisible': [('boi_type', '!=', 'BOI')], 'required': [('boi_type', '=', 'BOI')]}"/>
+                    <field name="boi_picking_ids" widget="many2many_tags" options="{'create':false,'create_edit':false}" domain="[('type','=','out'),('is_supply_list','=',False),('is_bom_move','=',False),('boi_type','=','BOI')]" attrs="{'invisible': [('boi_type', '!=', 'BOI')], 'required': [('boi_type', '=', 'BOI'), ('state', '!=', 'draft')]}"/>
                 </xpath>
             </field>
         </record>
