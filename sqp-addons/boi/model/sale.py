@@ -41,7 +41,7 @@ class sale_order(osv.osv):
     _columns = {
         'boi_cert_id': fields.many2one('boi.certificate', 'BOI Number', ondelete="restrict", domain="[('start_date','!=',False),('active','!=',False)]"),
         'is_boi': fields.boolean('BOI', default=False),
-        'ref_order_id': fields.many2one('sale.order', 'Ref BOI Quotation', ondelete="restrict", domain="[('product_tag_id.name','=','BOI'), ('state','=','draft')]"),
+        'ref_order_id': fields.many2one('sale.order', 'Ref BOI Quotation', ondelete="restrict", domain="[('product_tag_id.name','=','BOI'), ('state','not in',('cancel'))]"),
     }
 
     _constraints = [
