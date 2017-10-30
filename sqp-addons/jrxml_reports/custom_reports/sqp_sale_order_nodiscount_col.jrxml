@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Sales Order" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.8181818181818217"/>
-	<property name="ireport.x" value="306"/>
+	<property name="ireport.x" value="149"/>
 	<property name="ireport.y" value="0"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;order_line&quot;]"/>
 	<style name="table" lineSpacing="Single">
@@ -646,7 +646,7 @@
 					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[SA-F-02 Rev.1
-Effective : 19/02/14]]></text>
+Effective : 30/10/17]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="417" y="0" width="138" height="34">
@@ -656,7 +656,7 @@ Effective : 19/02/14]]></text>
 					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[SA-F-04 Rev.2
-Effective : 19/02/14]]></text>
+Effective : 30/10/17]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="374" y="39" width="181" height="20" forecolor="#666666"/>
@@ -773,9 +773,9 @@ Effective : 19/02/14]]></text>
 				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="7" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[21/485 หมู่ 12 ถนนบางนา-ตราด แขวงบางนา เขตบางนา กรุงเทพฯ 10260 โทรศัพท์ : 0-2744-6300 โทรสาร : 0-2744-6303 www.squarepanel.com
+				<text><![CDATA[64 ซอยบางนา-ตราด 12 แขวงบางนา เขตบางนา กรุงเทพฯ 10260 โทรศัพท์ : 02-744-6300-2 โทรสาร : 02-744-6303 www.squarepanel.com
 
-21/485 Moo 12, Bangna-Trad Rd., Sub-District Bangna,  Bangna,  Bangkok 10260  Tel : 0-2744-6300  Fax : 0-2744-6303 www.squarepanel.com]]></text>
+64 Soi Bangna-Trad 12, Bangna, Bangna, Bangkok 10260 Tel : 02-744-6300-2  Fax : 02-744-6303 www.squarepanel.com]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="footer" x="-2" y="3" width="554" height="38"/>
@@ -800,9 +800,9 @@ Effective : 19/02/14]]></text>
 				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="7" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[21/485 หมู่ 12 ถนนบางนา-ตราด แขวงบางนา เขตบางนา กรุงเทพฯ 10260 โทรศัพท์ : 0-2744-6300 โทรสาร : 0-2744-6303 www.squarepanel.com
+				<text><![CDATA[64 ซอยบางนา-ตราด 12 แขวงบางนา เขตบางนา กรุงเทพฯ 10260 โทรศัพท์ : 02-744-6300-2 โทรสาร : 02-744-6303 www.squarepanel.com
 
-21/485 Moo 12, Bangna-Trad Rd., Sub-District Bangna,  Bangna,  Bangkok 10260  Tel : 0-2744-6300  Fax : 0-2744-6303 www.squarepanel.com]]></text>
+64 Soi Bangna-Trad 12, Bangna, Bangna, Bangkok 10260 Tel : 02-744-6300-2  Fax : 02-744-6303 www.squarepanel.com]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="396" y="86" width="156" height="13"/>
