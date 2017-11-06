@@ -53,8 +53,8 @@ Features
         'sale_view.xml',
         'product_view.xml',
         #'sale_sequence.xml',
-        'data/ir.values.csv',
-        
+        # 'data/ir.values.csv',  # no longer use. We fix in database
+
     ],
     'test' : [
     ],
