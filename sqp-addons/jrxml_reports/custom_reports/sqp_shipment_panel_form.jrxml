@@ -65,7 +65,7 @@
 		<fieldDescription><![CDATA[date_done]]></fieldDescription>
 	</field>
 	<field name="project_name" class="java.lang.String">
-		<fieldDescription><![CDATA[sale_id/ref_project_name]]></fieldDescription>
+		<fieldDescription><![CDATA[ref_project_name]]></fieldDescription>
 	</field>
 	<field name="supply_list_no" class="java.lang.String">
 		<fieldDescription><![CDATA[name]]></fieldDescription>
@@ -153,7 +153,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{sale_order}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="124" y="122" width="198" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="124" y="122" width="351" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
