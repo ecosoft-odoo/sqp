@@ -45,7 +45,7 @@ class product_stock_balance(osv.osv):
             amount_stock_balance,
             type='float',
             digits_compute=dp.get_precision('Product Unit of Measure'),
-            string='On Hand',
+            string='Amount',
         ),
     }
 
