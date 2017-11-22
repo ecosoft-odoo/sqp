@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_product_stock_balance_tree" model="ir.ui.view">
+            <field name="name">view.product.stock.balance.tree</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Balance Report" version="7.0">
+                    <field name="default_code" string="Product Code"/>
+                    <field name="name" string="Product Name"/>
+                    <field name="uom_id" string="Unit"/>
+                    <field name="qty_stock_balance" string="On Hand"/>
+                    <field name="standard_price" string="Unit Price"/>
+                    <field name="amt_stock_bal" string="Amount"/>
+                    <field name="categ_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_stock_balance_search" model="ir.ui.view">
+            <field name="name">view.product.stock.balance.search</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <search string="Stock Balance Report" version="7.0">
+                    <field name="default_code" string="Product Code"/>
+                    <field name="categ_id" string="Product Category"/>
+                    <field name="standard_price" string="Unit Price"/>
+                    <separator/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Product Category" domain="[]" context="{'group_by':'categ_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_product_stock_balance" model="ir.actions.act_window">
+            <field name="name">Stock Balance Report</field>
+            <field name="res_model">product.product</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_product_stock_balance_tree"/>
+            <field name="search_view_id" ref="view_product_stock_balance_search"/>
+            <field name="target">current</field>
+            <field name="help">Stock Balance Report</field>
+        </record>
+    </data>
+</openerp>
