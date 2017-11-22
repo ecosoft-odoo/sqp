@@ -35,17 +35,15 @@ class product_stock_balance_wizard(osv.osv_memory):
         result = act_obj.read(cr, uid, [xml_id], context=context)[0]
 
         # Define domain and context
-        from_date, to_date, categ_ids = False, False, []
+        to_date, categ_ids = False, []
         stock_balance = self.browse(cr, uid, ids, context=context)[0]
         if stock_balance.period_id:
-            from_date = stock_balance.period_id.date_start
             to_date = stock_balance.period_id.date_stop
         categ_ids = list(set([categ.id for categ in stock_balance.categ_ids]))
         if categ_ids:
             result['domain'] = [('categ_id', 'in', categ_ids)]
         result['context'] = {
             'is_stock_balance_report': True,
-            'from_date': from_date,
             'to_date': to_date,
         }
         return result
