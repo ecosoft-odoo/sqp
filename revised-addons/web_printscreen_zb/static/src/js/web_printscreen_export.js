@@ -1,24 +1,28 @@
 openerp.web_printscreen_zb = function(instance, m) {
-    
+
     var _t = instance.web._t,
     QWeb = instance.web.qweb;
-    
+
     instance.web.ListView.include({
         load_list: function () {
             var self = this;
             this._super.apply(this, arguments);
             var links = document.getElementsByClassName("oe_list_button_import_excel");
             var links_pdf = document.getElementsByClassName("oe_list_button_import_pdf");
-            if (links && links[0]){
-                links[0].onclick = function() {
-                    self.export_to_excel("excel")
+            for (var i = 0; i < links.length; i++) {
+                if (links && links[i]) {
+                    links[i].onclick = function() {
+                        self.export_to_excel("excel");
+                    };
                 };
-            }
-            if (links_pdf && links_pdf[0]){
-                links_pdf[0].onclick = function() {
-                    self.export_to_excel("pdf")
+            };
+            for (var i = 0; i < links_pdf.length; i++) {
+                if (links_pdf && links_pdf[i]) {
+                    links_pdf[i].onclick = function() {
+                        self.export_to_excel("pdf");
+                    };
                 };
-            }
+            };
         },
         export_to_excel: function(export_type) {
             var self = this
@@ -41,7 +45,7 @@ openerp.web_printscreen_zb = function(instance, m) {
                    // }
                 });
             });
-            
+
             //Find Data Element
             data_eles = self.$el.find('.oe_list_content > tbody > tr')
             export_data = []
@@ -74,9 +78,9 @@ openerp.web_printscreen_zb = function(instance, m) {
 	                export_data.push(data)
                 }
             });
-            
+
             //Find Footer Element
-            
+
             footer_eles = self.$el.find('.oe_list_content > tfoot> tr')
             $.each(footer_eles,function(){
                 data = []
@@ -95,7 +99,7 @@ openerp.web_printscreen_zb = function(instance, m) {
                 });
                 export_data.push(data)
             });
-            
+
             //Export to excel
             $.blockUI();
             if (export_type === 'excel'){
