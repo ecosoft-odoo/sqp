@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        
+
         <record id="view_quotation_tree_ext" model="ir.ui.view">
             <field name="name">view.quotation.tree.ext</field>
             <field name="model">sale.order</field>
@@ -9,8 +9,8 @@
             <field name="arch" type="xml">
                 <data>
                     <field name="name" position="after">
-                    	<field name="product_tag_id"/>
-                    	<field name="ref_project_name"/>
+                    	 <field name="ref_project_name"/>
+                       <field name="product_tag_id"/>
                     </field>
                     <field name="name" position="before">
                     	<field name="pricelist_id"/>
@@ -26,8 +26,8 @@
             <field name="arch" type="xml">
                 <data>
                     <field name="name" position="after">
-                    	<field name="product_tag_id"/>
-                    	<field name="ref_project_name"/>
+                        <field name="ref_project_name"/>
+                      	<field name="product_tag_id"/>
                     </field>
                     <field name="name" position="before">
                     	<field name="pricelist_id"/>
@@ -44,7 +44,7 @@
                 <data>
                 	<xpath expr="/search/group" position="inside">
                         <filter string="Project" domain="[]" context="{'group_by':'ref_project_name'}"/>
-         			</xpath> 
+         			</xpath>
 				</data>
             </field>
         </record>
@@ -63,46 +63,46 @@
 					</button>
 					<button name="invoice_cancel" position="attributes" >
 						<attribute name="confirm">Are you sure you want to cancel?</attribute>
-					</button>										
+					</button>
                     <field name="name" position="after">
                         <div class="oe_right">
 	                        <field name="is_international" attrs="{'readonly':[('name','!=','/')]}"/>
 	                        <label string="International"/>
                     	</div>
-                    </field>					
+                    </field>
 					<field name="date_order" position="before" version="7.0">
 						<field name="doc_version" attrs="{'invisible':[('state','!=','draft')]}"/>
 						<field name="ref_quote_no" attrs="{'invisible':[('state','=','draft')]}"/>
 	                </field>
-					<field name="amount_untaxed" position="before" version="7.0">					
+					<field name="amount_untaxed" position="before" version="7.0">
 						<field name="amount_untaxed_pset" widget='monetary' options="{'currency_field': 'currency_id'}"/>
 						<field name="number_of_set" string="X Units" on_change="onchange_number_of_set(number_of_set)"/>
 					</field>
-	                <field name="client_order_ref" position="after" version="7.0">					
-						<field name="ref_project_name" /> 
-					</field>		
-	                <field name="project_id" position="after" version="7.0">					
-						<field name="ref_attention_name" /> 
+	                <field name="client_order_ref" position="after" version="7.0">
+						<field name="ref_project_name" />
+					</field>
+	                <field name="project_id" position="after" version="7.0">
+						<field name="ref_attention_name" />
 						<field name="note2" />
 					</field>
-					<field name="pricelist_id" position="after" version="7.0">					
-						<field name="tag_no" /> 
+					<field name="pricelist_id" position="after" version="7.0">
+						<field name="tag_no" />
 					</field>
 					<xpath expr="/form/sheet/notebook/page[1]" position="after">
 	       				<page string="Header Text">
 							<field name="header_msg"/>
-		                </page>         			
-					</xpath>		
+		                </page>
+					</xpath>
 					<xpath expr="/form/sheet/notebook/page/field/tree//field[@name='product_uom_qty']" position="before">
-	       				<field name="product_uom_qty_pset" invisible="1" />   			
-					</xpath>			
+	       				<field name="product_uom_qty_pset" invisible="1" />
+					</xpath>
 					<xpath expr="/form/sheet/notebook/page/field/tree//field[@name='price_subtotal']" position="before">
-	       				<field name="price_subtotal_pset" invisible="1" />   			
+	       				<field name="price_subtotal_pset" invisible="1" />
 					</xpath>
 				</data>
 			</field>
         </record>
-        
+
         <record id="view_order_form_ext2" model="ir.ui.view">
             <field name="name">view.order.form.ext2</field>
             <field name="model">sale.order</field>
@@ -118,18 +118,18 @@
 				</data>
 			</field>
         </record>
-        
+
         <record id="view_order_additional_discount_ext" model="ir.ui.view">
             <field name="name">view.order.additional.discount.ext</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="advance_and_additional_discount.view_order_ext"/>
             <field name="arch" type="xml">
-				<field name="add_disc" position="after">                    
+				<field name="add_disc" position="after">
 						<field name="add_disc_amt_ex" string="Additional Discount Amt" widget="monetary" options="{'currency_field': 'currency_id'}"/>
 				</field>
-				<field name="add_disc_amt" position="attributes">  
-					<attribute name="invisible">True</attribute>                  
-				</field>			
+				<field name="add_disc_amt" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</field>
 			</field>
         </record>
 
