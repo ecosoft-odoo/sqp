@@ -19,6 +19,11 @@ class product_stock_balance_wizard(osv.osv_memory):
             string='Product Categories',
             domain="[('type', '!=', 'view')]",
         ),
+        'location_id': fields.many2one(
+            'stock.location',
+            'Location',
+            domain=[('usage', '=', 'internal')],
+        ),
     }
 
     _defaults = {
@@ -35,15 +40,18 @@ class product_stock_balance_wizard(osv.osv_memory):
         result = act_obj.read(cr, uid, [xml_id], context=context)[0]
 
         # Define domain and context
-        to_date, categ_ids = False, []
+        to_date, location_id, categ_ids = False, False, []
         stock_balance = self.browse(cr, uid, ids, context=context)[0]
         if stock_balance.period_id:
             to_date = stock_balance.period_id.date_stop
+        if stock_balance.location_id:
+            location_id = stock_balance.location_id.id
         categ_ids = list(set([categ.id for categ in stock_balance.categ_ids]))
         if categ_ids:
             result['domain'] = [('categ_id', 'in', categ_ids)]
         result['context'] = {
             'is_stock_balance_report': True,
             'to_date': to_date,
+            'location': location_id,
         }
         return result

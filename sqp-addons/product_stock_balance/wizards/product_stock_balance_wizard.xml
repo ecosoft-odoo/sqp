@@ -8,6 +8,7 @@
                 <form string="Stock Balance Report" version="7.0">
                     <group>
                         <field name="period_id" options="{'create':false,'create_edit':false}"/>
+                        <field name="location_id" options="{'create':false,'create_edit':false}"/>
                         <field name="categ_ids" options="{'create':false,'create_edit':false}"/>
                     </group>
                     <footer>
