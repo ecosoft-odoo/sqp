@@ -342,7 +342,7 @@
 $F{Unit_Price-price_unit} * (1-$V{discount}/100)]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00;(-#,##0.00)" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="306" y="0" width="37" height="20"/>
+				<reportElement stretchType="RelativeToTallestObject" x="275" y="0" width="68" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="SansSerif" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
