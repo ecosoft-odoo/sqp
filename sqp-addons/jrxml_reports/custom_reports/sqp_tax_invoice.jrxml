@@ -3,7 +3,7 @@
 	<property name="ireport.layers" value="##Fri Aug 06 11:09:44 ICT 2010\nlayer.1.name=Invoice BG\nlayer.1.visible=true\nlayer.1.id=1\nlayer.0.name=Background\nlayer.0.visible=true\nlayer.0.id=0"/>
 	<property name="ireport.zoom" value="1.0000000000000075"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.y" value="576"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;invoice_line&quot;]"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String">
 		<defaultValueExpression><![CDATA["/home/kittiu/workspace/openerp_sqp/sqp_addons/jrxml_reports/sale/"]]></defaultValueExpression>
@@ -155,7 +155,7 @@
 	<field name="Advance_Amt" class="java.lang.String">
 		<fieldDescription><![CDATA[amount_advance]]></fieldDescription>
 	</field>
-	<field name="Additional_Discount_Amt" class="java.lang.String">
+	<field name="Additional_Discount_Amt" class="java.lang.Number">
 		<fieldDescription><![CDATA[add_disc_amt]]></fieldDescription>
 	</field>
 	<field name="amount_retention" class="java.lang.Number">
@@ -191,7 +191,7 @@
 	<field name="ref_po_number" class="java.lang.String">
 		<fieldDescription><![CDATA[sale_order_ids/client_order_ref]]></fieldDescription>
 	</field>
-	<field name="Deposit_Amt" class="java.lang.String">
+	<field name="Deposit_Amt" class="java.lang.Number">
 		<fieldDescription><![CDATA[amount_deposit]]></fieldDescription>
 	</field>
 	<field name="amount_total_text_th" class="java.lang.String">
@@ -207,10 +207,10 @@
 		<variableExpression><![CDATA[$F{Advance_Amt}.toString() == "" ? 0.0 : $F{Advance_Amt} == null ? 0.0 : Float.parseFloat($F{Advance_Amt})]]></variableExpression>
 	</variable>
 	<variable name="add_disc_amt" class="java.lang.Number">
-		<variableExpression><![CDATA[$F{Additional_Discount_Amt}.toString() == "" ? 0.0 : $F{Additional_Discount_Amt} == null ? 0.0 : Float.parseFloat($F{Additional_Discount_Amt})]]></variableExpression>
+		<variableExpression><![CDATA[$F{Additional_Discount_Amt} == null ? 0.0 : $F{Additional_Discount_Amt}]]></variableExpression>
 	</variable>
 	<variable name="amount_deposit" class="java.lang.Number">
-		<variableExpression><![CDATA[$F{Deposit_Amt}.toString() == "" ? 0.0 : $F{Deposit_Amt} == null ? 0.0 : Float.parseFloat($F{Deposit_Amt})]]></variableExpression>
+		<variableExpression><![CDATA[$F{Deposit_Amt} == null ? 0.0 : $F{Deposit_Amt}]]></variableExpression>
 	</variable>
 	<group name="UniqueID" isStartNewPage="true" footerPosition="ForceAtBottom">
 		<groupExpression><![CDATA[$F{id}]]></groupExpression>
