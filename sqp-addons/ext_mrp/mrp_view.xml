@@ -70,7 +70,8 @@
 				</button-->
 				<xpath expr="/form/sheet/group//field[@name='origin']" position="after">
 	            	<field name="target_picking_id"/>
-	            </xpath>
+                    <field name="flag_claim"/>
+                </xpath>
 				<xpath expr="/form/sheet/group/group/field[@name='product_id']" position="after">
 	            	<field name="partner_id"/>
 	            </xpath>
