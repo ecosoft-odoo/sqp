@@ -88,6 +88,9 @@
                 <button name="action_cancel" position="attributes">
                     <attribute name="groups">ext_mrp.group_mrp_cancel_production</attribute>
                 </button>
+                <button name="button_cancel" position="attributes">
+                    <attribute name="groups">ext_mrp.group_mrp_cancel_production</attribute>
+                </button>
 	    	</field>
 	    </record>
 
