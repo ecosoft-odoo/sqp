@@ -23,16 +23,17 @@ from openerp.osv import fields, osv
 import inspect
 
 class sale_order_line(osv.osv):
-    
+
     _inherit = 'sale.order.line'
-    
+
     # A complete overwrite method of sale_order_line
     def _fnct_line_invoiced(self, cr, uid, ids, field_name, args, context=None):
         res = dict.fromkeys(ids, False)
         uom_obj = self.pool.get('product.uom')
         for this in self.browse(cr, uid, ids, context=context):
             # kittiu, if product line, we need to calculate carefully
-            if this.product_id and not this.product_uos: # TODO: uos case is not covered yet.
+            # if this.product_id and not this.product_uos: # TODO: uos case is not covered yet.
+            if this.product_id:  # TODO ignore product_uos
                 args, v, k, d = inspect.getargspec(uom_obj._compute_qty)
                 if 'round' in args:
                     oline_qty = uom_obj._compute_qty(cr, uid, this.product_uom.id, this.product_uom_qty, this.product_id.uom_id.id, round=False)
@@ -47,36 +48,36 @@ class sale_order_line(osv.osv):
                             else:
                                 iline_qty += uom_obj._compute_qty(cr, uid, iline.uos_id.id, iline.quantity, iline.product_id.uom_id.id)
                         else: # UOS case.
-                            iline_qty += iline.quantity / (iline.product_id.uos_id and iline.product_id.uos_coeff or 1)                        
+                            iline_qty += iline.quantity / (iline.product_id.uos_id and iline.product_id.uos_coeff or 1)
                 # Test quantity
-                res[this.id] = iline_qty >= oline_qty
+                res[this.id] = round(iline_qty, 2) >= round(oline_qty, 2)
             else:
                 res[this.id] = this.invoice_lines and \
-                all(iline.invoice_id.state != 'cancel' for iline in this.invoice_lines) 
+                all(iline.invoice_id.state != 'cancel' for iline in this.invoice_lines)
         return res
-    
+
     # A complete overwrite method. We need it here because it is called from a function field.
     def _order_lines_from_invoice(self, cr, uid, ids, context=None):
         # direct access to the m2m table is the less convoluted way to achieve this (and is ok ACL-wise)
         cr.execute("""SELECT DISTINCT sol.id FROM sale_order_invoice_rel rel JOIN
                                                   sale_order_line sol ON (sol.order_id = rel.order_id)
                                     WHERE rel.invoice_id = ANY(%s)""", (list(ids),))
-        return [i[0] for i in cr.fetchall()]        
-    
+        return [i[0] for i in cr.fetchall()]
+
     def _prepare_order_line_invoice_line(self, cr, uid, line, account_id=False, context=None):
         res = super(sale_order_line, self)._prepare_order_line_invoice_line(cr, uid, line, account_id=account_id, context=context)
         line_percent = context.get('line_percent', False)
         if line_percent:
             res.update({'quantity': (res.get('quantity') or 0.0) * (line_percent / 100)})
         return res
-    
+
     _columns = {
         'invoiced': fields.function(_fnct_line_invoiced, string='Invoiced', type='boolean',
             store={
                 'account.invoice': (_order_lines_from_invoice, ['state'], 10),
                 'sale.order.line': (lambda self,cr,uid,ids,ctx=None: ids, ['invoice_lines'], 10)}),
     }
-    
+
 sale_order_line()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
