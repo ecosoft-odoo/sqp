@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.3636363636363635"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="144"/>
-	<property name="OPENERP_RELATIONS" value="[&quot;product_line&quot;]"/>
+	<property name="OPENERP_RELATIONS" value="[&quot;child_ids&quot;]"/>
 	<import value="org.apache.commons.codec.binary.Base64"/>
 	<style name="table" lineSpacing="Single">
 		<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
@@ -104,8 +104,6 @@
 	<field name="product_id" class="java.lang.Number">
 		<fieldDescription><![CDATA[child_ids/product_id/id]]></fieldDescription>
 	</field>
-	<sortField name="sequence"/>
-	<sortField name="product_id"/>
 	<variable name="Item No" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{Mo Line}]]></variableExpression>
 	</variable>
