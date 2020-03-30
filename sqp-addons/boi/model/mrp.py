@@ -102,7 +102,7 @@ class bom_choice_insulation(osv.osv):
             order_obj = self.pool.get('sale.order')
             order = order_obj.browse(cr, user, context.get('order_id'), context=context)
             if order.product_tag_id and order.product_tag_id.name == 'BOI':
-                args = [('name', 'in', ['PIR', 'PU', 'PU(DEN80)'])] + args
+                args = [('name', 'in', ['PIR', 'PU', 'PU(DEN80)', 'Rockwool'])] + args
             else:
                 if context.get('object', 'not door') == 'door':
                     args = [('name', '!=', 'PIR')] + args
