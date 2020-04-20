@@ -47,11 +47,12 @@ class mrp_production_product_line(osv.osv):
         for product_line in self.browse(cr, uid, ids, context=context):
             res[product_line.id] = {
                 'W': False, 'L': False, 'T': False,
-                'line1_inject1': False, 'line1_inject2': False, 'line2_inject1': False, 'line2_inject2': False, 
-                'line3_inject1': False, 'line3_inject2': False, 'line4_inject1': False, 'line4_inject2': False, 
-                'line5_inject1': False, 'line5_inject2': False, 
-                'line1_settime': False, 'line2_settime': False, 'line3_settime': False, 
-                'line4_settime': False, 'line5_settime': False, 
+                'line1_inject1': False, 'line1_inject2': False, 'line2_inject1': False, 'line2_inject2': False,
+                'line3_inject1': False, 'line3_inject2': False, 'line4_inject1': False, 'line4_inject2': False,
+                'line5_inject1': False, 'line5_inject2': False, 'line6_inject1': False, 'line7_pir_inject1': False,
+                'line7_pu_inject2': False,
+                'line1_settime': False, 'line2_settime': False, 'line3_settime': False,
+                'line4_settime': False, 'line5_settime': False,
                 'cut_area': False, 'remark': False,
             }
             product = product_line.product_id
@@ -68,124 +69,171 @@ class mrp_production_product_line(osv.osv):
             if master_ids:
                 W = product.W or 0.0
                 L = product.L or 0.0
-                T = product.T.value or 0.0                
+                T = product.T.value or 0.0
                 sets = setup_detail_obj.browse(cr, uid, master_ids)
-                # For each machine (line1, line2, ..., line5), calculate values
-                if product_line.is_special:  # kittiu: Additional Calculation
-                    for set in sets:
-                        factor = set.flowrate or (set.correction_factor and 1/set.correction_factor) or 0.0
+                # For each machine (line1, line2, ..., line_7_pu), calculate values
+                # if product_line.is_special:  # kittiu: Additional Calculation
+                #     for set in sets:
+                #         factor = set.flowrate or (set.correction_factor and 1/set.correction_factor) or 0.0
+                #         res[product_line.id].update({
+                #             set.machine_id.name + '_inject1': factor and (W*L*T/1000000000-(product.cut_area*T/1000))*set.density*((set.overpack_1/100)+1)/factor - (50*L*T/1000000000)*set.density*((set.overpack_1/100)+1)/factor or 0.0,
+                #             set.machine_id.name + '_inject2': factor and (W*L*T/1000000000-(product.cut_area*T/1000))*set.density*((set.overpack_2/100)+1)/factor - (50*L*T/1000000000)*set.density*((set.overpack_1/100)+1)/factor or 0.0,
+                #             set.machine_id.name + '_settime': set.settime,
+                #         })
+                # else:  # --
+                for set in sets:
+                    # factor = set.flowrate or (set.correction_factor and 1/set.correction_factor) or 0.0
+                    if set.machine_id.name == 'line4':
                         res[product_line.id].update({
-                            set.machine_id.name + '_inject1': factor and (W*L*T/1000000000-(product.cut_area*T/1000))*set.density*((set.overpack_1/100)+1)/factor - (50*L*T/1000000000)*set.density*((set.overpack_1/100)+1)/factor or 0.0,
-                            set.machine_id.name + '_inject2': factor and (W*L*T/1000000000-(product.cut_area*T/1000))*set.density*((set.overpack_2/100)+1)/factor - (50*L*T/1000000000)*set.density*((set.overpack_1/100)+1)/factor or 0.0,
+                            set.machine_id.name + '_inject1': (W*L/1000000-product.cut_area)*(T/1000)*set.density*((set.overpack_1/100)+1)/set.flowrate or 0.0,
+                            set.machine_id.name + '_inject2': (W*L/1000000-product.cut_area)*(T/1000)*set.density*((set.overpack_1/100)+1)/set.flowrate or 0.0,
                             set.machine_id.name + '_settime': set.settime,
                         })
-                else:  # --
-                    for set in sets:
-                        factor = set.flowrate or (set.correction_factor and 1/set.correction_factor) or 0.0
+                    elif set.machine_id.name == 'line7_pu':
                         res[product_line.id].update({
-                            set.machine_id.name + '_inject1': factor and (W*L*T/1000000000-(product.cut_area*T/1000))*set.density*((set.overpack_1/100)+1)/factor or 0.0,
-                            set.machine_id.name + '_inject2': factor and (W*L*T/1000000000-(product.cut_area*T/1000))*set.density*((set.overpack_2/100)+1)/factor or 0.0,
+                            set.machine_id.name + '_inject2': (W*L/1000000-product.cut_area)*(T/1000)*set.density or 0.0,
+                            set.machine_id.name + '_settime': set.settime,
+                        })
+                    elif set.machine_id.name in ['line6', 'line7_pir']:
+                        res[product_line.id].update({
+                            set.machine_id.name + '_inject1': (W*L/1000000-product.cut_area)*(T/1000)*set.density or 0.0,
+                            set.machine_id.name + '_settime': set.settime,
+                        })
+                    else:
+                        res[product_line.id].update({
+                            set.machine_id.name + '_inject1': (W*L/1000000-product.cut_area)*(T/1000)*set.density/set.flowrate or 0.0,
+                            set.machine_id.name + '_inject2': (W*L/1000000-product.cut_area)*(T/1000)*set.density/set.flowrate or 0.0,
                             set.machine_id.name + '_settime': set.settime,
                         })
         return res
 
     _columns = {
-        'W':fields.function(_get_machine_setup_params, string="Width (W)", type="float", multi="all",                 
+        'W':fields.function(_get_machine_setup_params, string="Width (W)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'L':fields.function(_get_machine_setup_params, string="Length (L)", type="float", multi="all",       
+        'L':fields.function(_get_machine_setup_params, string="Length (L)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'T':fields.function(_get_machine_setup_params, string="Thick (T)", type="float", multi="all",                  
+        'T':fields.function(_get_machine_setup_params, string="Thick (T)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line1_inject1':fields.function(_get_machine_setup_params, string="L1 (am)", type="float", multi="all",                   
+        'line1_inject1':fields.function(_get_machine_setup_params, string="L1 (am)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line1_inject2':fields.function(_get_machine_setup_params, string="L1 (pm)", type="float", multi="all",                   
+        'line1_inject2':fields.function(_get_machine_setup_params, string="L1 (pm)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line2_inject1':fields.function(_get_machine_setup_params, string="L2 (am)", type="float", multi="all",                   
+        'line2_inject1':fields.function(_get_machine_setup_params, string="L2 (am)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line2_inject2':fields.function(_get_machine_setup_params, string="L2 (pm)", type="float", multi="all",                   
+        'line2_inject2':fields.function(_get_machine_setup_params, string="L2 (pm)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line3_inject1':fields.function(_get_machine_setup_params, string="L3 (am)", type="float", multi="all",                   
+        'line3_inject1':fields.function(_get_machine_setup_params, string="L3 (am)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line3_inject2':fields.function(_get_machine_setup_params, string="L3 (pm)", type="float", multi="all",                   
+        'line3_inject2':fields.function(_get_machine_setup_params, string="L3 (pm)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line4_inject1':fields.function(_get_machine_setup_params, string="L4 (am)", type="float", multi="all",                   
+        'line4_inject1':fields.function(_get_machine_setup_params, string="L4 (am)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line4_inject2':fields.function(_get_machine_setup_params, string="L4 (pm)", type="float", multi="all",                   
+        'line4_inject2':fields.function(_get_machine_setup_params, string="L4 (pm)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line5_inject1':fields.function(_get_machine_setup_params, string="L5 (kg) (am)", type="float", multi="all",                   
+        'line5_inject1':fields.function(_get_machine_setup_params, string="L5 (kg) (PIR)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line5_inject2':fields.function(_get_machine_setup_params, string="L5 (kg) (pm)", type="float", multi="all",                   
+        'line5_inject2':fields.function(_get_machine_setup_params, string="L5 (kg) (pm)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line1_settime':fields.function(_get_machine_setup_params, string="Set Time (L1)", type="float", multi="all",                  
+        'line6_inject1':fields.function(_get_machine_setup_params, string="L6 (kg) (PIR)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line2_settime':fields.function(_get_machine_setup_params, string="Set Time (L2)", type="float", multi="all",                   
+        'line7_pir_inject1':fields.function(_get_machine_setup_params, string="L7 (kg) (PIR)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line3_settime':fields.function(_get_machine_setup_params, string="Set Time (L3)", type="float", multi="all",                   
+        'line7_pu_inject2':fields.function(_get_machine_setup_params, string="L7 (kg) (PU)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line4_settime':fields.function(_get_machine_setup_params, string="Set Time (L4)", type="float", multi="all",                   
+        'line1_settime':fields.function(_get_machine_setup_params, string="Set Time (L1)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'line5_settime':fields.function(_get_machine_setup_params, string="Set Time (L5)", type="float", multi="all",                   
+        'line2_settime':fields.function(_get_machine_setup_params, string="Set Time (L2)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
-        'cut_area':fields.function(_get_machine_setup_params, string="Cut Area (sqm)", type="float", multi="all", 
+        'line3_settime':fields.function(_get_machine_setup_params, string="Set Time (L3)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
-                   }),        
-        'remark':fields.function(_get_machine_setup_params, string="Remark", type="char", multi="all", 
+                   }),
+        'line4_settime':fields.function(_get_machine_setup_params, string="Set Time (L4)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line5_settime':fields.function(_get_machine_setup_params, string="Set Time (L5)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line6_settime':fields.function(_get_machine_setup_params, string="Set Time (L6)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line7_pir_settime':fields.function(_get_machine_setup_params, string="Set Time (L7) (PIR)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line7_pu_settime':fields.function(_get_machine_setup_params, string="Set Time (L7) (PU)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'cut_area':fields.function(_get_machine_setup_params, string="Cut Area (sqm)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'remark':fields.function(_get_machine_setup_params, string="Remark", type="char", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
@@ -203,5 +251,22 @@ class mrp_production_product_line(osv.osv):
         return True
 
 mrp_production_product_line()
+
+
+class mrp_machine_setup_master(osv.osv):
+    _inherit = 'mrp.machine.setup.master'
+    _columns = {
+        'name': fields.selection([('line1','Line 1'),
+                                  ('line2','Line 2'),
+                                  ('line3','Line 3'),
+                                  ('line4','Line 4'),
+                                  ('line5','Line 5'),
+                                  ('line6','Line 6'),
+                                  ('line7_pu','Line 7 (PU)'),
+                                  ('line7_pir','Line 7 (PIR)'),
+                                     ],'Machine'),
+    }
+
+mrp_machine_setup_master()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
