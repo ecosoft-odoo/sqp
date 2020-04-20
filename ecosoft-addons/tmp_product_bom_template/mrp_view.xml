@@ -20,17 +20,63 @@
             <field name="inherit_id" ref="mrp.mrp_production_product_tree_view"/>
             <field name="arch" type="xml">
                 <data>
-	                <field name="product_id" position="after"> 
+	                <field name="product_id" position="after">
                         <button name="toggle_special_product" attrs="{'invisible': [('is_special', '=', True)]}" invisible="context.get('parent_mo', False)"
-                        	icon="gtk-no" string="Toggle Special Product" type="object" help="Toggle for special calculation of injection"/>	   
+                        	icon="gtk-no" string="Toggle Special Product" type="object" help="Toggle for special calculation of injection"/>
                         <button name="toggle_special_product" attrs="{'invisible': [('is_special', '!=', True)]}" invisible="context.get('parent_mo', False)"
-                        	icon="gtk-yes" string="Toggle Special Product" type="object" help="Toggle back to normal"/>	                  	
+                        	icon="gtk-yes" string="Toggle Special Product" type="object" help="Toggle back to normal"/>
 	                	<field name="is_special" invisible="1"/>
 	                </field>
                 </data>
             </field>
-        </record>		
-	    
+        </record>
+
+        <record id="mrp_production_product_form_view_ext_2" model="ir.ui.view">
+              <field name="name">mrp.production.product.form.view</field>
+              <field name="model">mrp.production.product.line</field>
+              <field name="inherit_id" ref="product_bom_template.mrp_production_product_form_view_ext"/>
+              <field name="arch" type="xml">
+                  <data>
+                    <field name="line5_inject2" position="after">
+                        <field name="line6_inject1"/>
+                        <field name="line7_pir_inject1"/>
+                        <field name="line7_pu_inject2"/>
+                    </field>
+                    <field name="line5_inject2" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </field>
+                    <field name="line5_settime" position="after">
+                      <field name="line6_settime"/>
+                      <field name="line7_pir_settime"/>
+                      <field name="line7_pu_settime"/>
+                    </field>
+                  </data>
+              </field>
+          </record>
+
+          <record id="mrp_production_product_tree_view_ext_2" model="ir.ui.view">
+                <field name="name">mrp.production.product.tree.view.ext</field>
+                <field name="model">mrp.production.product.line</field>
+                <field name="inherit_id" ref="product_bom_template.mrp_production_product_tree_view_ext"/>
+                <field name="arch" type="xml">
+                  <data>
+                    <field name="line5_inject2" position="after">
+                        <field name="line6_inject1"/>
+                        <field name="line7_pir_inject1"/>
+                        <field name="line7_pu_inject2"/>
+                    </field>
+                    <field name="line5_inject2" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </field>
+                    <field name="line5_settime" position="after">
+                      <field name="line6_settime"/>
+                      <field name="line7_pir_settime"/>
+                      <field name="line7_pu_settime"/>
+                    </field>
+                  </data>
+                </field>
+            </record>
+
     </data>
-    
+
 </openerp>
