@@ -32,7 +32,7 @@
         </record>
 
         <record id="mrp_production_product_form_view_ext_2" model="ir.ui.view">
-              <field name="name">mrp.production.product.form.view</field>
+              <field name="name">mrp.production.product.form.view.2</field>
               <field name="model">mrp.production.product.line</field>
               <field name="inherit_id" ref="product_bom_template.mrp_production_product_form_view_ext"/>
               <field name="arch" type="xml">
@@ -55,7 +55,7 @@
           </record>
 
           <record id="mrp_production_product_tree_view_ext_2" model="ir.ui.view">
-                <field name="name">mrp.production.product.tree.view.ext</field>
+                <field name="name">mrp.production.product.tree.view.ext.2</field>
                 <field name="model">mrp.production.product.line</field>
                 <field name="inherit_id" ref="product_bom_template.mrp_production_product_tree_view_ext"/>
                 <field name="arch" type="xml">
