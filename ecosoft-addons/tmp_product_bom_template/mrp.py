@@ -81,6 +81,13 @@ class mrp_production_product_line(osv.osv):
                 #             set.machine_id.name + '_settime': set.settime,
                 #         })
                 # else:  # --
+                #     for set in sets:
+                #         factor = set.flowrate or (set.correction_factor and 1/set.correction_factor) or 0.0
+                #         res[product_line.id].update({
+                #             set.machine_id.name + '_inject1': factor and (W*L*T/1000000000-(product.cut_area*T/1000))*set.density*((set.overpack_1/100)+1)/factor or 0.0,
+                #             set.machine_id.name + '_inject2': factor and (W*L*T/1000000000-(product.cut_area*T/1000))*set.density*((set.overpack_2/100)+1)/factor or 0.0,
+                #             set.machine_id.name + '_settime': set.settime,
+                #         })
                 for set in sets:
                     # factor = set.flowrate or (set.correction_factor and 1/set.correction_factor) or 0.0
                     if set.machine_id.name == 'line4':
