@@ -91,7 +91,7 @@ class mrp_production_product_line(osv.osv):
                 #         })
                 area = W*L/1000000-product.cut_area
                 for set in sets:
-                    if set.machine_id.name not in ['line5', 'line6', 'line7']:
+                    if set.machine_id.name in ['line1', 'line2', 'line3', 'line4']:
                         res[product_line.id].update({
                             set.machine_id.name + '_inject1': round(round(area*T/1000*set.density,2)*((set.overpack_1/100)+1)/set.flowrate,2) or 0.0,
                             set.machine_id.name + '_inject2': round(round(area*T/1000*set.density,2)*((set.overpack_1/100)+1)/set.flowrate,2) or 0.0,
@@ -99,7 +99,6 @@ class mrp_production_product_line(osv.osv):
                         })
                     else:
                         res[product_line.id].update({
-                            set.machine_id.name: round(round(area*T/1000*set.density,2)*((set.overpack_1/100)+1)/set.flowrate,2) or 0.0,
                             set.machine_id.name: round(round(area*T/1000*set.density,2)*((set.overpack_1/100)+1)/set.flowrate,2) or 0.0,
                             set.machine_id.name + '_settime': set.settime,
                         })
@@ -278,7 +277,6 @@ class mrp_production_product_line(osv.osv):
                 self.write(cr, uid, [result['id']], {'is_special': True}, context=context)
         return True
 
-
 mrp_production_product_line()
 
 
@@ -298,7 +296,6 @@ class mrp_machine_setup_master(osv.osv):
                                   ('line_pir3_pu','Line PIR3 (PU)'),
                                      ],'Machine'),
     }
-
 
 mrp_machine_setup_master()
 

@@ -100,7 +100,6 @@ class mrp_production_product_line(osv.osv):
                     else:
                         res[product_line.id].update({
                             set.machine_id.name: round(round(area*T/1000*set.density,2)*((set.overpack_1/100)+1)/set.flowrate,2) or 0.0,
-                            set.machine_id.name: round(round(area*T/1000*set.density,2)*((set.overpack_1/100)+1)/set.flowrate,2) or 0.0,
                             set.machine_id.name + '_settime': set.settime,
                         })
         return res
