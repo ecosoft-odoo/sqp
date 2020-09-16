@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="invoice_form_ext" model="ir.ui.view">
+            <field name="name">account.invoice.form.ext</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="advance_and_additional_discount.invoice_form_ext"/>
+            <field name="arch" type="xml">
+                <field name="amount_advance" position="attributes">
+                    <attribute name="nolabel">1</attribute>
+                    <attribute name="colspan"></attribute>
+                </field>
+                <field name="amount_advance" position="before">
+                    <div attrs="{'invisible':[('amount_advance', '=', 0.0)]}">
+                        <label for="amount_advance"/>
+                        <button name="%(action_update_amount_advance)d" states="draft" string="(update)" class="oe_link oe_edit_only" type="action"/>
+                    </div>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
