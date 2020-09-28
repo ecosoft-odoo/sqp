@@ -12,6 +12,17 @@
                         </group>
                         <group></group>
                     </group>
+                    <notebook>
+                        <page string="Tax Line">
+                            <field name="tax_line">
+                                <tree editable="bottom" create="0" delete="0">
+                                    <field name="tax_id" readonly="1"/>
+                                    <field name="base"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                     <footer>
                         <button name="update_amount_advance" string="Update" type="object" class="oe_highlight"/>
                         or
