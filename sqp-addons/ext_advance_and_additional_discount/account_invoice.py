@@ -17,7 +17,7 @@ class account_invoice(osv.osv):
                         case when is_advance = True then amount_net
                         else -amount_advance end) as diff
                     from account_invoice
-                    where id in %s
+                    where id in %s and state not in ('cancel')
                 """, (tuple([inv.id for inv in orders[0].invoice_ids]), ))
                 diff = map(lambda l: l[0], cr.fetchall())[0]
                 if round(diff, 2):
