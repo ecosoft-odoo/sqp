@@ -22,4 +22,5 @@ class account_invoice(osv.osv):
                 diff = map(lambda l: l[0], cr.fetchall())[0]
                 if round(diff, 2):
                     raise osv.except_osv(
-                        _("Error!"), _("Advance Amt is wrong, please check."))
+                        _("Error!"),
+                        _("Please check Advance Amt of this invoice."))
