@@ -47,7 +47,9 @@ class update_amount_advance(osv.osv_memory):
         amount_beforetax = invoice.amount_net - amount_advance - \
             invoice.amount_deposit
         # Tax
-        amount_tax = sum([line.amount for line in wizards[0].tax_line])
+        amount_tax = sum([
+            line.amount for line in wizards[0].tax_line
+            if not line.tax_id.is_wht])
         # Before Retention
         amount_beforeretention = amount_beforetax + amount_tax
         # Total
@@ -70,6 +72,8 @@ class update_amount_advance(osv.osv_memory):
                     "date": invoice.date_invoice or
                     fields.date.context_today(
                         self, cr, uid, context=context)}, round=False)
+            base_amount = cur_obj.round(
+                cr, uid, invoice.currency_id, base_amount)
             tax_amount = cur_obj.compute(
                 cr, uid, invoice.currency_id.id,
                 invoice.company_id.currency_id.id, line.amount,
@@ -77,6 +81,8 @@ class update_amount_advance(osv.osv_memory):
                     "date": invoice.date_invoice or
                     fields.date.context_today(
                         self, cr, uid, context=context)}, round=False)
+            tax_amount = cur_obj.round(
+                cr, uid, invoice.currency_id, tax_amount)
             cr.execute("""
                 update account_invoice_tax
                 set base = %s, base_amount = %s, amount = %s, tax_amount = %s
