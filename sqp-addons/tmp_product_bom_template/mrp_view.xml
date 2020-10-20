@@ -143,6 +143,42 @@
                 </field>
             </record>
 
+            <record id="machine_setup_master_form" model="ir.ui.view">
+                <field name="name">machine.setup.master.form</field>
+                <field name="model">mrp.machine.setup.master</field>
+                <field name="inherit_id" ref="product_bom_template.machine_setup_master_form"/>
+                <field name="arch" type="xml">
+                    <data>
+                        <field name="flowrate" position="attributes">
+                            <attribute name="invisible">1</attribute>
+                        </field>
+                        <field name="density" position="attributes">
+                            <attribute name="invisible">1</attribute>
+                        </field>
+                        <field name="correction_factor" position="attributes">
+                            <attribute name="invisible">1</attribute>
+                        </field>
+                        <field name="overpack_1" position="attributes">
+                            <attribute name="invisible">1</attribute>
+                        </field>
+                        <field name="overpack_2" position="attributes">
+                            <attribute name="invisible">1</attribute>
+                        </field>
+                        <field name="settime" position="attributes">
+                            <attribute name="invisible">1</attribute>
+                        </field>
+                        <field name="settime" position="after">
+                            <field name="str_flowrate"/>
+                            <field name="str_density"/>
+                            <field name="str_correction_factor"/>
+                            <field name="str_overpack_1"/>
+                            <field name="str_overpack_2"/>
+                            <field name="str_settime"/>
+                        </field>
+                    </data>
+                </field>
+            </record>
+
     </data>
 
 </openerp>

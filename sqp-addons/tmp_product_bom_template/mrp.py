@@ -89,18 +89,39 @@ class mrp_production_product_line(osv.osv):
                 #             set.machine_id.name + '_inject2': factor and (W*L*T/1000000000-(product.cut_area*T/1000))*set.density*((set.overpack_2/100)+1)/factor or 0.0,
                 #             set.machine_id.name + '_settime': set.settime,
                 #         })
+
+                # Not used 20/10/2020
+                # area = W*L/1000000-product.cut_area
+                # for set in sets:
+                #     if set.machine_id.name in ['line1', 'line2', 'line3', 'line4']:
+                #         res[product_line.id].update({
+                #             set.machine_id.name + '_inject1': round(round(area*T/1000*set.density,2)*((set.overpack_1/100)+1)/set.flowrate,2) or 0.0,
+                #             set.machine_id.name + '_inject2': round(round(area*T/1000*set.density,2)*((set.overpack_1/100)+1)/set.flowrate,2) or 0.0,
+                #             set.machine_id.name + '_settime': set.settime,
+                #         })
+                #     else:
+                #         res[product_line.id].update({
+                #             set.machine_id.name: round(round(area*T/1000*set.density,2)*((set.overpack_1/100)+1)/set.flowrate,2) or 0.0,
+                #             set.machine_id.name + '_settime': set.settime,
+                #         })
+
+                # Customization by Pod (20/10/2020)
                 area = W*L/1000000-product.cut_area
                 for set in sets:
+                    flowrate = self._get_val(cr, uid, product_line.id, set.str_flowrate, W, L, context=context)
+                    density = self._get_val(cr, uid, product_line.id, set.str_density, W, L, context=context)
+                    overpack_1 = self._get_val(cr, uid, product_line.id, set.str_overpack_1, W, L, context=context)
+                    settime = self._get_val(cr, uid, product_line.id, set.str_settime, W, L, context=context)
                     if set.machine_id.name in ['line1', 'line2', 'line3', 'line4']:
                         res[product_line.id].update({
-                            set.machine_id.name + '_inject1': round(round(area*T/1000*set.density,2)*((set.overpack_1/100)+1)/set.flowrate,2) or 0.0,
-                            set.machine_id.name + '_inject2': round(round(area*T/1000*set.density,2)*((set.overpack_1/100)+1)/set.flowrate,2) or 0.0,
-                            set.machine_id.name + '_settime': set.settime,
+                            set.machine_id.name + '_inject1': round(round(area*T/1000*density,2)*((overpack_1/100)+1)/flowrate,2) or 0.0,
+                            set.machine_id.name + '_inject2': round(round(area*T/1000*density,2)*((overpack_1/100)+1)/flowrate,2) or 0.0,
+                            set.machine_id.name + '_settime': settime,
                         })
                     else:
                         res[product_line.id].update({
-                            set.machine_id.name: round(round(area*T/1000*set.density,2)*((set.overpack_1/100)+1)/set.flowrate,2) or 0.0,
-                            set.machine_id.name + '_settime': set.settime,
+                            set.machine_id.name: round(round(area*T/1000*density,2)*((overpack_1/100)+1)/flowrate,2) or 0.0,
+                            set.machine_id.name + '_settime': settime,
                         })
         return res
 
@@ -277,6 +298,17 @@ class mrp_production_product_line(osv.osv):
                 self.write(cr, uid, [result['id']], {'is_special': True}, context=context)
         return True
 
+    def _get_val(self, cr, uid, id, val, W, L, context=None):
+        val = val.replace('W', str(W)).replace('L', str(L))
+        result = eval(val)
+        if not isinstance(result, (int, float)):
+            raise osv.except_osv(
+                _('Error!'),
+                _('Can not compute sheduled products, '
+                  'please check the machine setup master.'),
+            )
+        return float(result)
+
 mrp_production_product_line()
 
 
@@ -298,5 +330,60 @@ class mrp_machine_setup_master(osv.osv):
     }
 
 mrp_machine_setup_master()
+
+
+class mrp_machine_setup_master_line(osv.osv):
+    _inherit = 'mrp.machine.setup.master.line'
+    _columns = {
+        'str_flowrate': fields.char('Flowrate (kg/sec)', help="You can pass variable to this field \n 'W': Product's width \n 'L': Product's Length \n Ex: L > 1000 and 10 or 20"),
+        'str_density': fields.char('Density (kg/m3)', help="You can pass variable to this field \n 'W': Product's width \n 'L': Product's Length \n Ex: L > 1000 and 10 or 20"),
+        'str_correction_factor': fields.char('Correction Factor', help="You can pass variable to this field \n 'W': Product's width \n 'L': Product's Length \n Ex: L > 1000 and 10 or 20"),
+        'str_overpack_1': fields.char('% Overpack (morning)', help="You can pass variable to this field \n 'W': Product's width \n 'L': Product's Length \n Ex: L > 1000 and 10 or 20"),
+        'str_overpack_2': fields.char('% Overpack (afternoon)', help="You can pass variable to this field \n 'W': Product's width \n 'L': Product's Length \n Ex: L > 1000 and 10 or 20"),
+        'str_settime': fields.char('Set Time', help="You can pass variable to this field \n 'W': Product's width \n 'L': Product's Length \n Ex: L > 1000 and 10 or 20"),
+    }
+
+    _defaults = {
+        'str_flowrate': '0.000',
+        'str_density': '0.00',
+        'str_correction_factor': '0.00',
+        'str_overpack_1': '0.00',
+        'str_overpack_2': '0.00',
+        'str_settime': '0.00',
+    }
+
+    def _check_machine_line(self, cr, uid, ids, context=None):
+        fields = ['str_flowrate', 'str_density', 'str_correction_factor',
+                  'str_overpack_1', 'str_overpack_2', 'str_settime']
+        for record in self.browse(cr, uid, ids, context=context):
+            for field in fields:
+                result = False
+                try:
+                    # This can pass Width(W), Length(L) from the product.
+                    val = record[field].replace(
+                        'W', 'False').replace('L', 'False')
+                    result = eval(val)
+                except Exception:
+                    raise osv.except_osv(
+                        _('Error!'),
+                        _('%s of %s is not correct.') % (
+                            self._columns[field].string,
+                            record.thickness.name))
+                if result and not isinstance(result, (int, float)):
+                    raise osv.except_osv(
+                        _('Error!'),
+                        _('%s of %s must be the number.' % (
+                            self._columns[field].string,
+                            record.thickness.name))
+                    )
+        return True
+
+    _constraints = [
+        (_check_machine_line, 'Machine setup is not correct.',
+         ['str_flowrate', 'str_density', 'str_correction_factor',
+          'str_overpack_1', 'str_overpack_2', 'str_settime'])
+    ]
+
+mrp_machine_setup_master_line()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
