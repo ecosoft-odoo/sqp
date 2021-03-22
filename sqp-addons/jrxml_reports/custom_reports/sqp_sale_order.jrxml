@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Sales Order" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="0.7710865788590636"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="121"/>
 	<property name="OPENERP_RELATIONS" value="[&quot;order_line&quot;]"/>
 	<style name="table" lineSpacing="Single">
 		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
@@ -832,16 +832,16 @@ Effective : 06/06/18]]></text>
 		</band>
 	</pageFooter>
 	<lastPageFooter>
-		<band height="226">
+		<band height="289">
 			<staticText>
-				<reportElement style="footer" x="-2" y="185" width="554" height="38"/>
+				<reportElement style="footer" x="-2" y="249" width="554" height="38"/>
 				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="7" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="190" width="595" height="35"/>
+				<reportElement x="0" y="254" width="595" height="35"/>
 				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="7" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -880,7 +880,7 @@ Effective : 06/06/18]]></text>
 				<text><![CDATA[Buyer:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="396" height="187"/>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="396" height="249"/>
 				<textElement verticalAlignment="Top" lineSpacing="Single" markup="none">
 					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
