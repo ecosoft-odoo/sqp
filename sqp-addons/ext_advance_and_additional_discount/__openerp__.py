@@ -6,7 +6,6 @@
     "depends": ["advance_and_additional_discount"],
     "data": [
         "wizard/update_amount_advance_view.xml",
-        "wizard/update_amount_deposit_view.xml",
         "account_invoice_workflow.xml",
         "account_invoice_view.xml",
     ],
