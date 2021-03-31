@@ -16,6 +16,16 @@
                         <button name="%(action_update_amount_advance)d" states="draft" string="(update)" class="oe_link oe_edit_only" type="action"/>
                     </div>
                 </field>
+                <field name="amount_deposit" position="attributes">
+                    <attribute name="nolabel">1</attribute>
+                    <attribute name="colspan"></attribute>
+                </field>
+                <field name="amount_deposit" position="before">
+                    <div attrs="{'invisible':[('amount_deposit', '=', 0.0)]}">
+                        <label for="amount_deposit"/>
+                        <button name="%(action_update_amount_deposit)d" states="draft" string="(update)" class="oe_link oe_edit_only" type="action"/>
+                    </div>
+                </field>
             </field>
         </record>
     </data>
