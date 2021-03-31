@@ -8,7 +8,7 @@
                 <form string="Update Deposit Amt" version="7.0">
                     <group>
                         <group>
-                            <field name="amount_advance"/>
+                            <field name="amount_deposit"/>
                         </group>
                         <group></group>
                     </group>
