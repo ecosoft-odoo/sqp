@@ -512,7 +512,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Top" lineSpacing="Single">
 					<font fontName="Monospaced" size="11" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[(Math.round($V{quantity}*100.0)/100.0).toString().replace(".00","") + " " + $F{uom}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[(Math.round($V{quantity}*100.0)/100).toString().replace(".00","") + " " + $F{uom}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
 				<reportElement style="table_TH_2" stretchType="RelativeToTallestObject" mode="Transparent" x="465" y="0" width="90" height="20"/>
