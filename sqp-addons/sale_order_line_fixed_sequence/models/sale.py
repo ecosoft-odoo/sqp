@@ -32,7 +32,7 @@ class sale_order(osv.osv):
         for rec in orders:
             current_sequence = 1
             for line in rec.order_line:
-                line.write(cr, uid, {'sequence': current_sequence}, context=context)
+                self.pool.get('sale.order.line').write(cr, uid, [line.id], {'sequence': current_sequence}, context=context)
                 current_sequence += 1
 
     # reset line sequence number during create
