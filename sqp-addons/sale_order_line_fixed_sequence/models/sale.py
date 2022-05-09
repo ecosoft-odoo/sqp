@@ -26,6 +26,8 @@ class sale_order(osv.osv):
     _inherit = 'sale.order'
 
     def _reset_sequence(self, cr, uid, ids, context=None):
+        if not isinstance(ids, list):
+            ids = [ids]
         orders = self.browse(cr, uid, ids, context=context)
         for rec in orders:
             current_sequence = 1
