@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="pallet_config_tree_view" model="ir.ui.view">
+            <field name="name">pallet.config.tree.view</field>
+            <field name="model">pallet.config</field>
+            <field name="arch" type="xml">
+                <tree string="Pallet Config" version="7.0">
+                    <field name="bom_template_id"/>
+                    <field name="is_international"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="pallet_config_form_view" model="ir.ui.view">
+            <field name="name">pallet.config.form.view</field>
+            <field name="model">pallet.config</field>
+            <field name="arch" type="xml">
+                <form string="Pallet Config" version="7.0">
+                    <group>
+                        <group>
+                            <field name="bom_template_id"/>
+                        </group>
+                        <group>
+                            <field name="is_international"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Config Lines">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="thickness"/>
+                                    <field name="total_panel"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="pallet_config_form_action" model="ir.actions.act_window">
+            <field name="name">Pallet Config</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pallet.config</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new Pallet Config.
+                </p>
+            </field>
+        </record>
+        
+        <menuitem
+            id="menu_pallet_config_form_action"
+            action="pallet_config_form_action"
+            parent="mrp.menu_mrp_configuration"
+            sequence="22"
+            groups="mrp.group_mrp_manager"
+        />
+    </data>
+</openerp>

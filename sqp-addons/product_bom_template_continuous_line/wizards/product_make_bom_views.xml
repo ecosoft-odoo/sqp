@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_product_make_bom_ext" model="ir.ui.view">
+            <field name="name">view.product.make.bom.ext</field>
+            <field name="model">product.make.bom</field>
+            <field name="inherit_id" ref="product_bom_template.view_product_make_bom_ext"/>
+            <field name="arch" type="xml">
+                <field name="is_one_time_use" position="after">
+                    <field name="is_continuous_line"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

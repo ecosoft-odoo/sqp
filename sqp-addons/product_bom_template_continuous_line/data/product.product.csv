@@ -1,0 +1,5 @@
+id,name,categ_id/id,sale_ok,purchase_ok,is_one_time_use,uom_id,type
+product.template_slipjoint,Slip Joint,product.product_category_bom_template,FALSE,FALSE,FALSE,EA,consu
+product.template_secretjoint,Secret Joint,product.product_category_bom_template,FALSE,FALSE,FALSE,EA,consu
+product.template_roofjoint,Roof Joint,product.product_category_bom_template,FALSE,FALSE,FALSE,EA,consu
+product.template_board,Board,product.product_category_bom_template,FALSE,FALSE,FALSE,EA,consu

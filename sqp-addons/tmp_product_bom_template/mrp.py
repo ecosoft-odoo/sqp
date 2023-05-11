@@ -55,6 +55,11 @@ class mrp_production_product_line(osv.osv):
                 'line4_settime': False, 'line5_settime': False, 'line_pir1_pir_settime': False,
                 'line_pir2_pir_settime': False, 'line_pir3_pir_settime': False,
                 'cut_area': False, 'remark': False,
+                # For continuous line
+                'line_slipjoint_pir': False, 'line_slipjoint_pu': False, 'line_secretjoint_pir': False, 'line_secretjoint_pu': False,
+                'line_roofjoint_pir': False, 'line_roofjoint_pu': False, 'line_board_pir': False, 'line_board_pu': False,
+                'line_slipjoint_pir_settime': False, 'line_slipjoint_pu_settime': False, 'line_secretjoint_pir_settime': False, 'line_secretjoint_pu_settime': False,
+                'line_roofjoint_pir_settime': False, 'line_roofjoint_pu_settime': False, 'line_board_pir_settime': False, 'line_board_pu_settime': False,
             }
             product = product_line.product_id
             # For all Machine Lines, these values are common.
@@ -106,23 +111,38 @@ class mrp_production_product_line(osv.osv):
                 #         })
 
                 # Customization by Pod (20/10/2020)
-                area = W*L/1000000-product.cut_area
                 for set in sets:
                     flowrate = self._get_val(cr, uid, product_line.id, set.str_flowrate, W, L, context=context)
                     density = self._get_val(cr, uid, product_line.id, set.str_density, W, L, context=context)
                     overpack_1 = self._get_val(cr, uid, product_line.id, set.str_overpack_1, W, L, context=context)
                     settime = self._get_val(cr, uid, product_line.id, set.str_settime, W, L, context=context)
-                    if set.machine_id.name in ['line1', 'line2', 'line3', 'line4']:
-                        res[product_line.id].update({
-                            set.machine_id.name + '_inject1': round(round(area*T/1000*density,2)*((overpack_1/100)+1)/flowrate,2) or 0.0,
-                            set.machine_id.name + '_inject2': round(round(area*T/1000*density,2)*((overpack_1/100)+1)/flowrate,2) or 0.0,
-                            set.machine_id.name + '_settime': settime,
-                        })
+                    if not product_line.production_id.is_continuous_line:
+                        area = W*L/1000000-product.cut_area
+                        if set.machine_id.name in ['line1', 'line2', 'line3', 'line4', 'line5']:
+                            res[product_line.id].update({
+                                set.machine_id.name + '_inject1': round(round(area*T/1000*density,2)*((overpack_1/100)+1)/flowrate,2) or 0.0,
+                                set.machine_id.name + '_inject2': round(round(area*T/1000*density,2)*((overpack_1/100)+1)/flowrate,2) or 0.0,
+                                set.machine_id.name + '_settime': settime,
+                            })
+                        elif set.machine_id.name in ['line_pir1_pir', 'line_pir1_pu', 'line_pir2_pir', 'line_pir2_pu', 'line_pir3_pir', 'line_pir3_pu']:
+                            res[product_line.id].update({
+                                set.machine_id.name: round(round(area*T/1000*density,2)*((overpack_1/100)+1)/flowrate,2) or 0.0,
+                                set.machine_id.name + '_settime': settime,
+                            })
                     else:
-                        res[product_line.id].update({
-                            set.machine_id.name: round(round(area*T/1000*density,2)*((overpack_1/100)+1)/flowrate,2) or 0.0,
-                            set.machine_id.name + '_settime': settime,
-                        })
+                        # area = W*L/1000000
+                        # if any([m in set.machine_id.name for m in ['line_slipjoint', 'line_secretjoint', 'line_roofjoint', 'line_board']]):
+                        #     if product.bom_template_id == set.machine_id.bom_template_id and product.mat_insulation_choices.code.lower() in set.machine_id.name:
+                        #         res[product_line.id].update({
+                        #             set.machine_id.name: round((area*T)/1000*density,2),
+                        #             set.machine_id.name + "_settime": settime,
+                        #         })
+                        if any([m in set.machine_id.name for m in ['line_slipjoint', 'line_secretjoint', 'line_roofjoint', 'line_board']]):
+                            if product.bom_template_id == set.machine_id.bom_template_id and product.mat_insulation_choices.code.lower() in set.machine_id.name:
+                                res[product_line.id].update({
+                                    set.machine_id.name: round(W * T * density * settime / 1000000, 2),
+                                    set.machine_id.name + "_settime": settime,
+                                })
         return res
 
     _columns = {
@@ -221,6 +241,46 @@ class mrp_production_product_line(osv.osv):
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
+        'line_slipjoint_pir':fields.function(_get_machine_setup_params, string="Slip Joint (PIR)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_slipjoint_pu':fields.function(_get_machine_setup_params, string="Slip Joint (PU)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_secretjoint_pir':fields.function(_get_machine_setup_params, string="Secret Joint (PIR)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_secretjoint_pu':fields.function(_get_machine_setup_params, string="Secret Joint (PU)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_roofjoint_pir':fields.function(_get_machine_setup_params, string="Roof Joint (PIR)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_roofjoint_pu':fields.function(_get_machine_setup_params, string="Roof Joint (PU)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_board_pir':fields.function(_get_machine_setup_params, string="Board (PIR)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_board_pu':fields.function(_get_machine_setup_params, string="Board (PU)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
         'line1_settime':fields.function(_get_machine_setup_params, string="Set Time (L1)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
@@ -276,6 +336,46 @@ class mrp_production_product_line(osv.osv):
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
                    'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
                    }),
+        'line_slipjoint_pir_settime':fields.function(_get_machine_setup_params, string="Set Time (Slip Joint PIR)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_slipjoint_pu_settime':fields.function(_get_machine_setup_params, string="Set Time (Slip Joint PU)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_secretjoint_pir_settime':fields.function(_get_machine_setup_params, string="Set Time (Secret Joint PIR)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_secretjoint_pu_settime':fields.function(_get_machine_setup_params, string="Set Time (Secret Joint PU)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_roofjoint_pir_settime':fields.function(_get_machine_setup_params, string="Set Time (Roof Joint PIR)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_roofjoint_pu_settime':fields.function(_get_machine_setup_params, string="Set Time (Roof Joint PU)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_board_pir_settime':fields.function(_get_machine_setup_params, string="Set Time (Board PIR)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
+        'line_board_pu_settime':fields.function(_get_machine_setup_params, string="Set Time (Board PU)", type="float", multi="all",
+                store={
+                   'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
+                   'product.product': (_get_product_line, ['W','L','T','bom_product_type','cut_area','remark'], 10)
+                   }),
         'cut_area':fields.function(_get_machine_setup_params, string="Cut Area (sqm)", type="float", multi="all",
                 store={
                    'mrp.production.product.line': (lambda self, cr, uid, ids, c={}: ids, None, 10),
@@ -326,6 +426,14 @@ class mrp_machine_setup_master(osv.osv):
                                   ('line_pir2_pu','Line PIR2 (PU)'),
                                   ('line_pir3_pir','Line PIR3 (PIR)'),
                                   ('line_pir3_pu','Line PIR3 (PU)'),
+                                  ('line_slipjoint_pir','Line Slip Joint (PIR)'),
+                                  ('line_slipjoint_pu','Line Slip Joint (PU)'),
+                                  ('line_secretjoint_pir','Line Secret Joint (PIR)'),
+                                  ('line_secretjoint_pu','Line Secret Joint (PU)'),
+                                  ('line_roofjoint_pir','Line Roof Joint (PIR)'),
+                                  ('line_roofjoint_pu','Line Roof Joint (PU)'),
+                                  ('line_board_pir','Line Board (PIR)'),
+                                  ('line_board_pu','Line Board (PU)'),
                                      ],'Machine'),
     }
 

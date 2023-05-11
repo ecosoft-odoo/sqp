@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!-- Form View -->
+        <record id="view_product_rapid_create_form" model="ir.ui.view">
+            <field name="name">view.product.rapid.create.form</field>
+            <field name="model">product.rapid.create</field>
+            <field name="inherit_id" ref="product_bom_template.view_product_rapid_create_form"/>
+            <field name="arch" type="xml">
+                <!-- Hide field not used -->
+                <xpath expr="//field[@name='door_lines']/.." position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='num_door_lines']/.." position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='window_lines']/.." position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='num_window_lines']/.." position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='panel_lines']/tree/field[@name='mat_model_choices']" position="attributes">
+                    <attribute name="invisible">context.get('default_is_continuous_line', False)</attribute>
+                </xpath>
+                <xpath expr="//field[@name='panel_lines']/tree/field[@name='mat_joint_choices']" position="attributes">
+                    <attribute name="invisible">context.get('default_is_continuous_line', False)</attribute>
+                </xpath>
+                <xpath expr="//field[@name='panel_lines']/tree/field[@name='mat_camlock_choices']" position="attributes">
+                    <attribute name="invisible">context.get('default_is_continuous_line', False)</attribute>
+                </xpath>
+                <xpath expr="//field[@name='panel_lines']/tree/field[@name='cut_area']" position="attributes">
+                    <attribute name="invisible">context.get('default_is_continuous_line', False)</attribute>
+                </xpath>
+                <xpath expr="//field[@name='panel_lines']/tree/field[@name='W']" position="attributes">
+                    <attribute name="invisible">context.get('default_is_continuous_line', False)</attribute>
+                </xpath>
+                <!-- Filter bom template -->
+                <xpath expr="//field[@name='panel_lines']/tree/field[@name='bom_template_id']" position="attributes">
+                    <attribute name="domain">[('bom_product_type','=','panel'), ('is_bom_template','=',True), ('is_continuous_line', '=', parent.is_continuous_line)]</attribute>
+                </xpath>
+                <xpath expr="//field[@name='door_lines']/tree/field[@name='bom_template_id']" position="attributes">
+                    <attribute name="domain">[('bom_product_type','=','door'), ('is_bom_template','=',True), ('is_continuous_line', '=', parent.is_continuous_line)]</attribute>
+                </xpath>
+                <xpath expr="//field[@name='window_lines']/tree/field[@name='bom_template_id']" position="attributes">
+                    <attribute name="domain">[('bom_product_type','=','window'), ('is_bom_template','=',True), ('is_continuous_line', '=', parent.is_continuous_line)]</attribute>
+                </xpath>
+                <!-- Add some fields -->
+                <xpath expr="//field[@name='is_one_time_use']" position="after">
+                    <field name="is_continuous_line" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='panel_lines']/tree/field[@name='W']" position="before">
+                    <field name="is_continuous_line" invisible="1"/>
+                    <field name="mat_width_choices" attrs="{'required': [('is_continuous_line', '=', True), ('is_W_required','=',True)]}" on_change="onchange_mat_width_choices(mat_width_choices, context)" invisible="not context.get('default_is_continuous_line', False)" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+                </xpath>
+                <xpath expr="//field[@name='panel_lines']/tree/field[@name='mat_inside_skin_choices']" position="after">
+                    <field name="mat_in_surface_choices" attrs="{'required': [('is_continuous_line', '=', True), ('is_mat_in_surface_choices_required','=',True)]}" invisible="not context.get('default_is_continuous_line', False)" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+                    <field name="is_mat_in_surface_choices_required" invisible="1"/> 
+                </xpath>
+                <xpath expr="//field[@name='panel_lines']/tree/field[@name='mat_outside_skin_choices']" position="after">
+                    <field name="mat_out_surface_choices" attrs="{'required': [('is_continuous_line', '=', True), ('is_mat_out_surface_choices_required','=',True)]}" invisible="not context.get('default_is_continuous_line', False)" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+                    <field name="is_mat_out_surface_choices_required" invisible="1"/> 
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_product_rapid_create_form_ext" model="ir.ui.view">
+            <field name="name">view.product.rapid.create.form.ext</field>
+            <field name="model">product.rapid.create</field>
+            <field name="inherit_id" ref="boi.view_product_rapid_create_form"/>
+            <field name="arch" type="xml">
+                <!-- Default is_continuous_line field on panel lines -->
+                <xpath expr="//field[@name='panel_lines']" position="attributes">
+                    <attribute name="context">{'bom_product_type': 'panel','order_id':order_id, 'default_is_continuous_line': is_continuous_line}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Window Action -->
+        <record id="product_bom_template.action_view_product_rapid_create" model="ir.actions.act_window">
+            <field name="context">{"default_is_continuous_line": False}</field>
+            <field name="domain">[('is_continuous_line', '=', False)]</field>
+        </record>
+        
+       	<record id="action_view_product_rapid_create_for_continuous" model="ir.actions.act_window">
+            <field name="name">Create One-Time Product (For Continuous)</field>
+            <field name="res_model">product.rapid.create</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{"default_is_continuous_line": True}</field>
+            <field name="domain">[('is_continuous_line', '=', True)]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to start a new Create One-Time Product (For Continuous).
+              </p>
+            </field>
+        </record>
+        
+        <!-- Menu -->
+        <menuitem
+            id="menu_action_view_product_rapid_create_for_continuous"
+            action="action_view_product_rapid_create_for_continuous"
+            parent="mrp.menu_mrp_bom"
+            name="Create One-Time Product (Continuous)."
+        	sequence="20"
+            groups="mrp.group_mrp_user"
+        />
+
+        <record id="product_bom_template.menu_action_view_product_rapid_create" model="ir.ui.menu">
+            <field name="name">Create One-Time Product (Discontinuous).</field>
+        </record>
+
+    </data>
+</openerp>

@@ -21,30 +21,13 @@
                     <page string="Status Tracking" attrs="{'invisible': [('parent_id','!=',False)]}">
                 		<field name="progress_rate" widget="progressbar"/>
 						<group name="status_tracking">
-	                        <field name="status_lines" nolabel="1" options="{'reload_on_button': true}">
-	                            <tree string="Status Tracking" editable="bottom">
-	                                <field name="product_id"/>
-	                                <field name="product_qty"/>
-	                                <field name="product_uom"/>
-	                                <field name="s1" string="SF" on_change="onchange_ss(product_qty,0,s1)"/>
-	                                <field name="s1_line" string="L#" />
-	                                <field name="s2" string="AS" on_change="onchange_ss(product_qty,s1,s2)"/>
-	                                <field name="s2_line" string="L#" />
-	                                <field name="s3" string="IJ" on_change="onchange_ss(product_qty,s2,s3)"/>
-	                                <field name="s3_line" string="L#" />
-	                                <field name="s4" string="DO" on_change="onchange_ss(product_qty,s3,s4)"/>
-	                                <field name="s4_line" string="L#" />
-	                                <field name="s5" string="FN" on_change="onchange_ss(product_qty,s4,s5)"/>
-	                                <field name="s5_line" string="L#" />
-	                                <field name="num_stations"/>
-	                            </tree>
-	                        </field>
+	                        <field name="status_lines" nolabel="1" options="{'reload_on_button': true}"/>
 	                    </group>
 						<footer>
 							<field name="num_stations" nolabel="1" class="oe_inline oe_right" states="draft,confirmed,readon,in_production"/>
 	                        <button name="reset_stations" string="Reset Stations" type="object" class="oe_inline oe_right oe_link" states="draft,confirmed,readon,in_production" context="{'num_stations': num_stations}}"/>
-						</footer>					
-					</page>           
+						</footer>
+					</page>
 				</xpath>
 	        </field>
 	    </record>
@@ -67,5 +50,28 @@
 	        </field>
 	    </record>
 	    
+		<record id="mrp_production_status_tree_view" model="ir.ui.view">
+			<field name="name">mrp.production.status.tree.view</field>
+			<field name="model">mrp.production.status</field>
+			<field name="arch" type="xml">
+				<tree string="Status Tracking" editable="bottom">
+					<field name="product_id"/>
+					<field name="product_qty"/>
+					<field name="product_uom"/>
+					<field name="s1" string="SF" on_change="onchange_ss(product_qty,0,s1)"/>
+					<field name="s1_line" string="L#" />
+					<field name="s2" string="AS" on_change="onchange_ss(product_qty,s1,s2)"/>
+					<field name="s2_line" string="L#" />
+					<field name="s3" string="IJ" on_change="onchange_ss(product_qty,s2,s3)"/>
+					<field name="s3_line" string="L#" />
+					<field name="s4" string="DO" on_change="onchange_ss(product_qty,s3,s4)"/>
+					<field name="s4_line" string="L#" />
+					<field name="s5" string="FN" on_change="onchange_ss(product_qty,s4,s5)"/>
+					<field name="s5_line" string="L#" />
+					<field name="num_stations"/>
+				</tree>
+			</field>
+		</record>
+
     </data>
 </openerp>

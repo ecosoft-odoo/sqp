@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bom_choice_width_mrp_user,bom.choice.width mrp_user,model_bom_choice_width,mrp.group_mrp_user,1,0,0,0
+access_bom_choice_width_mrp_manager,bom.choice.width mrp_manager,model_bom_choice_width,mrp.group_mrp_manager,1,1,1,1
+access_bom_choice_surface_mrp_user,bom.choice.surface mrp_user,model_bom_choice_surface,mrp.group_mrp_user,1,0,0,0
+access_bom_choice_surface_mrp_manager,bom.choice.surface mrp_manager,model_bom_choice_surface,mrp.group_mrp_manager,1,1,1,1
+access_pallet_config_mrp_user,pallet.config mrp_user,model_pallet_config,mrp.group_mrp_user,1,0,0,0
+access_pallet_config_mrp_manager,pallet.config mrp_manager,model_pallet_config,mrp.group_mrp_manager,1,1,1,1
+access_pallet_config_line_mrp_user,pallet.config.line mrp_user,model_pallet_config_line,mrp.group_mrp_user,1,0,0,0
+access_pallet_config_line_mrp_manager,pallet.config.line mrp_manager,model_pallet_config_line,mrp.group_mrp_manager,1,1,1,1

@@ -35,7 +35,7 @@ For the Product Line tab in MO, to have special of calculate injection.
     'category': 'Manufacturing',
     'website': 'http://www.ecosoft.co.th',
     'images': [],
-    'depends': ['product_bom_template'],
+    'depends': ['product_bom_template', 'product_bom_template_continuous_line'],
     'demo': [],
     'data': [
         'mrp_view.xml',

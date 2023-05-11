@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="product_normal_form_view_ext" model="ir.ui.view">
+            <field name="name">product.normal.form.view.ext</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product_bom_template.product_normal_form_view_ext"/>
+            <field name="arch" type="xml">
+                <label for="is_one_time_use" position="after">
+                    <field name="is_continuous_line"/>
+                    <label for="is_continuous_line"/>
+                </label>
+                <group name="other" position="after">
+                    <group name="surface" string="Surface" attrs="{'invisible': [('is_continuous_line', '=', False)]}">
+                        <field name="mat_in_surface_choices"/>
+                        <field name="mat_out_surface_choices"/>
+                    </group>
+                </group>
+                <field name="cut_area" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_search_form_view" model="ir.ui.view">
+            <field name="name">product.search.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_search_form_view"/>
+            <field name="arch" type="xml">
+                <separator position="after">
+                    <filter string="Discontinuous Line" name="is_discontinuous_line" domain="[('is_continuous_line', '=', False)]"/>
+                    <filter string="Continuous Line" name="is_continuous_line" domain="[('is_continuous_line', '=', True)]"/>
+                    <separator/>
+                </separator>
+            </field>
+        </record>
+
+        <record id="product_kanban_view_ext" model="ir.ui.view">
+            <field name="name">product.kanban.view.ext</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product_bom_template.product_kanban_view_ext"/>
+            <field name="arch" type="xml">
+                <xpath expr="//t[@t-if='record.is_one_time_use.raw_value']/.." position="after">
+                    <li><t t-if="record.is_continuous_line.raw_value"><field name="is_continuous_line" invisible="1"/><font color="blue">Continuous Line</font></t></li>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

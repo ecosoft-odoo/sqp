@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- BOM View -->
+        <record id="mrp_bom_form_view" model="ir.ui.view">
+            <field name="name">mrp.bom.form</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <field name="is_continuous_line"/>
+                </field>
+                <xpath expr="//field[@name='bom_lines']/tree" position="inside">
+                    <field name="is_continuous_line" invisible="1"/>
+                </xpath>
+                <field name="bom_lines" position="attributes">
+                    <attribute name="context">{'default_is_continuous_line': is_continuous_line}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="mrp_bom_form_view_ext" model="ir.ui.view">
+            <field name="name">mrp.bom.form.view.ext</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="product_bom_template.mrp_bom_form_view_ext"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bom_lines_formula']/tree" position="inside">
+                    <field name="is_continuous_line" invisible="1"/>
+                </xpath>
+                <field name="bom_lines_formula" position="attributes">
+                    <attribute name="context">{'default_is_continuous_line': is_continuous_line}</attribute>
+                </field>
+                <div name="model_choices" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </div>
+                <div name="joint_choices" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </div>
+                <div name="camlock_choices" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </div>
+                <div name="window_choices" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </div>
+                <div name="window_choices" position="after">
+					<div name="width_choices" attrs="{'invisible': [('is_continuous_line', '=', False)]}">
+						<label for="mat_width_choices"/>
+			            <field name="mat_width_choices" widget="many2many_tags"/>
+			        </div>
+					<div name="in_surface_choices" attrs="{'invisible': [('is_continuous_line', '=', False)]}">
+						<label for="mat_in_surface_choices"/>
+			            <field name="mat_in_surface_choices" widget="many2many_tags"/>
+			        </div>
+					<div name="out_surface_choices" attrs="{'invisible': [('is_continuous_line', '=', False)]}">
+						<label for="mat_out_surface_choices"/>
+			            <field name="mat_out_surface_choices" widget="many2many_tags"/>
+			        </div>
+                </div>
+            </field>
+        </record>
+
+        <record id="view_mrp_bom_filter" model="ir.ui.view">
+            <field name="name">mrp.bom.select</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.view_mrp_bom_filter"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <separator/>
+                    <filter string="Discontinuous Line" name="is_discontinuous_line" domain="[('is_continuous_line', '=', False)]"/>
+                    <filter string="Continuous Line" name="is_continuous_line" domain="[('is_continuous_line', '=', True)]"/>
+                    <separator/>
+                </field>
+            </field>
+        </record>
+
+        <record id="mrp_bom_tree_view_ext" model="ir.ui.view">
+            <field name="name">mrp.bom.tree.view.ext</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="product_bom_template.mrp_bom_tree_view_ext"/>
+            <field name="arch" type="xml">
+                <field name="is_bom_template" position="after">
+                    <field name="is_continuous_line"/>
+                </field>
+            </field>
+        </record>
+
+    	<!-- Choice Width -->
+        <record id="bom_choice_width_tree_view" model="ir.ui.view">
+            <field name="name">bom.choice.width.tree.view</field>
+            <field name="model">bom.choice.width</field>
+            <field name="arch" type="xml">
+                <tree string="Width Choice" version="7.0">
+                    <field name="name"/>
+                    <field name="value"/>
+                </tree>
+            </field>
+        </record>
+
+		<record id="bom_choice_width_form_view" model="ir.ui.view">
+            <field name="name">bom.choice.width.form.view</field>
+            <field name="model">bom.choice.width</field>
+            <field name="arch" type="xml">
+                <form string="Width Choice" version="7.0">
+                    <group>
+                        <field name="name"/>
+                        <field name="value"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <record id="bom_choice_width_form_action" model="ir.actions.act_window">
+            <field name="name">Width Choice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bom.choice.width</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new Width Choice.
+                </p>
+            </field>
+        </record>
+        
+        <menuitem
+            id="menu_bom_choice_width_form_action"
+            action="bom_choice_width_form_action"
+            parent="product_bom_template.menu_bom_template_choice"
+            sequence="40"
+            groups="mrp.group_mrp_manager"
+        />
+
+    	<!-- Choice Surface -->
+        <record id="bom_choice_surface_tree_view" model="ir.ui.view">
+            <field name="name">bom.choice.surface.tree.view</field>
+            <field name="model">bom.choice.surface</field>
+            <field name="arch" type="xml">
+                <tree string="Surface Choice" version="7.0">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+		<record id="bom_choice_surface_form_view" model="ir.ui.view">
+            <field name="name">bom.choice.surface.form.view</field>
+            <field name="model">bom.choice.surface</field>
+            <field name="arch" type="xml">
+                <form string="Surface Choice" version="7.0">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <record id="bom_choice_surface_form_action" model="ir.actions.act_window">
+            <field name="name">Surface Choice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bom.choice.surface</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new Surface Choice.
+                </p>
+            </field>
+        </record>
+        
+        <menuitem
+            id="menu_bom_choice_surface_form_action"
+            action="bom_choice_surface_form_action"
+            parent="product_bom_template.menu_bom_template_choice"
+            sequence="50"
+            groups="mrp.group_mrp_manager"
+        />
+
+        <!-- MO View -->
+        <record id="mrp_production_tree_view" model="ir.ui.view">
+            <field name="name">mrp.production.tree</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                    <field name="is_continuous_line"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="mrp_production_form_view" model="ir.ui.view">
+            <field name="name">mrp.production.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]/group[1]" position="inside">
+                    <field name="is_continuous_line" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="mrp_production_form_view_ext" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.ext</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp_production_status.mrp_production_form_view_ext"/>
+            <field name="arch" type="xml">
+                <label string="SF" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </label>
+                <label string="AS" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </label>
+                <label string="IJ" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </label>
+                <label string="DO" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </label>
+                <label string="FN" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </label>
+                <field name="line_number_s1" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </field>
+                <field name="line_number_s2" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </field>
+                <field name="line_number_s3" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </field>
+                <field name="line_number_s4" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </field>
+                <field name="line_number_s5" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </field>
+                <field name="line_number_s5" position="after">
+                    <label string="Line" attrs="{'invisible': [('is_continuous_line', '=', False)]}"/> <field name="line_number_sc" class="oe_inline" attrs="{'invisible': [('is_continuous_line', '=', False)]}"/>
+                </field>
+                <field name="status_lines" position="attributes">
+                    <attribute name="context">{'is_continuous_line': False}</attribute>
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </field>
+                <field name="status_lines" position="after">
+                    <field name="continuous_status_lines" nolabel="1" options="{'reload_on_button': true}" context="{'is_continuous_line': True}" attrs="{'invisible': [('is_continuous_line', '=', False)]}"/>
+                </field>
+                <xpath expr="//field[@name='num_stations']/.." position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="mrp_production_form_view_ext2" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.ext</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="product_bom_template.mrp_production_form_view_ext"/>
+            <field name="arch" type="xml">
+                <field name="product_lines" position="attributes">
+                    <attribute name="context">{'parent_mo': parent_id, 'is_continuous_line': False}</attribute>
+                    <attribute name="attrs">{'invisible': [('is_continuous_line', '=', True)]}</attribute>
+                </field>
+                <field name="product_lines" position="after">
+                    <field name="continuous_product_lines" context="{'parent_mo': parent_id, 'is_continuous_line': True}" attrs="{'invisible': [('is_continuous_line', '=', False)]}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="mrp_production_tree_view_ext" model="ir.ui.view">
+            <field name="name">mrp.production.tree.view.ext</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp_production_status.mrp_production_tree_view_ext"/>
+            <field name="arch" type="xml">
+                <field name="line_number_s5" position="after">
+                    <field name="line_number_sc" string="Line" invisible="1" />
+                </field>
+            </field>
+        </record>
+
+        <record id="view_mrp_production_filter" model="ir.ui.view">
+            <field name="name">mrp.production.select</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
+            <field name="arch" type="xml">
+                <separator position="after">
+                    <filter string="Discontinuous Line" name="is_discontinuous_line" domain="[('is_continuous_line', '=', False)]"/>
+                    <filter string="Continuous Line" name="is_continuous_line" domain="[('is_continuous_line','=',True)]"/>
+                    <separator/>
+                </separator>
+            </field>
+        </record>
+
+        <!-- MO: Status Tracking View -->
+        <record id="mrp_production_status_tree_view" model="ir.ui.view">
+            <field name="name">mrp.production.status.tree.view</field>
+            <field name="model">mrp.production.status</field>
+            <field name="inherit_id" ref="mrp_production_status.mrp_production_status_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="s1" position="attributes">
+                    <attribute name="invisible">context.get('is_continuous_line', False)</attribute>
+                </field>
+                <field name="s2" position="attributes">
+                    <attribute name="invisible">context.get('is_continuous_line', False)</attribute>
+                </field>
+                <field name="s3" position="attributes">
+                    <attribute name="invisible">context.get('is_continuous_line', False)</attribute>
+                </field>
+                <field name="s4" position="attributes">
+                    <attribute name="invisible">context.get('is_continuous_line', False)</attribute>
+                </field>
+                <field name="s5" position="attributes">
+                    <attribute name="invisible">context.get('is_continuous_line', False)</attribute>
+                </field>
+                <field name="s1_line" position="attributes">
+                    <attribute name="invisible">context.get('is_continuous_line', False)</attribute>
+                </field>
+                <field name="s2_line" position="attributes">
+                    <attribute name="invisible">context.get('is_continuous_line', False)</attribute>
+                </field>
+                <field name="s3_line" position="attributes">
+                    <attribute name="invisible">context.get('is_continuous_line', False)</attribute>
+                </field>
+                <field name="s4_line" position="attributes">
+                    <attribute name="invisible">context.get('is_continuous_line', False)</attribute>
+                </field>
+                <field name="s5_line" position="attributes">
+                    <attribute name="invisible">context.get('is_continuous_line', False)</attribute>
+                </field>
+                <field name="num_stations" position="attributes">
+                    <attribute name="invisible">context.get('is_continuous_line', False)</attribute>
+                </field>
+                <field name="s5_line" position="after">
+                    <field name="sc_line" string="Line #" invisible="not context.get('is_continuous_line', False)"/>
+                    <field name="sc" string="Produced" invisible="not context.get('is_continuous_line', False)" on_change="onchange_ss(product_qty, 0, sc)"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- Machine Setup Master -->
+        <record id="view_machine_setup_master_tree" model="ir.ui.view">
+            <field name="name">view.machine.setup.master.tree</field>
+            <field name="model">mrp.machine.setup.master</field>
+            <field name="inherit_id" ref="product_bom_template.view_machine_setup_master_tree"/>
+            <field name="arch" type="xml">
+                <field name="description" position="after">
+                    <field name="is_continuous_line"/>
+                </field>
+            </field>
+        </record>
+        
+        <record id="machine_setup_master_form" model="ir.ui.view">
+            <field name="name">machine.setup.master.form</field>
+            <field name="model">mrp.machine.setup.master</field>
+            <field name="inherit_id" ref="product_bom_template.machine_setup_master_form"/>
+            <field name="arch" type="xml">
+                <field name="description" position="after">
+                    <field name="is_continuous_line"/>
+                    <field name="bom_template_id" attrs="{'invisible': [('is_continuous_line', '=', False)], 'required': [('is_continuous_line', '=', True)]}" domain="[('is_bom_template', '=', True), ('is_continuous_line', '=', is_continuous_line)]"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_machine_setup_master_search" model="ir.ui.view">
+            <field name="name">view.machine.setup.master.search</field>
+            <field name="model">mrp.machine.setup.master</field>
+            <field name="inherit_id" ref="product_bom_template.view_machine_setup_master_search"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <separator/>
+                    <filter string="Discontinuous Line" name="is_discontinuous_line" domain="[('is_continuous_line', '=', False)]"/>
+                    <filter string="Continuous Line" name="is_continuous_line" domain="[('is_continuous_line', '=', True)]"/>
+                    <separator/>
+                </field>
+            </field>
+        </record>
+
+        <!-- MO: Scheduled Products -->
+        <record id="mrp_production_product_form_view_ext" model="ir.ui.view">
+            <field name="name">mrp.production.product.form.view</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="inherit_id" ref="product_bom_template.mrp_production_product_form_view_ext"/>
+            <field name="arch" type="xml">
+                <field name="line5_inject2" position="after">
+                    <field name="line_slipjoint_pu" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_slipjoint_pir" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_secretjoint_pu" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_secretjoint_pir" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_roofjoint_pu" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_roofjoint_pir" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_board_pu" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_board_pir" invisible="context.get('parent_mo', False)"/>
+                </field>
+                <field name="line5_settime" position="after">
+                    <field name="line_slipjoint_pu_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_slipjoint_pir_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_secretjoint_pu_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_secretjoint_pir_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_roofjoint_pu_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_roofjoint_pir_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_board_pu_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_board_pir_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="total_panel" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="mrp_production_product_tree_view_ext" model="ir.ui.view">
+            <field name="name">mrp.production.product.tree.view.ext</field>
+            <field name="model">mrp.production.product.line</field>
+            <field name="inherit_id" ref="product_bom_template.mrp_production_product_tree_view_ext"/>
+            <field name="arch" type="xml">
+                <field name="line5_inject2" position="after">
+                    <field name="line_slipjoint_pu" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_slipjoint_pir" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_secretjoint_pu" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_secretjoint_pir" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_roofjoint_pu" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_roofjoint_pir" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_board_pu" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_board_pir" invisible="context.get('parent_mo', False)"/>
+                </field>
+                <field name="line5_settime" position="after">
+                    <field name="line_slipjoint_pu_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_slipjoint_pir_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_secretjoint_pu_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_secretjoint_pir_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_roofjoint_pu_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_roofjoint_pir_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_board_pu_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="line_board_pir_settime" invisible="context.get('parent_mo', False)"/>
+                    <field name="total_panel" invisible="1"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
