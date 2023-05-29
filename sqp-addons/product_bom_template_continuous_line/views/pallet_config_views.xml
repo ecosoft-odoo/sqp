@@ -6,7 +6,7 @@
             <field name="model">pallet.config</field>
             <field name="arch" type="xml">
                 <tree string="Pallet Config" version="7.0">
-                    <field name="bom_template_id"/>
+                    <field name="bom_template_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
                     <field name="is_international"/>
                 </tree>
             </field>
@@ -19,7 +19,7 @@
                 <form string="Pallet Config" version="7.0">
                     <group>
                         <group>
-                            <field name="bom_template_id"/>
+                            <field name="bom_template_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
                         </group>
                         <group>
                             <field name="is_international"/>
@@ -29,7 +29,7 @@
                         <page string="Config Lines">
                             <field name="line_ids">
                                 <tree editable="bottom">
-                                    <field name="thickness"/>
+                                    <field name="thickness" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
                                     <field name="total_panel"/>
                                 </tree>
                             </field>

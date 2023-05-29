@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="product_bom_template.product_normal_form_view_ext"/>
             <field name="arch" type="xml">
                 <label for="is_one_time_use" position="after">
-                    <field name="is_continuous_line"/>
+                    <field name="is_continuous_line" readonly="1"/>
                     <label for="is_continuous_line"/>
                 </label>
                 <group name="other" position="after">

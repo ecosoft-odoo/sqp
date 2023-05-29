@@ -111,13 +111,13 @@ class mrp_production_product_line(osv.osv):
                 #         })
 
                 # Customization by Pod (20/10/2020)
+                area = W*L/1000000-product.cut_area
                 for set in sets:
                     flowrate = self._get_val(cr, uid, product_line.id, set.str_flowrate, W, L, context=context)
                     density = self._get_val(cr, uid, product_line.id, set.str_density, W, L, context=context)
                     overpack_1 = self._get_val(cr, uid, product_line.id, set.str_overpack_1, W, L, context=context)
                     settime = self._get_val(cr, uid, product_line.id, set.str_settime, W, L, context=context)
                     if not product_line.production_id.is_continuous_line:
-                        area = W*L/1000000-product.cut_area
                         if set.machine_id.name in ['line1', 'line2', 'line3', 'line4', 'line5']:
                             res[product_line.id].update({
                                 set.machine_id.name + '_inject1': round(round(area*T/1000*density,2)*((overpack_1/100)+1)/flowrate,2) or 0.0,
@@ -130,13 +130,6 @@ class mrp_production_product_line(osv.osv):
                                 set.machine_id.name + '_settime': settime,
                             })
                     else:
-                        # area = W*L/1000000
-                        # if any([m in set.machine_id.name for m in ['line_slipjoint', 'line_secretjoint', 'line_roofjoint', 'line_board']]):
-                        #     if product.bom_template_id == set.machine_id.bom_template_id and product.mat_insulation_choices.code.lower() in set.machine_id.name:
-                        #         res[product_line.id].update({
-                        #             set.machine_id.name: round((area*T)/1000*density,2),
-                        #             set.machine_id.name + "_settime": settime,
-                        #         })
                         if any([m in set.machine_id.name for m in ['line_slipjoint', 'line_secretjoint', 'line_roofjoint', 'line_board']]):
                             if product.bom_template_id == set.machine_id.bom_template_id and product.mat_insulation_choices.code.lower() in set.machine_id.name:
                                 res[product_line.id].update({

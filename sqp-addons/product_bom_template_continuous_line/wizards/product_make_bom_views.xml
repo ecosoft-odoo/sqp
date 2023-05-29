@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="product_bom_template.view_product_make_bom_ext"/>
             <field name="arch" type="xml">
                 <field name="is_one_time_use" position="after">
-                    <field name="is_continuous_line"/>
+                    <field name="is_continuous_line" readonly="1"/>
                 </field>
             </field>
         </record>

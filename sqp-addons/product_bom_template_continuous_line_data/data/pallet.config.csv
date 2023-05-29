@@ -1,0 +1,9 @@
+id,bom_template_id/id,is_international
+product_bom_template.pallet_config_1,mrp.template_slipjoint,FALSE
+product_bom_template.pallet_config_2,mrp.template_slipjoint,TRUE
+product_bom_template.pallet_config_3,mrp.template_secretjoint,FALSE
+product_bom_template.pallet_config_4,mrp.template_secretjoint,TRUE
+product_bom_template.pallet_config_5,mrp.template_roofjoint,FALSE
+product_bom_template.pallet_config_6,mrp.template_roofjoint,TRUE
+product_bom_template.pallet_config_7,mrp.template_board,FALSE
+product_bom_template.pallet_config_8,mrp.template_board,TRUE

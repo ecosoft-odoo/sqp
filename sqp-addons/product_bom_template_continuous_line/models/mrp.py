@@ -333,9 +333,7 @@ class mrp_production_product_line(osv.osv):
             master_ids = setup_detail_obj.search(cr, uid, [("thickness", "=", product.T.id)])
             if master_ids:
                 W = product.W or 0.0
-                L = product.L or 0.0
                 T = product.T.value or 0.0
-                area = W * L / 1000000
                 sets = setup_detail_obj.browse(cr, uid, master_ids)
                 for set in sets:
                     if any([m in set.machine_id.name for m in masters]):
@@ -343,7 +341,7 @@ class mrp_production_product_line(osv.osv):
                             density = self._get_val(cr, uid, product_line.id, set.str_density, W, L, context=context)
                             settime = self._get_val(cr, uid, product_line.id, set.str_settime, W, L, context=context)
                             res[product_line.id].update({
-                                set.machine_id.name: round((area * T) / 1000 * density, 2),
+                                set.machine_id.name: round(W * T * density * settime / 1000000, 2),
                                 set.machine_id.name + "_settime": settime,
                             })
         return res
