@@ -28,14 +28,14 @@ class sale_order(osv.osv):
     _inherit = 'sale.order'
 
     def _check_product_name(self, cr, uid, ids):
-        line_obj = self.pool.get('sale.order.line')
-        for order in self.browse(cr, uid, ids):
-            product_tag_name = order.product_tag_id and order.product_tag_id.name or False
-            line_ids = line_obj.search(cr, uid, [('order_id', '=', order.id)])
-            for line in line_obj.browse(cr, uid, line_ids):
-                for tag in line.product_id.tag_ids:
-                    if product_tag_name and ((product_tag_name == 'BOI' and tag.name != 'BOI') or (product_tag_name != 'BOI' and tag.name == 'BOI')):
-                        return False
+        # line_obj = self.pool.get('sale.order.line')
+        # for order in self.browse(cr, uid, ids):
+        #     product_tag_name = order.product_tag_id and order.product_tag_id.name or False
+        #     line_ids = line_obj.search(cr, uid, [('order_id', '=', order.id)])
+        #     for line in line_obj.browse(cr, uid, line_ids):
+        #         for tag in line.product_id.tag_ids:
+        #             if product_tag_name and ((product_tag_name == 'BOI' and tag.name != 'BOI') or (product_tag_name != 'BOI' and tag.name == 'BOI')):
+        #                 return False
         return True
 
     _columns = {
