@@ -28,5 +28,5 @@ class sale_order(osv.osv):
         if product_tag_id:
             tag = self.pool.get("product.tag").browse(cr, uid, product_tag_id, context=context)
             if tag.name.upper() == "CONTINUOUS":
-                res["header_msg"] = header_msg
+                res["value"]["header_msg"] = header_msg
         return res
