@@ -3,20 +3,20 @@
 
 from openerp.osv import osv
 
-header_msg = '<div>' + \
-                '<b>Heat Insulation Sandwich Panel</b><br>' + \
-                '<b>Product of Square Panel System Co., Ltd.</b><br>' + \
-                '<b><u>Specification :</u></b>' + \
-                '<ul>' + \
-                    '<li>Density : 40~45 kg/m3</li>' + \
-                    '<li>Core material &nbsp;: Polyisocyanorate Foam ( PIR )</li>' + \
-                    '<li>Surface material : Color steel sheet (T) 0.50 mm.</li>' + \
-                    '<li>Color Steel Sheet - Outside : Off white</li>' + \
-                    '<li>Color Steel Sheet - Inside : Off white</li>' + \
-                    '<li>Panel Thickness : ______ mm. (External)</li>' + \
-                    '<li>Joint : </li>' + \
-                '</ul>' + \
-             '</div>
+header_msg = "<div>" + \
+                "<b>Heat Insulation Sandwich Panel</b><br>" + \
+                "<b>Product of Square Panel System Co., Ltd.</b><br>" + \
+                "<b><u>Specification :</u></b>" + \
+                "<ul>" + \
+                    "<li>Density : 40~45 kg/m3</li>" + \
+                    "<li>Core material &nbsp;: Polyisocyanorate Foam ( PIR )</li>" + \
+                    "<li>Surface material : Color steel sheet (T) 0.50 mm.</li>" + \
+                    "<li>Color Steel Sheet - Outside : Off white</li>" + \
+                    "<li>Color Steel Sheet - Inside : Off white</li>" + \
+                    "<li>Panel Thickness : ______ mm. (External)</li>" + \
+                    "<li>Joint : </li>" + \
+                "</ul>" + \
+             "</div>"
 
 
 class sale_order(osv.osv):
