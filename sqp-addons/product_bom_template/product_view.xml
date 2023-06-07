@@ -45,7 +45,7 @@
 					<xpath expr="/form/sheet//field[@name='categ_id']" position="after">
 		                <field name="is_one_time_use"/>
 		                <label for="is_one_time_use"/>
-                    </xpath>                                
+                    </xpath>
                     <xpath expr="/form/sheet/notebook/page[@string='Sales']" position="after">
 	                    <page string="Part Spec" groups="base.group_user" >
 	                        <group>

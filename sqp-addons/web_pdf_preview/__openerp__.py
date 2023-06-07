@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#    Web PDF Report Preview & Print
+#    Copyright 2012 wangbuke <wangbuke@gmail.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,31 +19,38 @@
 ##############################################################################
 
 {
-    'name': " Temp extension for product_bom_template",
-    'author': 'Kitti U.',
-    'summary': '',
-    'description': """
-This module will be used temporarilly.
+    "name": "Web PDF Report Preview & Print",
+    'version': '1.0',
+    'category': 'Web',
+    'description': """Web PDF Report Preview & Print
 
-For the Product Line tab in MO, to have special of calculate injection.
+Preview & Print PDF report in your browser.
 
-* Add new "Special" field.
-* With special field, calculate with attitional formula
+* For IE, Adobe Reader is required.
+* For Chrome , nothing is requried.
+* For Firefox, Adobe Reader is required.
 
-""",
-    'category': 'Manufacturing',
-    'website': 'http://www.ecosoft.co.th',
-    'images': [],
-    'depends': ['product_bom_template', 'product_bom_template_continuous_line'],
-    'demo': [],
-    'data': [
-        'mrp_view.xml',
-    ],
-    'test': [
-    ],
+Test passed on Windows.
+
+If your brower prevented pop-up window, you should allow it.
+
+功能：PDF 报表预览
+
+如果您觉得好用，请进入下面的网址，付费支持作者 ~
+
+http://me.alipay.com/wangbuke
+
+谢谢！
+
+    """,
+    'author': 'wangbuke@gmail.com',
+    'website': 'http://buke.github.io',
+    'license': 'AGPL-3',
+    'depends': ['web'],
+    'data': [],
     'auto_install': False,
-    'application': True,
-    'installable': True,
+    'web_preload': True,
+    'js': ['static/src/js/web_pdf_preview.js'],
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <form string="Create One-Time Product from BOM Template" version="7.0">
                     <header>
-						<button string="Create One-Time Product" name="create_product" type="object" states="draft" class="oe_highlight"/>						
+						<button string="Create One-Time Product" name="create_product" type="object" states="draft" class="oe_highlight"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,done" />
                 	</header>                	
 					<group>

@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#    Web PDF Report Preview & Print
+#    Copyright 2012 wangbuke <wangbuke@gmail.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,32 +18,18 @@
 #
 ##############################################################################
 
-{
-    'name': " Temp extension for product_bom_template",
-    'author': 'Kitti U.',
-    'summary': '',
-    'description': """
-This module will be used temporarilly.
+import openerp.addons.web.http as openerpweb
+from openerp.addons.web.controllers.main import Reports
+import urllib
 
-For the Product Line tab in MO, to have special of calculate injection.
+class WebPdfReports(Reports):
+    _cp_path = "/web/report/pdf"
 
-* Add new "Special" field.
-* With special field, calculate with attitional formula
-
-""",
-    'category': 'Manufacturing',
-    'website': 'http://www.ecosoft.co.th',
-    'images': [],
-    'depends': ['product_bom_template', 'product_bom_template_continuous_line'],
-    'demo': [],
-    'data': [
-        'mrp_view.xml',
-    ],
-    'test': [
-    ],
-    'auto_install': False,
-    'application': True,
-    'installable': True,
-}
+    @openerpweb.httprequest
+    def index(self, req, action, token):
+        action = urllib.unquote(action)
+        result = super(WebPdfReports, self).index(req, action, token)
+        result.headers['Content-Disposition'] = result.headers['Content-Disposition'].replace('attachment', 'inline')
+        return result
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

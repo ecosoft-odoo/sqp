@@ -435,7 +435,7 @@
                 	<field name="product_lines" context="{'parent_mo': parent_id}"/>
 				</xpath>
             </field>
-        </record>       		
+        </record>
 
 
     	<record id="mrp_production_product_form_view_ext" model="ir.ui.view">

@@ -51,7 +51,7 @@ class product_make_bom(osv.osv_memory):
         mod_obj = self.pool.get('ir.model.data')
         act_obj = self.pool.get('ir.actions.act_window')
     
-        data = self.read(cr, uid, ids)[0]    
+        data = self.read(cr, uid, ids)[0]
         if context is None:
             context = {}
         data = self.read(cr, uid, ids)[0]

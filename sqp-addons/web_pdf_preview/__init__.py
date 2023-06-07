@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#    Web PDF Report Preview & Print
+#    Copyright 2012 wangbuke <wangbuke@gmail.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -16,35 +15,8 @@
 #
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
 ##############################################################################
 
-{
-    'name': " Temp extension for product_bom_template",
-    'author': 'Kitti U.',
-    'summary': '',
-    'description': """
-This module will be used temporarilly.
-
-For the Product Line tab in MO, to have special of calculate injection.
-
-* Add new "Special" field.
-* With special field, calculate with attitional formula
-
-""",
-    'category': 'Manufacturing',
-    'website': 'http://www.ecosoft.co.th',
-    'images': [],
-    'depends': ['product_bom_template', 'product_bom_template_continuous_line'],
-    'demo': [],
-    'data': [
-        'mrp_view.xml',
-    ],
-    'test': [
-    ],
-    'auto_install': False,
-    'application': True,
-    'installable': True,
-}
+from . import controllers
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

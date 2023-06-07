@@ -1,0 +1,7 @@
+id,bom_id/id,product_id,product_qty_formula,product_uom
+mrp.template_board_line_1,mrp.template_board,[SP05048],(line.mat_insulation_choices.code=='PU') and (line.W*line.L*line.T.value/1000000000*40*0.437*1.13) or 0.0,kg
+mrp.template_board_line_2,mrp.template_board,[SP05049],(line.mat_insulation_choices.code=='PU') and (line.W*line.L*line.T.value/1000000000*40*0.563*1.13) or 0.0,kg
+mrp.template_board_line_3,mrp.template_board,[SP05048],(line.mat_insulation_choices.code=='PIR') and (line.W*line.L*line.T.value/1000000000*40*0.437*1.13) or 0.0,kg
+mrp.template_board_line_4,mrp.template_board,[SP05049],(line.mat_insulation_choices.code=='PIR') and (line.W*line.L*line.T.value/1000000000*40*0.563*1.13) or 0.0,kg
+mrp.template_board_line_5,mrp.template_board,[SP05023],(line.mat_insulation_choices.code=='PIR') and (line.W*line.L*line.T.value/1000000000*36*0.044*1.2*1.05) or 0.0,kg
+mrp.template_board_line_6,mrp.template_board,[SP05046],(line.mat_insulation_choices.code=='PIR') and (line.W*line.L*line.T.value/1000000000*53.482*0.072*1.2*1.0*0.85) or 0.0,kg

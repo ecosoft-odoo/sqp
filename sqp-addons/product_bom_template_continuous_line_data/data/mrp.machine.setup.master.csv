@@ -1,0 +1,9 @@
+id,name,description,is_continuous_line,bom_template_id/id
+product_bom_template.master_slipjoint_pir,line_slipjoint_pir,Slip Joint (PIR),TRUE,mrp.template_slipjoint
+product_bom_template.master_slipjoint_pu,line_slipjoint_pu,Slip Joint (PU),TRUE,mrp.template_slipjoint
+product_bom_template.master_secretjoint_pir,line_secretjoint_pir,Secret Joint (PIR),TRUE,mrp.template_secretjoint
+product_bom_template.master_secretjoint_pu,line_secretjoint_pu,Secret Joint (PU),TRUE,mrp.template_secretjoint
+product_bom_template.master_roofjoint_pir,line_roofjoint_pir,Roof Joint (PIR),TRUE,mrp.template_roofjoint
+product_bom_template.master_roofjoint_pu,line_roofjoint_pu,Roof Joint (PU),TRUE,mrp.template_roofjoint
+product_bom_template.master_board_pir,line_board_pir,Board (PIR),TRUE,mrp.template_board
+product_bom_template.master_board_pu,line_board_pu,Board (PU),TRUE,mrp.template_board

@@ -1,0 +1,31 @@
+id,machine_id/id,thickness,str_flowrate,str_density,str_correction_factor,str_overpack_1,str_overpack_2,str_settime
+product_bom_template.master_slipjoint_pir_line_1,product_bom_template.master_slipjoint_pir,42,0,45,0,0,0,7
+product_bom_template.master_slipjoint_pir_line_2,product_bom_template.master_slipjoint_pir,50,0,45,0,0,0,6.86
+product_bom_template.master_slipjoint_pir_line_3,product_bom_template.master_slipjoint_pir,75,0,45,0,0,0,6.11
+product_bom_template.master_slipjoint_pir_line_4,product_bom_template.master_slipjoint_pir,100,0,45,0,0,0,5.36
+product_bom_template.master_slipjoint_pir_line_5,product_bom_template.master_slipjoint_pir,125,0,45,0,0,0,4.61
+product_bom_template.master_slipjoint_pir_line_6,product_bom_template.master_slipjoint_pir,150,0,W == 1100 and 44 or 45,0,0,0,3.5
+product_bom_template.master_slipjoint_pir_line_7,product_bom_template.master_slipjoint_pir,175,0,W == 1100 and 44 or 45,0,0,0,3.11
+product_bom_template.master_slipjoint_pir_line_8,product_bom_template.master_slipjoint_pir,200,0,W == 1100 and 44 or 45,0,0,0,W == 1100 and 2.8 or 2.36
+product_bom_template.master_slipjoint_pu_line_1,product_bom_template.master_slipjoint_pu,42,0,45,0,0,0,7
+product_bom_template.master_slipjoint_pu_line_2,product_bom_template.master_slipjoint_pu,50,0,45,0,0,0,6.86
+product_bom_template.master_slipjoint_pu_line_3,product_bom_template.master_slipjoint_pu,75,0,45,0,0,0,6.11
+product_bom_template.master_slipjoint_pu_line_4,product_bom_template.master_slipjoint_pu,100,0,45,0,0,0,5.36
+product_bom_template.master_slipjoint_pu_line_5,product_bom_template.master_slipjoint_pu,125,0,45,0,0,0,4.61
+product_bom_template.master_slipjoint_pu_line_6,product_bom_template.master_slipjoint_pu,150,0,W == 1100 and 44 or 45,0,0,0,3.5
+product_bom_template.master_slipjoint_pu_line_7,product_bom_template.master_slipjoint_pu,175,0,W == 1100 and 44 or 45,0,0,0,3.11
+product_bom_template.master_slipjoint_pu_line_8,product_bom_template.master_slipjoint_pu,200,0,W == 1100 and 44 or 45,0,0,0,W == 1100 and 2.8 or 2.36
+product_bom_template.master_secretjoint_pir_line_1,product_bom_template.master_secretjoint_pir,50,0,45,0,0,0,6.5
+product_bom_template.master_secretjoint_pir_line_2,product_bom_template.master_secretjoint_pir,75,0,45,0,0,0,5.5
+product_bom_template.master_secretjoint_pir_line_3,product_bom_template.master_secretjoint_pir,100,0,W == 1000 and 44 or 45,0,0,0,4.5
+product_bom_template.master_secretjoint_pu_line_1,product_bom_template.master_secretjoint_pu,50,0,45,0,0,0,6.5
+product_bom_template.master_secretjoint_pu_line_2,product_bom_template.master_secretjoint_pu,75,0,45,0,0,0,5.5
+product_bom_template.master_secretjoint_pu_line_3,product_bom_template.master_secretjoint_pu,100,0,W == 1000 and 44 or 45,0,0,0,4.5
+product_bom_template.master_roofjoint_pir_line_1,product_bom_template.master_roofjoint_pir,25,0,45,0,0,0,10
+product_bom_template.master_roofjoint_pir_line_2,product_bom_template.master_roofjoint_pir,50,0,45,0,0,0,6.6
+product_bom_template.master_roofjoint_pu_line_1,product_bom_template.master_roofjoint_pu,25,0,45,0,0,0,10
+product_bom_template.master_roofjoint_pu_line_2,product_bom_template.master_roofjoint_pu,50,0,45,0,0,0,6.6
+product_bom_template.master_board_pir_line_1,product_bom_template.master_board_pir,50,0,45,0,0,0,6
+product_bom_template.master_board_pir_line_2,product_bom_template.master_board_pir,100,0,45,0,0,0,4
+product_bom_template.master_board_pu_line_1,product_bom_template.master_board_pu,50,0,45,0,0,0,6
+product_bom_template.master_board_pu_line_2,product_bom_template.master_board_pu,100,0,45,0,0,0,4

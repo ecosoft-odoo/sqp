@@ -53,7 +53,7 @@ class mrp_production(osv.osv):
                     res[id]['progress_rate'] = 0.0
         return res
 
-    def _get_mrp_proudction(self, cr, uid, ids, context=None):
+    def _get_mrp_production(self, cr, uid, ids, context=None):
         result = {}
         for line in self.pool.get('mrp.production.status').browse(cr, uid, ids, context=context):
             result[line.production_id.id] = True
@@ -65,7 +65,7 @@ class mrp_production(osv.osv):
         'progress_rate': fields.function(_progress_rate, multi="progress", string='Progress', type='float', group_operator="avg", help="Percent of tasks closed according to the total of tasks todo.",
             store = {
                 'mrp.production': (lambda self, cr, uid, ids, c={}: ids, ['status_lines','num_stations'], 10),
-                'mrp.production.status': (_get_mrp_proudction, ['s1', 's2', 's3', 's4', 's5', 'num_stations'], 10),
+                'mrp.production.status': (_get_mrp_production, ['s1', 's2', 's3', 's4', 's5', 'num_stations'], 10),
             }),
         'num_stations': fields.selection([(1,'1'), (2,'2'), (3,'3'), (4,'4'), (5,'5')], '# Stations', required=True, readonly=False, states={'done':[('readonly',True)]}),
         'line_number_s1': fields.selection([('L1','Line 1'),
