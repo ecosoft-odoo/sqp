@@ -5,3 +5,4 @@ from . import mrp
 from . import procurement
 from . import product
 from . import product_rapid_create
+from . import sale
