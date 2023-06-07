@@ -407,7 +407,8 @@ $F{mat_insulation_choice} == "PIR" ? ($F{line_slipjoint_pir_settime} != null ? $
 						<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<text><![CDATA[COLOR
-(IN/OUT)]]></text>
+(UPPER/
+LOWER)]]></text>
 				</staticText>
 				<staticText>
 					<reportElement style="table" mode="Opaque" x="264" y="0" width="44" height="42" backcolor="#B5E7D3"/>
@@ -415,7 +416,8 @@ $F{mat_insulation_choice} == "PIR" ? ($F{line_slipjoint_pir_settime} != null ? $
 						<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
 					<text><![CDATA[SURFACE
-(IN/OUT)]]></text>
+(UPPER/
+LOWER)]]></text>
 				</staticText>
 				<staticText>
 					<reportElement style="table" mode="Opaque" x="308" y="0" width="28" height="42" backcolor="#B5E7D3"/>
