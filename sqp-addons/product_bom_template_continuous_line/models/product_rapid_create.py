@@ -103,3 +103,24 @@ class product_rapid_create_line(osv.osv):
                 "is_mat_out_surface_choices_required": len(bom.mat_out_surface_choices) > 0,
             })
         return res
+
+    def onchange_product_id(self, cr, uid, ids, product_id, context=None):
+        res = super(product_rapid_create_line, self).onchange_product_id(cr, uid, ids, product_id, context=context)
+        if context.get("default_is_continuous_line") and product_id:
+            product = self.pool.get("product.product").browse(cr, uid, product_id, context=context)
+            # Thick
+            thick = product.T and product.T.id or False
+            # Width
+            width = False
+            if product.W:
+                width_ids = self.pool.get("bom.choice.width").search(cr, uid, [("value", "=", product.W)], context=context)
+                if len(width_ids) == 1:
+                    width = width_ids[0]
+            # Insulation
+            insulation = product.mat_insulation_choices and product.mat_insulation_choices.id or False
+            res["value"].update({
+                "mat_width_choices": width,
+                "T": thick,
+                "mat_insulation_choices": insulation,
+            })
+        return res
