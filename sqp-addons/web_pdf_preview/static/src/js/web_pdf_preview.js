@@ -33,11 +33,13 @@ openerp.web_pdf_preview = function(instance) {
                 instance.web.unblockUI();
                 self.dialog_stop();
                 window.open('/web/report/pdf?action=' + encodeURIComponent(JSON.stringify(action)) + '&token=' + new Date().getTime() + '&session_id=' + self.session.session_id, 'report', '');
+                setTimeout(function() {
+                    if (!self.dialog) {
+                        options.on_close();
+                    }
+                    self.dialog_stop();
+                }, 2500);
             });
         },
     });
-
-
 };
-
-
