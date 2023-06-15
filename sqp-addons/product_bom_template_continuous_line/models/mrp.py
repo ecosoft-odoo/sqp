@@ -173,6 +173,9 @@ class mrp_production(osv.osv):
             readonly=True,
             states={"draft": [("readonly", False)]},
         ),
+        "approved2": fields.boolean(
+            string="Approved (Aphichad Kesamool)",
+        ),
     }
 
     _defaults = {
@@ -189,6 +192,11 @@ class mrp_production(osv.osv):
                 self.pool.get("mrp.production.status").write(cr, uid, status_line_ids,
                                                              {"sc_line": vals.get("line_number_sc")},
                                                              context=context)
+        # Update approved2
+        for production in self.browse(cr, uid, ids, context=context):
+            if not production.parent_id:
+                production_ids = self.search(cr, uid, [("parent_id","=",production.id)], context=context)
+                self.write(cr, uid, production_ids, {"approved2": vals.get("approved2", production.approved2)}, context=context)
         return res
 
     def _hook_create_post_procurement(self, cr, uid, production, procurement_id, context=None):

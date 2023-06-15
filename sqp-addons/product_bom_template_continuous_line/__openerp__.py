@@ -11,6 +11,7 @@
     "website" : "http://www.ecosoft.co.th",
     "depends" : [
         "boi",
+        "bom_move",
         "mrp_production_status",
         "product_bom_template",
     ],
