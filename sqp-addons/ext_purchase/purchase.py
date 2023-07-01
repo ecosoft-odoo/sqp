@@ -64,7 +64,8 @@ class purchase_order(osv.osv):
         for pr in pr_obj.browse(cr, uid, requisition_ids, context=context):
             res = {
                 'ref_order_id': pr.id and pr.ref_order_id.id or False,
-                'ref_project_name': pr.id and pr.ref_project_name or False
+                'ref_project_name': pr.id and pr.ref_project_name or False,
+                'ref_partner_id': pr.id and pr.ref_partner_id.id or False,
             }
             prids=self.search(cr,uid,[('requisition_id','in',requisition_ids)])
             self.write(cr, uid, prids, res, context=context)
