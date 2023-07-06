@@ -176,6 +176,7 @@
 	<field name="approved2" class="java.lang.Boolean">
 		<fieldDescription><![CDATA[approved2]]></fieldDescription>
 	</field>
+	<sortField name="L" order="Descending"/>
 	<variable name="Item No" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{Mo Line}]]></variableExpression>
 	</variable>
@@ -183,7 +184,7 @@
 		<variableExpression><![CDATA[($F{W}==null?"0":new DecimalFormat("#,##0").format($F{W}))+" x "+($F{L}==null?"0":new DecimalFormat("#,##0").format($F{L}))+" x "+($F{T}==null?"0":$F{T})]]></variableExpression>
 	</variable>
 	<variable name="Area" class="java.lang.Number">
-		<variableExpression><![CDATA[($F{W}==null?0.00:$F{W})*($F{L}==null?0.00:$F{L})/1000000]]></variableExpression>
+		<variableExpression><![CDATA[(($F{W}==null?0.00:$F{W})*($F{L}==null?0.00:$F{L}))/1000000*($F{QTY}==null?0.0:$F{QTY})]]></variableExpression>
 	</variable>
 	<variable name="QTY_2" class="java.lang.Number" resetType="Group" resetGroup="Mo Group" calculation="Sum">
 		<variableExpression><![CDATA[$F{QTY}]]></variableExpression>
@@ -687,7 +688,7 @@ Joint]]></text>
 				<text><![CDATA[
  CO-F-01  REV.0
 
- วันที่บังคับใช้ : 05/05/23
+ วันที่บังคับใช้ : 05/06/66
 				]]></text>
 			</staticText>
 			<image>
