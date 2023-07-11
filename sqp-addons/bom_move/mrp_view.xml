@@ -12,8 +12,20 @@
                             attrs="{'invisible': ['|',('parent_id','=',True), ('mrp_bom_move_exists','=',False)]}"/>
                 </button>
                 <field name="short_note" position="after">
-                    <field name="approved" attrs="{'readonly': ['|',('parent_id','!=',False),('state','=','draft')]}"/>  
+                    <field name="approved" attrs="{'readonly': ['|',('parent_id','!=',False),('state','=','draft')]}"/>
                 </field>
+            </field>
+        </record>
+
+        <record id="mrp_production_form_view_hide_buttons" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.hide.buttons</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp_production_form_view_ext"/>
+            <field name="groups_id" eval="[(4, ref('ext_mrp.group_mrp_hide_all_buttons_in_mo'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_sqp_bom_move']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
             </field>
         </record>
     </data>
