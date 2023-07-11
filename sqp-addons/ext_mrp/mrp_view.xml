@@ -119,7 +119,8 @@
 	        <field name="arch" type="xml">
 				<field name="order_id" position="attributes">
 					<attribute name="required">True</attribute>
-				</field>
+                    <attribute name="groups">base.group_sale_salesman</attribute>
+                </field>
 	        </field>
 	    </record>
 
@@ -151,6 +152,71 @@
 	            </field>
 	        </field>
 	    </record>
+
+        <!-- View for group 'Hide all buttons in MO' -->
+        <record id="mrp_production_tree_view_hide_buttons" model="ir.ui.view">
+            <field name="name">mrp.production.tree.view.hide.buttons</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+            <field name="groups_id" eval="[(4, ref('group_mrp_hide_all_buttons_in_mo'))]"/>
+            <field name="arch" type="xml">
+                <tree position="attributes">
+                    <attribute name="create">0</attribute>
+                    <attribute name="edit">0</attribute>
+                    <attribute name="delete">0</attribute>
+                </tree>
+            </field>
+        </record>
+
+        <record id="mrp_production_form_view_hide_buttons" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.hide.buttons</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="groups_id" eval="[(4, ref('group_mrp_hide_all_buttons_in_mo'))]"/>
+            <field name="arch" type="xml">
+                <form position="attributes">
+                    <attribute name="create">0</attribute>
+                    <attribute name="edit">0</attribute>
+                    <attribute name="delete">0</attribute>
+                </form>
+                <xpath expr="//button[@name='button_confirm']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='%(mrp.act_mrp_product_produce)d']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='force_production'][1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='force_production'][2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_produce']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_recreate']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_cancel']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="mrp_production_form_view_ext_hide_buttons" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.ext.hide.buttons</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp_production_form_view_ext"/>
+            <field name="groups_id" eval="[(4, ref('group_mrp_hide_all_buttons_in_mo'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_child_mrp_production']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
 
     </data>
 
