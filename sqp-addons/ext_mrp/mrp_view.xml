@@ -119,7 +119,6 @@
 	        <field name="arch" type="xml">
 				<field name="order_id" position="attributes">
 					<attribute name="required">True</attribute>
-                    <attribute name="groups">base.group_sale_salesman</attribute>
                 </field>
 	        </field>
 	    </record>
