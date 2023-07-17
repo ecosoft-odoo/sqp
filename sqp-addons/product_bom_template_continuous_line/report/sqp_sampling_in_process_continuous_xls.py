@@ -166,7 +166,7 @@ class sqp_sampling_in_process_continuous_xls(report_xls):
         color = ""
         surface = ""
         qty_pcs = ""
-        for line in o.product_lines:
+        for line in sorted([pl for pl in o.product_lines], key=lambda x: x.L, reverse=True):
             item += 1
             # Panel code
             product_name = line.product_id.name
