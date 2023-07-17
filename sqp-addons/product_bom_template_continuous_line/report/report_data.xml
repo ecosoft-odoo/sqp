@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+        <!-- Manufacturing Order (Continuous) Form -->
         <report string="Manufacturing Order (Continuous)"
             model="mrp.production"
             auto="False"
@@ -15,6 +16,23 @@
         <record id="report_sqp_super_mo_continuous_form" model="ir.actions.report.xml">
             <field name="jasper_report">True</field>
             <field name="jasper_output">pdf</field>
+        </record>
+
+        <!-- Sampling In Process Form -->
+        <record id="report_sqp_sampling_in_process_continuous_xls" model="ir.actions.report.xml">
+            <field name="name">Sampling in Process (Continuous)</field>
+            <field name="model">mrp.production</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="report_name">sqp_sampling_in_process_continuous.xls</field>
+            <field name="report_type">xls</field>
+            <field name="auto" eval="False"/>
+        </record>
+
+        <record id="report_sqp_sampling_in_process_continuous_xls_values" model="ir.values">
+            <field name="name">Sampling in Process (Continuous)</field>
+            <field name="key2">client_print_multi</field>
+            <field name="value" eval="'ir.actions.report.xml,' +str(ref('report_sqp_sampling_in_process_continuous_xls'))"/>
+            <field name="model">mrp.production</field>
         </record>
     </data>
 </openerp>

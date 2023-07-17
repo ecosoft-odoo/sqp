@@ -14,6 +14,7 @@
         "bom_move",
         "mrp_production_status",
         "product_bom_template",
+        "report_xls",
     ],
     "data" : [
         "security/ir.model.access.csv",
