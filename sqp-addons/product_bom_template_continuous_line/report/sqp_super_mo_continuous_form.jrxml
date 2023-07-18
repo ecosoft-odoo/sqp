@@ -176,6 +176,12 @@
 	<field name="approved2" class="java.lang.Boolean">
 		<fieldDescription><![CDATA[approved2]]></fieldDescription>
 	</field>
+	<field name="approved2_by" class="java.lang.String">
+		<fieldDescription><![CDATA[approved2_by/name]]></fieldDescription>
+	</field>
+	<field name="date_approved2" class="java.util.Date">
+		<fieldDescription><![CDATA[date_approved2]]></fieldDescription>
+	</field>
 	<sortField name="L" order="Descending"/>
 	<variable name="Item No" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{Mo Line}]]></variableExpression>
@@ -346,13 +352,45 @@ $F{mat_insulation_choice} == "PIR" ? ($F{line_slipjoint_pir_settime} != null ? $
 						</textElement>
 						<text><![CDATA[สถานที่นำส่งสินค้า :]]></text>
 					</staticText>
-					<staticText>
-						<reportElement mode="Transparent" x="230" y="20" width="160" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-						<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
-							<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
-						</textElement>
-						<text><![CDATA[Approved (Aphichad Kesamool)]]></text>
-					</staticText>
+                    <staticText>
+					    <reportElement mode="Transparent" x="230" y="20" width="160" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					    <textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					    </textElement>
+                        <text><![CDATA[Approved]]></text>
+                    </staticText>
+				    <staticText>
+					    <reportElement mode="Transparent" x="270" y="15" width="120" height="20" forecolor="#000000" backcolor="#FFFFFF">
+                            <printWhenExpression><![CDATA[$F{approved2_by}]]></printWhenExpression>
+                        </reportElement>
+					    <textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					    </textElement>
+					    <text><![CDATA[By]]></text>
+				    </staticText>
+				    <textField pattern="" isBlankWhenNull="true">
+					    <reportElement mode="Transparent" x="282" y="15" width="108" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					    <textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					    </textElement>
+					    <textFieldExpression class="java.lang.String"><![CDATA[$F{approved2_by}]]></textFieldExpression>
+				    </textField>
+				    <staticText>
+					    <reportElement mode="Transparent" x="270" y="25" width="120" height="20" forecolor="#000000" backcolor="#FFFFFF">
+                            <printWhenExpression><![CDATA[$F{date_approved2}]]></printWhenExpression>
+                        </reportElement>
+					    <textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					    </textElement>
+					    <text><![CDATA[On]]></text>
+				    </staticText>
+				    <textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					    <reportElement mode="Transparent" x="282" y="25" width="108" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					    <textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					    </textElement>
+					    <textFieldExpression class="java.util.Date"><![CDATA[$F{date_approved2}]]></textFieldExpression>
+				    </textField>
 					<image>
 						<reportElement x="215" y="24" width="11" height="10"/>
 						<imageExpression class="java.lang.String"><![CDATA[$F{approved2} == null || $F{approved2} == false ? $P{SUBREPORT_DIR} + "uncheckbox.png" : $P{SUBREPORT_DIR} + "checkbox.png"]]></imageExpression>

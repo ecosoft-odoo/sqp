@@ -174,7 +174,16 @@ class mrp_production(osv.osv):
             states={"draft": [("readonly", False)]},
         ),
         "approved2": fields.boolean(
-            string="Approved (Aphichad Kesamool)",
+            string="Approved (For Continuous)",
+        ),
+        "date_approved2": fields.date(
+            string="Approved Date",
+            readonly=True,
+        ),
+        "approved2_by": fields.many2one(
+            "res.users",
+            string="Approved By",
+            readonly=True,
         ),
     }
 
@@ -192,11 +201,20 @@ class mrp_production(osv.osv):
                 self.pool.get("mrp.production.status").write(cr, uid, status_line_ids,
                                                              {"sc_line": vals.get("line_number_sc")},
                                                              context=context)
-        # Update approved2
         for production in self.browse(cr, uid, ids, context=context):
             if not production.parent_id:
-                production_ids = self.search(cr, uid, [("parent_id","=",production.id)], context=context)
-                self.write(cr, uid, production_ids, {"approved2": vals.get("approved2", production.approved2)}, context=context)
+                if "approved2" in vals:
+                    approved2 = vals["approved2"]
+                    approved2_by = False
+                    date_approved2 = False
+                    if approved2:
+                        approved2_by = uid
+                        date_approved2 = fields.date.context_today(self, cr, uid, context=context)
+                    # Approved By, Approved Date
+                    self.write(cr, uid, [production.id], {"approved2_by": approved2_by, "date_approved2": date_approved2}, context=context)
+                    # Update Child MO
+                    production_ids = self.search(cr, uid, [("parent_id","=",production.id)], context=context)
+                    self.write(cr, uid, production_ids, {"approved2": approved2, "approved2_by": approved2_by, "date_approved2": date_approved2}, context=context)
         return res
 
     def _hook_create_post_procurement(self, cr, uid, production, procurement_id, context=None):
@@ -208,7 +226,7 @@ class mrp_production(osv.osv):
 class bom_choice_width(osv.osv):
     _name = "bom.choice.width"
     _description = "Width Choice when create BOM"
-    
+
     _columns = {
         "name": fields.char(
             string="Name",
