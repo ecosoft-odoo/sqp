@@ -108,7 +108,7 @@
                 </form>
             </field>
         </record>
-        
+
         <record id="bom_choice_width_form_action" model="ir.actions.act_window">
             <field name="name">Width Choice</field>
             <field name="type">ir.actions.act_window</field>
@@ -121,7 +121,7 @@
                 </p>
             </field>
         </record>
-        
+
         <menuitem
             id="menu_bom_choice_width_form_action"
             action="bom_choice_width_form_action"
@@ -152,7 +152,7 @@
                 </form>
             </field>
         </record>
-        
+
         <record id="bom_choice_surface_form_action" model="ir.actions.act_window">
             <field name="name">Surface Choice</field>
             <field name="type">ir.actions.act_window</field>
@@ -165,7 +165,7 @@
                 </p>
             </field>
         </record>
-        
+
         <menuitem
             id="menu_bom_choice_surface_form_action"
             action="bom_choice_surface_form_action"
@@ -269,7 +269,12 @@
             <field name="inherit_id" ref="bom_move.mrp_production_form_view_ext"/>
             <field name="arch" type="xml">
                 <field name="approved" position="after">
-                    <field name="approved2" attrs="{'readonly': ['|',('parent_id','!=',False),('state','=','draft')]}"/>
+                    <label for="approved2"/>
+                    <div>
+                        <field name="approved2" attrs="{'readonly': ['|',('parent_id','!=',False),('state','=','draft')]}" class="oe_inline"/>
+                        <label string="By" attrs="{'invisible': [('approved2_by', '=', False)]}"/> <field name="approved2_by" attrs="{'invisible': [('approved2_by', '=', False)]}" class="oe_inline"/>
+                        <label string="On" attrs="{'invisible': [('date_approved2', '=', False)]}"/> <field name="date_approved2" attrs="{'invisible': [('date_approved2', '=', False)]}" class="oe_inline"/>
+                    </div>
                 </field>
             </field>
         </record>
@@ -355,7 +360,7 @@
                 </field>
             </field>
         </record>
-        
+
         <record id="machine_setup_master_form" model="ir.ui.view">
             <field name="name">machine.setup.master.form</field>
             <field name="model">mrp.machine.setup.master</field>
