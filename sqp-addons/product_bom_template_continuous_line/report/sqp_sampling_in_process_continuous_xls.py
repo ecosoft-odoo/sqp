@@ -17,7 +17,7 @@ class sqp_sampling_in_process_continuous_xls_parser(report_sxw.rml_parse):
     def _get_wanted_list(self):
         wanted_list = [
             "item", "panel_code", "panel_size", "color", "surface", "qty_pcs", "qty_sampling", "date",
-            "mark", "edge", "plate", "width", "length", "thick", "checker", "remark",
+            "mark", "edge", "plate", "width", "length", "checker", "remark",
         ]
         return wanted_list
 
@@ -89,10 +89,6 @@ class sqp_sampling_in_process_continuous_xls(report_xls):
                 "header": [1, 15, "text", "ยาว"],
                 "lines": [1, 0, "text", ""],
             },
-            "thick": {
-                "header": [1, 15, "text", "หนา"],
-                "lines": [1, 0, "text", ""],
-            },
             "checker": {
                 "header": [1, 20, "text", "ผู้สุ่มตรวจ"],
                 "lines": [1, 0, "text", ""],
@@ -115,23 +111,32 @@ class sqp_sampling_in_process_continuous_xls(report_xls):
         right_bottom_border_format = "borders: right_color black, bottom_color black, right thin, bottom thin;"
         left_right_bottom_border_format = "borders: left_color black, right_color black, bottom_color black, left thin, right thin, bottom thin;"
         bottom_border_format = "borders: bottom_color black, bottom thin;"
+        left_border_format = "borders: left_color black, left thin;"
+        right_border_format = "borders: right_color black, right thin;"
         c_specs = [
             ("header_1", 1, 0, "text", "", None, xlwt.easyxf(cell_format + left_top_border_format)),
             ("header_2", 12, 0, "text", "บริษัท สแควร์ พาแนล ซิสเต็ม จำกัด", None, xlwt.easyxf(cell_format + right_top_border_format)),
-            ("header_3", 3, 0, "text", "CO-F-02 Rev.0", None, xlwt.easyxf(cell_format + right_top_border_format)),
+            ("header_3", 2, 0, "text", "CO-F-02 Rev.0", None, xlwt.easyxf(cell_format + right_top_border_format)),
+        ]
+        row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+        row_pos = self.xls_write_row(ws, row_pos, row_data)
+        c_specs = [
+            ("header_1", 1, 0, "text", "", None, xlwt.easyxf(cell_format + left_border_format)),
+            ("header_2", 12, 0, "text", "Square Panel System Co., Ltd.", None, xlwt.easyxf(cell_format + right_border_format)),
+            ("header_3", 2, 0, "text", "วันที่บังคับใช้: 22/06/66", None, xlwt.easyxf(cell_format + right_border_format)),
         ]
         row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
         row_pos = self.xls_write_row(ws, row_pos, row_data)
         c_specs = [
             ("header_1", 1, 0, "text", "", None, xlwt.easyxf(cell_format + left_bottom_border_format)),
-            ("header_2", 12, 0, "text", "Square Panel System Co., Ltd.", None, xlwt.easyxf(cell_format + right_bottom_border_format)),
-            ("header_3", 3, 0, "text", "วันที่บังคับใช้: 22/06/66", None, xlwt.easyxf(cell_format + right_bottom_border_format)),
+            ("header_2", 12, 0, "text", "", None, xlwt.easyxf(cell_format + right_bottom_border_format)),
+            ("header_3", 2, 0, "text", "เลขที่ใบสั่งผลิต: {}".format(o.name or ""), None, xlwt.easyxf(cell_format + right_bottom_border_format)),
         ]
         row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
         row_pos = self.xls_write_row(ws, row_pos, row_data)
         # Title
         c_specs = [
-            ("header_1", 16, 0, "text", "ใบสุ่มตรวจ (Sampling in Process)", None, xlwt.easyxf(cell_format + _xs["center"] + left_right_bottom_border_format)),
+            ("header_1", 15, 0, "text", "ใบสุ่มตรวจ (Sampling in Process)", None, xlwt.easyxf(cell_format + _xs["center"] + left_right_bottom_border_format)),
         ]
         row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
         row_pos = self.xls_write_row(ws, row_pos, row_data)
@@ -140,7 +145,7 @@ class sqp_sampling_in_process_continuous_xls(report_xls):
             ("header_1", 3, 0, "text", "หน่วยงาน: Continuous Line", None, xlwt.easyxf(cell_format + left_bottom_border_format)),
             ("header_2", 5, 0, "text", "ชื่อลูกค้า: {}".format(((o.order_id and o.order_id.partner_id.name or "") or (o.tmp_partner_id and o.tmp_partner_id.name or "") or "").encode("UTF-8")), None, xlwt.easyxf(cell_format + bottom_border_format)),
             ("header_3", 4, 0, "text", "ORDER NO: {}".format((o.order_id and o.order_id.name or "") or o.tmp_ref_order or ""), None, xlwt.easyxf(cell_format + bottom_border_format)),
-            ("header_4", 4, 0, "text", "PROJECT: {}".format(((o.order_id and o.order_id.ref_project_name or "") or (o.product_id and o.product_id.name or "") or "").encode("UTF-8")), None, xlwt.easyxf(cell_format + right_bottom_border_format)),
+            ("header_4", 3, 0, "text", "PROJECT: {}".format(((o.order_id and o.order_id.ref_project_name or "") or (o.product_id and o.product_id.name or "") or "").encode("UTF-8")), None, xlwt.easyxf(cell_format + right_bottom_border_format)),
         ]
         row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
         row_pos = self.xls_write_row(ws, row_pos, row_data)
@@ -213,8 +218,7 @@ class sqp_sampling_in_process_continuous_xls(report_xls):
             ("footer_12", 1, 0, "text", ""),
             ("footer_13", 1, 0, "text", ""),
             ("footer_14", 1, 0, "text", ""),
-            ("footer_15", 1, 0, "text", ""),
-            ("footer_16", 1, 0, "text", "", None, right_border_style),
+            ("footer_15", 1, 0, "text", "", None, right_border_style),
         ]
         row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
         row_pos = self.xls_write_row(ws, row_pos, row_data)
@@ -233,8 +237,7 @@ class sqp_sampling_in_process_continuous_xls(report_xls):
             ("footer_12", 1, 0, "text", ""),
             ("footer_13", 1, 0, "text", "สภาพแผ่น = แผ่นเยื้อง การซอยแผ่น"),
             ("footer_14", 1, 0, "text", ""),
-            ("footer_15", 1, 0, "text", ""),
-            ("footer_16", 1, 0, "text", "", None, right_border_style),
+            ("footer_15", 1, 0, "text", "", None, right_border_style),
         ]
         row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
         row_pos = self.xls_write_row(ws, row_pos, row_data)
@@ -253,18 +256,17 @@ class sqp_sampling_in_process_continuous_xls(report_xls):
             ("footer_12", 1, 0, "text", ""),
             ("footer_13", 1, 0, "text", ""),
             ("footer_14", 1, 0, "text", ""),
-            ("footer_15", 1, 0, "text", ""),
-            ("footer_16", 1, 0, "text", "", None, right_border_style),
+            ("footer_15", 1, 0, "text", "", None, right_border_style),
         ]
         row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
         row_pos = self.xls_write_row(ws, row_pos, row_data)
         c_specs = [
             ("footer_1", 1, 0, "text", "หมายเหตุ 3", None, left_border_style),
             ("footer_2", 1, 0, "text", ""),
-            ("footer_3", 1, 0, "text", "ตรวจทุกแผ่นแรกของแต่ละ Item ตามเกณฑ์ A"),
+            ("footer_3", 1, 0, "text", "ตรวจทุกแผ่นแรกของแต่ละ Item ตามแบบฟอร์มและตรวจซ้ำทุก 250 m"),
             ("footer_4", 1, 0, "text", ""),
             ("footer_5", 1, 0, "text", ""),
-            ("footer_6", 1, 0, "text", "หาก Item ไหนมีความยาวรวมเกิน 500 m ให้ตรวจตามเกณฑ์ A ซ้ำทุก 500 m"),
+            ("footer_6", 1, 0, "text", ""),
             ("footer_7", 1, 0, "text", ""),
             ("footer_8", 1, 0, "text", ""),
             ("footer_9", 1, 0, "text", ""),
@@ -273,8 +275,7 @@ class sqp_sampling_in_process_continuous_xls(report_xls):
             ("footer_12", 1, 0, "text", ""),
             ("footer_13", 1, 0, "text", ""),
             ("footer_14", 1, 0, "text", ""),
-            ("footer_15", 1, 0, "text", ""),
-            ("footer_16", 1, 0, "text", "", None, right_border_style),
+            ("footer_15", 1, 0, "text", "", None, right_border_style),
         ]
         row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
         row_pos = self.xls_write_row(ws, row_pos, row_data)
@@ -293,8 +294,7 @@ class sqp_sampling_in_process_continuous_xls(report_xls):
             ("footer_12", 1, 0, "text", ""),
             ("footer_13", 1, 0, "text", ""),
             ("footer_14", 1, 0, "text", ""),
-            ("footer_15", 1, 0, "text", ""),
-            ("footer_16", 1, 0, "text", "", None, right_border_style),
+            ("footer_15", 1, 0, "text", "", None, right_border_style),
         ]
         row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
         row_pos = self.xls_write_row(ws, row_pos, row_data)
@@ -313,8 +313,7 @@ class sqp_sampling_in_process_continuous_xls(report_xls):
             ("footer_12", 1, 0, "text", ""),
             ("footer_13", 1, 0, "text", ""),
             ("footer_14", 1, 0, "text", ""),
-            ("footer_15", 1, 0, "text", ""),
-            ("footer_16", 1, 0, "text", "", None, right_border_style),
+            ("footer_15", 1, 0, "text", "", None, right_border_style),
         ]
         row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
         row_pos = self.xls_write_row(ws, row_pos, row_data)
@@ -333,8 +332,7 @@ class sqp_sampling_in_process_continuous_xls(report_xls):
             ("footer_12", 1, 0, "text", "", None, bottom_border_style),
             ("footer_13", 1, 0, "text", "", None, bottom_border_style),
             ("footer_14", 1, 0, "text", "", None, bottom_border_style),
-            ("footer_15", 1, 0, "text", "", None, bottom_border_style),
-            ("footer_16", 1, 0, "text", "", None, right_bottom_border_style),
+            ("footer_15", 1, 0, "text", "", None, right_bottom_border_style),
         ]
         row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
         row_pos = self.xls_write_row(ws, row_pos, row_data)
