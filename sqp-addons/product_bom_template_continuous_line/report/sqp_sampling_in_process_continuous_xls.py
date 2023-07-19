@@ -159,7 +159,7 @@ class sqp_sampling_in_process_continuous_xls(report_xls):
             set_column_size=True)
         ws.set_horz_split_pos(row_pos)
         # Height Row
-        for i in range(5):
+        for i in range(6):
             ws.row(i).height = 600
         return row_pos
 
