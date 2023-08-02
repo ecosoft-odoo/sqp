@@ -202,19 +202,23 @@ class mrp_production(osv.osv):
                                                              {"sc_line": vals.get("line_number_sc")},
                                                              context=context)
         for production in self.browse(cr, uid, ids, context=context):
-            if not production.parent_id:
-                if "approved2" in vals:
-                    approved2 = vals["approved2"]
-                    approved2_by = False
-                    date_approved2 = False
-                    if approved2:
-                        approved2_by = uid
-                        date_approved2 = fields.date.context_today(self, cr, uid, context=context)
-                    # Approved By, Approved Date
-                    self.write(cr, uid, [production.id], {"approved2_by": approved2_by, "date_approved2": date_approved2}, context=context)
-                    # Update Child MO
-                    production_ids = self.search(cr, uid, [("parent_id","=",production.id)], context=context)
-                    self.write(cr, uid, production_ids, {"approved2": approved2, "approved2_by": approved2_by, "date_approved2": date_approved2}, context=context)
+            if not production.parent_id and "approved2" in vals:
+                approved2 = vals["approved2"]
+                approved2_by = False
+                date_approved2 = False
+                is_printed = False
+                if approved2:
+                    approved2_by = uid
+                    date_approved2 = fields.date.context_today(self, cr, uid, context=context)
+                    is_printed = True
+                # Check permission user to approved the document
+                if not self.pool['res.users'].has_group(cr, uid, 'product_bom_template_continuous_line.group_allow_approved_mo'):
+                    raise osv.except_osv(_('User Error!'), _('You are not allowed to %s this document.') % ('approved' if approved2 else 'unapproved'))
+                # Approved By, Approved Date, Printed
+                self.write(cr, uid, [production.id], {"approved2_by": approved2_by, "date_approved2": date_approved2, "is_printed": is_printed}, context=context)
+                # Update Child MO
+                production_ids = self.search(cr, uid, [("parent_id", "=", production.id)], context=context)
+                self.write(cr, uid, production_ids, {"approved2": approved2, "approved2_by": approved2_by, "date_approved2": date_approved2, "is_printed": is_printed}, context=context)
         return res
 
     def _hook_create_post_procurement(self, cr, uid, production, procurement_id, context=None):

@@ -18,6 +18,7 @@
     ],
     "data" : [
         "security/ir.model.access.csv",
+        "security/product_bom_template_continuous_line_security.xml",
         "wizards/product_make_bom_views.xml",
         "views/mrp_views.xml",
         "views/product_rapid_create_views.xml",

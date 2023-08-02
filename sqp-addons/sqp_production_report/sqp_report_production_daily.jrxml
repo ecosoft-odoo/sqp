@@ -47,6 +47,7 @@
 		when dept='S3' then 'IJ'
 		when dept='S4' then 'DO'
 		when dept='S5' then 'FN'
+		when dept='SC' then 'CL'
 	end as dept,
   mo.name mo, so.name so, so.ref_project_name project, history.line_number, pp.name_template as product, pp."W", pp."L", thick.value as "T",
 (select name from res_partner where id = so.partner_id) as customer,
@@ -63,6 +64,7 @@ date, order_qty, normal_qty, ot_qty from
 		when atl.field_description='S3' then status.s3_line
 		when atl.field_description='S4' then status.s4_line
 		when atl.field_description='S5' then status.s5_line
+		when atl.field_description='SC' then status.sc_line
 	end as line_number,
     status.product_id, status.product_qty as order_qty, date_trunc('day', at.create_date + interval '7 hour') date,
     coalesce(new_value_text, '0')::float new_value, coalesce(old_value_text, '0')::float old_value
@@ -70,7 +72,7 @@ date, order_qty, normal_qty, ot_qty from
     left outer join audittrail_log at on status.id = at.res_id
     join audittrail_log_line atl on at.id = atl.log_id
     where at.object_id = (select id from ir_model where model='mrp.production.status')
-    and atl.field_description in ('S1', 'S2', 'S3', 'S4', 'S5')
+    and atl.field_description in ('S1', 'S2', 'S3', 'S4', 'S5', 'SC')
     -- at.create_date + interval '7 hour' = ICT datetime
     -- ICT hour between 12 and 24 is considered normal working hour for the day
     and at.create_date + interval '7 hour' - interval '12 hour' >= $P{date} and at.create_date + interval '7 hour'- interval '24 hour' < $P{date}
@@ -86,6 +88,7 @@ union all
 		when atl.field_description='S3' then status.s3_line
 		when atl.field_description='S4' then status.s4_line
 		when atl.field_description='S5' then status.s5_line
+		when atl.field_description='SC' then status.sc_line
 	end as line_number,
 	status.product_id, status.product_qty as order_qty, date_trunc('day', at.create_date + interval '7 hour' - interval '24 hour') date,
     coalesce(new_value_text, '0')::float new_value, coalesce(old_value_text, '0')::float old_value
@@ -93,7 +96,7 @@ union all
     left outer join audittrail_log at on status.id = at.res_id
     join audittrail_log_line atl on at.id = atl.log_id
     where at.object_id = (select id from ir_model where model='mrp.production.status')
-    and atl.field_description in ('S1', 'S2', 'S3', 'S4', 'S5')
+    and atl.field_description in ('S1', 'S2', 'S3', 'S4', 'S5', 'SC')
     -- at.create_date + interval '7 hour' = ICT datetime
     -- ICT hour between 24 and 36 (1d+) is considered OT hour for the day
     and at.create_date + interval '7 hour' - interval '24 hour' >= $P{date}  and at.create_date + interval '7 hour' - interval '36 hour' < $P{date}
@@ -291,7 +294,8 @@ where a.dept = $P{dept}]]>
     $F{dept} == "AS" ? "Assembly" : (
         $F{dept} == "IJ" ? "Injection" : (
             $F{dept} == "DO" ? "Door" : (
-                $F{dept} == "FN" ? "Finishing" : "")))))
+                $F{dept} == "FN" ? "Finishing" : (
+                    $F{dept} == "CL" ? "Continuous Line" : ""))))))
 + " / " +
 ($F{line_number}.toString() == "" ? "" : (
   $F{line_number} == "L1" ? "Line 1" : (

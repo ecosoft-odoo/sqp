@@ -20,6 +20,7 @@
 ##############################################################################
 
 from osv import osv, fields
+from openerp.tools.translate import _
 
 LOCATION_FC_RM = 15
 LOCATION_PRODUCTION = 7
@@ -49,9 +50,14 @@ class mrp_production(osv.osv):
 
     def write(self, cr, uid, ids, vals, context=None):
         for production in self.browse(cr, uid, ids, context=context):
-            if not production.parent_id:
-                production_ids = self.search(cr, uid, [('parent_id','=',production.id)], context=context)
-                self.write(cr, uid, production_ids, {'approved': vals.get('approved', production.approved)}, context=context)
+            if not production.parent_id and 'approved' in vals:
+                approved = vals['approved']
+                # Check permission user to approved the document
+                if not self.pool['res.users'].has_group(cr, uid, 'bom_move.group_allow_approved_mo'):
+                    raise osv.except_osv(_('User Error!'), _('You are not allowed to %s this document.') % ('approved' if approved else 'unapproved'))
+                # --
+                production_ids = self.search(cr, uid, [('parent_id', '=', production.id)], context=context)
+                self.write(cr, uid, production_ids, {'approved': approved}, context=context)
         return super(mrp_production, self).write(cr, uid, ids, vals, context=context)
 
     def action_confirm(self, cr, uid, ids, context=None):

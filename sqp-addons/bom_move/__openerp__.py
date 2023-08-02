@@ -45,6 +45,7 @@
         'reports.xml',
         'report_view/bom_move_report_view.xml',
         'security/ir.model.access.csv',
+        'security/bom_move_security.xml',
     ],
     'test': [
     ],
