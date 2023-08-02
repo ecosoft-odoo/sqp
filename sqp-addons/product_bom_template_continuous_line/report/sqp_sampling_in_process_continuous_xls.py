@@ -182,7 +182,8 @@ class sqp_sampling_in_process_continuous_xls(report_xls):
             # Panel size
             W = str(int(line.W)) if line.W == int(line.W) else "{:,.2f}".format(line.W)
             L = str(int(line.L)) if line.L == int(line.L) else "{:,.2f}".format(line.L)
-            T = str(int(line.T)) if line.T == int(line.T) else "{:,.2f}".format(line.T)
+            # T = str(int(line.T)) if line.T == int(line.T) else "{:,.2f}".format(line.T)
+            T = line.product_id.T.name or ""
             panel_size = "{} x {} x {}".format(W, L, T)
             color = "{}/{}".format(line.product_id.mat_inside_skin_choices.code or "", line.product_id.mat_outside_skin_choices.code or "")
             surface = "{}/{}".format(line.product_id.mat_in_surface_choices.name or "", line.product_id.mat_out_surface_choices.name or "")
