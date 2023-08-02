@@ -59,8 +59,8 @@
 	<field name="L" class="java.lang.Number">
 		<fieldDescription><![CDATA[product_lines/L]]></fieldDescription>
 	</field>
-	<field name="T" class="java.lang.Number">
-		<fieldDescription><![CDATA[product_lines/T]]></fieldDescription>
+	<field name="T" class="java.lang.String">
+		<fieldDescription><![CDATA[product_lines/product_id/T/name]]></fieldDescription>
 	</field>
 	<field name="QTY" class="java.lang.Number">
 		<fieldDescription><![CDATA[product_lines/product_qty]]></fieldDescription>
