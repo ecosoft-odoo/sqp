@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <!-- Group -->
+        <record id="group_allow_approved_mo" model="res.groups">
+            <field name="name">Allow Approved in MO</field>
+            <field name="category_id" ref="base.module_category_manufacturing"/>
+        </record>
+    </data>
+</openerp>

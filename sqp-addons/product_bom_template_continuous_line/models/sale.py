@@ -11,8 +11,8 @@ header_msg = "<div>" + \
                     "<li>Density : 40~45 kg/m3</li>" + \
                     "<li>Core material &nbsp;: Polyisocyanorate Foam ( PIR )</li>" + \
                     "<li>Surface material : Color steel sheet (T) 0.50 mm.</li>" + \
-                    "<li>Color Steel Sheet - Outside : Off white</li>" + \
                     "<li>Color Steel Sheet - Inside : Off white</li>" + \
+                    "<li>Color Steel Sheet - Outside : Off white</li>" + \
                     "<li>Panel Thickness : ______ mm. (External)</li>" + \
                     "<li>Joint : </li>" + \
                 "</ul>" + \
