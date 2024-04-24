@@ -433,21 +433,25 @@ where a.dept = $P{dept}]]>
 	<title>
 		<band height="42" splitType="Stretch">
 			<staticText>
-				<reportElement x="-1" y="20" width="261" height="20"/>
+				<reportElement x="47" y="20" width="220" height="20"/>
 				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="14" isBold="true" isUnderline="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[ใบบันทึกการผลิตประจำวันที่]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="662" y="20" width="140" height="20"/>
+				<reportElement x="642" y="20" width="160" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="10" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[ วันที่บังคับใช้ 05/01/52]]></text>
+				<text><![CDATA[ วันที่บังคับใช้ 22/04/67]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="1" width="46" height="35"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sqp_small_logo.gif"]]></imageExpression>
+			</image>
 			<staticText>
-				<reportElement x="1" y="0" width="186" height="20"/>
+				<reportElement x="47" y="0" width="186" height="20"/>
 				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="12" isBold="true" isUnderline="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -458,10 +462,10 @@ where a.dept = $P{dept}]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="10" isBold="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[PD - F - 70 Rev.0]]></text>
+				<text><![CDATA[PD - F - 70 Rev.2]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="191" y="20" width="182" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="270" y="20" width="182" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Monospaced" size="13" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
