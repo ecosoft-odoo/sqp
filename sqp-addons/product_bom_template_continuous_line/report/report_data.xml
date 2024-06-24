@@ -18,8 +18,25 @@
             <field name="jasper_output">pdf</field>
         </record>
 
+        <!-- Sampling In Process (Continuous) Form -->
+        <report string="Sampling in Process (Continuous)"
+            model="mrp.production"
+            auto="False"
+            name="qa.sampling.sqp.continuous"
+            rml="product_bom_template_continuous_line/report/sqp_qa_sampling_continuous.jrxml"
+            id="report_sqp_qa_sampling_continuous"
+            menu="True"
+            header="False"
+    	    attachment=""
+            groups=""
+        />
+        <record id="report_sqp_qa_sampling_continuous" model="ir.actions.report.xml">
+            <field name="jasper_report">True</field>
+            <field name="jasper_output">pdf</field>
+        </record>
+
         <!-- Sampling In Process Form -->
-        <record id="report_sqp_sampling_in_process_continuous_xls" model="ir.actions.report.xml">
+        <!-- <record id="report_sqp_sampling_in_process_continuous_xls" model="ir.actions.report.xml">
             <field name="name">Sampling in Process (Continuous)</field>
             <field name="model">mrp.production</field>
             <field name="type">ir.actions.report.xml</field>
@@ -33,6 +50,6 @@
             <field name="key2">client_print_multi</field>
             <field name="value" eval="'ir.actions.report.xml,' +str(ref('report_sqp_sampling_in_process_continuous_xls'))"/>
             <field name="model">mrp.production</field>
-        </record>
+        </record> -->
     </data>
 </openerp>
