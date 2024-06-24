@@ -92,23 +92,23 @@
 				<frame>
 					<reportElement style="table" x="0" y="0" width="802" height="30"/>
 					<staticText>
-						<reportElement x="6" y="9" width="220" height="20"/>
+						<reportElement x="6" y="9" width="265" height="20"/>
 						<textElement verticalAlignment="Top" lineSpacing="Single">
-							<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+							<font fontName="Monospaced" size="11" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
 						<text><![CDATA[เลขที่ใบสั่งผลิต (Manufacturing Order) :]]></text>
 					</staticText>
 					<textField pattern="" isBlankWhenNull="true">
-						<reportElement mode="Transparent" x="171" y="9" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+						<reportElement mode="Transparent" x="202" y="9" width="150" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 						<textElement verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-							<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+							<font fontName="Monospaced" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
 						<textFieldExpression class="java.lang.String"><![CDATA[$F{MO Number}]]></textFieldExpression>
 					</textField>
 					<staticText>
 						<reportElement x="500" y="9" width="220" height="20"/>
 						<textElement verticalAlignment="Top" lineSpacing="Single">
-							<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+							<font fontName="Monospaced" size="11" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
 						<text><![CDATA[หน่วยงาน : Continuous Line]]></text>
 					</staticText>
@@ -126,44 +126,44 @@
 				<frame>
 					<reportElement style="table" x="0" y="60" width="802" height="30"/>
 					<staticText>
-						<reportElement x="6" y="9" width="60" height="21"/>
+						<reportElement x="6" y="4" width="70" height="26"/>
 						<textElement verticalAlignment="Top" lineSpacing="Single">
-							<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+							<font fontName="Monospaced" size="11" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
 						<text><![CDATA[Customer :]]></text>
 					</staticText>
 					<textField pattern="" isBlankWhenNull="true">
-						<reportElement mode="Transparent" x="55" y="9" width="230" height="21" forecolor="#000000" backcolor="#FFFFFF"/>
+						<reportElement mode="Transparent" x="61" y="4" width="224" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
 						<textElement verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-							<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+							<font fontName="Monospaced" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
 						<textFieldExpression class="java.lang.String"><![CDATA[$F{Customer}.toString() == "" ? $F{tmp_partner_name} : $F{Customer}]]></textFieldExpression>
 					</textField>
 					<staticText>
-						<reportElement x="285" y="9" width="40" height="21"/>
+						<reportElement x="285" y="4" width="45" height="26"/>
 						<textElement verticalAlignment="Top" lineSpacing="Single">
-							<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+							<font fontName="Monospaced" size="11" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
 						<text><![CDATA[Project :]]></text>
 					</staticText>
 				    <textField pattern="" isBlankWhenNull="true">
-					    <reportElement mode="Transparent" x="325" y="9" width="330" height="21" forecolor="#000000" backcolor="#FFFFFF"/>
+					    <reportElement mode="Transparent" x="330" y="4" width="325" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
 					    <textElement verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-						    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+						    <font fontName="Monospaced" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					    </textElement>
 					    <textFieldExpression class="java.lang.String"><![CDATA[$F{Project Name}.toString() == "" ? $F{product_name} : $F{Project Name}]]></textFieldExpression>
 				    </textField>
 					<staticText>
-						<reportElement x="655" y="9" width="50" height="21"/>
+						<reportElement x="655" y="4" width="55" height="26"/>
 						<textElement verticalAlignment="Top" lineSpacing="Single">
-							<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+							<font fontName="Monospaced" size="11" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
 						<text><![CDATA[Order NO :]]></text>
 					</staticText>
 					<textField pattern="" isBlankWhenNull="true">
-						<reportElement mode="Transparent" x="700" y="9" width="94" height="21" forecolor="#000000" backcolor="#FFFFFF"/>
+						<reportElement mode="Transparent" x="708" y="4" width="86" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
 						<textElement verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-							<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+							<font fontName="Monospaced" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 						</textElement>
 						<textFieldExpression class="java.lang.String"><![CDATA[$F{Sale Order}.toString() == "" ? $F{tmp_ref_order} : $F{Sale Order}]]></textFieldExpression>
 					</textField>
