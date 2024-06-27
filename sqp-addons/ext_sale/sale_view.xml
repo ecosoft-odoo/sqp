@@ -13,7 +13,7 @@
                        <field name="product_tag_id"/>
                     </field>
                     <field name="name" position="before">
-                    	<field name="pricelist_id"/>
+                    	<field name="pricelist_id" invisible="1"/>
                     </field>
 				</data>
 			</field>
@@ -30,7 +30,7 @@
                       	<field name="product_tag_id"/>
                     </field>
                     <field name="name" position="before">
-                    	<field name="pricelist_id"/>
+                    	<field name="pricelist_id" invisible="1"/>
                     </field>
 				</data>
 			</field>
