@@ -383,7 +383,7 @@
 				<text><![CDATA[อ้างถึง]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="476" y="146" width="77" height="15"/>
+				<reportElement x="476" y="146" width="100" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="11" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
@@ -407,7 +407,7 @@
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{invoice_ref_date}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="476" y="176" width="70" height="15"/>
+				<reportElement x="476" y="176" width="100" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="11" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
