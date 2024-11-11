@@ -385,7 +385,7 @@
 			<textField isBlankWhenNull="true">
 				<reportElement x="476" y="146" width="100" height="15"/>
 				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="11" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					<font fontName="Monospaced" size="10" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{invoice_ref_number}]]></textFieldExpression>
 			</textField>
@@ -409,7 +409,7 @@
 			<textField isBlankWhenNull="true">
 				<reportElement x="476" y="176" width="100" height="15"/>
 				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="11" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+					<font fontName="Monospaced" size="10" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Order No}]]></textFieldExpression>
 			</textField>
