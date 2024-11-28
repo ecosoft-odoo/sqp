@@ -346,9 +346,9 @@
 					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[
- PU-F-05  Rev.1
+ PU-F-05  Rev.2
 
- วันที่บังคับใช้ : 30/10/60]]></text>
+ วันที่บังคับใช้ : 1/12/2567]]></text>
 			</staticText>
 			<image>
 				<reportElement x="2" y="4" width="46" height="44"/>
@@ -685,32 +685,32 @@ AUTHORIZED SIGNATURE]]></text>
 				<text><![CDATA[CONDITION :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="62" width="393" height="12"/>
+				<reportElement x="1" y="62" width="494" height="10"/>
 				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[1. โปรดระบุเลขที่ใบสั่งซื้อทุกครั้งในเอกสารใบส่งของ และใบกำกับภาษี]]></text>
+				<text><![CDATA[1. การรับสินค้า สามารถจัดส่งสินค้าได้ในวันทำการ วันจันทร์-ศุกร์ เวลา 08.30-16.00น.เท่านั้น]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="75" width="474" height="12"/>
+				<reportElement x="1" y="75" width="494" height="10"/>
 				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[2. เมื่อมีการส่งสินค้ากรุณานำใบสั่งซื้อแนบคู่กับใบส่งของ /ใบกำกับภาษีทุกครั้ง]]></text>
+				<text><![CDATA[2. เมื่อมีการจัดส่งสินค้าให้แนบPO. และระบุ เลขที่PO. ลงในใบส่งสินค้าและใบกำกับภาษีทุกครั้ง]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="88" width="497" height="10"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[3. การวางบิล&รับเช็คบริษัทฯ จะทำการตามตารางปฎิทินวางบิล&รับเช็ค ของทุกเดือนเวลา 10.00-16.00น.]]></text>
+				<text><![CDATA[3. การวางบิล ให้ส่งเอกสารวางบิลทางไปรษณีย์ หรือ ปฎิบัติตามระเบียบการวางบิลที่กำหนดไว้]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="101" width="393" height="12"/>
+				<reportElement x="2" y="101" width="494" height="10"/>
 				<textElement lineSpacing="Single">
-					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[   การนัดจ่ายเช็ค จะนับจากวันวางบิลเป็นหลักกรุณานำเอกสารวางบิลตามกำหนด]]></text>
+				<text><![CDATA[   การชำระเงินค่าสินค้า/ค่าบริการ ทางบริษัทฯ จะชำระเงินตามวันที่กำหนดไว้ในตารางกำหนดชำระเงิน]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="table" x="0" y="118" width="260" height="75"/>
@@ -718,10 +718,7 @@ AUTHORIZED SIGNATURE]]></text>
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[
- ได้รับเอกสารกรุณากรอกข้อมูลแล้ว FAX กลับ 0-2744 6303
-
-
- ผู้ขาย                                (ตัวบรรรจง) วันที่]]></text>
+ กรุณากรอกข้อมูลแล้วส่งกลับเพื่อยืนยันการสั่งซื้อทาง EMAIL]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="table" x="260" y="118" width="134" height="75"/>
@@ -756,40 +753,47 @@ AUTHORIZED SIGNATURE]]></text>
 				<textFieldExpression class="java.lang.Number"><![CDATA[$V{add_disc_amt}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="83" y="0" width="258" height="12"/>
+				<reportElement x="3" y="164" width="50" height="12"/>
 				<textElement verticalAlignment="Middle" lineSpacing="Single">
-					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[กรุณาแฟกส์กลับเพื่อยืนยันในการจัดซื้อ]]></text>
+				<text><![CDATA[ผู้ขาย]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="101" y="13" width="240" height="12"/>
+				<reportElement x="124" y="164" width="240" height="12"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[(ตัวบรรรจง)  วันที่]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="145" width="240" height="10"/>
 				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[ส่งสินค้าได้ตามกำหนด]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="101" y="26" width="319" height="12"/>
+				<reportElement x="110" y="145" width="319" height="10"/>
 				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[ไม่ได้จะจัดส่งสินค้าให้ วันที่ .........................................]]></text>
+				<text><![CDATA[ไม่ได้จะจัดส่งสินค้าให้ วันที่ .........................]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="85" y="17" width="5" height="5"/>
+				<reportElement x="6" y="148" width="5" height="5"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="85" y="29" width="5" height="5"/>
+				<reportElement x="100" y="148" width="5" height="5"/>
 			</rectangle>
 			<rectangle>
 				<reportElement x="266" y="129" width="10" height="10"/>
 			</rectangle>
 			<line>
-				<reportElement x="27" y="169" width="95" height="1"/>
+				<reportElement x="27" y="174" width="95" height="1"/>
 			</line>
 			<line>
-				<reportElement x="200" y="169" width="56" height="1"/>
+				<reportElement x="200" y="174" width="56" height="1"/>
 			</line>
 			<line>
 				<reportElement x="268" y="169" width="117" height="1"/>
