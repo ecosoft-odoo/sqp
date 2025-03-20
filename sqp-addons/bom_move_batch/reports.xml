@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- PDF -->
+        <report string="Bom Move(pdf)"
+            model="bom.move.batch"
+            auto="False"
+            name="bom.move.batch.pdf"
+            rml="bom_move_batch/report/bom_move_batch_pdf.jrxml"
+            id="bom_move_batch_pdf"
+            menu="True"
+            header="False"
+     	      attachment=""
+            groups=""
+        />
+        <record id="bom_move_batch_pdf" model="ir.actions.report.xml">
+            <field name="jasper_report">True</field>
+            <field name="jasper_output">pdf</field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- notify all employees of module installation -->
+        <record model="mail.message" id="module_install_notification">
+            <field name="model">mail.group</field>
+            <field name="res_id" ref="mail.group_all_employees"/>
+            <field name="type">notification</field>
+            <field name="subtype_id" ref="mail.mt_comment"/>
+            <field name="subject">Bom Move Batch Process application installed!</field>
+            <field name="body"><![CDATA[<p>Bom Move Batch</p>]]></field>
+        </record>
+
+        <!-- mail: subtypes -->
+        <record id="mt_bom_move_batch" model="mail.message.subtype">
+            <field name="name">Status Change</field>
+            <field name="res_model">bom.move.batch</field>
+        </record>
+
+    </data>
+</openerp>
