@@ -1,0 +1,4 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_bom_move_batch,bom.move.batch,model_bom_move_batch,base.group_user,1,1,1,1
+access_bom_move_batch_line,bom.move.batch.line,model_bom_move_batch_line,base.group_user,1,1,1,1
+access_bom_move_batch_report,bom.move.batch.report,model_bom_move_batch,base.group_user,1,0,0,0

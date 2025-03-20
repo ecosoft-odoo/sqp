@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="seq_type_bom_move_batch" model="ir.sequence.type">
+            <field name="name">Bom Move Batch</field>
+            <field name="code">bom.move.batch</field>
+        </record>
+        <record id="seq_bom_move" model="ir.sequence">
+            <field name="name">Bom Move Batch (SQP)</field>
+            <field name="code">bom.move.batch</field>
+            <field name="prefix">BMB%(fy)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+            <field name="implementation">standard</field>
+        </record>
+    </data>
+</openerp>
