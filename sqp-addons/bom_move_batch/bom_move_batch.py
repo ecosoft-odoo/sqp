@@ -19,6 +19,7 @@
 #
 ##############################################################################
 
+import time
 from osv import osv, fields
 from openerp.tools.translate import _
 
@@ -30,7 +31,7 @@ class bom_move_batch(osv.osv):
     _columns = {
         'name': fields.char('Name', size=64, required=True, readonly=True),
         'date': fields.date('Date', required=True, readonly=True, states={'draft': [('readonly', False)]}),
-        'department_id': fields.many2one('hr.department', 'Department', required=True, readonly=True, states={'draft': [('readonly', False)]}),
+        'department_id': fields.many2one('hr.department', 'Department', readonly=True, states={'draft': [('readonly', False)]}),
         'ref_bom': fields.char('Reference', readonly=True),
         'ref_mo': fields.char('Reference MO', readonly=True),
         'ref_bom_ids': fields.many2many(
@@ -38,7 +39,15 @@ class bom_move_batch(osv.osv):
             'bom_move_batch_bom_rel',
             'bom_move_batch_id',
             'bom_move_id',
-            'Reference BOMs', readonly=True, states={'draft': [('readonly', False)]}),
+            'Reference BOMs', readonly=True, states={'draft': [('readonly', False)]}
+        ),
+        'ref_mo_ids': fields.many2many(
+            'mrp.production',
+            'bom_move_batch_mo_rel',
+            'bom_move_batch_id',
+            'mo_id',
+            'Reference MOs', required=True, readonly=True, states={'draft': [('readonly', False)]}
+        ),
         'state':fields.selection(
             [
                 ('draft','Draft'),
@@ -50,7 +59,8 @@ class bom_move_batch(osv.osv):
     }
     _defaults = {
         'state': 'draft',
-        'name': '/'
+        'name': '/',
+        'date': lambda *a: time.strftime('%Y-%m-%d'),
     }
     
     def copy(self, cr, uid, id, defaults, context=None):
@@ -62,10 +72,6 @@ class bom_move_batch(osv.osv):
         for obj in self.browse(cr, uid, ids, context=context):
             message = "Bom Move Batch Document <b>created</b>."
             self.message_post(cr, uid, [obj.id], body=message, context=context)
-    
-    def onchange_department_id(self, cr, uid, ids, department_id, context=None):
-        res = {'value': {'ref_bom_ids': False}}
-        return res
         
     def _get_batch_bom(self, cr, uid, batch_data, context=None):
         return ' ,'.join(sorted(batch_data['name']))
@@ -155,9 +161,6 @@ class bom_move_batch(osv.osv):
             if move_line_ids:
                 self.pool.get('bom.move.batch.line').unlink(cr, uid, move_line_ids, context=context)
             batch_data = self._get_batch(cr, uid, picking_ids[0][2], context=context)
-            if len(batch_data["department_id"]) > 1:
-                raise osv.except_osv(_('Error!'), _('All selected Bom moves must belong to the same department.'))
-        
             lines = self._prepare_batch_move_line_vals(cr, uid, batch_data, context=context)
             vals['move_lines'] = lines
             vals['ref_bom'] = self._get_batch_bom(cr, uid, batch_data, context=context)

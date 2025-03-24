@@ -35,24 +35,26 @@
                         </h1>
                         <group>
                             <group>
-                                <field name="ref_bom_ids" 
+                                <field 
+                                        name="ref_bom_ids" 
                                     widget="many2many_tags"
                                     domain="[
-                                        ('department_id', 'child_of', department_id),
-                                        ('type','=','internal'),
-                                        ('is_bom_move','=',True),
-                                        ('state', '=', 'done'),
+                                        ('ref_mo_id', 'in', ref_mo_ids[0][2]),
+                                        ('type', '=', 'internal'),
+                                        ('is_bom_move', '=', True),
+                                        ('state', 'not in', ['cancel', 'done']),
                                     ]"
-                                />    
-                                <field name="ref_mo" />
+                                />
+                                <field 
+                                    name="ref_mo_ids"
+                                    widget="many2many_tags"
+                                />
+                                <field name="ref_mo" invisible="1"/>
                                 <field name="ref_bom" invisible="1"/>
                             </group>
                             <group>
                                 <field name="date"/>
-                                <field 
-                                    name="department_id"
-                                    on_change="onchange_department_id(department_id, context)"
-                                />
+                                <field name="department_id"/>
                             </group>
                         </group>
                         <notebook>
