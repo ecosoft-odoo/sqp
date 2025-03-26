@@ -23,11 +23,13 @@ from osv import osv, fields
 
 class bom_move_batch_line(osv.osv):
     _name = 'bom.move.batch.line'
+    _order = "product_code"
     _columns = {
-        'name': fields.char('Desciption', size=64, required=True),
+        'name': fields.char('Description', size=64, required=True),
         'bom_move_batch_id': fields.many2one('bom.move.batch', 'Batch', ondelete='cascade'),
+        'product_code': fields.related('product_id', 'code', type='char', string='Product Code', readonly=True, store=True),
         'product_id': fields.many2one('product.product', 'Product', required=True),
-        'product_qty': fields.float('Qunatity', required=True),
+        'product_qty': fields.float('Quantity', required=True),
         'product_uom': fields.many2one('product.uom', 'Unit of Measure', required=True),
         'order_qty': fields.float('Order Quantity', required=True),
     }
