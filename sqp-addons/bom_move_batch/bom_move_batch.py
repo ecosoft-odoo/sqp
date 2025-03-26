@@ -143,38 +143,46 @@ class bom_move_batch(osv.osv):
         picking_ids = vals.get('ref_bom_ids', False)
         if vals.get('name', '/') == '/':
             vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'bom.move.batch') or '/'
-        if picking_ids:
-            batch_data = self._get_batch(cr, uid, picking_ids[0][2], context=context)
-            lines = self._prepare_batch_move_line_vals(cr, uid, batch_data, context=context)
-            vals['move_lines'] = lines
-            vals['ref_bom'] = self._get_batch_bom(cr, uid, batch_data, context=context)
-            vals['ref_mo'] = self._get_batch_mo(cr, uid, batch_data, context=context)
         context.update({'mail_create_nolog': True})
         res = super(bom_move_batch, self).create(cr, uid, vals, context=context)
         self.create_send_note(cr, uid, [res], context=context)
         return res
         
     def write(self, cr, uid, ids, vals, context=None):
-        picking_ids = vals.get('ref_bom_ids', False)
-        if picking_ids:
-            move_line_ids = self.pool.get('bom.move.batch.line').search(cr, uid, [('bom_move_batch_id', 'in', ids)], context=context)
-            if move_line_ids:
-                self.pool.get('bom.move.batch.line').unlink(cr, uid, move_line_ids, context=context)
-            batch_data = self._get_batch(cr, uid, picking_ids[0][2], context=context)
-            lines = self._prepare_batch_move_line_vals(cr, uid, batch_data, context=context)
-            vals['move_lines'] = lines
-            vals['ref_bom'] = self._get_batch_bom(cr, uid, batch_data, context=context)
-            vals['ref_mo'] = self._get_batch_mo(cr, uid, batch_data, context=context)
-        
+        mo_ids = vals.get('ref_mo_ids', False)
+        pick_obj = self.pool.get('stock.picking.out')
+        if mo_ids:
+            picking_ids = pick_obj.search(
+                cr, 
+                uid, 
+                [
+                    ('ref_mo_id', 'in', mo_ids[0][2]),
+                    ('type', '=', 'internal'),
+                    ('is_bom_move', '=', True),
+                    ('state', 'not in', ['cancel', 'done']),
+                ],
+                context=context)
+            if picking_ids:
+                vals['ref_bom_ids'] = [(6, 0, picking_ids)]        
         res = super(bom_move_batch, self).write(cr, uid, ids, vals, context=context)
         return res
 
     def action_done(self, cr, uid, ids, context=None):
-        if context is None:
-            context = {}
-        for obj in self.browse(cr, uid, ids, context=context):
-            if not obj.move_lines:
-                raise osv.except_osv(_('Error!'), _('You need to add a line before done.'))
+        for batch in self.browse(cr, uid, ids, context=context):
+            picking_ids = [rec.id for rec in batch.ref_bom_ids]
+            if picking_ids:
+                move_line_ids = self.pool.get('bom.move.batch.line').search(cr, uid, [('bom_move_batch_id', 'in', ids)], context=context)
+                if move_line_ids:
+                    self.pool.get('bom.move.batch.line').unlink(cr, uid, move_line_ids, context=context)
+                batch_data = self._get_batch(cr, uid, picking_ids, context=context)
+                if batch_data:
+                    vals = {
+                        'move_lines': self._prepare_batch_move_line_vals(cr, uid, batch_data, context=context),
+                        'ref_bom': self._get_batch_bom(cr, uid, batch_data, context=context),
+                        'ref_mo': self._get_batch_mo(cr, uid, batch_data, context=context),
+                    }
+                batch.write(vals)
+                
         return self.write(cr, uid, ids, {'state': 'done'}, context=context)
     
     def action_cancel(self, cr, uid, ids, context=None):
