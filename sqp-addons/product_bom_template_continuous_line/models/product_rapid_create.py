@@ -12,6 +12,7 @@ class product_rapid_create(osv.osv):
         "is_continuous_line": fields.boolean(
             string="Continuous Line",
         ),
+        "product_customer": fields.many2one('res.partner', 'Product Customer'),
     }
 
     _defaults = {
@@ -23,6 +24,7 @@ class product_rapid_create(osv.osv):
             cr, uid, ids, new_product_name, line, object, context=context)
         prepare_product.update({
             "is_continuous_line": object.is_continuous_line,
+            "partner_id": object.product_customer.id,
             "mat_in_surface_choices": line.mat_in_surface_choices.id,
             "mat_out_surface_choices": line.mat_out_surface_choices.id,
             "bom_template_id": line.bom_template_id.id,

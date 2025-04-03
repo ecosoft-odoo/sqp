@@ -50,6 +50,9 @@
                 <xpath expr="//field[@name='is_one_time_use']" position="after">
                     <field name="is_continuous_line" invisible="1"/>
                 </xpath>
+                <xpath expr="//field[@name='valuation']" position="after">
+                    <field name="product_customer"/>
+                </xpath>
                 <xpath expr="//field[@name='panel_lines']/tree/field[@name='W']" position="before">
                     <field name="is_continuous_line" invisible="1"/>
                     <field name="mat_width_choices" attrs="{'required': [('is_continuous_line', '=', True), ('is_W_required','=',True)]}" on_change="onchange_mat_width_choices(mat_width_choices, context)" invisible="not context.get('default_is_continuous_line', False)" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
