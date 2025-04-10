@@ -19,6 +19,7 @@
 #
 ##############################################################################
 
+from datetime import datetime
 from openerp.osv import fields, osv
 
 
@@ -45,9 +46,13 @@ class account_invoice(osv.osv):
         for invoice in self.browse(cr, uid, ids):
             # Update name for BOI
             if invoice.boi_type == 'BOI':
-                boi_cert_name = invoice.boi_cert_id and invoice.boi_cert_id.name or 'BOI'
-                number = '%s-%s'%(boi_cert_name,invoice.number[invoice.number.find('-') + 1:])
-                self.write(cr, uid, [invoice.id], {'number': number})
+                today = datetime.strptime(invoice.date_invoice, '%Y-%m-%d').date()
+                start_date = datetime.strptime(invoice.boi_cert_id.start_date, '%Y-%m-%d').date()
+                end_date = datetime.strptime(invoice.boi_cert_id.expire_date, '%Y-%m-%d').date()
+                if start_date <= today <= end_date:
+                    boi_cert_name = invoice.boi_cert_id and invoice.boi_cert_id.name or 'BOI'
+                    number = '%s-%s'%(boi_cert_name,invoice.number[invoice.number.find('-') + 1:])
+                    self.write(cr, uid, [invoice.id], {'number': number})
         return result
 
     def refund(self, cr, uid, ids, date=None, period_id=None, description=None, journal_id=None, context=None):
