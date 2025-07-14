@@ -83,6 +83,7 @@ class account_invoice(AdditionalDiscountable, osv.Model):
                   'account.invoice.tax': (_get_invoice_tax, None, 20),
                   'account.invoice.line': (_get_invoice_line, ['price_unit', 'invoice_line_tax_id', 'quantity', 'discount', 'invoice_id'], 20),
                   }, multi='all', help="The advance amount to be deducted according to original percentage"),
+            'manual_advance_invoice': fields.boolean('Manual Advance Invoice'),
             # Deposit
             'is_deposit': fields.boolean('Deposit'),
             'amount_deposit': fields.function(_amount_all, method=True, digits_compute=dp.get_precision('Account'), string='Deposit Amt',
@@ -402,6 +403,9 @@ class account_invoice_tax(osv.Model):
         add_disc = invoice.add_disc
         # Percent Advance
         advance = not invoice.is_advance and order_ids and (order_ids[0].advance_percentage) or 0.0
+        if invoice.manual_advance_invoice:
+            advance_amount = not invoice.is_advance and invoice.amount_advance or 0.0
+            advance = invoice.amount_net and advance_amount / (invoice.amount_net) * 100 or 0.0
         # Percent Deposit
         deposit_amount = not invoice.is_deposit and invoice.amount_deposit or 0.0
         deposit = order_ids and invoice.amount_net and (deposit_amount / (invoice.amount_net) * 100) or 0.0
