@@ -104,7 +104,10 @@
                 <field name="amount_tax" position="after">
                     <field name="amount_beforeretention" sum="Before Retention" colspan="2" attrs="{'invisible':[('amount_retention', '=', 0.0)]}" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                     <field name="amount_retention" sum="Retention Amt" colspan="2" attrs="{'invisible':[('amount_retention', '=', 0.0)]}" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                </field>            
+                </field>  
+                <field name="origin" position="after">
+                    <field name="manual_advance_invoice" />
+                </field>    
 			</field>
         </record>
         

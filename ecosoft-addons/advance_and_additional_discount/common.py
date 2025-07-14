@@ -105,7 +105,11 @@ class AdditionalDiscountable(object):
 #             if record.sale_order_ids or record.purchase_order_ids:
 #                 order = record.sale_order_ids and record.sale_order_ids[0] or record.purchase_order_ids[0]
                 if not record.is_advance:
-                    advance_percentage = order.advance_percentage
+                    if not record.manual_advance_invoice:
+                        advance_percentage = order.advance_percentage
+                    else:
+                        advance_amount = record.amount_advance or 0.0
+                        advance_percentage = record.amount_net and advance_amount / (record.amount_net) * 100 or 0.0
                     if advance_percentage:
                         o_res['amount_advance'] = cur_round(o_res['amount_net'] * advance_percentage / 100)
                         o_res['amount_beforetax'] = cur_round(o_res['amount_beforetax']) - cur_round(o_res['amount_advance'])
