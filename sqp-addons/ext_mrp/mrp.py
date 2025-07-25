@@ -69,6 +69,8 @@ class mrp_production(osv.osv):
         'note': fields.text('Remark'),
         'short_note': fields.char('Short Note', size=256, required=False, readonly=False),
         'flag_claim': fields.boolean('For Claim?', states={'draft': [('readonly', False)]}),
+        'date_planned': fields.datetime('Mo Date', required=True, select=1, readonly=True, states={'draft':[('readonly',False)]}),
+        'date_delivery': fields.datetime('Delivery Date', readonly=True, states={'draft':[('readonly',False)]}),
     }
     _constraints = [
         (_check_submo_valid,
