@@ -52,47 +52,48 @@
         <menuitem action="super_mrp_production_action" id="menu_super_mrp_production_action"
             parent="mrp.menu_mrp_manufacturing" sequence="0"/>
 
-	    <record id="mrp_production_form_view_ext" model="ir.ui.view">
-	        <field name="name">mrp.production.form.view.ext</field>
-	        <field name="model">mrp.production</field>
-	        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
-	        <field name="arch" type="xml">
-	        	<button name="button_confirm" position="before">
-	        		<field name="mrp_production_exists" invisible="1"/>
+        <record id="mrp_production_form_view_ext" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.ext</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <button name="button_confirm" position="before">
+                    <field name="mrp_production_exists" invisible="1"/>
                     <button name="action_view_child_mrp_production" string="View Child MOs" type="object" class="oe_highlight"
                         attrs="{'invisible': ['|',('parent_id','=',True),('mrp_production_exists','=',False)]}"/>
-				</button>
-				<!--button name="button_confirm" position="after" >
-					<field name="sale_picking_ids" invisible="True"/>
-					<button name="action_ship_create" type="object" confirm="Are you sure to create Delivery Order?"
-						attrs="{'invisible':['|','|','|',('parent_id','!=',False),('order_id','=',False),'&amp;',('sale_picking_ids','!=',False),('sale_picking_ids','!=',[])]}"
-						string="Create Delivery Order" class="oe_highlight"/>
-				</button-->
-				<xpath expr="/form/sheet/group//field[@name='origin']" position="after">
-	            	<field name="target_picking_id"/>
+                </button>
+                <!--button name="button_confirm" position="after" >
+                    <field name="sale_picking_ids" invisible="True"/>
+                    <button name="action_ship_create" type="object" confirm="Are you sure to create Delivery Order?"
+                        attrs="{'invisible':['|','|','|',('parent_id','!=',False),('order_id','=',False),'&amp;',('sale_picking_ids','!=',False),('sale_picking_ids','!=',[])]}"
+                        string="Create Delivery Order" class="oe_highlight"/>
+                </button-->
+                <xpath expr="/form/sheet/group//field[@name='origin']" position="after">
+                    <field name="date_delivery"/>
+                    <field name="target_picking_id"/>
                     <field name="flag_claim"/>
                 </xpath>
-				<xpath expr="/form/sheet/group/group/field[@name='product_id']" position="after">
-	            	<field name="partner_id"/>
-	            </xpath>
-				<xpath expr="/form/sheet/group//field[@name='bom_id']" position="after">
-	            	<field name="is_printed"/>
-	            </xpath>
-	            <xpath expr="/form/sheet/notebook" position="after">
-	            	<label for="note" string="Remark"/>
-	            	<field name="note"/>
-	            </xpath>
-	            <field name="date_planned" position="after">
-	            	<field name="short_note" />
-	            </field>
+                <xpath expr="/form/sheet/group/group/field[@name='product_id']" position="after">
+                    <field name="partner_id"/>
+                </xpath>
+                <xpath expr="/form/sheet/group//field[@name='bom_id']" position="after">
+                    <field name="is_printed"/>
+                </xpath>
+                <xpath expr="/form/sheet/notebook" position="after">
+                    <label for="note" string="Remark"/>
+                    <field name="note"/>
+                </xpath>
+                <field name="date_planned" position="after">
+                    <field name="short_note" />
+                </field>
                 <button name="action_cancel" position="attributes">
                     <attribute name="groups">ext_mrp.group_mrp_cancel_production</attribute>
                 </button>
                 <button name="button_cancel" position="attributes">
                     <attribute name="groups">ext_mrp.group_mrp_cancel_production</attribute>
                 </button>
-	    	</field>
-	    </record>
+            </field>
+        </record>
 
 		<!-- Manufacturing Order -->
         <record id="mrp_change_rm_production_form_view_ext" model="ir.ui.view">
@@ -123,22 +124,28 @@
 	        </field>
 	    </record>
 
-	    <record id="mrp_production_tree_view_ext" model="ir.ui.view">
-	        <field name="name">mrp.production.tree.view.ext</field>
-	        <field name="model">mrp.production</field>
-	        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
-	        <field name="arch" type="xml">
-	            <xpath expr="/tree/field[@name='product_uom']" position="after">
-	            	<field name="target_picking_id"/>
-	            </xpath>
-	            <xpath expr="/tree/field[@name='product_id']" position="after">
-	            	<field name="partner_id"/>
-	            </xpath>
-	            <xpath expr="/tree/field[@name='state']" position="before">
-	            	<field name="is_printed"/>
-	            </xpath>
-	        </field>
-	    </record>
+        <record id="mrp_production_tree_view_ext" model="ir.ui.view">
+            <field name="name">mrp.production.tree.view.ext</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="/tree/field[@name='product_uom']" position="after">
+                    <field name="target_picking_id"/>
+                </xpath>
+                <xpath expr="/tree/field[@name='product_id']" position="after">
+                    <field name="partner_id"/>
+                </xpath>
+                <xpath expr="/tree/field[@name='state']" position="before">
+                    <field name="is_printed"/>
+                </xpath>
+                <xpath expr="/tree/field[@name='date_planned']" position="after">
+                    <field name="date_delivery"/>
+                </xpath>
+                <xpath expr="/tree/field[@name='origin']" position="after">
+                    <field name="user_id"/>
+                </xpath>
+            </field>
+        </record>
 
 	    <record id="view_mo_add_product_form_ext" model="ir.ui.view">
 	        <field name="name">view.mo.add.product.form.ext</field>
