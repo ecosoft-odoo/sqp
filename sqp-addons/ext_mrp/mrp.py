@@ -70,7 +70,7 @@ class mrp_production(osv.osv):
         'short_note': fields.char('Short Note', size=256, required=False, readonly=False),
         'flag_claim': fields.boolean('For Claim?', states={'draft': [('readonly', False)]}),
         'date_planned': fields.datetime('Mo Date', required=True, select=1, readonly=True, states={'draft':[('readonly',False)]}),
-        'date_delivery': fields.related('target_picking_id','min_date', type='datetime', string="Delivery Date", select=True, readonly=True, store=True),
+        'date_delivery': fields.related('target_picking_id','min_date', type='datetime', string="Scheduled Time", select=True, readonly=True, store=True),
     }
     _constraints = [
         (_check_submo_valid,
