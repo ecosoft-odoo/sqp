@@ -124,9 +124,14 @@ class mrp_production_product_line(osv.osv):
                                 set.machine_id.name + '_inject2': round(round(area*T/1000*density,2)*((overpack_1/100)+1)/flowrate,2) or 0.0,
                                 set.machine_id.name + '_settime': settime,
                             })
-                        elif set.machine_id.name in ['line_pir1_pir', 'line_pir1_pu', 'line_pir2_pir', 'line_pir2_pu', 'line_pir3_pir', 'line_pir3_pu']:
+                        elif set.machine_id.name in ['line_pir1_pu', 'line_pir2_pu', 'line_pir3_pu']:
                             res[product_line.id].update({
                                 set.machine_id.name: round(round(area*T/1000*density,2)*((overpack_1/100)+1)/flowrate,2) or 0.0,
+                                set.machine_id.name + '_settime': settime,
+                            })
+                        elif set.machine_id.name in ['line_pir1_pir','line_pir2_pir','line_pir3_pir']:
+                            res[product_line.id].update({
+                                set.machine_id.name: round((area*T/1000*density)/flowrate,2) or 0.0,
                                 set.machine_id.name + '_settime': settime,
                             })
                     else:
