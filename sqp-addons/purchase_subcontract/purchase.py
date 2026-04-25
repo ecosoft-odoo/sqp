@@ -33,6 +33,9 @@ class purchase_order(osv.osv):
         'is_subcontract': fields.boolean('Subcontract', readonly=False, change_default=True),
         'sale_order_id': fields.many2one('sale.order', 'Copy SO Lines', required=False, domain=[('state', '<>', 'draft')], readonly=True, states={'draft': [('readonly', False)]}),
         'ref_attention_2_id': fields.many2one('res.partner', 'Attention 2', readonly=False),
+        'installation_start_date': fields.date('Installation Start Date'),
+        'installation_end_date': fields.date('Installation End Date'),
+        'number_of_workers': fields.integer('Number of Workers'),
     }
 
     _defaults = {

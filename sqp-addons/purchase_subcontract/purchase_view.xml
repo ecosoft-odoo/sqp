@@ -43,7 +43,10 @@
 				</field>                        
                 <field name="pricelist_id" position="after">
                 	<field name="is_subcontract" attrs="{'invisible':[('is_subcontract','=',False)]}"/>
-					<field name="ref_attention_2_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/> 
+					<field name="ref_attention_2_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+                    <field name="installation_start_date" attrs="{'invisible':[('is_subcontract','=',False)]}"/>
+                    <field name="installation_end_date" attrs="{'invisible':[('is_subcontract','=',False)]}"/>
+                    <field name="number_of_workers" attrs="{'invisible':[('is_subcontract','=',False)]}"/>
 				</field>
                 <xpath expr="/form/sheet/notebook/page/field/tree/field[@name='product_qty']" position="before">
 					<field name="product_so_qty" invisible="not context.get('is_subcontract',False)"/>

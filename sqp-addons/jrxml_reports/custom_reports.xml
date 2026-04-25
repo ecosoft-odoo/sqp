@@ -306,7 +306,26 @@
         <field name="invisible">not context.get('is_subcontract',False)</field>
     </record>
 
-	<!-- END -->
+    <!-- END -->
+
+    <report string="PO Subcontract - Print (SQP)"
+        model="purchase.order"
+        auto="False"
+        name="sqp.po.subcontract.print"
+        rml="jrxml_reports/custom_reports/sqp_po_subcontract_print.jrxml"
+        id="report_sqp_po_subcontract_print"
+        menu="True"
+        header="False"
+        attachment=""
+        groups=""
+    />
+    <record id="report_sqp_po_subcontract_print" model="ir.actions.report.xml">
+        <field name="jasper_report">True</field>
+        <field name="jasper_output">pdf</field>
+        <field name="invisible">not context.get('is_subcontract',False)</field>
+    </record>
+
+    <!-- END -->
 
     <report string="Internal Move Form (SQP)"
         model="stock.picking"
