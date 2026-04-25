@@ -160,6 +160,18 @@
 	<field name="notes" class="java.lang.String">
 		<fieldDescription><![CDATA[notes]]></fieldDescription>
 	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[name]]></fieldDescription>
+	</field>
+	<field name="installation_start_date" class="java.util.Date">
+		<fieldDescription><![CDATA[installation_start_date]]></fieldDescription>
+	</field>
+	<field name="installation_end_date" class="java.util.Date">
+		<fieldDescription><![CDATA[installation_end_date]]></fieldDescription>
+	</field>
+	<field name="number_of_workers" class="java.lang.Integer">
+		<fieldDescription><![CDATA[number_of_workers]]></fieldDescription>
+	</field>
 	<variable name="product_so_qty" class="java.lang.Number">
 		<variableExpression><![CDATA[$F{product_so_qty} == null ? 0.0 : $F{product_so_qty}]]></variableExpression>
 	</variable>
@@ -454,13 +466,13 @@
 					</textElement>
 					<text><![CDATA[จำนวนคนงานที่ใช้ :]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="89" y="31" width="101" height="15"/>
-					<textElement verticalAlignment="Middle" lineSpacing="Single">
-						<font fontName="Monospaced" size="9" isBold="false" isUnderline="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				<textField>
+					<reportElement mode="Transparent" x="89" y="31" width="101" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
-					<text><![CDATA[______________]]></text>
-				</staticText>
+					<textFieldExpression class="java.lang.String"><![CDATA[($F{number_of_workers} == null || $F{number_of_workers} == "" || $F{number_of_workers} == 0) ? "0.0" : $F{number_of_workers}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<staticText>
 				<reportElement style="table" x="434" y="0" width="121" height="50"/>
@@ -468,9 +480,9 @@
 					<font fontName="Monospaced" size="8" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[
- IN-F-26 Rev.1
+ IN-F-26 Rev.2
 
- วันที่บังคับใช้ : 14/11/59]]></text>
+ วันที่บังคับใช้ : 01/05/69]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="50" y="22" width="254" height="14"/>
@@ -523,20 +535,20 @@
 					</textElement>
 					<text><![CDATA[วันที่ติดตั้งเสร็จ :]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="467" y="2" width="81" height="15"/>
-					<textElement verticalAlignment="Middle" lineSpacing="Single">
-						<font fontName="Monospaced" size="9" isBold="false" isUnderline="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="467" y="2" width="81" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
-					<text><![CDATA[______________]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="467" y="16" width="81" height="15"/>
-					<textElement verticalAlignment="Middle" lineSpacing="Single">
-						<font fontName="Monospaced" size="9" isBold="false" isUnderline="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{installation_start_date}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="467" y="16" width="81" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
-					<text><![CDATA[______________]]></text>
-				</staticText>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{installation_end_date}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement style="table" x="0" y="50" width="555" height="17"/>
@@ -547,13 +559,13 @@
 					</textElement>
 					<text><![CDATA[Progress work for Subcontractor]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="304" y="1" width="250" height="15"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
-						<font fontName="Monospaced" size="9" isBold="false" isUnderline="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
+				<textField>
+					<reportElement mode="Transparent" x="408" y="1" width="145" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 					</textElement>
-					<text><![CDATA[Ref.___________/___________]]></text>
-				</staticText>
+					<textFieldExpression class="java.lang.String"><![CDATA["Ref. " + $F{name}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
 				<reportElement style="table" x="0" y="179" width="555" height="22"/>
