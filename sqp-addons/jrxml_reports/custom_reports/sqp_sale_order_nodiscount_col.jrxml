@@ -382,7 +382,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="195" splitType="Stretch">
+		<band height="209" splitType="Stretch">
 			<staticText>
 				<reportElement x="104" y="33" width="352" height="25">
 					<printWhenExpression><![CDATA[$F{Status-state} == "draft" || $F{Status-state} == "sent"]]></printWhenExpression>
@@ -401,21 +401,21 @@
 				<text><![CDATA[Customer Name:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="86" y="59" width="310" height="15"/>
+				<reportElement x="86" y="59" width="262" height="28"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Name-name}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="73" width="86" height="15"/>
+				<reportElement x="0" y="87" width="86" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Address:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="86" y="73" width="204" height="39"/>
+				<reportElement x="86" y="87" width="204" height="39"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
@@ -423,28 +423,28 @@
     $F{City-city},$F{State_Name-name},$F{Country_Name-name},$F{Zip-zip})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="111" width="87" height="15"/>
+				<reportElement x="0" y="125" width="87" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Office Tel:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="125" width="87" height="15"/>
+				<reportElement x="0" y="139" width="87" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Office Fax:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="139" width="87" height="15"/>
+				<reportElement x="0" y="153" width="87" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Attention:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="153" width="87" height="15"/>
+				<reportElement x="0" y="167" width="87" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -481,52 +481,52 @@
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{Date-date_order}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="348" y="109" width="207" height="58"/>
+				<reportElement x="348" y="123" width="207" height="58"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="350" y="110" width="68" height="15"/>
+				<reportElement x="350" y="124" width="68" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Saleman:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="350" y="124" width="68" height="15"/>
+				<reportElement x="350" y="138" width="68" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Mobile:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="350" y="138" width="68" height="15"/>
+				<reportElement x="350" y="152" width="68" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Office:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="417" y="124" width="137" height="15"/>
+				<reportElement x="417" y="138" width="137" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Mobile-mobile}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="417" y="110" width="137" height="15"/>
+				<reportElement x="417" y="124" width="137" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Name-name2}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="417" y="138" width="137" height="15"/>
+				<reportElement x="417" y="152" width="137" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Phone-phone2}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="15" y="168" width="361" height="26"/>
+				<reportElement x="15" y="182" width="361" height="26"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -534,14 +534,14 @@
         We are pleased to offer our price as following details.]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="86" y="111" width="258" height="15"/>
+				<reportElement x="86" y="125" width="258" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Phone-phone}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="86" y="125" width="258" height="15"/>
+				<reportElement x="86" y="139" width="258" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
@@ -572,42 +572,42 @@
 				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "iso.jpg"]]></imageExpression>
 			</image>
 			<textField isBlankWhenNull="true">
-				<reportElement x="417" y="152" width="137" height="15"/>
+				<reportElement x="417" y="166" width="137" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Email-email2}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="350" y="152" width="68" height="15"/>
+				<reportElement x="350" y="166" width="68" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" isBold="false" pdfFontName="Garuda-Bold.ttf" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Email:]]></text>
 			</staticText>
 			<textField evaluationTime="Report">
-				<reportElement x="502" y="174" width="40" height="20"/>
+				<reportElement x="502" y="188" width="40" height="20"/>
 				<textElement>
 					<font size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="422" y="174" width="80" height="20"/>
+				<reportElement x="422" y="188" width="80" height="20"/>
 				<textElement textAlignment="Right">
 					<font size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="86" y="139" width="258" height="15"/>
+				<reportElement x="86" y="153" width="258" height="15"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Attention-ref_attention_name}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="86" y="153" width="261" height="21"/>
+				<reportElement x="86" y="167" width="261" height="21"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Monospaced" size="9" pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
